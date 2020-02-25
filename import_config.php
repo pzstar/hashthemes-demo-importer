@@ -103,7 +103,7 @@ function change_demo_array($demo_array){
         )
     );
     
-    return $demo_array;
+    //return $demo_array;
 }
 
 add_filter('hdi_demo_files', 'change_demo_array');
