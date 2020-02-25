@@ -5,7 +5,7 @@
  * the protected updated method when importing options.
  *
  */
-final class Viral_Pro_Customzer_Option extends WP_Customize_Setting {
+final class HDI_Customzer_Option extends WP_Customize_Setting {
 
     /**
      * Import an option value for this setting.

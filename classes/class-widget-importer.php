@@ -4,7 +4,7 @@
  * Widget_Importer Class.
  *
  */
-class Viral_Pro_Widget_Importer {
+class HDI_Widget_Importer {
 
     /**
      * Import widget JSON data.

@@ -5,9 +5,9 @@ if (!defined('ABSPATH')) {
     die();
 }
 
-if (!class_exists('Viral_Pro_Demo_Importer')) {
+if (!class_exists('HDI_Demo_Importer')) {
 
-    final class Viral_Pro_Demo_Importer {
+    final class HDI_Demo_Importer {
 
         /**
          * A reference to an instance of this class.
@@ -300,7 +300,7 @@ if (!class_exists('Viral_Pro_Demo_Importer')) {
 
                 $upload_path = $upload_dir['path'] . '/' . $plugin . '.zip';
 
-                $url = wp_nonce_url(admin_url('themes.php?page=viral-pro-recommended-plugins'), 'remote-file-installation');
+                $url = wp_nonce_url(admin_url('themes.php?page=hdi-recommended-plugins'), 'remote-file-installation');
                 if (false === ($creds = request_filesystem_credentials($url, '', false, false, null) )) {
                     return; // stop processing here
                 }
@@ -323,4 +323,4 @@ if (!class_exists('Viral_Pro_Demo_Importer')) {
 
 }
 
-Viral_Pro_Demo_Importer::get_instance();
+HDI_Demo_Importer::get_instance();

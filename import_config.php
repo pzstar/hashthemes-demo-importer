@@ -4,6 +4,36 @@
  * Config file with each demo data
  */
 
+$square = array(
+    'main' => array(
+        'slug' => 'main',
+        'name' => 'Square',
+        'external_url' => 'https://hashthemes.com/import-files/square/main.zip',
+        'image' => 'https://i0.wp.com/themes.svn.wordpress.org/square/1.6.2/screenshot.png',
+        'preview_url' => 'https://demo.hashthemes.com/square',
+        'menu_array' => array(
+            'primary' => 'Primary Menu'
+        ),
+        'home_slug' => 'home-page',
+        'blog_slug' => 'blog'
+    ),
+);
+
+$square = array(
+    'main' => array(
+        'slug' => 'main',
+        'name' => 'Square',
+        'external_url' => 'https://hashthemes.com/import-files/square/main.zip',
+        'image' => 'https://i0.wp.com/themes.svn.wordpress.org/square/1.6.2/screenshot.png',
+        'preview_url' => 'https://demo.hashthemes.com/square',
+        'menu_array' => array(
+            'primary' => 'Primary Menu'
+        ),
+        'home_slug' => 'home-page',
+        'blog_slug' => 'blog'
+    )
+);
+
 $demos = array(
     'magazine' => array(
         'slug' => 'magazine',
@@ -229,4 +259,6 @@ $demos = array(
     )
 );
 
-return $demos;
+$active_theme = get_option('stylesheet');
+
+return apply_filters('hdi_demo_files', $$active_theme);

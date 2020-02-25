@@ -16,18 +16,18 @@ if (!defined('ABSPATH'))
     exit;
 
 
-define( 'HDI_VERSION', '1.0.0' );
+define('HDI_VERSION', '1.0.0');
 
-define( 'HDI_FILE', __FILE__ );
-define( 'HDI_PLUGIN_BASENAME', plugin_basename( HDI_FILE ) );
-define( 'HDI_PATH', plugin_dir_path( HDI_FILE ) );
-define( 'HDI_URL', plugins_url( '/', HDI_FILE ) );
+define('HDI_FILE', __FILE__);
+define('HDI_PLUGIN_BASENAME', plugin_basename(HDI_FILE));
+define('HDI_PATH', plugin_dir_path(HDI_FILE));
+define('HDI_URL', plugins_url('/', HDI_FILE));
 
-define( 'HDI_ASSETS_URL', HDI_URL . 'assets/' );
+define('HDI_ASSETS_URL', HDI_URL . 'assets/');
 
-if (!class_exists('Viral_Pro_Importer')) {
+if (!class_exists('HDI_Importer')) {
 
-    class Viral_Pro_Importer {
+    class HDI_Importer {
 
         public $configFile;
         public $uploads_dir;
@@ -50,75 +50,71 @@ if (!class_exists('Viral_Pro_Importer')) {
             require_once HDI_PATH . 'classes/class-demo-importer.php';
             require_once HDI_PATH . 'classes/class-customizer-importer.php';
             require_once HDI_PATH . 'classes/class-widget-importer.php';
-            
+
             // Load translation files
-            add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+            add_action('init', array($this, 'load_plugin_textdomain'));
 
             // WP-Admin Menu
-            add_action('admin_menu', array($this, 'viral_pro_menu'));
+            add_action('admin_menu', array($this, 'hdi_menu'));
 
             // Add necesary backend JS
             add_action('admin_enqueue_scripts', array($this, 'load_backends'));
 
             // Actions for the ajax call
-            add_action('wp_ajax_viral_pro_install_demo', array($this, 'viral_pro_install_demo'));
-            add_action('wp_ajax_viral_pro_install_plugin', array($this, 'viral_pro_install_plugin'));
-            add_action('wp_ajax_viral_pro_download_files', array($this, 'viral_pro_download_files'));
-            add_action('wp_ajax_viral_pro_import_xml', array($this, 'viral_pro_import_xml'));
-            add_action('wp_ajax_viral_pro_customizer_import', array($this, 'viral_pro_customizer_import'));
-            add_action('wp_ajax_viral_pro_menu_import', array($this, 'viral_pro_menu_import'));
-            add_action('wp_ajax_viral_pro_theme_option', array($this, 'viral_pro_theme_option'));
-            add_action('wp_ajax_viral_pro_importing_widget', array($this, 'viral_pro_importing_widget'));
-            add_action('wp_ajax_viral_pro_importing_revslider', array($this, 'viral_pro_importing_revslider'));
+            add_action('wp_ajax_hdi_install_demo', array($this, 'hdi_install_demo'));
+            add_action('wp_ajax_hdi_install_plugin', array($this, 'hdi_install_plugin'));
+            add_action('wp_ajax_hdi_download_files', array($this, 'hdi_download_files'));
+            add_action('wp_ajax_hdi_import_xml', array($this, 'hdi_import_xml'));
+            add_action('wp_ajax_hdi_customizer_import', array($this, 'hdi_customizer_import'));
+            add_action('wp_ajax_hdi_menu_import', array($this, 'hdi_menu_import'));
+            add_action('wp_ajax_hdi_theme_option', array($this, 'hdi_theme_option'));
+            add_action('wp_ajax_hdi_importing_widget', array($this, 'hdi_importing_widget'));
+            add_action('wp_ajax_hdi_importing_revslider', array($this, 'hdi_importing_revslider'));
         }
-        
+
         /**
-         * Loads the translation files.
-         *
-         * @since 1.0.0
-         * @access public
-         * @return void
+         * Loads the translation files
          */
         public function load_plugin_textdomain() {
-            load_plugin_textdomain( 'hashthemes-demo-importer', false, HDI_PATH . '/languages' );
+            load_plugin_textdomain('hashthemes-demo-importer', false, HDI_PATH . '/languages');
         }
 
         /*
          * WP-ADMIN Menu for importer
          */
 
-        function viral_pro_menu() {
-            add_submenu_page('themes.php', 'OneClick Demo Install', 'HashThemes Demo Importer', 'manage_options', 'viral-pro-demo-importer', array($this, 'viral_pro_display_demos'));
+        function hdi_menu() {
+            add_submenu_page('themes.php', esc_html__('OneClick Demo Install', 'hashthemes-demo-importer'), esc_html__('HashThemes Demo Importer', 'hashthemes-demo-importer'), 'manage_options', 'hdi-demo-importer', array($this, 'hdi_display_demos'));
         }
 
         /*
          *  Display the available demos
          */
 
-        function viral_pro_display_demos() {
+        function hdi_display_demos() { 
             ?>
-            <div class="wrap viral-pro-demo-importer-wrap">
-                <h2><?php echo esc_html__('Viral Pro OneClick Demo Importer', 'hashthemes-demo-importer'); ?></h2>
+            <div class="wrap hdi-demo-importer-wrap">
+                <h2><?php echo esc_html__('HashThemes OneClick Demo Importer', 'hashthemes-demo-importer'); ?></h2>
 
                 <?php if (is_array($this->configFile) && !is_null($this->configFile)) { ?>
-                    <div class="viral-pro-demo-box-wrap wp-clearfix">
+                    <div class="hdi-demo-box-wrap wp-clearfix">
                         <?php
                         // Loop through Demos
                         foreach ($this->configFile as $demo_slug => $demo_pack) {
                             $tags = implode(' ', array_keys($demo_pack['tags']));
                             ?>
-                            <div id="<?php echo esc_attr($demo_slug); ?>" class="viral-pro-demo-box <?php echo esc_attr($tags); ?>">
+                            <div id="<?php echo esc_attr($demo_slug); ?>" class="hdi-demo-box <?php echo esc_attr($tags); ?>">
                                 <img src="<?php echo esc_url($demo_pack['image']); ?> ">
 
-                                <div class="viral-pro-demo-actions">
+                                <div class="hdi-demo-actions">
                                     <h4><?php echo esc_html($demo_pack['name']); ?></h4>
 
-                                    <div class="viral-pro-demo-buttons">
+                                    <div class="hdi-demo-buttons">
                                         <a href="<?php echo esc_url($demo_pack['preview_url']); ?>" target="_blank" class="button">
                                             <?php echo esc_html__('Preview', 'hashthemes-demo-importer'); ?>
                                         </a> 
 
-                                        <a href="#viral-pro-modal-<?php echo esc_attr($demo_slug) ?>" class="viral-pro-modal-button button button-primary">
+                                        <a href="#hdi-modal-<?php echo esc_attr($demo_slug) ?>" class="hdi-modal-button button button-primary">
                                             <?php echo esc_html__('Install', 'hashthemes-demo-importer') ?>
                                         </a>
                                     </div>
@@ -129,8 +125,8 @@ if (!class_exists('Viral_Pro_Importer')) {
                     </div>
                 <?php } else {
                     ?>
-                    <div class="viral-pro-demo-wrap">
-                        <?php esc_html_e("It looks like the config file for the demos is missing or conatins errors!. Demo install can\'t go futher!", 'hashthemes-demo-importer'); ?>  
+                    <div class="hdi-demo-wrap">
+                        <?php esc_html_e("It looks like the config file for the demos is missing or conatins errors!. Demo install can't go futher!", 'hashthemes-demo-importer'); ?>  
                     </div>
                 <?php }
                 ?>
@@ -140,19 +136,19 @@ if (!class_exists('Viral_Pro_Importer')) {
                 if (is_array($this->configFile) && !is_null($this->configFile)) {
                     foreach ($this->configFile as $demo_slug => $demo_pack) {
                         ?>
-                        <div id="viral-pro-modal-<?php echo esc_attr($demo_slug) ?>" class="viral-pro-modal" style="display: none;">
+                        <div id="hdi-modal-<?php echo esc_attr($demo_slug) ?>" class="hdi-modal" style="display: none;">
 
-                            <div class="viral-pro-modal-header">
+                            <div class="hdi-modal-header">
                                 <h2><?php printf(esc_html('Import %s Demo', 'hashthemes-demo-importer'), esc_html($demo_pack['name'])); ?></h2>
-                                <div class="viral-pro-modal-back"><span class="dashicons dashicons-no-alt"></span></div>
+                                <div class="hdi-modal-back"><span class="dashicons dashicons-no-alt"></span></div>
                             </div>
 
-                            <div class="viral-pro-modal-wrap">
+                            <div class="hdi-modal-wrap">
                                 <p><?php echo sprintf(esc_html__('We recommend you backup your website content before attempting to import the demo so that you can recover your website if something goes wrong. You can use %s plugin for it.', 'hashthemes-demo-importer'), '<a href="https://wordpress.org/plugins/all-in-one-wp-migration/" target="_blank">' . esc_html__('All in one migration', 'hashthemes-demo-importer') . '</a>'); ?></p>
 
                                 <p><?php echo esc_html__('This process will install all the required plugins, import contents and setup customizer and theme options.', 'hashthemes-demo-importer'); ?></p>
 
-                                <div class="viral-pro-modal-recommended-plugins">
+                                <div class="hdi-modal-recommended-plugins">
                                     <h4><?php esc_html_e('Required Plugins', 'hashthemes-demo-importer') ?></h4>
                                     <p><?php esc_html_e('For your website to look exactly like the demo,the import process will install and activate the following plugin if they are not installed or activated.', 'hashthemes-demo-importer') ?></p>
                                     <?php
@@ -164,7 +160,7 @@ if (!class_exists('Viral_Pro_Importer')) {
                                             <?php
                                             foreach ($plugins as $plugin) {
                                                 $name = isset($plugin['name']) ? $plugin['name'] : '';
-                                                $status = Viral_Pro_Demo_Importer::plugin_active_status($plugin['file_path']);
+                                                $status = HDI_Demo_Importer::plugin_active_status($plugin['file_path']);
                                                 ?>
                                                 <li>
                                                     <?php
@@ -179,7 +175,7 @@ if (!class_exists('Viral_Pro_Importer')) {
                                     ?>
                                 </div>
 
-                                <div class="viral-pro-reset-checkbox">
+                                <div class="hdi-reset-checkbox">
                                     <h4><?php esc_html_e('Reset Website', 'hashthemes-demo-importer') ?></h4>
                                     <p><?php esc_html_e('Reseting the website will delete all your post, pages, custom post types, categories, taxonomies, images and all other customizer and theme option settings.', 'hashthemes-demo-importer') ?></p>
                                     <p><?php esc_html_e('It is always recommended to reset the database for a complete demo import.', 'hashthemes-demo-importer') ?></p>
@@ -189,27 +185,27 @@ if (!class_exists('Viral_Pro_Importer')) {
                                     </label>
                                 </div>
 
-                                <a href="javascript:void(0)" data-demo-slug="<?php echo esc_attr($demo_slug) ?>" class="button button-primary viral-pro-import-demo"><?php esc_html_e('Import Demo', 'hashthemes-demo-importer'); ?></a>
-                                <a href="javascript:void(0)" class="button viral-pro-modal-cancel"><?php esc_html_e('Cancel', 'hashthemes-demo-importer'); ?></a>
+                                <a href="javascript:void(0)" data-demo-slug="<?php echo esc_attr($demo_slug) ?>" class="button button-primary hdi-import-demo"><?php esc_html_e('Import Demo', 'hashthemes-demo-importer'); ?></a>
+                                <a href="javascript:void(0)" class="button hdi-modal-cancel"><?php esc_html_e('Cancel', 'hashthemes-demo-importer'); ?></a>
                             </div>
                         </div>
                         <?php
                     }
                 }
                 ?>
-                <div id="viral-pro-import-progress" style="display: none">
-                    <h2 class="viral-pro-import-progress-header"><?php echo esc_html__('Demo Import Progress', 'hashthemes-demo-importer'); ?></h2>
+                <div id="hdi-import-progress" style="display: none">
+                    <h2 class="hdi-import-progress-header"><?php echo esc_html__('Demo Import Progress', 'hashthemes-demo-importer'); ?></h2>
 
-                    <div class="viral-pro-import-progress-wrap">
-                        <div class="viral-pro-import-loader">
-                            <div class="viral-pro-loader-content">
-                                <div class="viral-pro-loader-content-inside">
-                                    <div class="viral-pro-loader-rotater"></div>
-                                    <div class="viral-pro-loader-line-point"></div>
+                    <div class="hdi-import-progress-wrap">
+                        <div class="hdi-import-loader">
+                            <div class="hdi-loader-content">
+                                <div class="hdi-loader-content-inside">
+                                    <div class="hdi-loader-rotater"></div>
+                                    <div class="hdi-loader-line-point"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="viral-pro-import-progress-message"></div>
+                        <div class="hdi-import-progress-message"></div>
                     </div>
                 </div>
             </div>
@@ -220,7 +216,7 @@ if (!class_exists('Viral_Pro_Importer')) {
          *  Do the install on ajax call
          */
 
-        function viral_pro_install_demo() {
+        function hdi_install_demo() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             // Get the demo content from the right file
@@ -233,12 +229,12 @@ if (!class_exists('Viral_Pro_Importer')) {
                 $this->ajax_response['complete_message'] = esc_html__('Database reset complete', 'hashthemes-demo-importer');
             }
 
-            $this->ajax_response['next_step'] = 'viral_pro_install_plugin';
+            $this->ajax_response['next_step'] = 'hdi_install_plugin';
             $this->ajax_response['next_step_message'] = esc_html__('Installing required plugins', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
-        function viral_pro_install_plugin() {
+        function hdi_install_plugin() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
@@ -255,12 +251,12 @@ if (!class_exists('Viral_Pro_Importer')) {
             } else {
                 $this->ajax_response['complete_message'] = esc_html__('No plugin required to install', 'hashthemes-demo-importer');
             }
-            $this->ajax_response['next_step'] = 'viral_pro_download_files';
+            $this->ajax_response['next_step'] = 'hdi_download_files';
             $this->ajax_response['next_step_message'] = esc_html__('Downloading demo files', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
-        function viral_pro_download_files() {
+        function hdi_download_files() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
@@ -269,12 +265,12 @@ if (!class_exists('Viral_Pro_Importer')) {
 
             $this->ajax_response['demo'] = $demo_slug;
             $this->ajax_response['complete_message'] = esc_html__('All demo files downloaded', 'hashthemes-demo-importer');
-            $this->ajax_response['next_step'] = 'viral_pro_import_xml';
+            $this->ajax_response['next_step'] = 'hdi_import_xml';
             $this->ajax_response['next_step_message'] = esc_html__('Importing posts, pages and medias. It may take a bit longer time', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
-        function viral_pro_import_xml() {
+        function hdi_import_xml() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
@@ -284,12 +280,12 @@ if (!class_exists('Viral_Pro_Importer')) {
 
             $this->ajax_response['demo'] = $demo_slug;
             $this->ajax_response['complete_message'] = esc_html__('All content imported', 'hashthemes-demo-importer');
-            $this->ajax_response['next_step'] = 'viral_pro_customizer_import';
+            $this->ajax_response['next_step'] = 'hdi_customizer_import';
             $this->ajax_response['next_step_message'] = esc_html__('Importing customizer settings', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
-        function viral_pro_customizer_import() {
+        function hdi_customizer_import() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
@@ -298,7 +294,7 @@ if (!class_exists('Viral_Pro_Importer')) {
 
             if (file_exists($customizer_filepath)) {
                 ob_start();
-                Viral_Pro_Customizer_Importer::import($customizer_filepath);
+                HDI_Customizer_Importer::import($customizer_filepath);
                 ob_end_clean();
                 $this->ajax_response['complete_message'] = esc_html__('Customizer settings imported', 'hashthemes-demo-importer');
             } else {
@@ -306,12 +302,12 @@ if (!class_exists('Viral_Pro_Importer')) {
             }
 
             $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['next_step'] = 'viral_pro_menu_import';
+            $this->ajax_response['next_step'] = 'hdi_menu_import';
             $this->ajax_response['next_step_message'] = esc_html__('Setting primary menu', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
-        function viral_pro_menu_import() {
+        function hdi_menu_import() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
@@ -324,12 +320,12 @@ if (!class_exists('Viral_Pro_Importer')) {
 
             $this->ajax_response['demo'] = $demo_slug;
             $this->ajax_response['complete_message'] = esc_html__('Primary menu saved', 'hashthemes-demo-importer');
-            $this->ajax_response['next_step'] = 'viral_pro_theme_option';
+            $this->ajax_response['next_step'] = 'hdi_theme_option';
             $this->ajax_response['next_step_message'] = esc_html__('Importing theme option settings', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
-        function viral_pro_theme_option() {
+        function hdi_theme_option() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
@@ -340,7 +336,7 @@ if (!class_exists('Viral_Pro_Importer')) {
                 $data = file_get_contents($themeoption_filepath);
 
                 if ($data) {
-                    if (update_option('viral-pro-options', json_decode($data, true), '', 'yes')) {
+                    if (update_option('hdi-options', json_decode($data, true), '', 'yes')) {
                         $this->ajax_response['complete_message'] = esc_html__('Theme options settings imported', 'hashthemes-demo-importer');
                     }
                 }
@@ -349,12 +345,12 @@ if (!class_exists('Viral_Pro_Importer')) {
             }
 
             $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['next_step'] = 'viral_pro_importing_widget';
+            $this->ajax_response['next_step'] = 'hdi_importing_widget';
             $this->ajax_response['next_step_message'] = esc_html__('Importing Widgets', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
-        function viral_pro_importing_widget() {
+        function hdi_importing_widget() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
@@ -363,7 +359,7 @@ if (!class_exists('Viral_Pro_Importer')) {
 
             if (file_exists($widget_filepath)) {
                 ob_start();
-                Viral_Pro_Widget_Importer::import($widget_filepath);
+                HDI_Widget_Importer::import($widget_filepath);
                 ob_end_clean();
                 $this->ajax_response['complete_message'] = esc_html__('Widgets Imported', 'hashthemes-demo-importer');
             } else {
@@ -371,12 +367,12 @@ if (!class_exists('Viral_Pro_Importer')) {
             }
 
             $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['next_step'] = 'viral_pro_importing_revslider';
+            $this->ajax_response['next_step'] = 'hdi_importing_revslider';
             $this->ajax_response['next_step_message'] = esc_html__('Importing Revolution slider', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
-        function viral_pro_importing_revslider() {
+        function hdi_importing_revslider() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
@@ -787,15 +783,15 @@ if (!class_exists('Viral_Pro_Importer')) {
                 'reset_database' => esc_html__('Reseting database', 'hashthemes-demo-importer'),
                 'no_reset_database' => esc_html__('Database was not reset', 'hashthemes-demo-importer'),
                 'import_error' => esc_html__('There was an error in importing demo. Please reload the page and try again.', 'hashthemes-demo-importer'),
-                'import_success' => '<h2>' . esc_html__('All done. Have fun!', 'hashthemes-demo-importer') . '</h2><p>' . esc_html__('Your website has been successfully setup.', 'hashthemes-demo-importer') . '</p><a class="button" target="_blank" href="' . esc_url(home_url('/')) . '">View your Website</a><a class="button" href="' . esc_url(admin_url('/admin.php?page=viral-pro-demo-importer')) . '">Go Back</a>'
+                'import_success' => '<h2>' . esc_html__('All done. Have fun!', 'hashthemes-demo-importer') . '</h2><p>' . esc_html__('Your website has been successfully setup.', 'hashthemes-demo-importer') . '</p><a class="button" target="_blank" href="' . esc_url(home_url('/')) . '">View your Website</a><a class="button" href="' . esc_url(admin_url('/admin.php?page=hdi-demo-importer')) . '">' . esc_html__('Go Back', 'hashthemes-demo-importer') . '</a>'
             );
 
-            wp_enqueue_script('viral-pro-demo-ajax', HDI_ASSETS_URL . 'demo-importer-ajax.js', array('jquery'), '2.0.0', true);
-            wp_localize_script('viral-pro-demo-ajax', 'viral_pro_ajax_data', $data);
-            wp_enqueue_style('viral-pro-demo-style', HDI_ASSETS_URL . 'demo-importer-style.css', array(), '2.0.0');
+            wp_enqueue_script('hdi-demo-ajax', HDI_ASSETS_URL . 'demo-importer-ajax.js', array('jquery'), '1.0.0', true);
+            wp_localize_script('hdi-demo-ajax', 'hdi_ajax_data', $data);
+            wp_enqueue_style('hdi-demo-style', HDI_ASSETS_URL . 'demo-importer-style.css', array(), '1.0.0');
         }
 
     }
 
 }
-new Viral_Pro_Importer;
+new HDI_Importer;

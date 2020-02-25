@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
  * The customizer import class.
  *
  */
-class Viral_Pro_Customizer_Importer {
+class HDI_Customizer_Importer {
 
     /**
      * Imports uploaded mods
@@ -59,7 +59,7 @@ class Viral_Pro_Customizer_Importer {
             include_once( dirname(__FILE__) . '/class-customizer-option.php' );
 
             foreach ($data['options'] as $option_key => $option_value) {
-                $option = new Viral_Pro_Customzer_Option($wp_customize, $option_key, array(
+                $option = new HDI_Customzer_Option($wp_customize, $option_key, array(
                     'default' => '',
                     'type' => 'option',
                     'capability' => 'edit_theme_options',
