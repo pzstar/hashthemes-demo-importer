@@ -91,7 +91,7 @@ if (!class_exists('HDI_Importer')) {
          *  Display the available demos
          */
 
-        function hdi_display_demos() { 
+        function hdi_display_demos() {
             ?>
             <div class="wrap hdi-demo-importer-wrap">
                 <h2><?php echo esc_html__('HashThemes OneClick Demo Importer', 'hashthemes-demo-importer'); ?></h2>
@@ -101,7 +101,10 @@ if (!class_exists('HDI_Importer')) {
                         <?php
                         // Loop through Demos
                         foreach ($this->configFile as $demo_slug => $demo_pack) {
-                            $tags = implode(' ', array_keys($demo_pack['tags']));
+                            $tags = '';
+                            if (isset($demo_pack['tags'])) {
+                                $tags = implode(' ', array_keys($demo_pack['tags']));
+                            }
                             ?>
                             <div id="<?php echo esc_attr($demo_slug); ?>" class="hdi-demo-box <?php echo esc_attr($tags); ?>">
                                 <img src="<?php echo esc_url($demo_pack['image']); ?> ">
