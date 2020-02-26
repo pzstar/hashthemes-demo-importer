@@ -84,4 +84,4 @@ if (isset($$active_theme)) {
     $demo_array = '';
 }
 
-return apply_filters('hdi_demo_files', $demo_array);
+return apply_filters('hdi_import_files', $demo_array);
