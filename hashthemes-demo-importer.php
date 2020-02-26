@@ -797,4 +797,9 @@ if (!class_exists('HDI_Importer')) {
     }
 
 }
-new HDI_Importer;
+
+function hdi_importer() {
+    new HDI_Importer;
+}
+
+add_action('after_setup_theme', 'hdi_importer');

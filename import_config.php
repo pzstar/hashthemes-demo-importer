@@ -4,7 +4,6 @@
  * Config file with each demo data
  */
 
-
 $active_theme = array();
 
 $square = array(
@@ -86,24 +85,3 @@ if (isset($$active_theme)) {
 }
 
 return apply_filters('hdi_demo_files', $demo_array);
-
-function change_demo_array($demo_array){
-    //var_dump($demo_array); die();
-    $demo_array = array(
-        'main' => array(
-            'name' => 'Viral',
-            'external_url' => 'https://hashthemes.com/import-files/viral/main.zip',
-            'image' => 'https://i0.wp.com/themes.svn.wordpress.org/viral/1.4.2/screenshot.png',
-            'preview_url' => 'https://demo.hashthemes.com/viral',
-            'menu_array' => array(
-                'primary' => 'Primary Menu'
-            ),
-            'home_slug' => 'home-page',
-            'blog_slug' => 'blog'
-        )
-    );
-    
-    //return $demo_array;
-}
-
-add_filter('hdi_demo_files', 'change_demo_array');
