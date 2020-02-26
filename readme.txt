@@ -74,7 +74,7 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
 == Screenshots ==
 
-
+ 
 == Changelog ==
 
 = 1.0 =
