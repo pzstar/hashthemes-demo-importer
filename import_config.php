@@ -4,8 +4,6 @@
  * Config file with each demo data
  */
 
-$active_theme = array();
-
 $square = array(
     'main' => array(
         'name' => 'Square',

@@ -152,8 +152,8 @@ if (!class_exists('HDI_Importer')) {
                                 <p><?php echo esc_html__('This process will install all the required plugins, import contents and setup customizer and theme options.', 'hashthemes-demo-importer'); ?></p>
 
                                 <div class="hdi-modal-recommended-plugins">
-                                    <h4><?php esc_html_e('Required Plugins', 'hashthemes-demo-importer') ?></h4>
-                                    <p><?php esc_html_e('For your website to look exactly like the demo,the import process will install and activate the following plugin if they are not installed or activated.', 'hashthemes-demo-importer') ?></p>
+                                    <h4><?php esc_html_e('Required Plugins', 'hashthemes-demo-importer'); ?></h4>
+                                    <p><?php esc_html_e('For your website to look exactly like the demo,the import process will install and activate the following plugin if they are not installed or activated.', 'hashthemes-demo-importer'); ?></p>
                                     <?php
                                     $plugins = isset($demo_pack['plugins']) ? $demo_pack['plugins'] : '';
 
@@ -223,7 +223,7 @@ if (!class_exists('HDI_Importer')) {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             // Get the demo content from the right file
-            $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
+            $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
 
             $this->ajax_response['demo'] = $demo_slug;
 
@@ -240,7 +240,7 @@ if (!class_exists('HDI_Importer')) {
         function hdi_install_plugin() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
-            $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
+            $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
 
             // Install Required Plugins
             $this->install_plugins($demo_slug);
@@ -262,7 +262,7 @@ if (!class_exists('HDI_Importer')) {
         function hdi_download_files() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
-            $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
+            $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
 
             $this->download_files($this->configFile[$demo_slug]['external_url']);
 
@@ -276,7 +276,7 @@ if (!class_exists('HDI_Importer')) {
         function hdi_import_xml() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
-            $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
+            $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
 
             // Import XML content
             $this->importDemoContent($demo_slug);
@@ -291,7 +291,7 @@ if (!class_exists('HDI_Importer')) {
         function hdi_customizer_import() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
-            $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
+            $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
 
             $customizer_filepath = $this->demo_upload_dir($demo_slug) . '/customizer.dat';
 
@@ -313,7 +313,7 @@ if (!class_exists('HDI_Importer')) {
         function hdi_menu_import() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
-            $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
+            $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
 
             $menu_array = isset($this->configFile[$demo_slug]['menu_array']) ? $this->configFile[$demo_slug]['menu_array'] : '';
             // Set menu
@@ -331,7 +331,7 @@ if (!class_exists('HDI_Importer')) {
         function hdi_theme_option() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
-            $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
+            $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
 
             $themeoption_filepath = $this->demo_upload_dir($demo_slug) . '/theme-option.json';
 
@@ -356,7 +356,7 @@ if (!class_exists('HDI_Importer')) {
         function hdi_importing_widget() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
-            $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
+            $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
 
             $widget_filepath = $this->demo_upload_dir($demo_slug) . '/widget.wie';
 
@@ -378,7 +378,7 @@ if (!class_exists('HDI_Importer')) {
         function hdi_importing_revslider() {
             check_ajax_referer('demo-importer-ajax', 'security');
 
-            $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
+            $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
 
             // Get the zip file path
             $sliderFile = $this->demo_upload_dir($demo_slug) . '/revslider.zip';
@@ -569,7 +569,7 @@ if (!class_exists('HDI_Importer')) {
             // Import demo content from XML
             if (class_exists('WP_Import')) {
                 $import_filepath = $this->demo_upload_dir($slug) . '/content.xml'; // Get the xml file from directory 
-                $demo_slug = isset($_POST['demo']) ? $_POST['demo'] : '';
+                $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
                 $home_slug = isset($this->configFile[$demo_slug]['home_slug']) ? $this->configFile[$demo_slug]['home_slug'] : '';
                 $blog_slug = isset($this->configFile[$demo_slug]['blog_slug']) ? $this->configFile[$demo_slug]['blog_slug'] : '';
 
