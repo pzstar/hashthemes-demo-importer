@@ -100,11 +100,12 @@ if (!class_exists('HDI_Importer')) {
                     $tags = array();
                     foreach ($this->configFile as $demo_slug => $demo_pack) {
                         if(isset($demo_pack['tags']) && is_array($demo_pack['tags'])){
-                            $tags[] = $demo_pack['tags'];
+                            foreach($demo_pack['tags'] as $key => $tag){
+                                $tags[$key] = $tag;
+                            }
                         }
                     }
-                    echo '<pre>';
-                    var_dump($tags);
+                    asort($tags);
                     ?>
                 
                     
