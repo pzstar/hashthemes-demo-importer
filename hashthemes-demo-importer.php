@@ -3,7 +3,7 @@
  * Plugin Name: HashThemes Demo Importer
  * Plugin URI: 
  * Description: A one click demo importer to import demo contents developed by HashThemes.
- * Version: 1.0.
+ * Version: 1.0.0
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: hashthemes-demo-importer
@@ -96,19 +96,36 @@ if (!class_exists('HDI_Importer')) {
             <div class="wrap hdi-demo-importer-wrap">
                 <h2><?php echo esc_html__('HashThemes OneClick Demo Importer', 'hashthemes-demo-importer'); ?></h2>
 
-                <?php if (is_array($this->configFile) && !is_null($this->configFile)) {
+                <?php
+                if (is_array($this->configFile) && !is_null($this->configFile)) {
                     $tags = array();
                     foreach ($this->configFile as $demo_slug => $demo_pack) {
-                        if(isset($demo_pack['tags']) && is_array($demo_pack['tags'])){
-                            foreach($demo_pack['tags'] as $key => $tag){
+                        if (isset($demo_pack['tags']) && is_array($demo_pack['tags'])) {
+                            foreach ($demo_pack['tags'] as $key => $tag) {
                                 $tags[$key] = $tag;
                             }
                         }
                     }
                     asort($tags);
-                    ?>
-                
-                    
+
+                    if (!empty($tags)) {
+                        ?>
+                        <div class="hdi-tab-filter">
+                            <div class="hdi-tag-tab" data-filter="*">
+                                <?php esc_html_e('All', 'hashthemes-demo-importer'); ?>
+                            </div>
+                            <?php
+                            foreach ($tags as $key => $value) {
+                                ?>
+                                <div class="hdi-tag-tab" data-filter=".<?php echo esc_attr($key); ?>">
+                                    <?php echo esc_html($value); ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    <?php } ?>
+
                     <div class="hdi-demo-box-wrap wp-clearfix">
                         <?php
                         // Loop through Demos
@@ -141,7 +158,7 @@ if (!class_exists('HDI_Importer')) {
                                         if ($type == 'pro') {
                                             $buy_url = isset($demo_pack['buy_url']) ? $demo_pack['buy_url'] : '#';
                                             ?>
-                                            <a target="_blank" href="<?php echo esc_url($demo_pack['buy_url']) ?>" class="button button-primary">
+                                            <a target="_blank" href="<?php echo esc_url($buy_url) ?>" class="button button-primary">
                                                 <?php echo esc_html__('Buy Now', 'hashthemes-demo-importer') ?>
                                             </a>
                                         <?php } else { ?>
@@ -820,7 +837,8 @@ if (!class_exists('HDI_Importer')) {
                 'import_success' => '<h2>' . esc_html__('All done. Have fun!', 'hashthemes-demo-importer') . '</h2><p>' . esc_html__('Your website has been successfully setup.', 'hashthemes-demo-importer') . '</p><a class="button" target="_blank" href="' . esc_url(home_url('/')) . '">View your Website</a><a class="button" href="' . esc_url(admin_url('/admin.php?page=hdi-demo-importer')) . '">' . esc_html__('Go Back', 'hashthemes-demo-importer') . '</a>'
             );
 
-            wp_enqueue_script('hdi-demo-ajax', HDI_ASSETS_URL . 'demo-importer-ajax.js', array('jquery'), '1.0.0', true);
+            wp_enqueue_script('isotope-pkgd', HDI_ASSETS_URL . 'isotope.pkgd.js', array('jquery'), '1.0.0', true);
+            wp_enqueue_script('hdi-demo-ajax', HDI_ASSETS_URL . 'demo-importer-ajax.js', array('jquery', 'imagesloaded'), '1.0.0', true);
             wp_localize_script('hdi-demo-ajax', 'hdi_ajax_data', $data);
             wp_enqueue_style('hdi-demo-style', HDI_ASSETS_URL . 'demo-importer-style.css', array(), '1.0.0');
         }

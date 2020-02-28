@@ -1,5 +1,26 @@
 (function ($) {
 
+    if ($('.hdi-tab-filter').length > 0) {
+
+        var first_class = $('.hdi-tag-tab:first').data('filter');
+        $('.hdi-tag-tab:first').addClass('hdi-active');
+
+        var $container = $('.hdi-demo-box-wrap').imagesLoaded(function () {
+            $container.isotope({
+                itemSelector: '.hdi-demo-box',
+                filter: first_class
+            });
+        });
+
+        $('.hdi-tab-filter').on('click', '.hdi-tag-tab', function () {
+            var filterValue = $(this).attr('data-filter');
+            $container.isotope({filter: filterValue});
+            $('.hdi-tag-tab').removeClass('hdi-active');
+            $(this).addClass('hdi-active');
+        });
+
+    }
+
     $('.hdi-modal-button').on('click', function (e) {
         e.preventDefault();
         $('body').addClass('hdi-modal-opened');

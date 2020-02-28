@@ -10,6 +10,25 @@ img {
     max-width: 100%;
 }
 
+.hdi-tab-filter{
+    background: #FFF;
+    border: 1px solid #DDD;
+    padding: 12px;
+    margin-top: 20px;
+}
+
+.hdi-tag-tab{
+    display: inline-block;
+    padding: 5px 15px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.hdi-tag-tab.hdi-active{
+    background: #0073aa;
+    color: #FFF;
+}
+
 .hdi-demo-box-wrap {
     margin-left: -3%;
     margin-top: 25px;
@@ -225,7 +244,8 @@ img {
     margin: 0 4px;
 }
 
-body.hdi-modal-opened .hdi-demo-box-wrap {
+body.hdi-modal-opened .hdi-tab-filter,
+body.hdi-modal-opened .hdi-demo-box-wrap{
     display: none;
 }
 
