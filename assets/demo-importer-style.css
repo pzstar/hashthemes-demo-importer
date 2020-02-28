@@ -43,6 +43,55 @@ img {
     line-height: 48px;
 }
 
+.hdi-ribbon {
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+}
+
+.hdi-ribbon::before,
+.hdi-ribbon::after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    display: block;
+    border: 5px solid #b12222;
+    border-top-color: transparent;
+    border-right-color: transparent;
+}
+
+.hdi-ribbon span {
+    position: absolute;
+    display: block;
+    width: 120px;
+    padding: 8px 0;
+    background-color: #d42929;
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 12px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.2);
+    text-transform: uppercase;
+    text-align: center;
+    left: -12px;
+    top: 13px;
+    transform: rotate(45deg);
+}
+
+.hdi-ribbon::before {
+    top: 0;
+    left: 1px;
+}
+
+.hdi-ribbon::after {
+    bottom: 1px;
+    right: 0;
+}
+
 .hdi-demo-actions {
     position: relative;
     border-top: 1px solid #ddd;

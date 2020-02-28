@@ -96,7 +96,18 @@ if (!class_exists('HDI_Importer')) {
             <div class="wrap hdi-demo-importer-wrap">
                 <h2><?php echo esc_html__('HashThemes OneClick Demo Importer', 'hashthemes-demo-importer'); ?></h2>
 
-                <?php if (is_array($this->configFile) && !is_null($this->configFile)) { ?>
+                <?php if (is_array($this->configFile) && !is_null($this->configFile)) {
+                    $tags = array();
+                    foreach ($this->configFile as $demo_slug => $demo_pack) {
+                        if(isset($demo_pack['tags']) && is_array($demo_pack['tags'])){
+                            $tags[] = $demo_pack['tags'];
+                        }
+                    }
+                    echo '<pre>';
+                    var_dump($tags);
+                    ?>
+                
+                    
                     <div class="hdi-demo-box-wrap wp-clearfix">
                         <?php
                         // Loop through Demos
@@ -105,11 +116,19 @@ if (!class_exists('HDI_Importer')) {
                             if (isset($demo_pack['tags'])) {
                                 $tags = implode(' ', array_keys($demo_pack['tags']));
                             }
+
+                            $type = isset($demo_pack['type']) ? $demo_pack['type'] : 'free';
                             ?>
                             <div id="<?php echo esc_attr($demo_slug); ?>" class="hdi-demo-box <?php echo esc_attr($tags); ?>">
+
+                                <?php if ($type == 'pro') { ?>
+                                    <div class="hdi-ribbon"><span>Premium</span></div>
+                                <?php } ?>
+
                                 <img src="<?php echo esc_url($demo_pack['image']); ?> ">
 
                                 <div class="hdi-demo-actions">
+
                                     <h4><?php echo esc_html($demo_pack['name']); ?></h4>
 
                                     <div class="hdi-demo-buttons">
@@ -117,10 +136,21 @@ if (!class_exists('HDI_Importer')) {
                                             <?php echo esc_html__('Preview', 'hashthemes-demo-importer'); ?>
                                         </a> 
 
-                                        <a href="#hdi-modal-<?php echo esc_attr($demo_slug) ?>" class="hdi-modal-button button button-primary">
-                                            <?php echo esc_html__('Install', 'hashthemes-demo-importer') ?>
-                                        </a>
+                                        <?php
+                                        if ($type == 'pro') {
+                                            $buy_url = isset($demo_pack['buy_url']) ? $demo_pack['buy_url'] : '#';
+                                            ?>
+                                            <a target="_blank" href="<?php echo esc_url($demo_pack['buy_url']) ?>" class="button button-primary">
+                                                <?php echo esc_html__('Buy Now', 'hashthemes-demo-importer') ?>
+                                            </a>
+                                        <?php } else { ?>
+                                            <a href="#hdi-modal-<?php echo esc_attr($demo_slug) ?>" class="hdi-modal-button button button-primary">
+                                                <?php echo esc_html__('Install', 'hashthemes-demo-importer') ?>
+                                            </a>
+                                        <?php }
+                                        ?>
                                     </div>
+
                                 </div>
                             </div>
                         <?php }
