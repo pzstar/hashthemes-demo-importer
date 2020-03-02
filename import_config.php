@@ -83,7 +83,7 @@ $viral_news = array(
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
-        'home_slug' => 'home-page',
+        'home_slug' => 'home',
         'blog_slug' => 'blog'
     ),
     'demo2' => array(
@@ -94,7 +94,7 @@ $viral_news = array(
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
-        'home_slug' => 'home-page',
+        'home_slug' => 'home',
         'blog_slug' => 'blog'
     ),
     'demo3' => array(
@@ -105,7 +105,7 @@ $viral_news = array(
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
-        'home_slug' => 'home-page',
+        'home_slug' => 'home',
         'blog_slug' => 'blog'
     ),
     'demo4' => array(
@@ -116,7 +116,7 @@ $viral_news = array(
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
-        'home_slug' => 'home-page',
+        'home_slug' => 'home',
         'blog_slug' => 'blog'
     ),
     'demo5' => array(
@@ -127,7 +127,7 @@ $viral_news = array(
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
-        'home_slug' => 'home-page',
+        'home_slug' => 'home',
         'blog_slug' => 'blog'
     ),
     'demo6' => array(
