@@ -14,15 +14,16 @@ HashThemes Demo importer imports the demo with just single click. It is as easy 
 
 HashThemes Demo Importer imports the full demo with just one click. It is specially developed to add a demo importer functionality in the theme developed by HashThemes but it can also be used by any other themes as well. 
 
-You just need to define the array that includes the location of the demo zip files and other informations. The other information includes name of the demo, preview image, menu array, home page and blog page slug(if any), required plugins array and the tags that categorizes the theme.
+You just need to define the array that includes the location of the demo zip files and other informations. The other information includes name of the demo, preview image, theme option array, menu array, home page and blog page slug(if any), required plugins array and the tags that categorizes the theme.
 
-The demo zip should contain the XML file, customizer (.dat) file, widget (.wie) file, theme option (.json).
+The demo zip should contain the XML file, customizer (.dat) file, widget (.wie) file, theme option (.json), revolutions slider zip. It is not necessary to add all these files in the demo zip. You can skip the files if your demo does not need it.
 
 <h4>Features</h4>
 <ul>
+<li>Reset website(Optional)</li>
+<li>Install recommended and required plugins automatically</li>
+<li>Imports Revolution slider</li>
 <li>Imports fully functional demo</li>
-<li>Install recommended and required plugins</li>
-<li>Reset website</li>
 </ul>
 
 == Installation ==
@@ -39,20 +40,29 @@ The easy way to install the plugin is via WordPress.org plugin directory.
 = How to predefine demo imports?  =
 
 An answer to that question.
-`<?php
+<code>
+<?php
 function hdi_import_files_array(){
     return array(
-        'demo-slug1' => array(
+        'demo-slug1' => array( //demo-slug should match the 'external_url' zip file name
             'name' => 'Demo Import One',
-            'external_url' => 'http://www.your_domain.com/import/demo-slug.zip',
+            'type' => 'pro', //Options - the value should be either 'free' or 'pro' - default is 'free'
+            'buy_url' => 'http://www.your_domain.com/theme-name/', //Optional - only if the 'type' is set to 'pro'
+            'external_url' => 'http://www.your_domain.com/import/demo-slug1.zip', // zip file should contain content.xml, customizer.dat, widget.wie, option_name1.json, option_name2.json, revslider.zip - you can skip any of the files if your demo does not need it
             'image' => 'http://www.your_domain.com/import/screenshot.png',
             'preview_url' => 'http://www.your_domain.com/demo-slug',
+            'options_array' => array('option_name1','option_name2'), //option_name1.json, option_name2.json file should be included in the zip file
             'menu_array' => array(
                 'primary' => 'Primary Menu',
                 'secondary' => 'Secondary Menu'
             ),
             'home_slug' => 'home',
-            'blog_slug' => 'blog'
+            'blog_slug' => 'blog',
+            'tags' => array( //Optional
+                'creative' => 'Creative',
+                'portfolio' => 'Portfolio',
+                'blog' => 'Blog'
+            )
         ),
         'demo-slug2' => array(
             'name' => 'Demo Import Two',
@@ -60,8 +70,7 @@ function hdi_import_files_array(){
             'image' => 'http://www.your_domain.com/import/screenshot.png',
             'preview_url' => 'http://www.your_domain.com/demo-slug2',
             'menu_array' => array(
-                'primary' => 'Primary Menu',
-                'secondary' => 'Secondary Menu'
+                'primary' => 'Primary Menu'
             ),
             'home_slug' => 'home',
             'blog_slug' => 'blog'
@@ -70,7 +79,8 @@ function hdi_import_files_array(){
 }
 
 add_filter( 'hdi_import_files', 'hdi_import_files_array' );
-?>`
+?>
+</code>
 
 == Screenshots ==
 

@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: HashThemes Demo Importer
- * Plugin URI: 
- * Description: A one click demo importer to import demo contents developed by HashThemes.
- * Version: 1.0.0
+ * Plugin URI: https://github.com/pzstar/hashthemes-demo-importer
+ * Description: Easily imports demo with just one click.
+ * Version: 1.0.1
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: hashthemes-demo-importer
@@ -97,7 +97,7 @@ if (!class_exists('HDI_Importer')) {
                 <h2><?php echo esc_html__('HashThemes OneClick Demo Importer', 'hashthemes-demo-importer'); ?></h2>
 
                 <?php
-                if (is_array($this->configFile) && !is_null($this->configFile)) {
+                if (is_array($this->configFile) && !is_null($this->configFile) && !empty($this->configFile)) {
                     $tags = array();
                     foreach ($this->configFile as $demo_slug => $demo_pack) {
                         if (isset($demo_pack['tags']) && is_array($demo_pack['tags'])) {
@@ -222,6 +222,12 @@ if (!class_exists('HDI_Importer')) {
                                             ?>
                                         </ul>
                                         <?php
+                                    } else {
+                                        ?>
+                                        <ul>
+                                            <li><?php esc_html_e('No Required Plugins Found.', 'hashthemes-demo-importer'); ?></li>
+                                        </ul>
+                                        <?php
                                     }
                                     ?>
                                 </div>
@@ -230,9 +236,9 @@ if (!class_exists('HDI_Importer')) {
                                     <h4><?php esc_html_e('Reset Website', 'hashthemes-demo-importer') ?></h4>
                                     <p><?php esc_html_e('Reseting the website will delete all your post, pages, custom post types, categories, taxonomies, images and all other customizer and theme option settings.', 'hashthemes-demo-importer') ?></p>
                                     <p><?php esc_html_e('It is always recommended to reset the database for a complete demo import.', 'hashthemes-demo-importer') ?></p>
-                                    <label>
+                                    <label class="hdi-reset-website-checkbox">
                                         <input id="checkbox-reset-<?php echo esc_attr($demo_slug); ?>" type="checkbox" value='1' checked="checked"/>
-                                        <?php echo esc_html('Reset Website', 'hashthemes-demo-importer'); ?>
+                                        <?php echo esc_html('Reset Website - Check this box only if you are sure to reset the website.', 'hashthemes-demo-importer'); ?>
                                     </label>
                                 </div>
 
@@ -381,16 +387,21 @@ if (!class_exists('HDI_Importer')) {
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
 
-            $themeoption_filepath = $this->demo_upload_dir($demo_slug) . '/theme-option.json';
+            $options_array = isset($this->configFile[$demo_slug]['options_array']) ? $this->configFile[$demo_slug]['options_array'] : '';
 
-            if (file_exists($themeoption_filepath)) {
-                $data = file_get_contents($themeoption_filepath);
+            if (isset($options_array) && is_array($options_array)) {
+                foreach ($options_array as $theme_option) {
+                    $option_filepath = $this->demo_upload_dir($demo_slug) . '/' . $theme_option . '.json';
 
-                if ($data) {
-                    if (update_option('hdi-options', json_decode($data, true), '', 'yes')) {
-                        $this->ajax_response['complete_message'] = esc_html__('Theme options settings imported', 'hashthemes-demo-importer');
+                    if (file_exists($option_filepath)) {
+                        $data = file_get_contents($option_filepath);
+
+                        if ($data) {
+                            update_option($theme_option, json_decode($data, true));
+                        }
                     }
                 }
+                $this->ajax_response['complete_message'] = esc_html__('Theme options settings imported', 'hashthemes-demo-importer');
             } else {
                 $this->ajax_response['complete_message'] = esc_html__('No theme options found', 'hashthemes-demo-importer');
             }
@@ -418,8 +429,16 @@ if (!class_exists('HDI_Importer')) {
             }
 
             $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['next_step'] = 'hdi_importing_revslider';
-            $this->ajax_response['next_step_message'] = esc_html__('Importing Revolution slider', 'hashthemes-demo-importer');
+            $sliderFile = $this->demo_upload_dir($demo_slug) . '/revslider.zip';
+
+            if (file_exists($sliderFile)) {
+                $this->ajax_response['next_step'] = 'hdi_importing_revslider';
+                $this->ajax_response['next_step_message'] = esc_html__('Importing Revolution slider', 'hashthemes-demo-importer');
+            } else {
+                $this->ajax_response['next_step'] = '';
+                $this->ajax_response['next_step_message'] = '';
+            }
+
             $this->send_ajax_response();
         }
 
@@ -439,8 +458,6 @@ if (!class_exists('HDI_Importer')) {
                 } else {
                     $this->ajax_response['complete_message'] = esc_html__('Revolution slider plugin not installed', 'hashthemes-demo-importer');
                 }
-            } else {
-                $this->ajax_response['complete_message'] = esc_html__('No Revolution slider found', 'hashthemes-demo-importer');
             }
 
             $this->ajax_response['demo'] = $demo_slug;
