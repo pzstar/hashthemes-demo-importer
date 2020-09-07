@@ -3,7 +3,7 @@
  * Plugin Name: HashThemes Demo Importer
  * Plugin URI: https://github.com/pzstar/hashthemes-demo-importer
  * Description: Easily imports demo with just one click.
- * Version: 1.0.1
+ * Version: 1.0.6
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: hashthemes-demo-importer
@@ -16,7 +16,7 @@ if (!defined('ABSPATH'))
     exit;
 
 
-define('HDI_VERSION', '1.0.0');
+define('HDI_VERSION', '1.0.6');
 
 define('HDI_FILE', __FILE__);
 define('HDI_PLUGIN_BASENAME', plugin_basename(HDI_FILE));
@@ -32,6 +32,7 @@ if (!class_exists('HDI_Importer')) {
         public $configFile;
         public $uploads_dir;
         public $plugin_install_count;
+        public $plugin_active_count;
         public $ajax_response = array();
 
         /*
@@ -43,6 +44,7 @@ if (!class_exists('HDI_Importer')) {
             $this->uploads_dir = wp_get_upload_dir();
 
             $this->plugin_install_count = 0;
+            $this->plugin_active_count = 0;
 
             // Include necesarry files
             $this->configFile = include HDI_PATH . 'import_config.php';
@@ -63,6 +65,7 @@ if (!class_exists('HDI_Importer')) {
             // Actions for the ajax call
             add_action('wp_ajax_hdi_install_demo', array($this, 'hdi_install_demo'));
             add_action('wp_ajax_hdi_install_plugin', array($this, 'hdi_install_plugin'));
+            add_action('wp_ajax_hdi_activate_plugin', array($this, 'hdi_activate_plugin'));
             add_action('wp_ajax_hdi_download_files', array($this, 'hdi_download_files'));
             add_action('wp_ajax_hdi_import_xml', array($this, 'hdi_import_xml'));
             add_action('wp_ajax_hdi_customizer_import', array($this, 'hdi_customizer_import'));
@@ -98,7 +101,7 @@ if (!class_exists('HDI_Importer')) {
 
                 <?php
                 if (is_array($this->configFile) && !is_null($this->configFile) && !empty($this->configFile)) {
-                    $tags = array();
+                    $tags = $pagebuilders = array();
                     foreach ($this->configFile as $demo_slug => $demo_pack) {
                         if (isset($demo_pack['tags']) && is_array($demo_pack['tags'])) {
                             foreach ($demo_pack['tags'] as $key => $tag) {
@@ -106,69 +109,113 @@ if (!class_exists('HDI_Importer')) {
                             }
                         }
                     }
-                    asort($tags);
 
-                    if (!empty($tags)) {
+                    foreach ($this->configFile as $demo_slug => $demo_pack) {
+                        if (isset($demo_pack['pagebuilder']) && is_array($demo_pack['pagebuilder'])) {
+                            foreach ($demo_pack['pagebuilder'] as $key => $pagebuilder) {
+                                $pagebuilders[$key] = $pagebuilder;
+                            }
+                        }
+                    }
+                    asort($tags);
+                    asort($pagebuilders);
+
+                    if (!empty($tags) && !empty($pagebuilders)) {
                         ?>
-                        <div class="hdi-tab-filter">
-                            <div class="hdi-tag-tab" data-filter="*">
-                                <?php esc_html_e('All', 'hashthemes-demo-importer'); ?>
-                            </div>
+                        <div class="hdi-tab-filter hdi-clearfix">
                             <?php
-                            foreach ($tags as $key => $value) {
+                            if (!empty($tags)) {
                                 ?>
-                                <div class="hdi-tag-tab" data-filter=".<?php echo esc_attr($key); ?>">
-                                    <?php echo esc_html($value); ?>
+                                <div class="hdi-tab-group hdi-tag-group" data-filter-group="tag">
+                                    <div class="hdi-tab" data-filter="*">
+                                        <?php esc_html_e('All', 'hashthemes-demo-importer'); ?>
+                                    </div>
+                                    <?php
+                                    foreach ($tags as $key => $value) {
+                                        ?>
+                                        <div class="hdi-tab" data-filter=".<?php echo esc_attr($key); ?>">
+                                            <?php echo esc_html($value); ?>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
                                 </div>
                                 <?php
                             }
+
+                            if (!empty($pagebuilders)) {
+                                ?>
+                                <div class="hdi-tab-group hdi-pagebuilder-group" data-filter-group="pagebuilder">
+                                    <div class="hdi-tab" data-filter="*">
+                                        <?php esc_html_e('All', 'hashthemes-demo-importer'); ?>
+                                    </div>
+                                    <?php
+                                    foreach ($pagebuilders as $key => $value) {
+                                        ?>
+                                        <div class="hdi-tab" data-filter=".<?php echo esc_attr($key); ?>">
+                                            <?php echo esc_html($value); ?>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                </div>
+                            <?php }
                             ?>
                         </div>
-                    <?php } ?>
+                        <?php
+                    }
+                    ?>
 
                     <div class="hdi-demo-box-wrap wp-clearfix">
                         <?php
                         // Loop through Demos
                         foreach ($this->configFile as $demo_slug => $demo_pack) {
-                            $tags = '';
+                            $tags = $pagebuilders = $class = '';
                             if (isset($demo_pack['tags'])) {
                                 $tags = implode(' ', array_keys($demo_pack['tags']));
                             }
 
+                            if (isset($demo_pack['pagebuilder'])) {
+                                $pagebuilders = implode(' ', array_keys($demo_pack['pagebuilder']));
+                            }
+
+                            $classes = $tags . ' ' . $pagebuilders;
+
                             $type = isset($demo_pack['type']) ? $demo_pack['type'] : 'free';
                             ?>
-                            <div id="<?php echo esc_attr($demo_slug); ?>" class="hdi-demo-box <?php echo esc_attr($tags); ?>">
+                            <div id="<?php echo esc_attr($demo_slug); ?>" class="hdi-demo-box <?php echo esc_attr($classes); ?>">
+                                <div class="hdi-demo-elements">
+                                    <?php if ($type == 'pro') { ?>
+                                        <div class="hdi-ribbon"><span>Premium</span></div>
+                                    <?php } ?>
 
-                                <?php if ($type == 'pro') { ?>
-                                    <div class="hdi-ribbon"><span>Premium</span></div>
-                                <?php } ?>
+                                    <img src="<?php echo esc_url($demo_pack['image']); ?> ">
 
-                                <img src="<?php echo esc_url($demo_pack['image']); ?> ">
+                                    <div class="hdi-demo-actions">
 
-                                <div class="hdi-demo-actions">
+                                        <h4><?php echo esc_html($demo_pack['name']); ?></h4>
 
-                                    <h4><?php echo esc_html($demo_pack['name']); ?></h4>
+                                        <div class="hdi-demo-buttons">
+                                            <a href="<?php echo esc_url($demo_pack['preview_url']); ?>" target="_blank" class="button">
+                                                <?php echo esc_html__('Preview', 'hashthemes-demo-importer'); ?>
+                                            </a> 
 
-                                    <div class="hdi-demo-buttons">
-                                        <a href="<?php echo esc_url($demo_pack['preview_url']); ?>" target="_blank" class="button">
-                                            <?php echo esc_html__('Preview', 'hashthemes-demo-importer'); ?>
-                                        </a> 
-
-                                        <?php
-                                        if ($type == 'pro') {
-                                            $buy_url = isset($demo_pack['buy_url']) ? $demo_pack['buy_url'] : '#';
+                                            <?php
+                                            if ($type == 'pro') {
+                                                $buy_url = isset($demo_pack['buy_url']) ? $demo_pack['buy_url'] : '#';
+                                                ?>
+                                                <a target="_blank" href="<?php echo esc_url($buy_url) ?>" class="button button-primary">
+                                                    <?php echo esc_html__('Buy Now', 'hashthemes-demo-importer') ?>
+                                                </a>
+                                            <?php } else { ?>
+                                                <a href="#hdi-modal-<?php echo esc_attr($demo_slug) ?>" class="hdi-modal-button button button-primary">
+                                                    <?php echo esc_html__('Install', 'hashthemes-demo-importer') ?>
+                                                </a>
+                                            <?php }
                                             ?>
-                                            <a target="_blank" href="<?php echo esc_url($buy_url) ?>" class="button button-primary">
-                                                <?php echo esc_html__('Buy Now', 'hashthemes-demo-importer') ?>
-                                            </a>
-                                        <?php } else { ?>
-                                            <a href="#hdi-modal-<?php echo esc_attr($demo_slug) ?>" class="hdi-modal-button button button-primary">
-                                                <?php echo esc_html__('Install', 'hashthemes-demo-importer') ?>
-                                            </a>
-                                        <?php }
-                                        ?>
-                                    </div>
+                                        </div>
 
+                                    </div>
                                 </div>
                             </div>
                         <?php }
@@ -207,15 +254,22 @@ if (!class_exists('HDI_Importer')) {
 
                                     if (is_array($plugins)) {
                                         ?>
-                                        <ul>
+                                        <ul class="hdi-plugin-status">
                                             <?php
                                             foreach ($plugins as $plugin) {
                                                 $name = isset($plugin['name']) ? $plugin['name'] : '';
                                                 $status = HDI_Demo_Importer::plugin_active_status($plugin['file_path']);
+                                                if ($status == 'active') {
+                                                    $plugin_class = '<span class="dashicons dashicons-yes-alt"></span>';
+                                                } else if ($status == 'inactive') {
+                                                    $plugin_class = '<span class="dashicons dashicons-warning"></span>';
+                                                } else {
+                                                    $plugin_class = '<span class="dashicons dashicons-dismiss"></span>';
+                                                }
                                                 ?>
-                                                <li>
+                                                <li class="hdi-<?php echo esc_attr($status); ?>">
                                                     <?php
-                                                    echo esc_html($name) . ' - ' . $this->get_plugin_status($status);
+                                                    echo $plugin_class . ' ' . esc_html($name) . ' - <i>' . $this->get_plugin_status($status) . '</i>';
                                                     ?>
                                                 </li>
                                             <?php }
@@ -301,13 +355,35 @@ if (!class_exists('HDI_Importer')) {
 
             $plugin_install_count = $this->plugin_install_count;
 
-            $this->ajax_response['demo'] = $demo_slug;
-
             if ($plugin_install_count > 0) {
-                $this->ajax_response['complete_message'] = esc_html__('All the required plugins installed and activated successfully', 'hashthemes-demo-importer');
+                $this->ajax_response['complete_message'] = esc_html__('All the required plugins installed', 'hashthemes-demo-importer');
             } else {
                 $this->ajax_response['complete_message'] = esc_html__('No plugin required to install', 'hashthemes-demo-importer');
             }
+
+            $this->ajax_response['demo'] = $demo_slug;
+            $this->ajax_response['next_step'] = 'hdi_activate_plugin';
+            $this->ajax_response['next_step_message'] = esc_html__('Activating required plugins', 'hashthemes-demo-importer');
+            $this->send_ajax_response();
+        }
+
+        function hdi_activate_plugin() {
+            check_ajax_referer('demo-importer-ajax', 'security');
+
+            $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
+
+            // Activate Required Plugins
+            $this->activate_plugins($demo_slug);
+
+            $plugin_active_count = $this->plugin_active_count;
+
+            if ($plugin_active_count > 0) {
+                $this->ajax_response['complete_message'] = esc_html__('All the required plugins activated', 'hashthemes-demo-importer');
+            } else {
+                $this->ajax_response['complete_message'] = esc_html__('No plugin required to activate', 'hashthemes-demo-importer');
+            }
+
+            $this->ajax_response['demo'] = $demo_slug;
             $this->ajax_response['next_step'] = 'hdi_download_files';
             $this->ajax_response['next_step_message'] = esc_html__('Downloading demo files', 'hashthemes-demo-importer');
             $this->send_ajax_response();
@@ -318,12 +394,17 @@ if (!class_exists('HDI_Importer')) {
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
 
-            $this->download_files($this->configFile[$demo_slug]['external_url']);
+            $downloads = $this->download_files($this->configFile[$demo_slug]['external_url']);
+            if ($downloads) {
+                $this->ajax_response['complete_message'] = esc_html__('All demo files downloaded', 'hashthemes-demo-importer');
+                $this->ajax_response['next_step'] = 'hdi_import_xml';
+                $this->ajax_response['next_step_message'] = esc_html__('Importing posts, pages and medias. It may take a bit longer time', 'hashthemes-demo-importer');
+            } else {
+                $this->ajax_response['error'] = true;
+                $this->ajax_response['error_message'] = esc_html__('Demo import process failed. Demo files can not be downloaded', 'hashthemes-demo-importer');
+            }
 
             $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['complete_message'] = esc_html__('All demo files downloaded', 'hashthemes-demo-importer');
-            $this->ajax_response['next_step'] = 'hdi_import_xml';
-            $this->ajax_response['next_step_message'] = esc_html__('Importing posts, pages and medias. It may take a bit longer time', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
@@ -333,12 +414,19 @@ if (!class_exists('HDI_Importer')) {
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
 
             // Import XML content
-            $this->importDemoContent($demo_slug);
+            $xml_filepath = $this->demo_upload_dir($demo_slug) . '/content.xml';
+
+            if (file_exists($xml_filepath)) {
+                $this->importDemoContent($xml_filepath);
+                $this->ajax_response['complete_message'] = esc_html__('All content imported', 'hashthemes-demo-importer');
+                $this->ajax_response['next_step'] = 'hdi_customizer_import';
+                $this->ajax_response['next_step_message'] = esc_html__('Importing customizer settings', 'hashthemes-demo-importer');
+            } else {
+                $this->ajax_response['error'] = true;
+                $this->ajax_response['error_message'] = esc_html__('Demo import process failed. No content file found', 'hashthemes-demo-importer');
+            }
 
             $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['complete_message'] = esc_html__('All content imported', 'hashthemes-demo-importer');
-            $this->ajax_response['next_step'] = 'hdi_customizer_import';
-            $this->ajax_response['next_step_message'] = esc_html__('Importing customizer settings', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
@@ -355,12 +443,12 @@ if (!class_exists('HDI_Importer')) {
                 ob_end_clean();
                 $this->ajax_response['complete_message'] = esc_html__('Customizer settings imported', 'hashthemes-demo-importer');
             } else {
-                $this->ajax_response['complete_message'] = esc_html__('No Customizer settings found', 'hashthemes-demo-importer');
+                $this->ajax_response['complete_message'] = esc_html__('No customizer settings found', 'hashthemes-demo-importer');
             }
 
             $this->ajax_response['demo'] = $demo_slug;
             $this->ajax_response['next_step'] = 'hdi_menu_import';
-            $this->ajax_response['next_step_message'] = esc_html__('Setting primary menu', 'hashthemes-demo-importer');
+            $this->ajax_response['next_step_message'] = esc_html__('Setting menus', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
@@ -373,10 +461,12 @@ if (!class_exists('HDI_Importer')) {
             // Set menu
             if ($menu_array) {
                 $this->setMenu($menu_array);
+                $this->ajax_response['complete_message'] = esc_html__('Menus saved', 'hashthemes-demo-importer');
+            } else {
+                $this->ajax_response['complete_message'] = esc_html__('No menus saved', 'hashthemes-demo-importer');
             }
 
             $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['complete_message'] = esc_html__('Primary menu saved', 'hashthemes-demo-importer');
             $this->ajax_response['next_step'] = 'hdi_theme_option';
             $this->ajax_response['next_step_message'] = esc_html__('Importing theme option settings', 'hashthemes-demo-importer');
             $this->send_ajax_response();
@@ -408,7 +498,7 @@ if (!class_exists('HDI_Importer')) {
 
             $this->ajax_response['demo'] = $demo_slug;
             $this->ajax_response['next_step'] = 'hdi_importing_widget';
-            $this->ajax_response['next_step_message'] = esc_html__('Importing Widgets', 'hashthemes-demo-importer');
+            $this->ajax_response['next_step_message'] = esc_html__('Importing widgets', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
@@ -423,12 +513,11 @@ if (!class_exists('HDI_Importer')) {
                 ob_start();
                 HDI_Widget_Importer::import($widget_filepath);
                 ob_end_clean();
-                $this->ajax_response['complete_message'] = esc_html__('Widgets Imported', 'hashthemes-demo-importer');
+                $this->ajax_response['complete_message'] = esc_html__('Widgets imported', 'hashthemes-demo-importer');
             } else {
-                $this->ajax_response['complete_message'] = esc_html__('No Widgets found', 'hashthemes-demo-importer');
+                $this->ajax_response['complete_message'] = esc_html__('No widgets found', 'hashthemes-demo-importer');
             }
 
-            $this->ajax_response['demo'] = $demo_slug;
             $sliderFile = $this->demo_upload_dir($demo_slug) . '/revslider.zip';
 
             if (file_exists($sliderFile)) {
@@ -439,6 +528,7 @@ if (!class_exists('HDI_Importer')) {
                 $this->ajax_response['next_step_message'] = '';
             }
 
+            $this->ajax_response['demo'] = $demo_slug;
             $this->send_ajax_response();
         }
 
@@ -458,6 +548,8 @@ if (!class_exists('HDI_Importer')) {
                 } else {
                     $this->ajax_response['complete_message'] = esc_html__('Revolution slider plugin not installed', 'hashthemes-demo-importer');
                 }
+            } else {
+                $this->ajax_response['complete_message'] = esc_html__('No Revolution slider found', 'hashthemes-demo-importer');
             }
 
             $this->ajax_response['demo'] = $demo_slug;
@@ -488,20 +580,19 @@ if (!class_exists('HDI_Importer')) {
 
             // Abort the request if the local uploads directory couldn't be created.
             if (!$result) {
-                $this->add_ajax_message['message'] = esc_html__('The directory for the demo packs couldn\'t be created.', 'hashthemes-demo-importer');
-                $this->ajax_response['error'] = true;
-                $this->send_ajax_response();
+                return false;
+            } else {
+                $demo_pack = $this->demo_upload_dir() . 'demo-pack.zip';
+
+                $file = wp_remote_retrieve_body(wp_remote_get($external_url, array(
+                    'timeout' => 60,
+                )));
+
+                $wp_filesystem->put_contents($demo_pack, $file);
+                unzip_file($demo_pack, $this->demo_upload_dir());
+                $wp_filesystem->delete($demo_pack);
+                return true;
             }
-
-            $demo_pack = $this->demo_upload_dir() . 'demo-pack.zip';
-
-            $file = wp_remote_retrieve_body(wp_remote_get($external_url, array(
-                'timeout' => 60,
-            )));
-
-            $wp_filesystem->put_contents($demo_pack, $file);
-            unzip_file($demo_pack, $this->demo_upload_dir());
-            $wp_filesystem->delete($demo_pack);
         }
 
         /*
@@ -619,12 +710,12 @@ if (!class_exists('HDI_Importer')) {
          * Import demo XML content
          */
 
-        function importDemoContent($slug) {
+        function importDemoContent($xml_filepath) {
 
             if (!defined('WP_LOAD_IMPORTERS'))
                 define('WP_LOAD_IMPORTERS', true);
 
-            if (!class_exists('WP_Import')) {
+            if (!class_exists('HDI_Import')) {
                 $class_wp_importer = HDI_PATH . "wordpress-importer/wordpress-importer.php";
                 if (file_exists($class_wp_importer)) {
                     require_once $class_wp_importer;
@@ -632,21 +723,19 @@ if (!class_exists('HDI_Importer')) {
             }
 
             // Import demo content from XML
-            if (class_exists('WP_Import')) {
-                $import_filepath = $this->demo_upload_dir($slug) . '/content.xml'; // Get the xml file from directory 
+            if (class_exists('HDI_Import')) {
                 $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
                 $home_slug = isset($this->configFile[$demo_slug]['home_slug']) ? $this->configFile[$demo_slug]['home_slug'] : '';
                 $blog_slug = isset($this->configFile[$demo_slug]['blog_slug']) ? $this->configFile[$demo_slug]['blog_slug'] : '';
 
-                if (file_exists($import_filepath)) {
-                    $wp_import = new WP_Import();
+                if (file_exists($xml_filepath)) {
+                    $wp_import = new HDI_Import();
                     $wp_import->fetch_attachments = true;
                     // Capture the output.
                     ob_start();
-                    $wp_import->import($import_filepath);
+                    $wp_import->import($xml_filepath);
                     // Clean the output.
                     ob_end_clean();
-
                     // Import DONE
                     // set homepage as front page
                     if ($home_slug) {
@@ -702,6 +791,23 @@ if (!class_exists('HDI_Importer')) {
             }
         }
 
+        function activate_plugins($slug) {
+            $demo = $this->configFile[$slug];
+
+            $plugins = $demo['plugins'];
+
+            foreach ($plugins as $plugin_slug => $plugin) {
+                $name = isset($plugin['name']) ? $plugin['name'] : '';
+                $file_path = isset($plugin['file_path']) ? $plugin['file_path'] : '';
+                $plugin_status = $this->plugin_status($file_path);
+
+                if ($plugin_status == 'inactive') {
+                    $this->activate_plugin($file_path);
+                    $this->plugin_active_count++;
+                }
+            }
+        }
+
         public function plugin_installer_callback($path, $slug) {
             $plugin_status = $this->plugin_status($path);
 
@@ -718,10 +824,8 @@ if (!class_exists('HDI_Importer')) {
                 $upgrader = new Plugin_Upgrader($skin);
                 $upgrader->install($api->download_link);
 
-                $this->activate_plugin($path);
-                $this->plugin_install_count++;
-            } else if ($plugin_status == 'inactive') {
-                $this->activate_plugin($path);
+                $this->activate_plugin($file_path);
+
                 $this->plugin_install_count++;
             }
         }
@@ -758,14 +862,10 @@ if (!class_exists('HDI_Importer')) {
 
                 $plugin_file = WP_PLUGIN_DIR . '/' . esc_html($path);
 
-                if (file_exists($plugin_file)) {
-                    $this->activate_plugin($path);
-                    $this->plugin_install_count++;
-                }
-
                 $wp_filesystem->delete($plugin);
-            } else if ($plugin_status == 'inactive') {
-                $this->activate_plugin($path);
+
+                $this->activate_plugin($file_path);
+
                 $this->plugin_install_count++;
             }
         }
@@ -854,10 +954,10 @@ if (!class_exists('HDI_Importer')) {
                 'import_success' => '<h2>' . esc_html__('All done. Have fun!', 'hashthemes-demo-importer') . '</h2><p>' . esc_html__('Your website has been successfully setup.', 'hashthemes-demo-importer') . '</p><a class="button" target="_blank" href="' . esc_url(home_url('/')) . '">View your Website</a><a class="button" href="' . esc_url(admin_url('/admin.php?page=hdi-demo-importer')) . '">' . esc_html__('Go Back', 'hashthemes-demo-importer') . '</a>'
             );
 
-            wp_enqueue_script('isotope-pkgd', HDI_ASSETS_URL . 'isotope.pkgd.js', array('jquery'), '1.0.0', true);
-            wp_enqueue_script('hdi-demo-ajax', HDI_ASSETS_URL . 'demo-importer-ajax.js', array('jquery', 'imagesloaded'), '1.0.0', true);
+            wp_enqueue_script('isotope-pkgd', HDI_ASSETS_URL . 'isotope.pkgd.js', array('jquery'), HDI_VERSION, true);
+            wp_enqueue_script('hdi-demo-ajax', HDI_ASSETS_URL . 'demo-importer-ajax.js', array('jquery', 'imagesloaded'), HDI_VERSION, true);
             wp_localize_script('hdi-demo-ajax', 'hdi_ajax_data', $data);
-            wp_enqueue_style('hdi-demo-style', HDI_ASSETS_URL . 'demo-importer-style.css', array(), '1.0.0');
+            wp_enqueue_style('hdi-demo-style', HDI_ASSETS_URL . 'demo-importer-style.css', array(), HDI_VERSION);
         }
 
     }

@@ -1,8 +1,8 @@
 === HashThemes Demo Importer ===
 Contributors: hashthemes
-Tags: demo, importer, hashthemes
+Tags: demo importer, hashthemes, widgets, content, import, one click import, content
 Requires at least: 5.0
-Tested up to: 5.3.2
+Tested up to: 5.5
 Stable tag: 1.0
 Requires PHP: 5.0
 License: GPLv2 or later
@@ -26,6 +26,9 @@ The demo zip should contain the XML file, customizer (.dat) file, widget (.wie) 
 <li>Imports fully functional demo</li>
 </ul>
 
+<h4>Video Guide</h4>
+<iframe width="620" height="345" src="https://www.youtube.com/embed/FCViyER0vTo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 == Installation ==
 The easy way to install the plugin is via WordPress.org plugin directory.
 
@@ -44,23 +47,41 @@ An answer to that question.
 <?php
 function hdi_import_files_array(){
     return array(
-        'demo-slug1' => array( //demo-slug should match the 'external_url' zip file name
+        'demo-slug1' => array( // demo-slug should match the 'external_url' zip file name
             'name' => 'Demo Import One',
-            'type' => 'pro', //Options - the value should be either 'free' or 'pro' - default is 'free'
-            'buy_url' => 'http://www.your_domain.com/theme-name/', //Optional - only if the 'type' is set to 'pro'
-            'external_url' => 'http://www.your_domain.com/import/demo-slug1.zip', // zip file should contain content.xml, customizer.dat, widget.wie, option_name1.json, option_name2.json, revslider.zip - you can skip any of the files if your demo does not need it
+            'type' => 'pro', // the value should be either 'free' or 'pro' - default is 'free'
+            'buy_url' => 'http://www.your_domain.com/theme-name/', // optional - only if the 'type' is set to 'pro'
+            'external_url' => 'http://www.your_domain.com/import/demo-slug1.zip', // zip file should contain content.xml, customizer.dat, widget.wie, option_name1.json, option_name2.json, revslider.zip(exported slider content from revolution slider) - you can skip any of the files if your demo does not need it
             'image' => 'http://www.your_domain.com/import/screenshot.png',
             'preview_url' => 'http://www.your_domain.com/demo-slug',
-            'options_array' => array('option_name1','option_name2'), //option_name1.json, option_name2.json file should be included in the zip file
-            'menu_array' => array(
+            'options_array' => array('option_name1','option_name2'), // option_name1.json, option_name2.json file should be included in the zip file
+            'menu_array' => array( // list of menus
                 'primary' => 'Primary Menu',
                 'secondary' => 'Secondary Menu'
             ),
+            'plugins' => array( // these plugins will be installed automatically before demo import
+                'simple-floating-menu' => array(
+                    'name' => 'Simple Floating Menu', // name of the plugin
+                    'source' => 'wordpress', // source is either 'wordpress' for plugins in WordPress directory or 'remote' for external stored 
+                    'file_path' => 'simple-floating-menu/simple-floating-menu.php' // path of the main file of the plugin
+                ),
+                'contact-form-7' => array(
+                    'name' => 'Contact Form 7',
+                    'source' => 'wordpress',
+                    'file_path' => 'contact-form-7/wp-contact-form-7.php'
+                )
+                'revslider' => array(
+                    'name' => 'Slider Revolution',
+                    'source' => 'remote',
+                    'file_path' => 'revslider/revslider.php',
+                    'location' => 'http://www.your_domain.com/import/revslider.zip' // if source is 'remote', add the location of the plugin zip
+                )
+            ),
             'home_slug' => 'home',
             'blog_slug' => 'blog',
-            'tags' => array( //Optional
-                'creative' => 'Creative',
-                'portfolio' => 'Portfolio',
+            'tags' => array( // Optional - add filter tab on the header to sort the demo by their type
+                'magazine' => 'Magazine',
+                'business' => 'Business',
                 'blog' => 'Blog'
             )
         ),
@@ -86,6 +107,22 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
+= 1.0.6 =
+* WordPress Importer Updated
+* New Demos added for Viral Theme
+
+= 1.0.5 =
+* Added new demo in Viral News theme
+
+= 1.0.4 =
+* Added More demo for Viral News Theme
+* Demo Importer Enhancement
+
+= 1.0.3 =
+* Fixed responsive issue in the dashboard
+
+= 1.0.2 =
+* Demo for HashOne theme added
 
 = 1.0 =
 * Release

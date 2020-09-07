@@ -1,24 +1,50 @@
 (function ($) {
-
     if ($('.hdi-tab-filter').length > 0) {
+        $('.hdi-tab-group').each(function () {
+            $(this).find('.hdi-tab:first').addClass('hdi-active');
+        });
 
-        var first_class = $('.hdi-tag-tab:first').data('filter');
-        $('.hdi-tag-tab:first').addClass('hdi-active');
-
-        var $container = $('.hdi-demo-box-wrap').imagesLoaded(function () {
-            $container.isotope({
+        // init Isotope
+        var $grid = $('.hdi-demo-box-wrap').imagesLoaded(function () {
+            $grid.isotope({
                 itemSelector: '.hdi-demo-box',
-                filter: first_class
             });
         });
 
-        $('.hdi-tab-filter').on('click', '.hdi-tag-tab', function () {
-            var filterValue = $(this).attr('data-filter');
-            $container.isotope({filter: filterValue});
-            $('.hdi-tag-tab').removeClass('hdi-active');
-            $(this).addClass('hdi-active');
+        // store filter for each group
+        var filters = {};
+
+        $('.hdi-tab-group').on('click', '.hdi-tab', function (event) {
+            var $button = $(event.currentTarget);
+            // get group key
+            var $buttonGroup = $button.parents('.hdi-tab-group');
+            var filterGroup = $buttonGroup.attr('data-filter-group');
+            // set filter for group
+            filters[ filterGroup ] = $button.attr('data-filter');
+            // combine filters
+            var filterValue = concatValues(filters);
+            // set filter for Isotope
+            $grid.isotope({filter: filterValue});
         });
 
+        // change is-checked class on buttons
+        $('.hdi-tab-group').each(function (i, buttonGroup) {
+            var $buttonGroup = $(buttonGroup);
+            $buttonGroup.on('click', '.hdi-tab', function (event) {
+                $buttonGroup.find('.hdi-active').removeClass('hdi-active');
+                var $button = $(event.currentTarget);
+                $button.addClass('hdi-active');
+            });
+        });
+
+        // flatten object by concatting values
+        function concatValues(obj) {
+            var value = '';
+            for (var prop in obj) {
+                value += obj[ prop ];
+            }
+            return value;
+        }
     }
 
     $('.hdi-modal-button').on('click', function (e) {
@@ -100,9 +126,10 @@
                         }
                         setTimeout(function () {
                             do_ajax(info);
-                        }, 4000);
+                        }, 2000);
                     } else {
-                        $('#hdi-import-progress .hdi-import-progress-message').html(hdi_ajax_data.import_error);
+                        $('#hdi-import-progress .hdi-import-progress-message').html(info.error_message);
+                        $('#hdi-import-progress').addClass('import-error');
 
                     }
                 },

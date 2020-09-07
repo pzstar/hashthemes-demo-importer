@@ -45,24 +45,6 @@ if (!class_exists('HDI_Demo_Importer')) {
             add_action('wp_ajax_plugin_deactivation', array($this, 'plugin_deactivation_callback'));
         }
 
-        /** Enqueue Necessary Styles and Scripts for the Welcome Page * */
-        public function enqueue_scripts() {
-            wp_enqueue_script('plugin-installer', get_template_directory_uri() . '/inc/viral-pro/recommended-plugins/js/plugin-installer.js', array('jquery'));
-
-            wp_localize_script('plugin-installer', 'PluginInstallerObject', array(
-                'ajaxurl' => esc_url(admin_url('admin-ajax.php')),
-                'admin_nonce' => wp_create_nonce('plugin_installer_nonce'),
-                'activate_nonce' => wp_create_nonce('plugin_activate_nonce'),
-                'deactivate_nonce' => wp_create_nonce('plugin_deactivate_nonce'),
-                'activate_btn' => esc_html__('Activate', 'hashthemes-demo-importer'),
-                'installed_btn' => esc_html__('Installed', 'hashthemes-demo-importer'),
-                'activating_btn' => esc_html__('Activating', 'hashthemes-demo-importer'),
-                'installing_btn' => esc_html__('Installing', 'hashthemes-demo-importer'),
-                'error_message' => esc_html__('Something went wrong. Plugin can not be installed.', 'hashthemes-demo-importer'),
-                'wait_message' => esc_html__('Please wait for the previous action to complete.', 'hashthemes-demo-importer')
-            ));
-        }
-
         /** Plugin API * */
         public static function call_plugin_api($plugin) {
             include_once ABSPATH . 'wp-admin/includes/plugin-install.php';

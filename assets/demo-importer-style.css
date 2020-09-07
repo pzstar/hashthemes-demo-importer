@@ -1,12 +1,18 @@
+.hdi-clearfix:after,
+.hdi-clearfix:before{
+    content: "";
+    display: table;
+}
+
+.hdi-clearfix:after{
+    clear: both;
+}
+
 .hdi-demo-importer-wrap * {
     box-sizing: border-box;
 }
 
-.hdi-demo-importer-wrap {
-    max-width: 1000px;
-}
-
-img {
+.hdi-demo-importer-wrap img {
     max-width: 100%;
 }
 
@@ -17,29 +23,40 @@ img {
     margin-top: 20px;
 }
 
-.hdi-tag-tab{
+.hdi-tab{
     display: inline-block;
     padding: 5px 15px;
     cursor: pointer;
     border-radius: 20px;
 }
 
-.hdi-tag-tab.hdi-active{
+.hdi-tab.hdi-active{
     background: #0073aa;
     color: #FFF;
 }
 
+.hdi-tag-group{
+    float: left;
+}
+
+.hdi-pagebuilder-group{
+    float: right;
+}
+
 .hdi-demo-box-wrap {
-    margin-left: -3%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -20px;
     margin-top: 25px;
 }
 
 .hdi-demo-box {
+    margin: 0 0 40px;
+    padding: 0 20px;
+}
+
+.hdi-demo-elements{
     position: relative;
-    float: left;
-    margin-left: 3%;
-    margin-bottom: 30px;
-    width: 30.33%;
     border: 1px solid #ddd;
     -webkit-box-shadow: 0 1px 1px -1px rgba(0, 0, 0, .1);
     box-shadow: 0 1px 1px -1px rgba(0, 0, 0, .1);
@@ -140,7 +157,6 @@ img {
     border: 1px solid #eee;
     background: #fff;
     margin-top: 30px;
-    max-width: 800px;
 }
 
 .hdi-modal-header {
@@ -202,6 +218,21 @@ img {
     margin-bottom: 10px;
 }
 
+.hdi-plugin-status li .dashicons-warning,
+.hdi-plugin-status .hdi-inactive i{
+    color: #ffb900;
+}
+
+.hdi-plugin-status li .dashicons-dismiss,
+.hdi-plugin-status .hdi-install i{
+    color: #c00;
+}
+
+.hdi-plugin-status li .dashicons-yes-alt,
+.hdi-plugin-status .hdi-active i{
+    color: #46b450;
+}
+
 .hdi-reset-checkbox {
     margin: 30px 0;
     border: 2px solid #EEE;
@@ -218,7 +249,6 @@ img {
 
 #hdi-import-progress {
     background: #FFF;
-    max-width: 800px;
     text-align: center;
     margin-top: 25px;
 }
@@ -346,6 +376,10 @@ body.hdi-modal-opened .hdi-demo-box-wrap{
     animation: hdi-check-right 0.25s forwards 1s;
 }
 
+.import-error .hdi-loader-rotater {
+    animation: none;
+}
+
 @keyframes hdi-check-left {
     0% {
         transform: rotate(-90deg);
@@ -423,5 +457,48 @@ body.hdi-modal-opened .hdi-demo-box-wrap{
     100% {
         text-shadow: .25em 0 0 #444, .5em 0 0 #444;
     }
-    ss
+}
+
+.hdi-demo-box{
+    width: 20%;
+}
+
+@media only screen and (max-width: 2000px){
+    .hdi-demo-box{
+        width: 25%;
+    }
+}
+
+@media only screen and (max-width: 1640px){
+    .hdi-demo-box{
+        width: 33.33%;
+    }
+}
+
+@media only screen and (max-width: 1120px){
+    .hdi-demo-box{
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .hdi-demo-box{
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 1120px){
+    .hdi-demo-importer-wrap{
+        margin-right: 5%;
+    }
+}
+
+@media screen and (max-width: 782px){
+    .hdi-demo-box h4{
+        line-height: 60px;
+    }
+
+    .hdi-demo-buttons{
+        height: 60px;
+    }
 }
