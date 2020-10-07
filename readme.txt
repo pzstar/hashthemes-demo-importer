@@ -107,6 +107,9 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
+= 1.0.7 =
+* Demos Rearranged
+
 = 1.0.6 =
 * WordPress Importer Updated
 * New Demos added for Viral Theme

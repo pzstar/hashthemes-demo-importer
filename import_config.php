@@ -10,6 +10,7 @@ $square = array(
         'external_url' => 'https://hashthemes.com/import-files/square/main.zip',
         'image' => 'https://i0.wp.com/themes.svn.wordpress.org/square/1.6.9/screenshot.png',
         'preview_url' => 'https://demo.hashthemes.com/square',
+        'options_array' => array('sfm_settings'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -24,6 +25,7 @@ $squarepress = array(
         'external_url' => 'https://hashthemes.com/import-files/squarepress/main.zip',
         'image' => 'https://i0.wp.com/themes.svn.wordpress.org/squarepress/1.0.6/screenshot.png',
         'preview_url' => 'https://demo.hashthemes.com/squarepress',
+        'options_array' => array('sfm_settings'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -38,6 +40,7 @@ $total = array(
         'external_url' => 'https://hashthemes.com/import-files/total/main.zip',
         'image' => 'https://i0.wp.com/themes.svn.wordpress.org/total/1.2.39/screenshot.png',
         'preview_url' => 'https://demo.hashthemes.com/total',
+        'options_array' => array('sfm_settings'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -52,6 +55,7 @@ $totally = array(
         'external_url' => 'https://hashthemes.com/import-files/totally/main.zip',
         'image' => 'https://i0.wp.com/themes.svn.wordpress.org/totally/1.1.2/screenshot.png',
         'preview_url' => 'https://demo.hashthemes.com/totally',
+        'options_array' => array('sfm_settings'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -66,6 +70,7 @@ $hashone = array(
         'external_url' => 'https://hashthemes.com/import-files/hashone/main.zip',
         'image' => 'https://i0.wp.com/themes.svn.wordpress.org/hashone/1.2.7/screenshot.png',
         'preview_url' => 'https://demo.hashthemes.com/hashone',
+        'options_array' => array('sfm_settings'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -76,7 +81,7 @@ $hashone = array(
 
 $viral = array(
     'demo1' => array(
-        'name' => 'Viral - Demo One',
+        'name' => 'Demo One - Customizer Version',
         'external_url' => 'https://hashthemes.com/import-files/viral/demo1.zip',
         'image' => 'https://hashthemes.com/import-files/viral/screen/demo1.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral/demo1',
@@ -105,98 +110,8 @@ $viral = array(
             'customizer' => 'Customizer'
         )
     ),
-    'demo2' => array(
-        'name' => 'Viral - Demo Two',
-        'external_url' => 'https://hashthemes.com/import-files/viral/demo2.zip',
-        'image' => 'https://hashthemes.com/import-files/viral/screen/demo2.jpg',
-        'preview_url' => 'https://demo.hashthemes.com/viral/demo2',
-        'menu_array' => array(
-            'primary' => 'Primary Menu'
-        ),
-        'options_array' => array('sfm_settings'),
-        'home_slug' => 'home-page',
-        'blog_slug' => 'blog',
-        'plugins' => array(
-            'simple-floating-menu' => array(
-                'name' => 'Simple Floating Menu',
-                'source' => 'wordpress',
-                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
-            )
-        ),
-        'tags' => array(
-            'free' => 'Free'
-        ),
-        'pagebuilder' => array(
-            'customizer' => 'Customizer'
-        )
-    ),
-    'demo3' => array(
-        'name' => 'Viral - Demo Three',
-        'external_url' => 'https://hashthemes.com/import-files/viral/demo3.zip',
-        'image' => 'https://hashthemes.com/import-files/viral/screen/demo3.jpg',
-        'preview_url' => 'https://demo.hashthemes.com/viral/demo3',
-        'menu_array' => array(
-            'primary' => 'Primary Menu'
-        ),
-        'options_array' => array('sfm_settings'),
-        'home_slug' => 'home-page',
-        'blog_slug' => 'blog',
-        'plugins' => array(
-            'simple-floating-menu' => array(
-                'name' => 'Simple Floating Menu',
-                'source' => 'wordpress',
-                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
-            )
-        ),
-        'tags' => array(
-            'free' => 'Free'
-        ),
-        'pagebuilder' => array(
-            'customizer' => 'Customizer'
-        )
-    ),
-    'demo4' => array(
-        'name' => 'Viral - Demo Four (Boxed)',
-        'external_url' => 'https://hashthemes.com/import-files/viral/demo4.zip',
-        'image' => 'https://hashthemes.com/import-files/viral/screen/demo4.jpg',
-        'preview_url' => 'https://demo.hashthemes.com/viral/demo4',
-        'menu_array' => array(
-            'primary' => 'Primary Menu'
-        ),
-        'options_array' => array('sfm_settings'),
-        'home_slug' => 'home-page',
-        'blog_slug' => 'blog',
-        'plugins' => array(
-            'simple-floating-menu' => array(
-                'name' => 'Simple Floating Menu',
-                'source' => 'wordpress',
-                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
-            )
-        ),
-        'tags' => array(
-            'free' => 'Free'
-        ),
-        'pagebuilder' => array(
-            'customizer' => 'Customizer'
-        )
-    ),
     'demo5' => array(
-        'name' => 'Viral - Elementor Demo One',
+        'name' => 'Demo One - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral/demo5.zip',
         'image' => 'https://hashthemes.com/import-files/viral/screen/demo1.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral/demo5',
@@ -235,8 +150,38 @@ $viral = array(
             'elementor' => 'Elementor'
         )
     ),
+    'demo2' => array(
+        'name' => 'Demo Two - Customizer Version',
+        'external_url' => 'https://hashthemes.com/import-files/viral/demo2.zip',
+        'image' => 'https://hashthemes.com/import-files/viral/screen/demo2.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral/demo2',
+        'menu_array' => array(
+            'primary' => 'Primary Menu'
+        ),
+        'options_array' => array('sfm_settings'),
+        'home_slug' => 'home-page',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'wp-my-instagram' => array(
+                'name' => 'WP Instant Feeds',
+                'source' => 'wordpress',
+                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        )
+    ),
     'demo6' => array(
-        'name' => 'Viral - Elementor Demo Two',
+        'name' => 'Demo Two - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral/demo6.zip',
         'image' => 'https://hashthemes.com/import-files/viral/screen/demo2.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral/demo6',
@@ -275,8 +220,38 @@ $viral = array(
             'elementor' => 'Elementor'
         )
     ),
+    'demo3' => array(
+        'name' => 'Demo Three - Customizer Version',
+        'external_url' => 'https://hashthemes.com/import-files/viral/demo3.zip',
+        'image' => 'https://hashthemes.com/import-files/viral/screen/demo3.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral/demo3',
+        'menu_array' => array(
+            'primary' => 'Primary Menu'
+        ),
+        'options_array' => array('sfm_settings'),
+        'home_slug' => 'home-page',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'wp-my-instagram' => array(
+                'name' => 'WP Instant Feeds',
+                'source' => 'wordpress',
+                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        )
+    ),
     'demo7' => array(
-        'name' => 'Viral - Elementor Demo Three',
+        'name' => 'Demo Three - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral/demo7.zip',
         'image' => 'https://hashthemes.com/import-files/viral/screen/demo3.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral/demo7',
@@ -315,8 +290,38 @@ $viral = array(
             'elementor' => 'Elementor'
         )
     ),
+    'demo4' => array(
+        'name' => 'Demo Four (Boxed) - Customizer Version',
+        'external_url' => 'https://hashthemes.com/import-files/viral/demo4.zip',
+        'image' => 'https://hashthemes.com/import-files/viral/screen/demo4.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral/demo4',
+        'menu_array' => array(
+            'primary' => 'Primary Menu'
+        ),
+        'options_array' => array('sfm_settings'),
+        'home_slug' => 'home-page',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'wp-my-instagram' => array(
+                'name' => 'WP Instant Feeds',
+                'source' => 'wordpress',
+                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        )
+    ),
     'demo8' => array(
-        'name' => 'Viral - Elementor Demo Five (Framed)',
+        'name' => 'Demo Five (Framed) - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral/demo8.zip',
         'image' => 'https://hashthemes.com/import-files/viral/screen/demo5.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral/demo8',
@@ -356,7 +361,7 @@ $viral = array(
         )
     ),
     'demo9' => array(
-        'name' => 'Viral - Elementor Demo Six (Dark)',
+        'name' => 'Demo Six (Dark) - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral/demo9.zip',
         'image' => 'https://hashthemes.com/import-files/viral/screen/demo6.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral/demo1',
@@ -399,10 +404,11 @@ $viral = array(
 
 $viral_news = array(
     'demo1' => array(
-        'name' => 'Viral News - Demo One',
+        'name' => 'Demo One - Customizer Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/demo1.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo1-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/demo1',
+        'options_array' => array('sfm_settings'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -413,93 +419,14 @@ $viral_news = array(
         ),
         'pagebuilder' => array(
             'customizer' => 'Customizer'
-        )
-    ),
-    'demo2' => array(
-        'name' => 'Viral News - Demo Two',
-        'external_url' => 'https://hashthemes.com/import-files/viral-news/demo2.zip',
-        'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo2-screenshot.jpg',
-        'preview_url' => 'https://demo.hashthemes.com/viral-news/demo2',
-        'menu_array' => array(
-            'primary' => 'Primary Menu'
-        ),
-        'home_slug' => 'home',
-        'blog_slug' => 'blog',
-        'tags' => array(
-            'free' => 'Free'
-        ),
-        'pagebuilder' => array(
-            'customizer' => 'Customizer'
-        )
-    ),
-    'demo3' => array(
-        'name' => 'Viral News - Demo Three',
-        'external_url' => 'https://hashthemes.com/import-files/viral-news/demo3.zip',
-        'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo3-screenshot.jpg',
-        'preview_url' => 'https://demo.hashthemes.com/viral-news/demo3',
-        'menu_array' => array(
-            'primary' => 'Primary Menu'
-        ),
-        'home_slug' => 'home',
-        'blog_slug' => 'blog',
-        'tags' => array(
-            'free' => 'Free'
-        ),
-        'pagebuilder' => array(
-            'customizer' => 'Customizer'
-        )
-    ),
-    'demo4' => array(
-        'name' => 'Viral News - Demo Four',
-        'external_url' => 'https://hashthemes.com/import-files/viral-news/demo4.zip',
-        'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo4-screenshot.jpg',
-        'preview_url' => 'https://demo.hashthemes.com/viral-news/demo4',
-        'menu_array' => array(
-            'primary' => 'Primary Menu'
-        ),
-        'home_slug' => 'home',
-        'blog_slug' => 'blog',
-        'tags' => array(
-            'free' => 'Free'
-        ),
-        'pagebuilder' => array(
-            'customizer' => 'Customizer'
-        )
-    ),
-    'demo5' => array(
-        'name' => 'Viral News - Demo Five',
-        'external_url' => 'https://hashthemes.com/import-files/viral-news/demo5.zip',
-        'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo5-screenshot.jpg',
-        'preview_url' => 'https://demo.hashthemes.com/viral-news/demo5',
-        'menu_array' => array(
-            'primary' => 'Primary Menu'
-        ),
-        'home_slug' => 'home',
-        'blog_slug' => 'blog',
-        'tags' => array(
-            'free' => 'Free'
-        ),
-        'pagebuilder' => array(
-            'customizer' => 'Customizer'
-        )
-    ),
-    'demo6' => array(
-        'name' => 'Viral News - Demo Six',
-        'external_url' => 'https://hashthemes.com/import-files/viral-news/demo6.zip',
-        'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo6-screenshot.jpg',
-        'preview_url' => 'https://demo.hashthemes.com/viral-news/demo6',
-        'menu_array' => array(
-            'primary' => 'Primary Menu'
-        ),
-        'tags' => array(
-            'free' => 'Free'
         )
     ),
     'elementor-demo1' => array(
-        'name' => 'Viral News - Elementor Demo One',
+        'name' => 'Demo One - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/elementor-demo1.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo1-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo1',
+        'options_array' => array('sfm_settings'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -532,13 +459,32 @@ $viral_news = array(
         ),
         'pagebuilder' => array(
             'elementor' => 'Elementor'
+        )
+    ),
+    'demo2' => array(
+        'name' => 'Demo Two - Customizer Version',
+        'external_url' => 'https://hashthemes.com/import-files/viral-news/demo2.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo2-screenshot.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-news/demo2',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
+            'primary' => 'Primary Menu'
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
         )
     ),
     'elementor-demo2' => array(
-        'name' => 'Viral News - Elementor Demo Two',
+        'name' => 'Demo Two - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/elementor-demo2.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo2-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo2',
+        'options_array' => array('sfm_settings'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -571,13 +517,32 @@ $viral_news = array(
         ),
         'pagebuilder' => array(
             'elementor' => 'Elementor'
+        )
+    ),
+    'demo3' => array(
+        'name' => 'Demo Three - Customizer Version',
+        'external_url' => 'https://hashthemes.com/import-files/viral-news/demo3.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo3-screenshot.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-news/demo3',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
+            'primary' => 'Primary Menu'
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
         )
     ),
     'elementor-demo3' => array(
-        'name' => 'Viral News - Elementor Demo Three',
+        'name' => 'Demo Three - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/elementor-demo3.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo3-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo3',
+        'options_array' => array('sfm_settings'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -610,13 +575,32 @@ $viral_news = array(
         ),
         'pagebuilder' => array(
             'elementor' => 'Elementor'
+        )
+    ),
+    'demo4' => array(
+        'name' => 'Demo Four - Customizer Version',
+        'external_url' => 'https://hashthemes.com/import-files/viral-news/demo4.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo4-screenshot.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-news/demo4',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
+            'primary' => 'Primary Menu'
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
         )
     ),
     'elementor-demo4' => array(
-        'name' => 'Viral News - Elementor Demo Four',
+        'name' => 'Demo Four - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/elementor-demo4.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo4-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo4',
+        'options_array' => array('sfm_settings'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -649,13 +633,32 @@ $viral_news = array(
         ),
         'pagebuilder' => array(
             'elementor' => 'Elementor'
+        )
+    ),
+    'demo5' => array(
+        'name' => 'Demo Five - Customizer Version',
+        'external_url' => 'https://hashthemes.com/import-files/viral-news/demo5.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo5-screenshot.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-news/demo5',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
+            'primary' => 'Primary Menu'
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
         )
     ),
     'elementor-demo5' => array(
-        'name' => 'Viral News - Elementor Demo Five',
+        'name' => 'Demo Five - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/elementor-demo5.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo5-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo5',
+        'options_array' => array('sfm_settings'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -690,11 +693,25 @@ $viral_news = array(
             'elementor' => 'Elementor'
         )
     ),
+    'demo6' => array(
+        'name' => 'Demo Six - Customizer Version',
+        'external_url' => 'https://hashthemes.com/import-files/viral-news/demo6.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo6-screenshot.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-news/demo6',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
+            'primary' => 'Primary Menu'
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        )
+    ),
     'elementor-demo6' => array(
-        'name' => 'Viral News - Elementor Demo Six',
+        'name' => 'Demo Seven - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/elementor-demo6.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/elementor-demo6-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo6',
+        'options_array' => array('sfm_settings'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),

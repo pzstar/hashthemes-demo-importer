@@ -278,6 +278,7 @@
 #hdi-import-progress .hdi-import-progress-message {
     font-size: 20px;
     margin-top: 50px;
+    line-height: 1.4;
 }
 
 .hdi-import-progress-message .button {
@@ -435,6 +436,7 @@ body.hdi-modal-opened .hdi-demo-box-wrap{
     animation: dots 1s linear infinite;
 }
 
+.import-error .hdi-import-progress-message:after,
 .import-success .hdi-import-progress-message:after {
     content: '';
     animation: none;
