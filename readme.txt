@@ -107,6 +107,9 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
+= 1.0.8 = Oct 12, 2020
+* Viral News Menu id mistake in config file fixed
+
 = 1.0.7 =
 * Demos Rearranged
 
