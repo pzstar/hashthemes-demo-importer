@@ -35,17 +35,53 @@ $squarepress = array(
 );
 
 $total = array(
-    'main' => array(
-        'name' => 'Total',
-        'external_url' => 'https://hashthemes.com/import-files/total/main.zip',
-        'image' => 'https://i0.wp.com/themes.svn.wordpress.org/total/1.2.39/screenshot.png',
-        'preview_url' => 'https://demo.hashthemes.com/total',
+    'agency' => array(
+        'name' => 'Agency - Customizer Version',
+        'external_url' => 'https://hashthemes.com/import-files/total/agency.zip',
+        'image' => 'https://i0.wp.com/themes.svn.wordpress.org/total/1.2.52/screenshot.png',
+        'preview_url' => 'https://demo.hashthemes.com/total/agency',
         'options_array' => array('sfm_settings'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
-        'home_slug' => 'home',
-        'blog_slug' => 'blog'
+        'home_slug' => 'home-page',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+        )
+    ),
+    'el-agency' => array(
+        'name' => 'Agency - Elementor Version',
+        'external_url' => 'https://hashthemes.com/import-files/total/el-agency.zip',
+        'image' => 'https://i0.wp.com/themes.svn.wordpress.org/total/1.2.52/screenshot.png',
+        'preview_url' => 'https://demo.hashthemes.com/total/el-agency',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
+            'primary' => 'Primary Menu'
+        ),
+        'home_slug' => 'home-page',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+        )
     )
 );
 
