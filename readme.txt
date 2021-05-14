@@ -107,6 +107,9 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
+= 1.1.0 = May 15, 2021
+* Square Elementor Demo added
+
 = 1.0.9 = Mar 08, 2021
 * Total Demo Import added
 

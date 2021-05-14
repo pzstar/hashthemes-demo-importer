@@ -6,7 +6,7 @@
 
 $square = array(
     'main' => array(
-        'name' => 'Square',
+        'name' => 'Square - Customizer Demo',
         'external_url' => 'https://hashthemes.com/import-files/square/main.zip',
         'image' => 'https://hashthemes.com/import-files/square/screen/square.jpg',
         'preview_url' => 'https://demo.hashthemes.com/square',
@@ -15,7 +15,53 @@ $square = array(
             'primary' => 'Primary Menu'
         ),
         'home_slug' => 'home-page',
-        'blog_slug' => 'blog'
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'contact-form-7' => array(
+                'name' => 'Contact Form 7',
+                'source' => 'wordpress',
+                'file_path' => 'contact-form-7/wp-contact-form-7.php'
+            ),
+        )
+    ),
+    'el-main' => array(
+        'name' => 'Square - Elementor Demo',
+        'external_url' => 'https://hashthemes.com/import-files/square/el-main.zip',
+        'image' => 'https://hashthemes.com/import-files/square/screen/square.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/square',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
+            'primary' => 'Primary Menu'
+        ),
+        'home_slug' => 'home-page',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'contact-form-7' => array(
+                'name' => 'Contact Form 7',
+                'source' => 'wordpress',
+                'file_path' => 'contact-form-7/wp-contact-form-7.php'
+            ),
+        )
     )
 );
 
@@ -30,7 +76,19 @@ $squarepress = array(
             'primary' => 'Primary Menu'
         ),
         'home_slug' => 'home-page',
-        'blog_slug' => 'blog'
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'contact-form-7' => array(
+                'name' => 'Contact Form 7',
+                'source' => 'wordpress',
+                'file_path' => 'contact-form-7/wp-contact-form-7.php'
+            ),
+        )
     )
 );
 
@@ -96,7 +154,14 @@ $totally = array(
             'primary' => 'Primary Menu'
         ),
         'home_slug' => 'home-page',
-        'blog_slug' => 'blog'
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+        )
     )
 );
 
