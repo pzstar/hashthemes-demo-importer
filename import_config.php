@@ -198,11 +198,6 @@ $viral = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -225,6 +220,11 @@ $viral = array(
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
             'elementor' => array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
@@ -239,11 +239,6 @@ $viral = array(
                 'name' => 'JetSticky For Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -270,11 +265,6 @@ $viral = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -297,6 +287,11 @@ $viral = array(
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
             'elementor' => array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
@@ -311,11 +306,6 @@ $viral = array(
                 'name' => 'JetSticky For Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -342,11 +332,6 @@ $viral = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -369,6 +354,11 @@ $viral = array(
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
             'elementor' => array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
@@ -383,11 +373,6 @@ $viral = array(
                 'name' => 'JetSticky For Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -414,11 +399,6 @@ $viral = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -441,6 +421,11 @@ $viral = array(
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
             'elementor' => array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
@@ -455,11 +440,6 @@ $viral = array(
                 'name' => 'JetSticky For Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -482,6 +462,11 @@ $viral = array(
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
             'elementor' => array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
@@ -496,11 +481,6 @@ $viral = array(
                 'name' => 'JetSticky For Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -530,7 +510,19 @@ $viral_news = array(
         ),
         'pagebuilder' => array(
             'customizer' => 'Customizer'
-        )
+        ),
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            )
+        ),
     ),
     'elementor-demo1' => array(
         'name' => 'Demo One - Elementor Version',
@@ -545,6 +537,11 @@ $viral_news = array(
         'home_slug' => 'home',
         'blog_slug' => 'blog',
         'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
             'elementor' => array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
@@ -559,11 +556,6 @@ $viral_news = array(
                 'name' => 'JetSticky For Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -590,7 +582,19 @@ $viral_news = array(
         ),
         'pagebuilder' => array(
             'customizer' => 'Customizer'
-        )
+        ),
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            )
+        ),
     ),
     'elementor-demo2' => array(
         'name' => 'Demo Two - Elementor Version',
@@ -605,6 +609,11 @@ $viral_news = array(
         'home_slug' => 'home',
         'blog_slug' => 'blog',
         'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
             'elementor' => array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
@@ -619,11 +628,6 @@ $viral_news = array(
                 'name' => 'JetSticky For Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -650,7 +654,19 @@ $viral_news = array(
         ),
         'pagebuilder' => array(
             'customizer' => 'Customizer'
-        )
+        ),
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            )
+        ),
     ),
     'elementor-demo3' => array(
         'name' => 'Demo Three - Elementor Version',
@@ -665,6 +681,11 @@ $viral_news = array(
         'home_slug' => 'home',
         'blog_slug' => 'blog',
         'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
             'elementor' => array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
@@ -679,11 +700,6 @@ $viral_news = array(
                 'name' => 'JetSticky For Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -710,7 +726,19 @@ $viral_news = array(
         ),
         'pagebuilder' => array(
             'customizer' => 'Customizer'
-        )
+        ),
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            )
+        ),
     ),
     'elementor-demo4' => array(
         'name' => 'Demo Four - Elementor Version',
@@ -725,6 +753,11 @@ $viral_news = array(
         'home_slug' => 'home',
         'blog_slug' => 'blog',
         'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
             'elementor' => array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
@@ -739,11 +772,6 @@ $viral_news = array(
                 'name' => 'JetSticky For Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -770,7 +798,19 @@ $viral_news = array(
         ),
         'pagebuilder' => array(
             'customizer' => 'Customizer'
-        )
+        ),
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            )
+        ),
     ),
     'elementor-demo5' => array(
         'name' => 'Demo Five - Elementor Version',
@@ -785,6 +825,11 @@ $viral_news = array(
         'home_slug' => 'home',
         'blog_slug' => 'blog',
         'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
             'elementor' => array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
@@ -799,11 +844,6 @@ $viral_news = array(
                 'name' => 'JetSticky For Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -825,6 +865,21 @@ $viral_news = array(
         ),
         'tags' => array(
             'free' => 'Free'
+        ),
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            )
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
         )
     ),
     'elementor-demo6' => array(
@@ -840,6 +895,11 @@ $viral_news = array(
         'home_slug' => 'home',
         'blog_slug' => 'blog',
         'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
             'elementor' => array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
@@ -854,11 +914,6 @@ $viral_news = array(
                 'name' => 'JetSticky For Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
-            ),
-            'wp-my-instagram' => array(
-                'name' => 'WP Instant Feeds',
-                'source' => 'wordpress',
-                'file_path' => 'wp-my-instagram/wp-my-instagram.php'
             )
         ),
         'tags' => array(
@@ -868,6 +923,44 @@ $viral_news = array(
             'elementor' => 'Elementor'
         )
     ),
+);
+
+$viral_mag = array(
+    'news' => array(
+        'name' => 'News',
+        'external_url' => 'https://hashthemes.com/import-files/viral-mag/news.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-mag/screen/news-screenshot.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-mag/news',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
+            'viral-mag-primary-menu' => 'Main Menu',
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            ),
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        )
+    )
 );
 
 $active_theme = str_replace('-', '_', get_option('stylesheet'));
