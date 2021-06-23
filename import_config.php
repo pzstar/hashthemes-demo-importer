@@ -926,10 +926,10 @@ $viral_news = array(
 );
 
 $viral_mag = array(
-    'news' => array(
-        'name' => 'News',
-        'external_url' => 'https://hashthemes.com/import-files/viral-mag/news.zip',
-        'image' => 'https://hashthemes.com/import-files/viral-mag/screen/news-screenshot.jpg',
+    'news-mag' => array(
+        'name' => 'News Mag',
+        'external_url' => 'https://hashthemes.com/import-files/viral-mag/news-mag.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-mag/screen/news-mag-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-mag/news',
         'options_array' => array('sfm_settings'),
         'menu_array' => array(
@@ -958,7 +958,7 @@ $viral_mag = array(
             'free' => 'Free'
         ),
         'pagebuilder' => array(
-            'customizer' => 'Customizer'
+            'elementor' => 'Elementor'
         )
     )
 );
