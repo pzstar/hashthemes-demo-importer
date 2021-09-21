@@ -286,6 +286,15 @@ if (!class_exists('HDI_Importer')) {
                                     ?>
                                 </div>
 
+                                <div class="hdi-exclude-image-checkbox">
+                                    <h4><?php esc_html_e('Exclude Images', 'hashthemes-demo-importer') ?></h4>
+                                    <p><?php esc_html_e('Check this option if importing demo fails multiple times. Excluding image will make the demo import process quick.', 'hashthemes-demo-importer') ?></p>
+                                    <label>
+                                        <input id="checkbox-exclude-image-<?php echo esc_attr($demo_slug); ?>" type="checkbox" value='1'/>
+                                        <?php echo esc_html('Yes, Exclude Images', 'hashthemes-demo-importer'); ?>
+                                    </label>
+                                </div>
+
                                 <div class="hdi-reset-checkbox">
                                     <h4><?php esc_html_e('Reset Website', 'hashthemes-demo-importer') ?></h4>
                                     <p><?php esc_html_e('Reseting the website will delete all your post, pages, custom post types, categories, taxonomies, images and all other customizer and theme option settings.', 'hashthemes-demo-importer') ?></p>
@@ -328,27 +337,35 @@ if (!class_exists('HDI_Importer')) {
          */
 
         function hdi_install_demo() {
+            if (!current_user_can('manage_options')) {
+                return;
+            }
             check_ajax_referer('demo-importer-ajax', 'security');
 
             // Get the demo content from the right file
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
-
-            $this->ajax_response['demo'] = $demo_slug;
+            $excludeImages = isset($_POST['excludeImages']) ? $_POST['excludeImages'] : '';
 
             if (isset($_POST['reset']) && $_POST['reset'] == 'true') {
                 $this->database_reset();
                 $this->ajax_response['complete_message'] = esc_html__('Database reset complete', 'hashthemes-demo-importer');
             }
 
+            $this->ajax_response['demo'] = $demo_slug;
+            $this->ajax_response['excludeImages'] = $excludeImages;
             $this->ajax_response['next_step'] = 'hdi_install_plugin';
             $this->ajax_response['next_step_message'] = esc_html__('Installing required plugins', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
         function hdi_install_plugin() {
+            if (!current_user_can('manage_options')) {
+                return;
+            }
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
+            $excludeImages = isset($_POST['excludeImages']) ? $_POST['excludeImages'] : '';
 
             // Install Required Plugins
             $this->install_plugins($demo_slug);
@@ -363,14 +380,19 @@ if (!class_exists('HDI_Importer')) {
 
             $this->ajax_response['demo'] = $demo_slug;
             $this->ajax_response['next_step'] = 'hdi_activate_plugin';
+            $this->ajax_response['excludeImages'] = $excludeImages;
             $this->ajax_response['next_step_message'] = esc_html__('Activating required plugins', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
         function hdi_activate_plugin() {
+            if (!current_user_can('manage_options')) {
+                return;
+            }
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
+            $excludeImages = isset($_POST['excludeImages']) ? $_POST['excludeImages'] : '';
 
             // Activate Required Plugins
             $this->activate_plugins($demo_slug);
@@ -384,15 +406,20 @@ if (!class_exists('HDI_Importer')) {
             }
 
             $this->ajax_response['demo'] = $demo_slug;
+            $this->ajax_response['excludeImages'] = $excludeImages;
             $this->ajax_response['next_step'] = 'hdi_download_files';
             $this->ajax_response['next_step_message'] = esc_html__('Downloading demo files', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
         function hdi_download_files() {
+            if (!current_user_can('manage_options')) {
+                return;
+            }
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
+            $excludeImages = isset($_POST['excludeImages']) ? $_POST['excludeImages'] : '';
 
             $downloads = $this->download_files($this->configFile[$demo_slug]['external_url']);
             if ($downloads) {
@@ -405,19 +432,23 @@ if (!class_exists('HDI_Importer')) {
             }
 
             $this->ajax_response['demo'] = $demo_slug;
+            $this->ajax_response['excludeImages'] = $excludeImages;
             $this->send_ajax_response();
         }
 
         function hdi_import_xml() {
+            if (!current_user_can('manage_options')) {
+                return;
+            }
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
-
+            $excludeImages = isset($_POST['excludeImages']) ? $_POST['excludeImages'] : '';
             // Import XML content
             $xml_filepath = $this->demo_upload_dir($demo_slug) . '/content.xml';
 
             if (file_exists($xml_filepath)) {
-                $this->importDemoContent($xml_filepath);
+                $this->importDemoContent($xml_filepath, $excludeImages);
                 $this->ajax_response['complete_message'] = esc_html__('All content imported', 'hashthemes-demo-importer');
                 $this->ajax_response['next_step'] = 'hdi_customizer_import';
                 $this->ajax_response['next_step_message'] = esc_html__('Importing customizer settings', 'hashthemes-demo-importer');
@@ -427,19 +458,24 @@ if (!class_exists('HDI_Importer')) {
             }
 
             $this->ajax_response['demo'] = $demo_slug;
+            $this->ajax_response['excludeImages'] = $excludeImages;
             $this->send_ajax_response();
         }
 
         function hdi_customizer_import() {
+            if (!current_user_can('manage_options')) {
+                return;
+            }
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
+            $excludeImages = isset($_POST['excludeImages']) ? $_POST['excludeImages'] : '';
 
             $customizer_filepath = $this->demo_upload_dir($demo_slug) . '/customizer.dat';
 
             if (file_exists($customizer_filepath)) {
                 ob_start();
-                HDI_Customizer_Importer::import($customizer_filepath);
+                HDI_Customizer_Importer::import($customizer_filepath, $excludeImages);
                 ob_end_clean();
                 $this->ajax_response['complete_message'] = esc_html__('Customizer settings imported', 'hashthemes-demo-importer');
             } else {
@@ -453,6 +489,9 @@ if (!class_exists('HDI_Importer')) {
         }
 
         function hdi_menu_import() {
+            if (!current_user_can('manage_options')) {
+                return;
+            }
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
@@ -473,6 +512,9 @@ if (!class_exists('HDI_Importer')) {
         }
 
         function hdi_theme_option() {
+            if (!current_user_can('manage_options')) {
+                return;
+            }
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
@@ -503,6 +545,9 @@ if (!class_exists('HDI_Importer')) {
         }
 
         function hdi_importing_widget() {
+            if (!current_user_can('manage_options')) {
+                return;
+            }
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
@@ -533,6 +578,9 @@ if (!class_exists('HDI_Importer')) {
         }
 
         function hdi_importing_revslider() {
+            if (!current_user_can('manage_options')) {
+                return;
+            }
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
@@ -710,7 +758,7 @@ if (!class_exists('HDI_Importer')) {
          * Import demo XML content
          */
 
-        function importDemoContent($xml_filepath) {
+        function importDemoContent($xml_filepath, $excludeImages) {
 
             if (!defined('WP_LOAD_IMPORTERS'))
                 define('WP_LOAD_IMPORTERS', true);
@@ -725,12 +773,13 @@ if (!class_exists('HDI_Importer')) {
             // Import demo content from XML
             if (class_exists('HDI_Import')) {
                 $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
+                $excludeImages = $excludeImages == 'true' ? false : true;
                 $home_slug = isset($this->configFile[$demo_slug]['home_slug']) ? $this->configFile[$demo_slug]['home_slug'] : '';
                 $blog_slug = isset($this->configFile[$demo_slug]['blog_slug']) ? $this->configFile[$demo_slug]['blog_slug'] : '';
 
                 if (file_exists($xml_filepath)) {
                     $wp_import = new HDI_Import();
-                    $wp_import->fetch_attachments = true;
+                    $wp_import->fetch_attachments = $excludeImages;
                     // Capture the output.
                     ob_start();
                     $wp_import->import($xml_filepath);

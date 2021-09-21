@@ -25,10 +25,11 @@ class HDI_Customizer_Importer {
      * @param object $wp_customize An instance of WP_Customize_Manager.
      * @return void
      */
-    public static function import($customizerFile) {
+    public static function import($customizerFile, $excludeImages) {
         global $wp_customize;
         $template = get_template();
         $data = maybe_unserialize(file_get_contents($customizerFile));
+        $excludeImages = $excludeImages == 'true' ? true : false;
 
         // Data checks.
         if ('array' != gettype($data)) {
@@ -45,7 +46,9 @@ class HDI_Customizer_Importer {
         }
 
         // Import Images.
-        $data['mods'] = self::import_images($data['mods']);
+        if (!$excludeImages) {
+            $data['mods'] = self::import_images($data['mods']);
+        }
 
         // Import custom options.
         if (isset($data['options'])) {

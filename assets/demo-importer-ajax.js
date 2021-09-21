@@ -66,6 +66,7 @@
         var $el = $(this);
         var demo = $(this).attr('data-demo-slug');
         var reset = $('#checkbox-reset-' + demo).is(':checked');
+        var excludeImages = $('#checkbox-exclude-image-' + demo).is(':checked');
         var reset_message = '';
 
         if (reset) {
@@ -90,6 +91,7 @@
             demo: demo,
             reset: reset,
             next_step: 'hdi_install_demo',
+            excludeImages: excludeImages,
             next_step_message: reset_message
         };
 
@@ -105,6 +107,7 @@
                 action: info.next_step,
                 demo: info.demo,
                 reset: info.reset,
+                excludeImages: info.excludeImages,
                 security: hdi_ajax_data.nonce
             };
 

@@ -204,7 +204,8 @@
 }
 
 .hdi-modal-recommended-plugins h4,
-.hdi-reset-checkbox h4 {
+.hdi-reset-checkbox h4,
+.hdi-exclude-image-checkbox h4{
     margin: 30px 0 15px;
     font-size: 16px;
 }

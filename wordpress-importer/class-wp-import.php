@@ -33,6 +33,7 @@ class HDI_Import extends WP_Importer {
     var $fetch_attachments = false;
     var $url_remap = array();
     var $featured_images = array();
+    var $custom_menu_metas = array('_menu_item_megamenu', '_menu_item_megamenu_col', '_menu_item_megamenu_heading', '_menu_item_category_post', '_menu_item_megamenu_template', '_menu_item_megamenu_widgetarea', '_menu_item_megamenu_icon', '_menu_item_megamenu_hide_label', '_menu_item_megamenu_icon_position', '_menu_item_megamenu_icon_size');
 
     /**
      * Registered callback function for the WordPress Importer
@@ -888,8 +889,10 @@ class HDI_Import extends WP_Importer {
             $menu_id = is_array($menu_id) ? $menu_id['term_id'] : $menu_id;
         }
 
-        foreach ($item['postmeta'] as $meta)
+        foreach ($item['postmeta'] as $meta) {
+            global ${$meta['key']};
             ${$meta['key']} = $meta['value'];
+        }
 
         if ('taxonomy' == $_menu_item_type && isset($this->processed_terms[intval($_menu_item_object_id)])) {
             $_menu_item_object_id = $this->processed_terms[intval($_menu_item_object_id)];
@@ -930,8 +933,15 @@ class HDI_Import extends WP_Importer {
         );
 
         $id = wp_update_nav_menu_item($menu_id, 0, $args);
-        if ($id && !is_wp_error($id))
+        if ($id && !is_wp_error($id)) {
             $this->processed_menu_items[intval($item['post_id'])] = (int) $id;
+            foreach ($this->custom_menu_metas as $meta) {
+                if (!empty($GLOBALS[$meta])) {
+                    update_post_meta($id, $meta, $GLOBALS[$meta]);
+                    unset($GLOBALS[$meta]);
+                }
+            }
+        }
     }
 
     /**
@@ -985,7 +995,7 @@ class HDI_Import extends WP_Importer {
      * @param array $post Attachment details
      * @return array|WP_Error Local file location details on success, WP_Error otherwise
      */
-    function fetch_remote_file($url, $post) {
+    function fetch_remote_file_old($url, $post) {
         // Extract the file name from the URL.
         $file_name = basename(parse_url($url, PHP_URL_PATH));
 
@@ -1000,7 +1010,7 @@ class HDI_Import extends WP_Importer {
 
         // Fetch the remote URL and write it to the placeholder file.
         $remote_response = wp_safe_remote_get($url, array(
-            'timeout' => 300,
+            'timeout' => 3000,
             'stream' => true,
             'filename' => $tmp_file_name,
             'headers' => array(
@@ -1115,6 +1125,58 @@ class HDI_Import extends WP_Importer {
             'type' => $wp_filetype['type'],
             'error' => false,
         );
+
+        // keep track of the old and new urls so we can substitute them later
+        $this->url_remap[$url] = $upload['url'];
+        $this->url_remap[$post['guid']] = $upload['url']; // r13735, really needed?
+        // keep track of the destination if the remote url is redirected somewhere else
+        if (isset($headers['x-final-location']) && $headers['x-final-location'] != $url)
+            $this->url_remap[$headers['x-final-location']] = $upload['url'];
+
+        return $upload;
+    }
+
+    function fetch_remote_file($url, $post) {
+        // extract the file name and extension from the url
+        $file_name = basename($url);
+
+        // get placeholder file in the upload dir with a unique, sanitized filename
+        $upload = wp_upload_bits($file_name, 0, '', $post['upload_date']);
+        if ($upload['error'])
+            return new WP_Error('upload_dir_error', $upload['error']);
+
+        // fetch the remote url and write it to the placeholder file
+        $headers = wp_get_http($url, $upload['file']);
+
+        // request failed
+        if (!$headers) {
+            @unlink($upload['file']);
+            return new WP_Error('import_file_error', __('Remote server did not respond', 'hashthemes-demo-importer'));
+        }
+
+        // make sure the fetch was successful
+        if ($headers['response'] != '200') {
+            @unlink($upload['file']);
+            return new WP_Error('import_file_error', sprintf(__('Remote server returned error response %1$d %2$s', 'hashthemes-demo-importer'), esc_html($headers['response']), get_status_header_desc($headers['response'])));
+        }
+
+        $filesize = filesize($upload['file']);
+
+        if (isset($headers['content-length']) && $filesize != $headers['content-length']) {
+            @unlink($upload['file']);
+            return new WP_Error('import_file_error', __('Remote file is incorrect size', 'hashthemes-demo-importer'));
+        }
+
+        if (0 == $filesize) {
+            @unlink($upload['file']);
+            return new WP_Error('import_file_error', __('Zero size file downloaded', 'hashthemes-demo-importer'));
+        }
+
+        $max_size = (int) $this->max_attachment_size();
+        if (!empty($max_size) && $filesize > $max_size) {
+            @unlink($upload['file']);
+            return new WP_Error('import_file_error', sprintf(__('Remote file is too large, limit is %s', 'hashthemes-demo-importer'), size_format($max_size)));
+        }
 
         // keep track of the old and new urls so we can substitute them later
         $this->url_remap[$url] = $upload['url'];
