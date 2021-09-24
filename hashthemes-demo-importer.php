@@ -269,7 +269,7 @@ if (!class_exists('HDI_Importer')) {
                                                 ?>
                                                 <li class="hdi-<?php echo esc_attr($status); ?>">
                                                     <?php
-                                                    echo $plugin_class . ' ' . esc_html($name) . ' - <i>' . $this->get_plugin_status($status) . '</i>';
+                                                    echo wp_kses_post($plugin_class) . ' ' . esc_html($name) . ' - <i>' . esc_html($this->get_plugin_status($status)) . '</i>';
                                                     ?>
                                                 </li>
                                             <?php }
@@ -288,7 +288,7 @@ if (!class_exists('HDI_Importer')) {
 
                                 <div class="hdi-exclude-image-checkbox">
                                     <h4><?php esc_html_e('Exclude Images', 'hashthemes-demo-importer') ?></h4>
-                                    <p><?php esc_html_e('Check this option if importing demo fails multiple times. Excluding image will make the demo import process quick.', 'hashthemes-demo-importer') ?></p>
+                                    <p><?php esc_html_e('Check this option if importing demo fails multiple times. Excluding image will make the demo import process super quick.', 'hashthemes-demo-importer') ?></p>
                                     <label>
                                         <input id="checkbox-exclude-image-<?php echo esc_attr($demo_slug); ?>" type="checkbox" value='1'/>
                                         <?php echo esc_html('Yes, Exclude Images', 'hashthemes-demo-importer'); ?>
@@ -344,7 +344,7 @@ if (!class_exists('HDI_Importer')) {
 
             // Get the demo content from the right file
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
-            $excludeImages = isset($_POST['excludeImages']) ? $_POST['excludeImages'] : '';
+            $excludeImages = isset($_POST['excludeImages']) ? sanitize_text_field($_POST['excludeImages']) : '';
 
             if (isset($_POST['reset']) && $_POST['reset'] == 'true') {
                 $this->database_reset();
@@ -365,7 +365,7 @@ if (!class_exists('HDI_Importer')) {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
-            $excludeImages = isset($_POST['excludeImages']) ? $_POST['excludeImages'] : '';
+            $excludeImages = isset($_POST['excludeImages']) ? sanitize_text_field($_POST['excludeImages']) : '';
 
             // Install Required Plugins
             $this->install_plugins($demo_slug);
@@ -392,7 +392,7 @@ if (!class_exists('HDI_Importer')) {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
-            $excludeImages = isset($_POST['excludeImages']) ? $_POST['excludeImages'] : '';
+            $excludeImages = isset($_POST['excludeImages']) ? sanitize_text_field($_POST['excludeImages']) : '';
 
             // Activate Required Plugins
             $this->activate_plugins($demo_slug);
@@ -419,7 +419,7 @@ if (!class_exists('HDI_Importer')) {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
-            $excludeImages = isset($_POST['excludeImages']) ? $_POST['excludeImages'] : '';
+            $excludeImages = isset($_POST['excludeImages']) ? sanitize_text_field($_POST['excludeImages']) : '';
 
             $downloads = $this->download_files($this->configFile[$demo_slug]['external_url']);
             if ($downloads) {
@@ -443,7 +443,7 @@ if (!class_exists('HDI_Importer')) {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
-            $excludeImages = isset($_POST['excludeImages']) ? $_POST['excludeImages'] : '';
+            $excludeImages = isset($_POST['excludeImages']) ? sanitize_text_field($_POST['excludeImages']) : '';
             // Import XML content
             $xml_filepath = $this->demo_upload_dir($demo_slug) . '/content.xml';
 
@@ -469,7 +469,7 @@ if (!class_exists('HDI_Importer')) {
             check_ajax_referer('demo-importer-ajax', 'security');
 
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
-            $excludeImages = isset($_POST['excludeImages']) ? $_POST['excludeImages'] : '';
+            $excludeImages = isset($_POST['excludeImages']) ? sanitize_text_field($_POST['excludeImages']) : '';
 
             $customizer_filepath = $this->demo_upload_dir($demo_slug) . '/customizer.dat';
 
