@@ -140,6 +140,79 @@ $total = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
         )
+    ),
+    'education' => array(
+        'name' => 'Education - Elementor Version',
+        'external_url' => 'https://hashthemes.com/import-files/total/education.zip',
+        'image' => 'https://hashthemes.com/import-files/total/screen/education.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/total/education',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
+            'primary' => 'Main Menu'
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'news-events',
+        'plugins' => array(
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'learnpress' => array(
+                'name' => 'LearnPress – WordPress LMS Plugin',
+                'source' => 'wordpress',
+                'file_path' => 'learnpress/learnpress.php',
+            ),
+            'wpforms-lite' => array(
+                'name' => 'Contact Form by WPForms',
+                'source' => 'wordpress',
+                'file_path' => 'wpforms-lite/wpforms.php',
+            )
+        )
+    ),
+    'law' => array(
+        'name' => 'Education - Elementor Version',
+        'external_url' => 'https://hashthemes.com/import-files/total/law.zip',
+        'image' => 'https://hashthemes.com/import-files/total/screen/law.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/total/law',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
+            'primary' => 'Main Menu'
+        ),
+        'home_slug' => 'front-page',
+        'blog_slug' => 'blogs',
+        'plugins' => array(
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'wpforms-lite' => array(
+                'name' => 'Contact Form by WPForms',
+                'source' => 'wordpress',
+                'file_path' => 'wpforms-lite/wpforms.php',
+            )
+        )
     )
 );
 
