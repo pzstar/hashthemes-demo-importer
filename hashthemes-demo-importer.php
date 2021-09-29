@@ -3,7 +3,7 @@
  * Plugin Name: HashThemes Demo Importer
  * Plugin URI: https://github.com/pzstar/hashthemes-demo-importer
  * Description: Easily imports demo with just one click.
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: hashthemes-demo-importer
@@ -16,7 +16,7 @@ if (!defined('ABSPATH'))
     exit;
 
 
-define('HDI_VERSION', '1.1.2');
+define('HDI_VERSION', '1.1.3');
 
 define('HDI_FILE', __FILE__);
 define('HDI_PLUGIN_BASENAME', plugin_basename(HDI_FILE));
@@ -62,6 +62,12 @@ if (!class_exists('HDI_Importer')) {
             // Add necesary backend JS
             add_action('admin_enqueue_scripts', array($this, 'load_backends'));
 
+            // Add Elementor required Changes
+            add_action('init', array($this, 'hdi_elementor_settings'));
+
+            // Allow SVG uploads
+            add_filter('upload_mimes', array($this, 'file_types_to_uploads'));
+
             // Actions for the ajax call
             add_action('wp_ajax_hdi_install_demo', array($this, 'hdi_install_demo'));
             add_action('wp_ajax_hdi_install_plugin', array($this, 'hdi_install_plugin'));
@@ -75,9 +81,10 @@ if (!class_exists('HDI_Importer')) {
             add_action('wp_ajax_hdi_importing_revslider', array($this, 'hdi_importing_revslider'));
         }
 
-        /**
+        /*
          * Loads the translation files
          */
+
         public function load_plugin_textdomain() {
             load_plugin_textdomain('hashthemes-demo-importer', false, HDI_PATH . '/languages');
         }
@@ -88,6 +95,49 @@ if (!class_exists('HDI_Importer')) {
 
         function hdi_menu() {
             add_submenu_page('themes.php', esc_html__('OneClick Demo Install', 'hashthemes-demo-importer'), esc_html__('HashThemes Demo Importer', 'hashthemes-demo-importer'), 'manage_options', 'hdi-demo-importer', array($this, 'hdi_display_demos'));
+        }
+
+        /*
+         *  Overwrite some elementor settings for better demo
+         */
+
+        function hdi_elementor_settings() {
+            // Check if Elementor installed and activated
+            if (!did_action('elementor/loaded')) {
+                return;
+            }
+
+            $options = get_option('hdi_elementor_overwrite');
+
+            if (!$options) {
+                if ('yes' !== get_option('elementor_disable_color_schemes')) {
+                    update_option('elementor_disable_color_schemes', 'yes');
+                }
+
+                if ('yes' !== get_option('elementor_disable_typography_schemes')) {
+                    update_option('elementor_disable_typography_schemes', 'yes');
+                }
+
+                if ('inactive' !== get_option('elementor_experiment-e_dom_optimization')) {
+                    update_option('elementor_experiment-e_dom_optimization', 'inactive');
+                }
+
+                if ('1' !== get_option('elementor_unfiltered_files_upload')) {
+                    update_option('elementor_unfiltered_files_upload', '1');
+                }
+            }
+            update_option('hdi_elementor_overwrite', '1');
+        }
+
+        /*
+         *  Allow SVG uploads
+         */
+
+        function file_types_to_uploads($file_types) {
+            $new_filetypes = array();
+            $new_filetypes['svg'] = 'image/svg+xml';
+            $file_types = array_merge($file_types, $new_filetypes);
+            return $file_types;
         }
 
         /*
@@ -612,7 +662,7 @@ if (!class_exists('HDI_Importer')) {
                 require_once( ABSPATH . 'wp-admin/includes/file.php' );
             }
 
-            /**
+            /*
              * Initialize WordPress' file system handler.
              *
              * @var WP_Filesystem_Base $wp_filesystem
@@ -713,11 +763,12 @@ if (!class_exists('HDI_Importer')) {
             $this->clear_uploads($this->uploads_dir['basedir']);
         }
 
-        /**
+        /*
          * Clear "uploads" folder
          * @param string $dir
          * @return bool
          */
+
         private function clear_uploads($dir) {
             $files = array_diff(scandir($dir), array('.', '..'));
             foreach ($files as $file) {
@@ -776,6 +827,7 @@ if (!class_exists('HDI_Importer')) {
                 $excludeImages = $excludeImages == 'true' ? false : true;
                 $home_slug = isset($this->configFile[$demo_slug]['home_slug']) ? $this->configFile[$demo_slug]['home_slug'] : '';
                 $blog_slug = isset($this->configFile[$demo_slug]['blog_slug']) ? $this->configFile[$demo_slug]['blog_slug'] : '';
+                $element_kit_slug = isset($this->configFile[$demo_slug]['element_kit_slug']) ? $this->configFile[$demo_slug]['element_kit_slug'] : '';
 
                 if (file_exists($xml_filepath)) {
                     $wp_import = new HDI_Import();
@@ -811,6 +863,13 @@ if (!class_exists('HDI_Importer')) {
 
                     if (!$home_slug && !$blog_slug) {
                         update_option('show_on_front', 'posts');
+                    }
+
+                    if ($element_kit_slug) {
+                        $elementor_kit = get_page_by_path($element_kit_slug, OBJECT, 'elementor_library');
+                        if ($elementor_kit) {
+                            update_option('elementor_active_kit', $elementor_kit->ID);
+                        }
                     }
                 }
             }
@@ -889,7 +948,7 @@ if (!class_exists('HDI_Importer')) {
                     require_once( ABSPATH . 'wp-admin/includes/file.php' );
                 }
 
-                /**
+                /*
                  * Initialize WordPress' file system handler.
                  *
                  * @var WP_Filesystem_Base $wp_filesystem

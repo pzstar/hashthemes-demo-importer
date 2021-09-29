@@ -139,6 +139,11 @@ $total = array(
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
+            'wpforms-lite' => array(
+                'name' => 'Contact Form by WPForms',
+                'source' => 'wordpress',
+                'file_path' => 'wpforms-lite/wpforms.php',
+            )
         )
     ),
     'education' => array(
@@ -152,6 +157,7 @@ $total = array(
         ),
         'home_slug' => 'home',
         'blog_slug' => 'news-events',
+        'element_kit_slug' => 'total-education-kit',
         'plugins' => array(
             'elementor' => array(
                 'name' => 'Elementor',
@@ -191,6 +197,7 @@ $total = array(
         ),
         'home_slug' => 'front-page',
         'blog_slug' => 'blogs',
+        'element_kit_slug' => 'total-law-kit',
         'plugins' => array(
             'elementor' => array(
                 'name' => 'Elementor',
