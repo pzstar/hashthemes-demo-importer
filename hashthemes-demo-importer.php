@@ -126,7 +126,7 @@ if (!class_exists('HDI_Importer')) {
                     update_option('elementor_unfiltered_files_upload', '1');
                 }
             }
-            update_option('hdi_elementor_overwrite', '1');
+            update_option('hdi_elementor_overwrite', 'yes');
         }
 
         /*
