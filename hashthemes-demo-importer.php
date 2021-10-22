@@ -3,7 +3,7 @@
  * Plugin Name: HashThemes Demo Importer
  * Plugin URI: https://github.com/pzstar/hashthemes-demo-importer
  * Description: Easily imports demo with just one click.
- * Version: 1.1.3
+ * Version: 1.1.4
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: hashthemes-demo-importer
@@ -16,7 +16,7 @@ if (!defined('ABSPATH'))
     exit;
 
 
-define('HDI_VERSION', '1.1.3');
+define('HDI_VERSION', '1.1.4');
 
 define('HDI_FILE', __FILE__);
 define('HDI_PLUGIN_BASENAME', plugin_basename(HDI_FILE));
@@ -57,28 +57,28 @@ if (!class_exists('HDI_Importer')) {
             add_action('init', array($this, 'load_plugin_textdomain'));
 
             // WP-Admin Menu
-            add_action('admin_menu', array($this, 'hdi_menu'));
+            add_action('admin_menu', array($this, 'add_menu'));
 
             // Add necesary backend JS
             add_action('admin_enqueue_scripts', array($this, 'load_backends'));
 
             // Add Elementor required Changes
-            add_action('init', array($this, 'hdi_elementor_settings'));
+            add_action('init', array($this, 'overwrite_elementor_settings'));
 
             // Allow SVG uploads
             add_filter('upload_mimes', array($this, 'file_types_to_uploads'));
 
             // Actions for the ajax call
-            add_action('wp_ajax_hdi_install_demo', array($this, 'hdi_install_demo'));
-            add_action('wp_ajax_hdi_install_plugin', array($this, 'hdi_install_plugin'));
-            add_action('wp_ajax_hdi_activate_plugin', array($this, 'hdi_activate_plugin'));
-            add_action('wp_ajax_hdi_download_files', array($this, 'hdi_download_files'));
-            add_action('wp_ajax_hdi_import_xml', array($this, 'hdi_import_xml'));
-            add_action('wp_ajax_hdi_customizer_import', array($this, 'hdi_customizer_import'));
-            add_action('wp_ajax_hdi_menu_import', array($this, 'hdi_menu_import'));
-            add_action('wp_ajax_hdi_theme_option', array($this, 'hdi_theme_option'));
-            add_action('wp_ajax_hdi_importing_widget', array($this, 'hdi_importing_widget'));
-            add_action('wp_ajax_hdi_importing_revslider', array($this, 'hdi_importing_revslider'));
+            add_action('wp_ajax_hdi_install_demo', array($this, 'install_demo_process'));
+            add_action('wp_ajax_hdi_install_plugin', array($this, 'install_plugin_process'));
+            add_action('wp_ajax_hdi_activate_plugin', array($this, 'activate_plugin_process'));
+            add_action('wp_ajax_hdi_download_files', array($this, 'download_files_process'));
+            add_action('wp_ajax_hdi_import_xml', array($this, 'import_xml_process'));
+            add_action('wp_ajax_hdi_import_customizer', array($this, 'import_customizer_process'));
+            add_action('wp_ajax_hdi_import_menu', array($this, 'import_menu_process'));
+            add_action('wp_ajax_hdi_import_theme_option', array($this, 'import_theme_option_process'));
+            add_action('wp_ajax_hdi_import_widget', array($this, 'import_widget_process'));
+            add_action('wp_ajax_hdi_import_revslider', array($this, 'import_revslider_process'));
         }
 
         /*
@@ -93,15 +93,15 @@ if (!class_exists('HDI_Importer')) {
          * WP-ADMIN Menu for importer
          */
 
-        function hdi_menu() {
-            add_submenu_page('themes.php', esc_html__('OneClick Demo Install', 'hashthemes-demo-importer'), esc_html__('HashThemes Demo Importer', 'hashthemes-demo-importer'), 'manage_options', 'hdi-demo-importer', array($this, 'hdi_display_demos'));
+        function add_menu() {
+            add_submenu_page('themes.php', esc_html__('OneClick Demo Install', 'hashthemes-demo-importer'), esc_html__('HashThemes Demo Importer', 'hashthemes-demo-importer'), 'manage_options', 'hdi-demo-importer', array($this, 'display_demos'));
         }
 
         /*
          *  Overwrite some elementor settings for better demo
          */
 
-        function hdi_elementor_settings() {
+        function overwrite_elementor_settings() {
             // Check if Elementor installed and activated
             if (!did_action('elementor/loaded')) {
                 return;
@@ -144,7 +144,7 @@ if (!class_exists('HDI_Importer')) {
          *  Display the available demos
          */
 
-        function hdi_display_demos() {
+        function display_demos() {
             ?>
             <div class="wrap hdi-demo-importer-wrap">
                 <h2><?php echo esc_html__('HashThemes OneClick Demo Importer', 'hashthemes-demo-importer'); ?></h2>
@@ -386,7 +386,7 @@ if (!class_exists('HDI_Importer')) {
          *  Do the install on ajax call
          */
 
-        function hdi_install_demo() {
+        function install_demo_process() {
             if (!current_user_can('manage_options')) {
                 return;
             }
@@ -408,7 +408,7 @@ if (!class_exists('HDI_Importer')) {
             $this->send_ajax_response();
         }
 
-        function hdi_install_plugin() {
+        function install_plugin_process() {
             if (!current_user_can('manage_options')) {
                 return;
             }
@@ -435,7 +435,7 @@ if (!class_exists('HDI_Importer')) {
             $this->send_ajax_response();
         }
 
-        function hdi_activate_plugin() {
+        function activate_plugin_process() {
             if (!current_user_can('manage_options')) {
                 return;
             }
@@ -462,7 +462,7 @@ if (!class_exists('HDI_Importer')) {
             $this->send_ajax_response();
         }
 
-        function hdi_download_files() {
+        function download_files_process() {
             if (!current_user_can('manage_options')) {
                 return;
             }
@@ -486,7 +486,7 @@ if (!class_exists('HDI_Importer')) {
             $this->send_ajax_response();
         }
 
-        function hdi_import_xml() {
+        function import_xml_process() {
             if (!current_user_can('manage_options')) {
                 return;
             }
@@ -500,7 +500,7 @@ if (!class_exists('HDI_Importer')) {
             if (file_exists($xml_filepath)) {
                 $this->importDemoContent($xml_filepath, $excludeImages);
                 $this->ajax_response['complete_message'] = esc_html__('All content imported', 'hashthemes-demo-importer');
-                $this->ajax_response['next_step'] = 'hdi_customizer_import';
+                $this->ajax_response['next_step'] = 'hdi_import_customizer';
                 $this->ajax_response['next_step_message'] = esc_html__('Importing customizer settings', 'hashthemes-demo-importer');
             } else {
                 $this->ajax_response['error'] = true;
@@ -512,7 +512,7 @@ if (!class_exists('HDI_Importer')) {
             $this->send_ajax_response();
         }
 
-        function hdi_customizer_import() {
+        function import_customizer_process() {
             if (!current_user_can('manage_options')) {
                 return;
             }
@@ -533,12 +533,12 @@ if (!class_exists('HDI_Importer')) {
             }
 
             $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['next_step'] = 'hdi_menu_import';
+            $this->ajax_response['next_step'] = 'hdi_import_menu';
             $this->ajax_response['next_step_message'] = esc_html__('Setting menus', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
-        function hdi_menu_import() {
+        function import_menu_process() {
             if (!current_user_can('manage_options')) {
                 return;
             }
@@ -556,12 +556,12 @@ if (!class_exists('HDI_Importer')) {
             }
 
             $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['next_step'] = 'hdi_theme_option';
+            $this->ajax_response['next_step'] = 'hdi_import_theme_option';
             $this->ajax_response['next_step_message'] = esc_html__('Importing theme option settings', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
-        function hdi_theme_option() {
+        function import_theme_option_process() {
             if (!current_user_can('manage_options')) {
                 return;
             }
@@ -589,12 +589,12 @@ if (!class_exists('HDI_Importer')) {
             }
 
             $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['next_step'] = 'hdi_importing_widget';
+            $this->ajax_response['next_step'] = 'hdi_import_widget';
             $this->ajax_response['next_step_message'] = esc_html__('Importing widgets', 'hashthemes-demo-importer');
             $this->send_ajax_response();
         }
 
-        function hdi_importing_widget() {
+        function import_widget_process() {
             if (!current_user_can('manage_options')) {
                 return;
             }
@@ -616,7 +616,7 @@ if (!class_exists('HDI_Importer')) {
             $sliderFile = $this->demo_upload_dir($demo_slug) . '/revslider.zip';
 
             if (file_exists($sliderFile)) {
-                $this->ajax_response['next_step'] = 'hdi_importing_revslider';
+                $this->ajax_response['next_step'] = 'hdi_import_revslider';
                 $this->ajax_response['next_step_message'] = esc_html__('Importing Revolution slider', 'hashthemes-demo-importer');
             } else {
                 $this->ajax_response['next_step'] = '';
@@ -627,7 +627,7 @@ if (!class_exists('HDI_Importer')) {
             $this->send_ajax_response();
         }
 
-        function hdi_importing_revslider() {
+        function import_revslider_process() {
             if (!current_user_can('manage_options')) {
                 return;
             }

@@ -107,6 +107,10 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
+= 1.1.4 = Oct 22, 2021
+* Typo mistake for Total demo fixes
+* Other minor code refinements
+
 = 1.1.3 = Sep 29, 2021
 * Total Demo Refined
 * Law, Education demo added for Total Theme

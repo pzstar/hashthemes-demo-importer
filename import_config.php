@@ -110,6 +110,11 @@ $total = array(
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
+            'wpforms-lite' => array(
+                'name' => 'Contact Form by WPForms',
+                'source' => 'wordpress',
+                'file_path' => 'wpforms-lite/wpforms.php',
+            )
         )
     ),
     'el-agency' => array(
@@ -187,7 +192,7 @@ $total = array(
         )
     ),
     'law' => array(
-        'name' => 'Education - Elementor Version',
+        'name' => 'Law - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/total/law.zip',
         'image' => 'https://hashthemes.com/import-files/total/screen/law.jpg',
         'preview_url' => 'https://demo.hashthemes.com/total/law',
@@ -314,11 +319,6 @@ $viral = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
-            ),
-            'jetsticky-for-elementor' => array(
-                'name' => 'JetSticky For Elementor',
-                'source' => 'wordpress',
-                'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
             )
         ),
         'tags' => array(
@@ -381,11 +381,6 @@ $viral = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
-            ),
-            'jetsticky-for-elementor' => array(
-                'name' => 'JetSticky For Elementor',
-                'source' => 'wordpress',
-                'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
             )
         ),
         'tags' => array(
@@ -448,11 +443,6 @@ $viral = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
-            ),
-            'jetsticky-for-elementor' => array(
-                'name' => 'JetSticky For Elementor',
-                'source' => 'wordpress',
-                'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
             )
         ),
         'tags' => array(
@@ -515,11 +505,6 @@ $viral = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
-            ),
-            'jetsticky-for-elementor' => array(
-                'name' => 'JetSticky For Elementor',
-                'source' => 'wordpress',
-                'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
             )
         ),
         'tags' => array(
@@ -556,11 +541,6 @@ $viral = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
-            ),
-            'jetsticky-for-elementor' => array(
-                'name' => 'JetSticky For Elementor',
-                'source' => 'wordpress',
-                'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
             )
         ),
         'tags' => array(
@@ -596,11 +576,6 @@ $viral_news = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
-            ),
-            'hash-elements' => array(
-                'name' => 'Hash Elements',
-                'source' => 'wordpress',
-                'file_path' => 'hash-elements/hash-elements.php'
             )
         ),
     ),
@@ -631,11 +606,6 @@ $viral_news = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
-            ),
-            'jetsticky-for-elementor' => array(
-                'name' => 'JetSticky For Elementor',
-                'source' => 'wordpress',
-                'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
             )
         ),
         'tags' => array(
@@ -668,11 +638,6 @@ $viral_news = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
-            ),
-            'hash-elements' => array(
-                'name' => 'Hash Elements',
-                'source' => 'wordpress',
-                'file_path' => 'hash-elements/hash-elements.php'
             )
         ),
     ),
@@ -703,11 +668,6 @@ $viral_news = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
-            ),
-            'jetsticky-for-elementor' => array(
-                'name' => 'JetSticky For Elementor',
-                'source' => 'wordpress',
-                'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
             )
         ),
         'tags' => array(
@@ -740,11 +700,6 @@ $viral_news = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
-            ),
-            'hash-elements' => array(
-                'name' => 'Hash Elements',
-                'source' => 'wordpress',
-                'file_path' => 'hash-elements/hash-elements.php'
             )
         ),
     ),
@@ -775,11 +730,6 @@ $viral_news = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
-            ),
-            'jetsticky-for-elementor' => array(
-                'name' => 'JetSticky For Elementor',
-                'source' => 'wordpress',
-                'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
             )
         ),
         'tags' => array(
@@ -812,11 +762,6 @@ $viral_news = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
-            ),
-            'hash-elements' => array(
-                'name' => 'Hash Elements',
-                'source' => 'wordpress',
-                'file_path' => 'hash-elements/hash-elements.php'
             )
         ),
     ),
@@ -847,11 +792,6 @@ $viral_news = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
-            ),
-            'jetsticky-for-elementor' => array(
-                'name' => 'JetSticky For Elementor',
-                'source' => 'wordpress',
-                'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
             )
         ),
         'tags' => array(
@@ -884,11 +824,6 @@ $viral_news = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
-            ),
-            'hash-elements' => array(
-                'name' => 'Hash Elements',
-                'source' => 'wordpress',
-                'file_path' => 'hash-elements/hash-elements.php'
             )
         ),
     ),
@@ -919,11 +854,6 @@ $viral_news = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
-            ),
-            'jetsticky-for-elementor' => array(
-                'name' => 'JetSticky For Elementor',
-                'source' => 'wordpress',
-                'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
             )
         ),
         'tags' => array(
@@ -951,11 +881,6 @@ $viral_news = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
-            ),
-            'hash-elements' => array(
-                'name' => 'Hash Elements',
-                'source' => 'wordpress',
-                'file_path' => 'hash-elements/hash-elements.php'
             )
         ),
         'pagebuilder' => array(
@@ -989,11 +914,6 @@ $viral_news = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
-            ),
-            'jetsticky-for-elementor' => array(
-                'name' => 'JetSticky For Elementor',
-                'source' => 'wordpress',
-                'file_path' => 'jetsticky-for-elementor/jetsticky-for-elementor.php'
             )
         ),
         'tags' => array(
@@ -1027,12 +947,7 @@ $viral_mag = array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'elementor/elementor.php',
-            ),
-            'hash-elements' => array(
-                'name' => 'Hash Elements',
-                'source' => 'wordpress',
-                'file_path' => 'hash-elements/hash-elements.php'
-            ),
+            )
         ),
         'tags' => array(
             'free' => 'Free'
