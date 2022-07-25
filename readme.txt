@@ -2,8 +2,8 @@
 Contributors: hashthemes
 Tags: demo importer, hashthemes, widgets, content, import, one click import, content
 Requires at least: 5.0
-Tested up to: 5.9
-Stable tag: 1.1.5
+Tested up to: 6.0
+Stable tag: 1.1.6
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,7 +107,10 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
-= 1.1.5 = Jan 28, 20212
+ = 1.1.6 = July 25, 2022
+* Added recommended plugins
+
+= 1.1.5 = Jan 28, 2022
 * Compatibility with the latest WordPress v5.9
 
 = 1.1.4 = Oct 22, 2021

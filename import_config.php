@@ -283,6 +283,11 @@ $viral = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -319,6 +324,11 @@ $viral = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -345,6 +355,11 @@ $viral = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -381,6 +396,11 @@ $viral = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -407,6 +427,11 @@ $viral = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -443,6 +468,11 @@ $viral = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -469,6 +499,11 @@ $viral = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -505,6 +540,11 @@ $viral = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -541,6 +581,11 @@ $viral = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -576,6 +621,11 @@ $viral_news = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
     ),
@@ -606,6 +656,11 @@ $viral_news = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -638,6 +693,11 @@ $viral_news = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
     ),
@@ -668,6 +728,11 @@ $viral_news = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -700,6 +765,11 @@ $viral_news = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
     ),
@@ -730,6 +800,11 @@ $viral_news = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -762,6 +837,11 @@ $viral_news = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
     ),
@@ -792,6 +872,11 @@ $viral_news = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -824,6 +909,11 @@ $viral_news = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
     ),
@@ -854,6 +944,11 @@ $viral_news = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -881,6 +976,11 @@ $viral_news = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'pagebuilder' => array(
@@ -914,6 +1014,11 @@ $viral_news = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
@@ -947,6 +1052,11 @@ $viral_mag = array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'elementor/elementor.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
             )
         ),
         'tags' => array(
