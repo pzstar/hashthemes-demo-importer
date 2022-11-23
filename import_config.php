@@ -1034,11 +1034,187 @@ $viral_mag = array(
     'news-mag' => array(
         'name' => 'News Mag',
         'external_url' => 'https://hashthemes.com/import-files/viral-mag/news-mag.zip',
-        'image' => 'https://hashthemes.com/import-files/viral-mag/screen/news-mag-screenshot.jpg',
+        'image' => 'https://hashthemes.com/import-files/viral-mag/screen/news.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-mag/news',
         'options_array' => array('sfm_settings'),
         'menu_array' => array(
+            'viral-mag-primary-menu' => 'Primary Menu',
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'elementor' => 'Elementor'
+        )
+    ),
+    'gadgets' => array(
+        'name' => 'Gadgets',
+        'external_url' => 'https://hashthemes.com/import-files/viral-mag/gadgets.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-mag/screen/gadgets.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-mag/gadgets',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
             'viral-mag-primary-menu' => 'Main Menu',
+            'viral-news-top-menu' => 'Header Menu'
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'elementor' => 'Elementor'
+        )
+    ),
+    'v-magazine' => array(
+        'name' => 'Magazine',
+        'external_url' => 'https://hashthemes.com/import-files/viral-mag/v-magazine.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-mag/screen/magazine.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-mag/magazine',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
+            'viral-mag-primary-menu' => 'Main Menu'
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'elementor' => 'Elementor'
+        )
+    ),
+    'tech' => array(
+        'name' => 'Technology',
+        'external_url' => 'https://hashthemes.com/import-files/viral-mag/tech.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-mag/screen/tech.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-mag/tech',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
+            'viral-mag-primary-menu' => 'Primary Menu'
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'elementor' => 'Elementor'
+        )
+    ),
+    'health' => array(
+        'name' => 'Health',
+        'external_url' => 'https://hashthemes.com/import-files/viral-mag/health.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-mag/screen/health.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-mag/health',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
+            'viral-mag-primary-menu' => 'Primary Menu'
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'elementor' => 'Elementor'
+        )
+    ),
+    'v-food' => array(
+        'name' => 'Food',
+        'external_url' => 'https://hashthemes.com/import-files/viral-mag/v-food.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-mag/screen/food.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-mag/food',
+        'options_array' => array('sfm_settings'),
+        'menu_array' => array(
+            'viral-mag-primary-menu' => 'Primary Menu'
         ),
         'home_slug' => 'home',
         'blog_slug' => 'blog',
