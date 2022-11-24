@@ -1038,7 +1038,7 @@ $viral_mag = array(
         'preview_url' => 'https://demo.hashthemes.com/viral-mag/news',
         'options_array' => array('sfm_settings'),
         'menu_array' => array(
-            'viral-mag-primary-menu' => 'Primary Menu',
+            'viral-mag-primary-menu' => 'Main Menu',
         ),
         'home_slug' => 'home',
         'blog_slug' => 'blog',
