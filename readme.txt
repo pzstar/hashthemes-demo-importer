@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: demo importer, hashthemes, widgets, content, import, one click import, content
 Requires at least: 5.0
 Tested up to: 6.1
-Stable tag: 1.1.6
+Stable tag: 1.1.7
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,53 +107,56 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
- = 1.1.6 = July 25, 2022
+ = 1.1.7, Nov 24, 2022
+* New demos added for Viral Mag
+
+ = 1.1.6, July 25, 2022
 * Added recommended plugins
 
-= 1.1.5 = Jan 28, 2022
+= 1.1.5, Jan 28, 2022
 * Compatibility with the latest WordPress v5.9
 
-= 1.1.4 = Oct 22, 2021
+= 1.1.4, Oct 22, 2021
 * Typo mistake for Total demo fixes
 * Other minor code refinements
 
-= 1.1.3 = Sep 29, 2021
+= 1.1.3, Sep 29, 2021
 * Total Demo Refined
 * Law, Education demo added for Total Theme
 
-= 1.1.1 = Jun 22, 2021
+= 1.1.1, Jun 22, 2021
 * Viral Mag Demo added
 
-= 1.1.0 = May 15, 2021
+= 1.1.0, May 15, 2021
 * Square Elementor Demo added
 
-= 1.0.9 = Mar 08, 2021
+= 1.0.9, Mar 08, 2021
 * Total Demo Import added
 
-= 1.0.8 = Oct 12, 2020
+= 1.0.8, Oct 12, 2020
 * Viral News Menu id mistake in config file fixed
 
-= 1.0.7 =
+= 1.0.7
 * Demos Rearranged
 
-= 1.0.6 =
+= 1.0.6
 * WordPress Importer Updated
 * New Demos added for Viral Theme
 
-= 1.0.5 =
+= 1.0.5
 * Added new demo in Viral News theme
 
-= 1.0.4 =
+= 1.0.4
 * Added More demo for Viral News Theme
 * Demo Importer Enhancement
 
-= 1.0.3 =
+= 1.0.3
 * Fixed responsive issue in the dashboard
 
-= 1.0.2 =
+= 1.0.2
 * Demo for HashOne theme added
 
-= 1.0 =
+= 1.0
 * Release
 
 == Upgrade Notice ==
