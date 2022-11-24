@@ -1073,7 +1073,7 @@ $viral_mag = array(
         'preview_url' => 'https://demo.hashthemes.com/viral-mag/gadgets',
         'options_array' => array('sfm_settings'),
         'menu_array' => array(
-            'viral-mag-primary-menu' => 'Main Menu',
+            'viral-mag-primary-menu' => 'Primary Menu',
             'viral-news-top-menu' => 'Header Menu'
         ),
         'home_slug' => 'home',
