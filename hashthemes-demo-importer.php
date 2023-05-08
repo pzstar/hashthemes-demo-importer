@@ -3,7 +3,7 @@
  * Plugin Name: HashThemes Demo Importer
  * Plugin URI: https://github.com/pzstar/hashthemes-demo-importer
  * Description: Easily imports demo with just one click.
- * Version: 1.1.8
+ * Version: 1.1.9
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: hashthemes-demo-importer
@@ -16,7 +16,7 @@ if (!defined('ABSPATH'))
     exit;
 
 
-define('HDI_VERSION', '1.1.8');
+define('HDI_VERSION', '1.1.9');
 
 define('HDI_FILE', __FILE__);
 define('HDI_PLUGIN_BASENAME', plugin_basename(HDI_FILE));
@@ -1065,7 +1065,11 @@ if (!class_exists('HDI_Importer')) {
             wp_enqueue_script('isotope-pkgd', HDI_ASSETS_URL . 'isotope.pkgd.js', array('jquery'), HDI_VERSION, true);
             wp_enqueue_script('hdi-demo-ajax', HDI_ASSETS_URL . 'demo-importer-ajax.js', array('jquery', 'imagesloaded'), HDI_VERSION, true);
             wp_localize_script('hdi-demo-ajax', 'hdi_ajax_data', $data);
-            wp_enqueue_style('hdi-demo-style', HDI_ASSETS_URL . 'demo-importer-style.css', array(), HDI_VERSION);
+            if (is_rtl()) {
+                wp_enqueue_style('hdi-demo-style', HDI_ASSETS_URL . 'demo-importer-style.rtl.css', array(), HDI_VERSION);
+            } else {
+                wp_enqueue_style('hdi-demo-style', HDI_ASSETS_URL . 'demo-importer-style.css', array(), HDI_VERSION);
+            }
         }
 
     }
