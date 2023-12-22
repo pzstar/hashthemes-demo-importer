@@ -11,6 +11,7 @@ $square = array(
         'image' => 'https://hashthemes.com/import-files/square/screen/square.jpg',
         'preview_url' => 'https://demo.hashthemes.com/square',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -22,11 +23,11 @@ $square = array(
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
-            'contact-form-7' => array(
-                'name' => 'Contact Form 7',
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
-                'file_path' => 'contact-form-7/wp-contact-form-7.php'
-            ),
+                'file_path' => 'hash-form/hash-form.php',
+            )
         )
     ),
     'el-main' => array(
@@ -35,6 +36,7 @@ $square = array(
         'image' => 'https://hashthemes.com/import-files/square/screen/square.jpg',
         'preview_url' => 'https://demo.hashthemes.com/square',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -56,11 +58,11 @@ $square = array(
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
-            'contact-form-7' => array(
-                'name' => 'Contact Form 7',
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
-                'file_path' => 'contact-form-7/wp-contact-form-7.php'
-            ),
+                'file_path' => 'hash-form/hash-form.php',
+            )
         )
     )
 );
@@ -72,6 +74,7 @@ $squarepress = array(
         'image' => 'https://hashthemes.com/import-files/squarepress/screen/main.jpg',
         'preview_url' => 'https://demo.hashthemes.com/squarepress',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -83,11 +86,11 @@ $squarepress = array(
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
-            'contact-form-7' => array(
-                'name' => 'Contact Form 7',
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
-                'file_path' => 'contact-form-7/wp-contact-form-7.php'
-            ),
+                'file_path' => 'hash-form/hash-form.php',
+            )
         )
     )
 );
@@ -99,6 +102,7 @@ $total = array(
         'image' => 'https://hashthemes.com/import-files/total/screen/agency.jpg',
         'preview_url' => 'https://demo.hashthemes.com/total/agency',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -110,10 +114,10 @@ $total = array(
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
-            'wpforms-lite' => array(
-                'name' => 'Contact Form by WPForms',
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
-                'file_path' => 'wpforms-lite/wpforms.php',
+                'file_path' => 'hash-form/hash-form.php',
             )
         )
     ),
@@ -123,6 +127,7 @@ $total = array(
         'image' => 'https://hashthemes.com/import-files/total/screen/agency.jpg',
         'preview_url' => 'https://demo.hashthemes.com/total/el-agency',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -144,10 +149,10 @@ $total = array(
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
-            'wpforms-lite' => array(
-                'name' => 'Contact Form by WPForms',
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
-                'file_path' => 'wpforms-lite/wpforms.php',
+                'file_path' => 'hash-form/hash-form.php',
             )
         )
     ),
@@ -157,6 +162,7 @@ $total = array(
         'image' => 'https://hashthemes.com/import-files/total/screen/education.jpg',
         'preview_url' => 'https://demo.hashthemes.com/total/education',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'primary' => 'Main Menu'
         ),
@@ -184,10 +190,10 @@ $total = array(
                 'source' => 'wordpress',
                 'file_path' => 'learnpress/learnpress.php',
             ),
-            'wpforms-lite' => array(
-                'name' => 'Contact Form by WPForms',
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
-                'file_path' => 'wpforms-lite/wpforms.php',
+                'file_path' => 'hash-form/hash-form.php',
             )
         )
     ),
@@ -197,6 +203,7 @@ $total = array(
         'image' => 'https://hashthemes.com/import-files/total/screen/law.jpg',
         'preview_url' => 'https://demo.hashthemes.com/total/law',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'primary' => 'Main Menu'
         ),
@@ -219,10 +226,10 @@ $total = array(
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
-            'wpforms-lite' => array(
-                'name' => 'Contact Form by WPForms',
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
-                'file_path' => 'wpforms-lite/wpforms.php',
+                'file_path' => 'hash-form/hash-form.php',
             )
         )
     )
@@ -235,6 +242,7 @@ $totally = array(
         'image' => 'https://hashthemes.com/import-files/totally/screen/main.jpg',
         'preview_url' => 'https://demo.hashthemes.com/totally',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
@@ -246,6 +254,11 @@ $totally = array(
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            )
         )
     )
 );
@@ -257,11 +270,24 @@ $hashone = array(
         'image' => 'https://hashthemes.com/import-files/hashone/screen/main.jpg',
         'preview_url' => 'https://demo.hashthemes.com/hashone',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
         'home_slug' => 'home-page',
-        'blog_slug' => 'blog'
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            )
+        )
     )
 );
 
@@ -276,6 +302,7 @@ $viral = array(
             'top-menu' => 'Top Menu'
         ),
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
@@ -288,6 +315,11 @@ $viral = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -307,6 +339,7 @@ $viral = array(
             'top-menu' => 'Top Menu'
         ),
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
@@ -329,6 +362,11 @@ $viral = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -348,6 +386,7 @@ $viral = array(
             'top-menu' => 'Top Menu'
         ),
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
@@ -360,6 +399,11 @@ $viral = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -379,6 +423,7 @@ $viral = array(
             'top-menu' => 'Top Menu'
         ),
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
@@ -401,6 +446,11 @@ $viral = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -420,6 +470,7 @@ $viral = array(
             'top-menu' => 'Top Menu'
         ),
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
@@ -432,6 +483,11 @@ $viral = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -451,6 +507,7 @@ $viral = array(
             'top-menu' => 'Top Menu'
         ),
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
@@ -473,6 +530,11 @@ $viral = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -492,6 +554,7 @@ $viral = array(
             'top-menu' => 'Top Menu'
         ),
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
@@ -504,6 +567,11 @@ $viral = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -523,6 +591,7 @@ $viral = array(
             'top-menu' => 'Top Menu'
         ),
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
@@ -545,6 +614,11 @@ $viral = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -564,6 +638,7 @@ $viral = array(
             'top-menu' => 'Top Menu'
         ),
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
@@ -586,6 +661,11 @@ $viral = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -604,6 +684,7 @@ $viral_news = array(
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo1-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/demo1',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-news-primary-menu' => 'Primary Menu',
             'viral-news-top-menu' => 'Top Menu'
@@ -626,6 +707,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
     ),
@@ -635,6 +721,7 @@ $viral_news = array(
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo1-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo1',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-news-primary-menu' => 'Primary Menu',
             'viral-news-top-menu' => 'Top Menu'
@@ -661,6 +748,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -676,6 +768,7 @@ $viral_news = array(
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo2-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/demo2',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-news-primary-menu' => 'Primary Menu',
             'viral-news-top-menu' => 'Top Menu'
@@ -698,6 +791,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
     ),
@@ -707,6 +805,7 @@ $viral_news = array(
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo2-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo2',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-news-primary-menu' => 'Primary Menu',
             'viral-news-top-menu' => 'Top Menu'
@@ -733,6 +832,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -748,6 +852,7 @@ $viral_news = array(
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo3-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/demo3',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-news-primary-menu' => 'Primary Menu',
             'viral-news-top-menu' => 'Top Menu'
@@ -770,6 +875,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
     ),
@@ -779,6 +889,7 @@ $viral_news = array(
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo3-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo3',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-news-primary-menu' => 'Primary Menu',
             'viral-news-top-menu' => 'Top Menu'
@@ -805,6 +916,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -820,6 +936,7 @@ $viral_news = array(
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo4-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/demo4',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-news-primary-menu' => 'Primary Menu',
             'viral-news-top-menu' => 'Top Menu'
@@ -842,6 +959,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
     ),
@@ -851,6 +973,7 @@ $viral_news = array(
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo4-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo4',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-news-primary-menu' => 'Primary Menu',
             'viral-news-top-menu' => 'Top Menu'
@@ -877,6 +1000,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -892,6 +1020,7 @@ $viral_news = array(
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo5-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/demo5',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-news-primary-menu' => 'Primary Menu',
             'viral-news-top-menu' => 'Top Menu'
@@ -914,6 +1043,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
     ),
@@ -923,6 +1057,7 @@ $viral_news = array(
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo5-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo5',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-news-primary-menu' => 'Primary Menu',
             'viral-news-top-menu' => 'Top Menu'
@@ -949,6 +1084,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -964,6 +1104,7 @@ $viral_news = array(
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo6-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/demo6',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-news-primary-menu' => 'Primary Menu',
             'viral-news-top-menu' => 'Top Menu'
@@ -981,6 +1122,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'pagebuilder' => array(
@@ -993,6 +1139,7 @@ $viral_news = array(
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/elementor-demo6-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo6',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-news-primary-menu' => 'Primary Menu',
             'viral-news-top-menu' => 'Top Menu'
@@ -1019,6 +1166,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -1037,6 +1189,7 @@ $viral_mag = array(
         'image' => 'https://hashthemes.com/import-files/viral-mag/screen/news.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-mag/news',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-mag-primary-menu' => 'Main Menu',
         ),
@@ -1062,6 +1215,11 @@ $viral_mag = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -1077,6 +1235,7 @@ $viral_mag = array(
         'image' => 'https://hashthemes.com/import-files/viral-mag/screen/gadgets.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-mag/gadgets',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-mag-primary-menu' => 'Primary Menu',
             'viral-news-top-menu' => 'Header Menu'
@@ -1103,6 +1262,11 @@ $viral_mag = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -1118,6 +1282,7 @@ $viral_mag = array(
         'image' => 'https://hashthemes.com/import-files/viral-mag/screen/magazine.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-mag/magazine',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-mag-primary-menu' => 'Main Menu'
         ),
@@ -1143,6 +1308,11 @@ $viral_mag = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -1158,6 +1328,7 @@ $viral_mag = array(
         'image' => 'https://hashthemes.com/import-files/viral-mag/screen/tech.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-mag/tech',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-mag-primary-menu' => 'Primary Menu'
         ),
@@ -1183,6 +1354,11 @@ $viral_mag = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -1198,6 +1374,7 @@ $viral_mag = array(
         'image' => 'https://hashthemes.com/import-files/viral-mag/screen/health.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-mag/health',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-mag-primary-menu' => 'Primary Menu'
         ),
@@ -1223,6 +1400,11 @@ $viral_mag = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(
@@ -1238,6 +1420,7 @@ $viral_mag = array(
         'image' => 'https://hashthemes.com/import-files/viral-mag/screen/food.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-mag/food',
         'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
         'menu_array' => array(
             'viral-mag-primary-menu' => 'Primary Menu'
         ),
@@ -1263,6 +1446,11 @@ $viral_mag = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
             )
         ),
         'tags' => array(

@@ -3,7 +3,7 @@
  * Plugin Name: HashThemes Demo Importer
  * Plugin URI: https://github.com/pzstar/hashthemes-demo-importer
  * Description: Easily imports demo with just one click.
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: hashthemes-demo-importer
@@ -16,7 +16,7 @@ if (!defined('ABSPATH'))
     exit;
 
 
-define('HDI_VERSION', '1.2.0');
+define('HDI_VERSION', '1.2.1');
 
 define('HDI_FILE', __FILE__);
 define('HDI_PLUGIN_BASENAME', plugin_basename(HDI_FILE));
@@ -78,6 +78,7 @@ if (!class_exists('HDI_Importer')) {
             add_action('wp_ajax_hdi_import_menu', array($this, 'import_menu_process'));
             add_action('wp_ajax_hdi_import_theme_option', array($this, 'import_theme_option_process'));
             add_action('wp_ajax_hdi_import_widget', array($this, 'import_widget_process'));
+            add_action('wp_ajax_hdi_import_hashform', array($this, 'import_hashform_process'));
             add_action('wp_ajax_hdi_import_revslider', array($this, 'import_revslider_process'));
         }
 
@@ -611,6 +612,69 @@ if (!class_exists('HDI_Importer')) {
                 $this->ajax_response['complete_message'] = esc_html__('Widgets imported', 'hashthemes-demo-importer');
             } else {
                 $this->ajax_response['complete_message'] = esc_html__('No widgets found', 'hashthemes-demo-importer');
+            }
+
+            $this->ajax_response['demo'] = $demo_slug;
+            $this->ajax_response['next_step'] = 'hdi_import_hashform';
+            $this->ajax_response['next_step_message'] = esc_html__('Importing Forms', 'hashthemes-demo-importer');
+            $this->send_ajax_response();
+        }
+
+        function import_hashform_process() {
+            if (!current_user_can('manage_options')) {
+                return;
+            }
+
+            check_ajax_referer('demo-importer-ajax', 'security');
+
+            $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
+
+            $hash_forms = isset($this->configFile[$demo_slug]['hash_forms']) ? $this->configFile[$demo_slug]['hash_forms'] : '';
+
+            if (isset($hash_forms) && is_array($hash_forms)) {
+                foreach ($hash_forms as $hash_form) {
+                    $filepath = $this->demo_upload_dir($demo_slug) . '/' . $hash_form . '.json';
+
+                    if (file_exists($filepath)) {
+                        if (class_exists('HashFormBuilder')) {
+                            hashform_create_table();
+
+                            $imdat = json_decode(file_get_contents($filepath), true);
+                            $options = $imdat['options'];
+
+                            $form = array(
+                                'name' => esc_html($options['title']),
+                                'description' => esc_html($options['description']),
+                                'options' => $options,
+                                'status' => $imdat['status'],
+                                'settings' => $imdat['settings'],
+                                'styles' => $imdat['styles'],
+                                'created_at' => current_time('mysql'),
+                            );
+
+                            $form_id = HashFormBuilder::create($form);
+
+                            foreach ($imdat['field'] as $field) {
+                                HashFormFields::create_row(array(
+                                    'name' => $field['name'],
+                                    'description' => $field['description'],
+                                    'type' => $field['type'],
+                                    'default_value' => $field['default_value'],
+                                    'options' => $field['options'],
+                                    'field_order' => $field['field_order'],
+                                    'form_id' => absint($form_id),
+                                    'required' => $field['required'],
+                                    'field_options' => $field['field_options']
+                                ));
+                            }
+                        } else {
+                            $this->ajax_response['complete_message'] = esc_html__('Hash Form plugin not installed', 'hashthemes-demo-importer');
+                        }
+                    }
+                }
+                $this->ajax_response['complete_message'] = esc_html__('Forms imported', 'hashthemes-demo-importer');
+            } else {
+                $this->ajax_response['complete_message'] = esc_html__('No Form files found', 'hashthemes-demo-importer');
             }
 
             $sliderFile = $this->demo_upload_dir($demo_slug) . '/revslider.zip';
