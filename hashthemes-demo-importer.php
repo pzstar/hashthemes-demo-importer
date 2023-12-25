@@ -493,6 +493,10 @@ if (!class_exists('HDI_Importer')) {
             }
             check_ajax_referer('demo-importer-ajax', 'security');
 
+            if ('1' !== get_option('elementor_unfiltered_files_upload')) {
+                update_option('elementor_unfiltered_files_upload', '1');
+            }
+
             $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
             $excludeImages = isset($_POST['excludeImages']) ? sanitize_text_field($_POST['excludeImages']) : '';
             // Import XML content
