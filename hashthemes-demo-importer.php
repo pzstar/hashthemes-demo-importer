@@ -119,8 +119,8 @@ if (!class_exists('HDI_Importer')) {
                     update_option('elementor_disable_typography_schemes', 'yes');
                 }
 
-                if ('inactive' !== get_option('elementor_experiment-e_dom_optimization')) {
-                    update_option('elementor_experiment-e_dom_optimization', 'inactive');
+                if (get_option('elementor_optimized_gutenberg_loading')) {
+                    update_option('elementor_optimized_gutenberg_loading', false);
                 }
 
                 if ('1' !== get_option('elementor_unfiltered_files_upload')) {
