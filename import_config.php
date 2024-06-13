@@ -376,6 +376,43 @@ $viral = array(
             'elementor' => 'Elementor'
         )
     ),
+    'demo10' => array(
+        'name' => 'Demo One - Gutenberg Version',
+        'external_url' => 'https://hashthemes.com/import-files/viral/demo10.zip',
+        'image' => 'https://hashthemes.com/import-files/viral/screen/demo1.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral/demo10',
+        'menu_array' => array(
+            'primary' => 'Primary Menu',
+            'top-menu' => 'Top Menu'
+        ),
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'home_slug' => 'home-page',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'gutenberg' => 'Gutenberg'
+        )
+    ),
     'demo2' => array(
         'name' => 'Demo Two - Customizer Version',
         'external_url' => 'https://hashthemes.com/import-files/viral/demo2.zip',
