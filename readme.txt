@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: demo importer, hashthemes, widgets, content, import, one click import, content
 Requires at least: 5.0
 Tested up to: 6.5
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,9 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
+ = 1.2.3, Jun 13, 2023
+* New demo added for Viral Theme
+
  = 1.2.2, Jun 04, 2023
 * Outdated code removed
 
