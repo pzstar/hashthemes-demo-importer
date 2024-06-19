@@ -799,6 +799,43 @@ $viral_news = array(
             'elementor' => 'Elementor'
         )
     ),
+    'block-demo1' => array(
+        'name' => 'Demo One - Gutenberg Version',
+        'external_url' => 'https://hashthemes.com/import-files/viral-news/block-demo1.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo1-screenshot.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-news/block-demo1',
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'menu_array' => array(
+            'viral-news-primary-menu' => 'Primary Menu',
+            'viral-news-top-menu' => 'Top Menu'
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'gutenberg' => 'Gutenberg'
+        ),
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            )
+        ),
+    ),
     'demo2' => array(
         'name' => 'Demo Two - Customizer Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/demo2.zip',
