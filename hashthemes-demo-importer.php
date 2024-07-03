@@ -3,7 +3,7 @@
  * Plugin Name: HashThemes Demo Importer
  * Plugin URI: https://github.com/pzstar/hashthemes-demo-importer
  * Description: Easily imports demo with just one click.
- * Version: 1.2.4
+ * Version: 1.2.5
  * Author: HashThemes
  * Author URI:  https://hashthemes.com
  * Text Domain: hashthemes-demo-importer
@@ -16,7 +16,7 @@ if (!defined('ABSPATH'))
     exit;
 
 
-define('HDI_VERSION', '1.2.4');
+define('HDI_VERSION', '1.2.5');
 
 define('HDI_FILE', __FILE__);
 define('HDI_PLUGIN_BASENAME', plugin_basename(HDI_FILE));
@@ -108,7 +108,7 @@ if (!class_exists('HDI_Importer')) {
                 return;
             }
 
-            $options = get_option('hdi_elementor_overwrite');
+            $options = get_option('hdi_elementor_params_overwrite');
 
             if (!$options) {
                 if ('yes' !== get_option('elementor_disable_color_schemes')) {
@@ -119,6 +119,10 @@ if (!class_exists('HDI_Importer')) {
                     update_option('elementor_disable_typography_schemes', 'yes');
                 }
 
+                if ('active' !== get_option('elementor_disable_typography_schemes')) {
+                    update_option('elementor_experiment-container', 'active');
+                }
+
                 if (get_option('elementor_optimized_gutenberg_loading')) {
                     update_option('elementor_optimized_gutenberg_loading', false);
                 }
@@ -127,7 +131,7 @@ if (!class_exists('HDI_Importer')) {
                     update_option('elementor_unfiltered_files_upload', '1');
                 }
             }
-            update_option('hdi_elementor_overwrite', 'yes');
+            update_option('hdi_elementor_params_overwrite', 'yes');
         }
 
         /*

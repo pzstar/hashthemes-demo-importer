@@ -232,7 +232,42 @@ $total = array(
                 'file_path' => 'hash-form/hash-form.php',
             )
         )
-    )
+    ),
+    'yoga' => array(
+        'name' => 'Yoga - Elementor Version',
+        'external_url' => 'https://hashthemes.com/import-files/total/yoga.zip',
+        'image' => 'https://hashthemes.com/import-files/total/screen/yoga.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/total/yoga',
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'menu_array' => array(
+            'primary' => 'Main Menu'
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            )
+        )
+    ),
 );
 
 $totally = array(
@@ -715,8 +750,100 @@ $viral = array(
 );
 
 $viral_news = array(
+    'elementor-demo8' => array(
+        'name' => 'Food Magazine',
+        'external_url' => 'https://hashthemes.com/import-files/viral-news/elementor-demo8.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-news/screen/elementor-demo8-screenshot.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo8',
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'menu_array' => array(
+            'viral-news-primary-menu' => 'Primary Menu',
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'elementor' => 'Elementor'
+        )
+    ),
+    'elementor-demo7' => array(
+        'name' => 'Digital News',
+        'external_url' => 'https://hashthemes.com/import-files/viral-news/elementor-demo7.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-news/screen/elementor-demo7-screenshot.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo7',
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'menu_array' => array(
+            'viral-news-primary-menu' => 'Primary Menu',
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'elementor' => 'Elementor'
+        )
+    ),
     'demo1' => array(
-        'name' => 'Demo One - Customizer Version',
+        'name' => 'News Magazine - Customizer Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/demo1.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo1-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/demo1',
@@ -753,7 +880,7 @@ $viral_news = array(
         ),
     ),
     'elementor-demo1' => array(
-        'name' => 'Demo One - Elementor Version',
+        'name' => 'News Magazine - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/elementor-demo1.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo1-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo1',
@@ -800,7 +927,7 @@ $viral_news = array(
         )
     ),
     'block-demo1' => array(
-        'name' => 'Demo One - Gutenberg Version',
+        'name' => 'News Magazine - Gutenberg Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/block-demo1.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo1-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/block-demo1',
@@ -837,7 +964,7 @@ $viral_news = array(
         ),
     ),
     'demo2' => array(
-        'name' => 'Demo Two - Customizer Version',
+        'name' => 'Sports Magazine - Customizer Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/demo2.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo2-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/demo2',
@@ -874,7 +1001,7 @@ $viral_news = array(
         ),
     ),
     'elementor-demo2' => array(
-        'name' => 'Demo Two - Elementor Version',
+        'name' => 'Sports Magazine - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/elementor-demo2.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo2-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo2',
@@ -921,7 +1048,7 @@ $viral_news = array(
         )
     ),
     'demo3' => array(
-        'name' => 'Demo Three - Customizer Version',
+        'name' => 'Gadget Magazine - Customizer Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/demo3.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo3-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/demo3',
@@ -958,7 +1085,7 @@ $viral_news = array(
         ),
     ),
     'elementor-demo3' => array(
-        'name' => 'Demo Three - Elementor Version',
+        'name' => 'Gadget Magazine - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/elementor-demo3.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo3-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo3',
@@ -1005,7 +1132,7 @@ $viral_news = array(
         )
     ),
     'demo4' => array(
-        'name' => 'Demo Four - Customizer Version',
+        'name' => 'Fitness Magazine - Customizer Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/demo4.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo4-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/demo4',
@@ -1042,7 +1169,7 @@ $viral_news = array(
         ),
     ),
     'elementor-demo4' => array(
-        'name' => 'Demo Four - Elementor Version',
+        'name' => 'Fitness Magazine - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/elementor-demo4.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo4-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo4',
@@ -1089,7 +1216,7 @@ $viral_news = array(
         )
     ),
     'demo5' => array(
-        'name' => 'Demo Five - Customizer Version',
+        'name' => 'Beauty Magazine - Customizer Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/demo5.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo5-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/demo5',
@@ -1126,7 +1253,7 @@ $viral_news = array(
         ),
     ),
     'elementor-demo5' => array(
-        'name' => 'Demo Five - Elementor Version',
+        'name' => 'Beauty Magazine - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/elementor-demo5.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo5-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo5',
@@ -1173,7 +1300,7 @@ $viral_news = array(
         )
     ),
     'demo6' => array(
-        'name' => 'Demo Six - Customizer Version',
+        'name' => 'Travel Blog - Customizer Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/demo6.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/demo6-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/demo6',
@@ -1208,7 +1335,7 @@ $viral_news = array(
         )
     ),
     'elementor-demo6' => array(
-        'name' => 'Demo Seven - Elementor Version',
+        'name' => 'Music Magazine - Elementor Version',
         'external_url' => 'https://hashthemes.com/import-files/viral-news/elementor-demo6.zip',
         'image' => 'https://hashthemes.com/import-files/viral-news/screen/elementor-demo6-screenshot.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-news/elementor-demo6',
