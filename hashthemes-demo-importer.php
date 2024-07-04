@@ -119,7 +119,7 @@ if (!class_exists('HDI_Importer')) {
                     update_option('elementor_disable_typography_schemes', 'yes');
                 }
 
-                if ('active' !== get_option('elementor_disable_typography_schemes')) {
+                if ('active' !== get_option('elementor_experiment-container')) {
                     update_option('elementor_experiment-container', 'active');
                 }
 
