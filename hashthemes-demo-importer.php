@@ -3,8 +3,8 @@
  * Plugin Name: HashThemes Demo Importer
  * Plugin URI: https://github.com/pzstar/hashthemes-demo-importer
  * Description: Easily imports demo with just one click.
- * Version: 1.2.5
- * Author: HashThemes
+ * Version: 1.2.6
+ * Author: hashthemes
  * Author URI:  https://hashthemes.com
  * Text Domain: hashthemes-demo-importer
  * License: GPL-2.0+
@@ -16,7 +16,7 @@ if (!defined('ABSPATH'))
     exit;
 
 
-define('HDI_VERSION', '1.2.5');
+define('HDI_VERSION', '1.2.6');
 
 define('HDI_FILE', __FILE__);
 define('HDI_PLUGIN_BASENAME', plugin_basename(HDI_FILE));
@@ -63,7 +63,7 @@ if (!class_exists('HDI_Importer')) {
             add_action('admin_enqueue_scripts', array($this, 'load_backends'));
 
             // Add Elementor required Changes
-            add_action('init', array($this, 'overwrite_elementor_settings'));
+            add_action('admin_init', array($this, 'overwrite_elementor_settings'));
 
             // Allow SVG uploads
             add_filter('upload_mimes', array($this, 'file_types_to_uploads'));

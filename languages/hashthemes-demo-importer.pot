@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HashThemes Demo Importer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-24 07:39+0000\n"
+"POT-Creation-Date: 2024-07-06 15:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -35,19 +35,19 @@ msgstr ""
 msgid "Activate"
 msgstr ""
 
-#: hashthemes-demo-importer.php:384
+#: hashthemes-demo-importer.php:439
 msgid "Activating required plugins"
 msgstr ""
 
-#: hashthemes-demo-importer.php:131 hashthemes-demo-importer.php:150
+#: hashthemes-demo-importer.php:186 hashthemes-demo-importer.php:205
 msgid "All"
 msgstr ""
 
-#: hashthemes-demo-importer.php:452
+#: hashthemes-demo-importer.php:511
 msgid "All content imported"
 msgstr ""
 
-#: hashthemes-demo-importer.php:426
+#: hashthemes-demo-importer.php:481
 msgid "All demo files downloaded"
 msgstr ""
 
@@ -55,19 +55,19 @@ msgstr ""
 msgid "All done."
 msgstr ""
 
-#: hashthemes-demo-importer.php:1003
+#: hashthemes-demo-importer.php:1134
 msgid "All done. Have fun!"
 msgstr ""
 
-#: hashthemes-demo-importer.php:245
+#: hashthemes-demo-importer.php:300
 msgid "All in one migration"
 msgstr ""
 
-#: hashthemes-demo-importer.php:403
+#: hashthemes-demo-importer.php:458
 msgid "All the required plugins activated"
 msgstr ""
 
-#: hashthemes-demo-importer.php:376
+#: hashthemes-demo-importer.php:431
 msgid "All the required plugins installed"
 msgstr ""
 
@@ -83,15 +83,15 @@ msgstr ""
 msgid "assign posts to an existing user:"
 msgstr ""
 
-#: hashthemes-demo-importer.php:208
+#: hashthemes-demo-importer.php:263
 msgid "Buy Now"
 msgstr ""
 
-#: hashthemes-demo-importer.php:309
+#: hashthemes-demo-importer.php:364
 msgid "Cancel"
 msgstr ""
 
-#: hashthemes-demo-importer.php:291
+#: hashthemes-demo-importer.php:346
 msgid ""
 "Check this option if importing demo fails multiple times. Excluding image "
 "will make the demo import process super quick."
@@ -105,27 +105,27 @@ msgstr ""
 msgid "Could not create temporary file."
 msgstr ""
 
-#: hashthemes-demo-importer.php:480
+#: hashthemes-demo-importer.php:539
 msgid "Customizer settings imported"
 msgstr ""
 
-#: hashthemes-demo-importer.php:351
+#: hashthemes-demo-importer.php:406
 msgid "Database reset complete"
 msgstr ""
 
-#: hashthemes-demo-importer.php:1001
+#: hashthemes-demo-importer.php:1132
 msgid "Database was not reset"
 msgstr ""
 
-#: hashthemes-demo-importer.php:431
+#: hashthemes-demo-importer.php:486
 msgid "Demo import process failed. Demo files can not be downloaded"
 msgstr ""
 
-#: hashthemes-demo-importer.php:457
+#: hashthemes-demo-importer.php:516
 msgid "Demo import process failed. No content file found"
 msgstr ""
 
-#: hashthemes-demo-importer.php:317
+#: hashthemes-demo-importer.php:372
 msgid "Demo Import Progress"
 msgstr ""
 
@@ -143,7 +143,7 @@ msgstr ""
 msgid "Downloaded file has incorrect size"
 msgstr ""
 
-#: hashthemes-demo-importer.php:411
+#: hashthemes-demo-importer.php:466
 msgid "Downloading demo files"
 msgstr ""
 
@@ -173,7 +173,7 @@ msgstr ""
 msgid "Error!! Plugin not activated."
 msgstr ""
 
-#: hashthemes-demo-importer.php:290
+#: hashthemes-demo-importer.php:345
 msgid "Exclude Images"
 msgstr ""
 
@@ -221,27 +221,35 @@ msgstr ""
 msgid "Fetching attachments is not enabled"
 msgstr ""
 
-#: hashthemes-demo-importer.php:251
+#: hashthemes-demo-importer.php:306
 msgid ""
 "For your website to look exactly like the demo,the import process will "
 "install and activate the following plugin if they are not installed or "
 "activated."
 msgstr ""
 
-#: hashthemes-demo-importer.php:1003
+#: hashthemes-demo-importer.php:683
+msgid "Forms imported"
+msgstr ""
+
+#: hashthemes-demo-importer.php:1134
 msgid "Go Back"
 msgstr ""
 
+#: hashthemes-demo-importer.php:679
+msgid "Hash Form plugin not installed"
+msgstr ""
+
 #. Author of the plugin
-msgid "HashThemes"
+msgid "hashthemes"
 msgstr ""
 
 #. Name of the plugin
-#: hashthemes-demo-importer.php:90
+#: hashthemes-demo-importer.php:98
 msgid "HashThemes Demo Importer"
 msgstr ""
 
-#: hashthemes-demo-importer.php:100
+#: hashthemes-demo-importer.php:155
 msgid "HashThemes OneClick Demo Importer"
 msgstr ""
 
@@ -280,7 +288,7 @@ msgstr ""
 msgid "Import author:"
 msgstr ""
 
-#: hashthemes-demo-importer.php:308
+#: hashthemes-demo-importer.php:363
 msgid "Import Demo"
 msgstr ""
 
@@ -296,27 +304,31 @@ msgstr ""
 msgid "Imported to Inactive"
 msgstr ""
 
-#: hashthemes-demo-importer.php:454
+#: hashthemes-demo-importer.php:513
 msgid "Importing customizer settings"
 msgstr ""
 
-#: hashthemes-demo-importer.php:428
+#: hashthemes-demo-importer.php:627
+msgid "Importing Forms"
+msgstr ""
+
+#: hashthemes-demo-importer.php:483
 msgid "Importing posts, pages and medias. It may take a bit longer time"
 msgstr ""
 
-#: hashthemes-demo-importer.php:570
+#: hashthemes-demo-importer.php:692
 msgid "Importing Revolution slider"
 msgstr ""
 
-#: hashthemes-demo-importer.php:510
+#: hashthemes-demo-importer.php:569
 msgid "Importing theme option settings"
 msgstr ""
 
-#: hashthemes-demo-importer.php:543
+#: hashthemes-demo-importer.php:602
 msgid "Importing widgets"
 msgstr ""
 
-#: hashthemes-demo-importer.php:212 classes/class-demo-importer.php:122
+#: hashthemes-demo-importer.php:267 classes/class-demo-importer.php:122
 msgid "Install"
 msgstr ""
 
@@ -324,15 +336,15 @@ msgstr ""
 msgid "Installed"
 msgstr ""
 
-#: hashthemes-demo-importer.php:976
+#: hashthemes-demo-importer.php:1107
 msgid "Installed and Active"
 msgstr ""
 
-#: hashthemes-demo-importer.php:980
+#: hashthemes-demo-importer.php:1111
 msgid "Installed but Not Active"
 msgstr ""
 
-#: hashthemes-demo-importer.php:357
+#: hashthemes-demo-importer.php:412
 msgid "Installing required plugins"
 msgstr ""
 
@@ -340,12 +352,12 @@ msgstr ""
 msgid "Invalid file type"
 msgstr ""
 
-#: hashthemes-demo-importer.php:301
+#: hashthemes-demo-importer.php:356
 msgid ""
 "It is always recommended to reset the database for a complete demo import."
 msgstr ""
 
-#: hashthemes-demo-importer.php:227
+#: hashthemes-demo-importer.php:282
 msgid ""
 "It looks like the config file for the demos is missing or conatins errors!. "
 "Demo install can't go futher!"
@@ -360,7 +372,7 @@ msgstr ""
 msgid "Menu item skipped due to missing menu slug"
 msgstr ""
 
-#: hashthemes-demo-importer.php:503
+#: hashthemes-demo-importer.php:562
 msgid "Menus saved"
 msgstr ""
 
@@ -368,31 +380,35 @@ msgstr ""
 msgid "Missing File Location."
 msgstr ""
 
-#: hashthemes-demo-importer.php:482
+#: hashthemes-demo-importer.php:541
 msgid "No customizer settings found"
 msgstr ""
 
-#: hashthemes-demo-importer.php:505
+#: hashthemes-demo-importer.php:685
+msgid "No Form files found"
+msgstr ""
+
+#: hashthemes-demo-importer.php:564
 msgid "No menus saved"
 msgstr ""
 
-#: hashthemes-demo-importer.php:405
+#: hashthemes-demo-importer.php:460
 msgid "No plugin required to activate"
 msgstr ""
 
-#: hashthemes-demo-importer.php:378
+#: hashthemes-demo-importer.php:433
 msgid "No plugin required to install"
 msgstr ""
 
-#: hashthemes-demo-importer.php:282
+#: hashthemes-demo-importer.php:337
 msgid "No Required Plugins Found."
 msgstr ""
 
-#: hashthemes-demo-importer.php:600
+#: hashthemes-demo-importer.php:722
 msgid "No Revolution slider found"
 msgstr ""
 
-#: hashthemes-demo-importer.php:538
+#: hashthemes-demo-importer.php:597
 msgid "No theme options found"
 msgstr ""
 
@@ -400,15 +416,15 @@ msgstr ""
 msgid "No Title"
 msgstr ""
 
-#: hashthemes-demo-importer.php:563
+#: hashthemes-demo-importer.php:622
 msgid "No widgets found"
 msgstr ""
 
-#: hashthemes-demo-importer.php:972
+#: hashthemes-demo-importer.php:1103
 msgid "Not Installed"
 msgstr ""
 
-#: hashthemes-demo-importer.php:90
+#: hashthemes-demo-importer.php:98
 msgid "OneClick Demo Install"
 msgstr ""
 
@@ -420,11 +436,11 @@ msgstr ""
 msgid "or create new user with login name:"
 msgstr ""
 
-#: hashthemes-demo-importer.php:999
+#: hashthemes-demo-importer.php:1130
 msgid "Preparing to import demo"
 msgstr ""
 
-#: hashthemes-demo-importer.php:200
+#: hashthemes-demo-importer.php:255
 msgid "Preview"
 msgstr ""
 
@@ -464,34 +480,34 @@ msgstr ""
 msgid "Request failed due to an error: %1$s (%2$s)"
 msgstr ""
 
-#: hashthemes-demo-importer.php:250
+#: hashthemes-demo-importer.php:305
 msgid "Required Plugins"
 msgstr ""
 
-#: hashthemes-demo-importer.php:299
+#: hashthemes-demo-importer.php:354
 msgid "Reset Website"
 msgstr ""
 
-#: hashthemes-demo-importer.php:1000
+#: hashthemes-demo-importer.php:1131
 msgid "Reseting database"
 msgstr ""
 
-#: hashthemes-demo-importer.php:300
+#: hashthemes-demo-importer.php:355
 msgid ""
 "Reseting the website will delete all your post, pages, custom post types, "
 "categories, taxonomies, images and all other customizer and theme option "
 "settings."
 msgstr ""
 
-#: hashthemes-demo-importer.php:595
+#: hashthemes-demo-importer.php:717
 msgid "Revolution slider installed"
 msgstr ""
 
-#: hashthemes-demo-importer.php:597
+#: hashthemes-demo-importer.php:719
 msgid "Revolution slider plugin not installed"
 msgstr ""
 
-#: hashthemes-demo-importer.php:487
+#: hashthemes-demo-importer.php:546
 msgid "Setting menus"
 msgstr ""
 
@@ -538,11 +554,11 @@ msgstr ""
 msgid "The uploaded file could not be moved"
 msgstr ""
 
-#: hashthemes-demo-importer.php:536
+#: hashthemes-demo-importer.php:595
 msgid "Theme options settings imported"
 msgstr ""
 
-#: hashthemes-demo-importer.php:1002
+#: hashthemes-demo-importer.php:1133
 #, php-format
 msgid ""
 "There was an error in importing demo. Please reload the page and try again. "
@@ -563,7 +579,7 @@ msgid ""
 "This does not appear to be a WXR file, missing/invalid WXR version number"
 msgstr ""
 
-#: hashthemes-demo-importer.php:247
+#: hashthemes-demo-importer.php:302
 msgid ""
 "This process will install all the required plugins, import contents and "
 "setup customizer and theme options."
@@ -583,7 +599,7 @@ msgid ""
 "site, such as your primary administrator account."
 msgstr ""
 
-#: hashthemes-demo-importer.php:245
+#: hashthemes-demo-importer.php:300
 #, php-format
 msgid ""
 "We recommend you backup your website content before attempting to import the "
@@ -599,11 +615,11 @@ msgstr ""
 msgid "Widget data is not available"
 msgstr ""
 
-#: hashthemes-demo-importer.php:561
+#: hashthemes-demo-importer.php:620
 msgid "Widgets imported"
 msgstr ""
 
-#: hashthemes-demo-importer.php:1003
+#: hashthemes-demo-importer.php:1134
 msgid "Your website has been successfully setup."
 msgstr ""
 

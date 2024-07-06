@@ -3,14 +3,12 @@ Contributors: hashthemes
 Tags: demo importer, hashthemes, import, one click import
 Requires at least: 5.0
 Tested up to: 6.5
-Stable tag: 1.2.5
+Stable tag: 1.2.6
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Transforming website setups from headache to 'click, click, done!
-
-HashThemes Demo importer imports the demo with just single click. It is as easy as that. It also install all the recommended or required plugins and also reset the website. This plugin is specially built to import the demo for the themes of HashThemes but will also work with any other theme using the filter. 
 
 == Description ==
 
@@ -109,34 +107,37 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
- = 1.2.5, Jul 3, 2024
+= 1.2.6, Jul 6, 2024
+* Minor bug fixes
+
+= 1.2.5, Jul 3, 2024
 * New demo added for Viral News & Total Theme Theme
 
- = 1.2.4, Jun 19, 2024
+= 1.2.4, Jun 19, 2024
 * New demo added for Viral News Theme
 
- = 1.2.3, Jun 13, 2024
+= 1.2.3, Jun 13, 2024
 * New demo added for Viral Theme
 
- = 1.2.2, Jun 04, 2024
+= 1.2.2, Jun 04, 2024
 * Outdated code removed
 
- = 1.2.1, Dec 22, 2023
+= 1.2.1, Dec 22, 2023
 * Hash Form Plugin demo added
 
- = 1.2.0, Sep 01, 2023
+= 1.2.0, Sep 01, 2023
 * Compatibility test with WordPress version 6.3
 
- = 1.1.9, May 08, 2022
+= 1.1.9, May 08, 2022
 * RTL Ready - Added
 
- = 1.1.8, Dec 05, 2022
+= 1.1.8, Dec 05, 2022
 * Suggested HashElements plugin missing for Viral Mag Theme - added
 
- = 1.1.7, Nov 24, 2022
+= 1.1.7, Nov 24, 2022
 * New demos added for Viral Mag
 
- = 1.1.6, July 25, 2022
+= 1.1.6, July 25, 2022
 * Added recommended plugins
 
 = 1.1.5, Jan 28, 2022
