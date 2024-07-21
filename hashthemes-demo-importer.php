@@ -126,7 +126,7 @@ if (!class_exists('HDI_Importer')) {
                 if ('0' !== get_option('elementor_optimized_gutenberg_loading')) {
                     update_option('elementor_optimized_gutenberg_loading', '0');
                 }
-                
+
                 if ('inactive' !== get_option('elementor_experiment-block_editor_assets_optimize')) {
                     update_option('elementor_experiment-block_editor_assets_optimize', 'inactive');
                 }
@@ -257,7 +257,7 @@ if (!class_exists('HDI_Importer')) {
                                         <div class="hdi-demo-buttons">
                                             <a href="<?php echo esc_url($demo_pack['preview_url']); ?>" target="_blank" class="button">
                                                 <?php echo esc_html__('Preview', 'hashthemes-demo-importer'); ?>
-                                            </a> 
+                                            </a>
 
                                             <?php
                                             if ($type == 'pro') {
@@ -283,7 +283,7 @@ if (!class_exists('HDI_Importer')) {
                 <?php } else {
                     ?>
                     <div class="hdi-demo-wrap">
-                        <?php esc_html_e("It looks like the config file for the demos is missing or conatins errors!. Demo install can't go futher!", 'hashthemes-demo-importer'); ?>  
+                        <?php esc_html_e("It looks like the config file for the demos is missing or conatins errors!. Demo install can't go futher!", 'hashthemes-demo-importer'); ?>
                     </div>
                 <?php }
                 ?>
@@ -349,7 +349,7 @@ if (!class_exists('HDI_Importer')) {
                                     <h4><?php esc_html_e('Exclude Images', 'hashthemes-demo-importer') ?></h4>
                                     <p><?php esc_html_e('Check this option if importing demo fails multiple times. Excluding image will make the demo import process super quick.', 'hashthemes-demo-importer') ?></p>
                                     <label>
-                                        <input id="checkbox-exclude-image-<?php echo esc_attr($demo_slug); ?>" type="checkbox" value='1'/>
+                                        <input id="checkbox-exclude-image-<?php echo esc_attr($demo_slug); ?>" type="checkbox" value='1' />
                                         <?php echo esc_html('Yes, Exclude Images', 'hashthemes-demo-importer'); ?>
                                     </label>
                                 </div>
@@ -359,7 +359,7 @@ if (!class_exists('HDI_Importer')) {
                                     <p><?php esc_html_e('Reseting the website will delete all your post, pages, custom post types, categories, taxonomies, images and all other customizer and theme option settings.', 'hashthemes-demo-importer') ?></p>
                                     <p><?php esc_html_e('It is always recommended to reset the database for a complete demo import.', 'hashthemes-demo-importer') ?></p>
                                     <label class="hdi-reset-website-checkbox">
-                                        <input id="checkbox-reset-<?php echo esc_attr($demo_slug); ?>" type="checkbox" value='1' checked="checked"/>
+                                        <input id="checkbox-reset-<?php echo esc_attr($demo_slug); ?>" type="checkbox" value='1' checked="checked" />
                                         <?php echo esc_html('Reset Website - Check this box only if you are sure to reset the website.', 'hashthemes-demo-importer'); ?>
                                     </label>
                                 </div>
@@ -667,17 +667,19 @@ if (!class_exists('HDI_Importer')) {
                             $form_id = HashFormBuilder::create($form);
 
                             foreach ($imdat['field'] as $field) {
-                                HashFormFields::create_row(array(
-                                    'name' => $field['name'],
-                                    'description' => $field['description'],
-                                    'type' => $field['type'],
-                                    'default_value' => $field['default_value'],
-                                    'options' => $field['options'],
-                                    'field_order' => $field['field_order'],
-                                    'form_id' => absint($form_id),
-                                    'required' => $field['required'],
-                                    'field_options' => $field['field_options']
-                                ));
+                                HashFormFields::create_row(
+                                    array(
+                                        'name' => $field['name'],
+                                        'description' => $field['description'],
+                                        'type' => $field['type'],
+                                        'default_value' => $field['default_value'],
+                                        'options' => $field['options'],
+                                        'field_order' => $field['field_order'],
+                                        'form_id' => absint($form_id),
+                                        'required' => $field['required'],
+                                        'field_options' => $field['field_options']
+                                    )
+                                );
                             }
                         } else {
                             $this->ajax_response['complete_message'] = esc_html__('Hash Form plugin not installed', 'hashthemes-demo-importer');
@@ -735,7 +737,7 @@ if (!class_exists('HDI_Importer')) {
         public function download_files($external_url) {
             // Make sure we have the dependency.
             if (!function_exists('WP_Filesystem')) {
-                require_once( ABSPATH . 'wp-admin/includes/file.php' );
+                require_once (ABSPATH . 'wp-admin/includes/file.php');
             }
 
             /*
@@ -760,7 +762,8 @@ if (!class_exists('HDI_Importer')) {
 
                 $file = wp_remote_retrieve_body(wp_remote_get($external_url, array(
                     'timeout' => 60,
-                )));
+                )
+                ));
 
                 $wp_filesystem->put_contents($demo_pack, $file);
                 unzip_file($demo_pack, $this->demo_upload_dir());
@@ -848,10 +851,10 @@ if (!class_exists('HDI_Importer')) {
         private function clear_uploads($dir) {
             $files = array_diff(scandir($dir), array('.', '..'));
             foreach ($files as $file) {
-                ( is_dir("$dir/$file") ) ? $this->clear_uploads("$dir/$file") : unlink("$dir/$file");
+                (is_dir("$dir/$file")) ? $this->clear_uploads("$dir/$file") : unlink("$dir/$file");
             }
 
-            return ( $dir != $this->uploads_dir['basedir'] ) ? rmdir($dir) : true;
+            return ($dir != $this->uploads_dir['basedir']) ? rmdir($dir) : true;
         }
 
         /*
@@ -1021,7 +1024,7 @@ if (!class_exists('HDI_Importer')) {
             if ($plugin_status == 'install') {
                 // Make sure we have the dependency.
                 if (!function_exists('WP_Filesystem')) {
-                    require_once( ABSPATH . 'wp-admin/includes/file.php' );
+                    require_once (ABSPATH . 'wp-admin/includes/file.php');
                 }
 
                 /*
@@ -1036,7 +1039,8 @@ if (!class_exists('HDI_Importer')) {
 
                 $file = wp_remote_retrieve_body(wp_remote_get($external_url, array(
                     'timeout' => 60,
-                )));
+                )
+                ));
 
                 $wp_filesystem->mkdir($this->demo_upload_dir());
 
@@ -1077,7 +1081,9 @@ if (!class_exists('HDI_Importer')) {
                     'requires' => false,
                     'downloadlink' => true,
                     'icons' => false
-            )));
+                )
+            )
+            );
 
             return $call_api;
         }

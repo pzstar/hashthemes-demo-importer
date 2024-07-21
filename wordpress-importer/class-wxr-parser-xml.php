@@ -13,17 +13,51 @@
 class HDI_WXR_Parser_XML {
 
     var $wp_tags = array(
-        'wp:post_id', 'wp:post_date', 'wp:post_date_gmt', 'wp:comment_status', 'wp:ping_status', 'wp:attachment_url',
-        'wp:status', 'wp:post_name', 'wp:post_parent', 'wp:menu_order', 'wp:post_type', 'wp:post_password',
-        'wp:is_sticky', 'wp:term_id', 'wp:category_nicename', 'wp:category_parent', 'wp:cat_name', 'wp:category_description',
-        'wp:tag_slug', 'wp:tag_name', 'wp:tag_description', 'wp:term_taxonomy', 'wp:term_parent',
-        'wp:term_name', 'wp:term_description', 'wp:author_id', 'wp:author_login', 'wp:author_email', 'wp:author_display_name',
-        'wp:author_first_name', 'wp:author_last_name',
+        'wp:post_id',
+        'wp:post_date',
+        'wp:post_date_gmt',
+        'wp:comment_status',
+        'wp:ping_status',
+        'wp:attachment_url',
+        'wp:status',
+        'wp:post_name',
+        'wp:post_parent',
+        'wp:menu_order',
+        'wp:post_type',
+        'wp:post_password',
+        'wp:is_sticky',
+        'wp:term_id',
+        'wp:category_nicename',
+        'wp:category_parent',
+        'wp:cat_name',
+        'wp:category_description',
+        'wp:tag_slug',
+        'wp:tag_name',
+        'wp:tag_description',
+        'wp:term_taxonomy',
+        'wp:term_parent',
+        'wp:term_name',
+        'wp:term_description',
+        'wp:author_id',
+        'wp:author_login',
+        'wp:author_email',
+        'wp:author_display_name',
+        'wp:author_first_name',
+        'wp:author_last_name',
     );
     var $wp_sub_tags = array(
-        'wp:comment_id', 'wp:comment_author', 'wp:comment_author_email', 'wp:comment_author_url',
-        'wp:comment_author_IP', 'wp:comment_date', 'wp:comment_date_gmt', 'wp:comment_content',
-        'wp:comment_approved', 'wp:comment_type', 'wp:comment_parent', 'wp:comment_user_id',
+        'wp:comment_id',
+        'wp:comment_author',
+        'wp:comment_author_email',
+        'wp:comment_author_url',
+        'wp:comment_author_IP',
+        'wp:comment_date',
+        'wp:comment_date_gmt',
+        'wp:comment_content',
+        'wp:comment_approved',
+        'wp:comment_type',
+        'wp:comment_parent',
+        'wp:comment_user_id',
     );
 
     function parse($file) {
@@ -79,24 +113,33 @@ class HDI_WXR_Parser_XML {
                     $this->sub_data['slug'] = $attr['nicename'];
                 }
                 break;
-            case 'item': $this->in_post = true;
-            case 'title': if ($this->in_post)
+            case 'item':
+                $this->in_post = true;
+            case 'title':
+                if ($this->in_post)
                     $this->in_tag = 'post_title';
                 break;
-            case 'guid': $this->in_tag = 'guid';
+            case 'guid':
+                $this->in_tag = 'guid';
                 break;
-            case 'dc:creator': $this->in_tag = 'post_author';
+            case 'dc:creator':
+                $this->in_tag = 'post_author';
                 break;
-            case 'content:encoded': $this->in_tag = 'post_content';
+            case 'content:encoded':
+                $this->in_tag = 'post_content';
                 break;
-            case 'excerpt:encoded': $this->in_tag = 'post_excerpt';
+            case 'excerpt:encoded':
+                $this->in_tag = 'post_excerpt';
                 break;
 
-            case 'wp:term_slug': $this->in_tag = 'slug';
+            case 'wp:term_slug':
+                $this->in_tag = 'slug';
                 break;
-            case 'wp:meta_key': $this->in_sub_tag = 'key';
+            case 'wp:meta_key':
+                $this->in_sub_tag = 'key';
                 break;
-            case 'wp:meta_value': $this->in_sub_tag = 'value';
+            case 'wp:meta_value':
+                $this->in_sub_tag = 'value';
                 break;
         }
     }

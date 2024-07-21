@@ -18,7 +18,7 @@ class HDI_WXR_Parser_SimpleXML {
         $internal_errors = libxml_use_internal_errors(true);
 
         $dom = new DOMDocument;
-        $old_value = null;
+        $old_value = NULL;
         if (function_exists('libxml_disable_entity_loader')) {
             $old_value = libxml_disable_entity_loader(true);
         }

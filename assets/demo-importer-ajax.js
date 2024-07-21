@@ -20,11 +20,11 @@
             var $buttonGroup = $button.parents('.hdi-tab-group');
             var filterGroup = $buttonGroup.attr('data-filter-group');
             // set filter for group
-            filters[ filterGroup ] = $button.attr('data-filter');
+            filters[filterGroup] = $button.attr('data-filter');
             // combine filters
             var filterValue = concatValues(filters);
             // set filter for Isotope
-            $grid.isotope({filter: filterValue});
+            $grid.isotope({ filter: filterValue });
         });
 
         // change is-checked class on buttons
@@ -41,7 +41,7 @@
         function concatValues(obj) {
             var value = '';
             for (var prop in obj) {
-                value += obj[ prop ];
+                value += obj[prop];
             }
             return value;
         }
@@ -53,13 +53,13 @@
         var modalId = $(this).attr('href');
         $(modalId).fadeIn();
 
-        $("html, body").animate({scrollTop: 0}, "slow");
+        $("html, body").animate({ scrollTop: 0 }, "slow");
     });
 
     $('.hdi-modal-back, .hdi-modal-cancel').on('click', function (e) {
         $('body').removeClass('hdi-modal-opened');
         $('.hdi-modal').hide();
-        $("html, body").animate({scrollTop: 0}, "slow");
+        $("html, body").animate({ scrollTop: 0 }, "slow");
     });
 
     $('body').on('click', '.hdi-import-demo', function () {
@@ -80,7 +80,7 @@
         if ($import_true == false)
             return;
 
-        $("html, body").animate({scrollTop: 0}, "slow");
+        $("html, body").animate({ scrollTop: 0 }, "slow");
 
         $('#hdi-modal-' + demo).hide();
         $('#hdi-import-progress').show();

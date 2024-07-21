@@ -19,15 +19,15 @@
 .hdi-tab-filter{
     background: #FFF;
     border: 1px solid #DDD;
-    padding: 12px;
     margin-top: 20px;
+    padding: 12px;
 }
 
 .hdi-tab{
+    border-radius: 20px;
+    cursor: pointer;
     display: inline-block;
     padding: 5px 15px;
-    cursor: pointer;
-    border-radius: 20px;
 }
 
 .hdi-tab.hdi-active{
@@ -56,10 +56,10 @@
 }
 
 .hdi-demo-elements{
-    position: relative;
     border: 1px solid #ddd;
     -webkit-box-shadow: 0 1px 1px -1px rgba(0, 0, 0, .1);
     box-shadow: 0 1px 1px -1px rgba(0, 0, 0, .1);
+    position: relative;
 }
 
 .hdi-demo-box img {
@@ -68,59 +68,59 @@
 }
 
 .hdi-demo-box h4 {
-    margin: 0;
-    padding: 0 15px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    background-color: #fafafa;
     font-size: 15px;
     font-weight: 600;
-    background-color: #fafafa;
     line-height: 48px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .hdi-ribbon {
-    width: 75px;
     height: 75px;
     overflow: hidden;
     position: absolute;
-    top: -8px;
     right: -8px;
+    top: -8px;
+    width: 75px;
 }
 
 .hdi-ribbon::before,
 .hdi-ribbon::after {
-    position: absolute;
-    z-index: -1;
+    border: 5px solid #b12222;
+    border-right-color: transparent;
+    border-top-color: transparent;
     content: '';
     display: block;
-    border: 5px solid #b12222;
-    border-top-color: transparent;
-    border-right-color: transparent;
+    position: absolute;
+    z-index: -1;
 }
 
 .hdi-ribbon span {
-    position: absolute;
-    display: block;
-    width: 120px;
-    padding: 8px 0;
     background-color: #d42929;
     box-shadow: 0 5px 10px rgba(0,0,0,.1);
     color: #fff;
+    display: block;
     font-size: 12px;
     font-weight: bold;
+    left: -12px;
     line-height: 12px;
+    padding: 8px 0;
+    position: absolute;
+    text-align: center;
     text-shadow: 0 1px 1px rgba(0,0,0,.2);
     text-transform: uppercase;
-    text-align: center;
-    left: -12px;
     top: 13px;
     transform: rotate(45deg);
+    width: 120px;
 }
 
 .hdi-ribbon::before {
-    top: 0;
     left: 1px;
+    top: 0;
 }
 
 .hdi-ribbon::after {
@@ -129,20 +129,20 @@
 }
 
 .hdi-demo-actions {
-    position: relative;
     border-top: 1px solid #ddd;
+    position: relative;
 }
 
 .hdi-demo-buttons {
-    display: none;
-    position: absolute;
+    background: rgba(244, 244, 244, 0.8);
     bottom: 0;
+    display: none;
+    height: 48px;
+    opacity: 1;
+    padding: 10px;
+    position: absolute;
     right: 0;
     top: 0;
-    height: 48px;
-    padding: 10px;
-    opacity: 1;
-    background: rgba(244, 244, 244, 0.8);
 }
 
 .hdi-demo-box:hover .hdi-demo-buttons {
@@ -154,44 +154,44 @@
 }
 
 .hdi-modal {
-    border: 1px solid #eee;
     background: #fff;
+    border: 1px solid #eee;
     margin-top: 30px;
 }
 
 .hdi-modal-header {
-    position: relative;
-    padding: 15px 30px;
-    font-size: 14px;
-    margin: 0;
-    line-height: 1.4;
     background: #ffffff;
     border-bottom: 1px solid #eee;
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
+    padding: 15px 30px;
+    position: relative;
 }
 
 .hdi-modal-header h2 {
-    margin: 0;
-    padding: 0;
     font-size: 14px;
     line-height: 18px;
+    margin: 0;
+    padding: 0;
 }
 
 .hdi-modal-header .hdi-modal-back {
+    border-left: 1px solid #EEE;
+    cursor: pointer;
+    height: 48px;
     position: absolute;
     right: 0;
-    top: 0;
-    border-left: 1px solid #EEE;
-    height: 48px;
-    width: 48px;
     text-align: center;
-    cursor: pointer;
+    top: 0;
+    width: 48px;
 }
 
 .hdi-modal-header .hdi-modal-back .dashicons {
-    line-height: 48px;
-    opacity: 0.8;
     display: inline-block;
     font-size: 22px;
+    line-height: 48px;
+    opacity: 0.8;
 }
 
 .hdi-modal-wrap {
@@ -206,8 +206,8 @@
 .hdi-modal-recommended-plugins h4,
 .hdi-reset-checkbox h4,
 .hdi-exclude-image-checkbox h4{
-    margin: 30px 0 15px;
     font-size: 16px;
+    margin: 30px 0 15px;
 }
 
 .hdi-modal-recommended-plugins ul {
@@ -235,8 +235,8 @@
 }
 
 .hdi-reset-checkbox {
-    margin: 30px 0;
     border: 2px solid #EEE;
+    margin: 30px 0;
     padding: 20px;
 }
 
@@ -250,14 +250,14 @@
 
 #hdi-import-progress {
     background: #FFF;
-    text-align: center;
     margin-top: 25px;
+    text-align: center;
 }
 
 #hdi-import-progress .hdi-import-progress-header {
-    padding: 15px;
     border-bottom: 1px solid #EEE;
     margin: 0;
+    padding: 15px;
 }
 
 .hdi-import-progress-wrap {
@@ -278,8 +278,8 @@
 
 #hdi-import-progress .hdi-import-progress-message {
     font-size: 20px;
-    margin-top: 50px;
     line-height: 1.4;
+    margin-top: 50px;
 }
 
 .hdi-import-progress-message .button {
@@ -292,60 +292,60 @@ body.hdi-modal-opened .hdi-demo-box-wrap{
 }
 
 .hdi-loader-content {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
     border: 5px solid #00adff;
     border-radius: 100%;
+    height: 100px;
+    margin: 0 auto;
+    width: 100px;
 }
 
 .hdi-loader-content-inside {
-    width: 100%;
     height: 100%;
     position: relative;
+    width: 100%;
 }
 
 .hdi-loader-rotater {
-    width: 100%;
+    animation: hdi-rotate 3s linear infinite 1s;
     height: 100%;
     position: relative;
-    animation: hdi-rotate 3s linear infinite 1s;
+    width: 100%;
 }
 
 .hdi-loader-rotater:before {
-    content: "";
-    position: absolute;
-    top: 0x;
-    left: 50%;
-    margin-left: -4px;
-    height: 8px;
-    width: 8px;
     background: #00adff;
     border-radius: 100%;
+    content: "";
+    height: 8px;
+    left: 50%;
+    margin-left: -4px;
+    position: absolute;
+    top: 0x;
+    width: 8px;
 }
 
 .hdi-loader-line-point {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
     bottom: 0;
-    margin: auto;
-    width: 24px;
     height: 24px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
     transition: height 0.15s ease 0.45s;
+    width: 24px;
 }
 
 .hdi-loader-line-point:before,
 .hdi-loader-line-point:after {
-    content: "";
-    position: absolute;
-    width: 5px;
-    height: 30px;
-    bottom: -8px;
     background: #00adff;
     border-radius: 10px;
+    bottom: -8px;
+    content: "";
+    height: 30px;
+    position: absolute;
     transition: transform 0.1s ease 0.5s, left 0.1s ease 0.5s, right 0.1s ease 0.5s;
+    width: 5px;
 }
 
 .hdi-loader-line-point:before {
@@ -367,15 +367,15 @@ body.hdi-modal-opened .hdi-demo-box-wrap{
 }
 
 .import-success .hdi-loader-line-point:after {
-    transform: rotate(-90deg);
-    left: -4px;
     animation: hdi-check-left 0.25s forwards 1s;
+    left: -4px;
+    transform: rotate(-90deg);
 }
 
 .import-success .hdi-loader-line-point:before {
-    transform: rotate(90deg);
-    right: -4px;
     animation: hdi-check-right 0.25s forwards 1s;
+    right: -4px;
+    transform: rotate(90deg);
 }
 
 .import-error .hdi-loader-rotater {
@@ -384,33 +384,33 @@ body.hdi-modal-opened .hdi-demo-box-wrap{
 
 @keyframes hdi-check-left {
     0% {
-        transform: rotate(-90deg);
-        left: -4px;
-        height: 30px;
         bottom: -8px;
+        height: 30px;
+        left: -4px;
+        transform: rotate(-90deg);
     }
     100% {
-        transform: rotate(-45deg);
-        left: -5px;
-        height: 20px;
-        bottom: -5px;
         background: #4BB543;
+        bottom: -5px;
+        height: 20px;
+        left: -5px;
+        transform: rotate(-45deg);
     }
 }
 
 @keyframes hdi-check-right {
     0% {
-        transform: rotate(90deg);
-        right: -4px;
-        height: 30px;
         bottom: -8px;
+        height: 30px;
+        right: -4px;
+        transform: rotate(90deg);
     }
     100% {
-        transform: rotate(45deg);
-        right: 4px;
-        height: 40px;
-        bottom: -10px;
         background: #4BB543;
+        bottom: -10px;
+        height: 40px;
+        right: 4px;
+        transform: rotate(45deg);
     }
 }
 
@@ -433,14 +433,14 @@ body.hdi-modal-opened .hdi-demo-box-wrap{
 }
 
 .hdi-import-progress-message:after {
-    content: '.';
     animation: dots 1s linear infinite;
+    content: '.';
 }
 
 .import-error .hdi-import-progress-message:after,
 .import-success .hdi-import-progress-message:after {
-    content: '';
     animation: none;
+    content: '';
 }
 
 @keyframes dots {

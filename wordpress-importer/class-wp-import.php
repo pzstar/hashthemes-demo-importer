@@ -55,7 +55,7 @@ class HDI_Import extends WP_Importer {
                 break;
             case 2:
                 check_admin_referer('import-wordpress');
-                $this->fetch_attachments = (!empty($_POST['fetch_attachments']) && $this->allow_fetch_attachments() );
+                $this->fetch_attachments = (!empty($_POST['fetch_attachments']) && $this->allow_fetch_attachments());
                 $this->id = (int) $_POST['import_id'];
                 $file = get_attached_file($this->id);
                 set_time_limit(0);
@@ -232,20 +232,20 @@ class HDI_Import extends WP_Importer {
             <?php wp_nonce_field('import-wordpress'); ?>
             <input type="hidden" name="import_id" value="<?php echo $this->id; ?>" />
 
-            <?php if (!empty($this->authors)) : ?>
+            <?php if (!empty($this->authors)): ?>
                 <h3><?php _e('Assign Authors', 'hashthemes-demo-importer'); ?></h3>
                 <p><?php _e('To make it simpler for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site, such as your primary administrator account.', 'hashthemes-demo-importer'); ?></p>
-                <?php if ($this->allow_create_users()) : ?>
+                <?php if ($this->allow_create_users()): ?>
                     <p><?php printf(__('If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary.', 'hashthemes-demo-importer'), esc_html(get_option('default_role'))); ?></p>
                 <?php endif; ?>
                 <ol id="authors">
-                    <?php foreach ($this->authors as $author) : ?>
+                    <?php foreach ($this->authors as $author): ?>
                         <li><?php $this->author_select($j++, $author); ?></li>
                     <?php endforeach; ?>
                 </ol>
             <?php endif; ?>
 
-            <?php if ($this->allow_fetch_attachments()) : ?>
+            <?php if ($this->allow_fetch_attachments()): ?>
                 <h3><?php _e('Import Attachments', 'hashthemes-demo-importer'); ?></h3>
                 <p>
                     <input type="checkbox" value="1" name="fetch_attachments" id="import-attachments" />
@@ -298,14 +298,16 @@ class HDI_Import extends WP_Importer {
         }
         echo '</label>';
 
-        echo ' ' . wp_dropdown_users(array(
-            'name' => "user_map[$n]",
-            'id' => 'imported_authors_' . $n,
-            'multi' => true,
-            'show_option_all' => __('- Select -', 'hashthemes-demo-importer'),
-            'show' => 'display_name_with_login',
-            'echo' => 0,
-        ));
+        echo ' ' . wp_dropdown_users(
+            array(
+                'name' => "user_map[$n]",
+                'id' => 'imported_authors_' . $n,
+                'multi' => true,
+                'show_option_all' => __('- Select -', 'hashthemes-demo-importer'),
+                'show' => 'display_name_with_login',
+                'echo' => 0,
+            )
+        );
 
         echo '<input type="hidden" name="imported_authors[' . $n . ']" value="' . esc_attr($author['author_login']) . '" />';
 
@@ -665,13 +667,22 @@ class HDI_Import extends WP_Importer {
                     $author = (int) get_current_user_id();
 
                 $postdata = array(
-                    'import_id' => $post['post_id'], 'post_author' => $author, 'post_date' => $post['post_date'],
-                    'post_date_gmt' => $post['post_date_gmt'], 'post_content' => $post['post_content'],
-                    'post_excerpt' => $post['post_excerpt'], 'post_title' => $post['post_title'],
-                    'post_status' => $post['status'], 'post_name' => $post['post_name'],
-                    'comment_status' => $post['comment_status'], 'ping_status' => $post['ping_status'],
-                    'guid' => $post['guid'], 'post_parent' => $post_parent, 'menu_order' => $post['menu_order'],
-                    'post_type' => $post['post_type'], 'post_password' => $post['post_password']
+                    'import_id' => $post['post_id'],
+                    'post_author' => $author,
+                    'post_date' => $post['post_date'],
+                    'post_date_gmt' => $post['post_date_gmt'],
+                    'post_content' => $post['post_content'],
+                    'post_excerpt' => $post['post_excerpt'],
+                    'post_title' => $post['post_title'],
+                    'post_status' => $post['status'],
+                    'post_name' => $post['post_name'],
+                    'comment_status' => $post['comment_status'],
+                    'ping_status' => $post['ping_status'],
+                    'guid' => $post['guid'],
+                    'post_parent' => $post_parent,
+                    'menu_order' => $post['menu_order'],
+                    'post_type' => $post['post_type'],
+                    'post_password' => $post['post_password']
                 );
 
                 $original_post_ID = $post['post_id'];
@@ -726,7 +737,7 @@ class HDI_Import extends WP_Importer {
                 $terms_to_set = array();
                 foreach ($post['terms'] as $term) {
                     // back compat with WXR 1.0 map 'tag' to 'post_tag'
-                    $taxonomy = ( 'tag' == $term['domain'] ) ? 'post_tag' : $term['domain'];
+                    $taxonomy = ('tag' == $term['domain']) ? 'post_tag' : $term['domain'];
                     $term_exists = term_exists($term['slug'], $taxonomy);
                     $term_id = is_array($term_exists) ? $term_exists['term_id'] : $term_exists;
                     if (!$term_id) {
@@ -1016,15 +1027,19 @@ class HDI_Import extends WP_Importer {
             'headers' => array(
                 'Accept-Encoding' => 'identity',
             ),
-        ));
+        )
+        );
 
         if (is_wp_error($remote_response)) {
             @unlink($tmp_file_name);
             return new WP_Error(
-                    'import_file_error', sprintf(
-                            /* translators: 1: The WordPress error message. 2: The WordPress error code. */
-                            __('Request failed due to an error: %1$s (%2$s)', 'hashthemes-demo-importer'), esc_html($remote_response->get_error_message()), esc_html($remote_response->get_error_code())
-                    )
+                'import_file_error',
+                sprintf(
+                    /* translators: 1: The WordPress error message. 2: The WordPress error code. */
+                    __('Request failed due to an error: %1$s (%2$s)', 'hashthemes-demo-importer'),
+                    esc_html($remote_response->get_error_message()),
+                    esc_html($remote_response->get_error_code())
+                )
             );
         }
 
@@ -1034,10 +1049,13 @@ class HDI_Import extends WP_Importer {
         if (200 !== $remote_response_code) {
             @unlink($tmp_file_name);
             return new WP_Error(
-                    'import_file_error', sprintf(
-                            /* translators: 1: The HTTP error message. 2: The HTTP error code. */
-                            __('Remote server returned the following unexpected result: %1$s (%2$s)', 'hashthemes-demo-importer'), get_status_header_desc($remote_response_code), esc_html($remote_response_code)
-                    )
+                'import_file_error',
+                sprintf(
+                    /* translators: 1: The HTTP error message. 2: The HTTP error code. */
+                    __('Remote server returned the following unexpected result: %1$s (%2$s)', 'hashthemes-demo-importer'),
+                    get_status_header_desc($remote_response_code),
+                    esc_html($remote_response_code)
+                )
             );
         }
 
@@ -1095,12 +1113,12 @@ class HDI_Import extends WP_Importer {
             $file_name = $proper_filename;
         }
 
-        if ((!$type || !$ext ) && !current_user_can('unfiltered_upload')) {
+        if ((!$type || !$ext) && !current_user_can('unfiltered_upload')) {
             return new WP_Error('import_file_error', __('Sorry, this file type is not permitted for security reasons.', 'hashthemes-demo-importer'));
         }
 
         $uploads = wp_upload_dir($post['upload_date']);
-        if (!( $uploads && false === $uploads['error'] )) {
+        if (!($uploads && false === $uploads['error'])) {
             return new WP_Error('upload_dir_error', $uploads['error']);
         }
 
@@ -1394,7 +1412,7 @@ class HDI_Import extends WP_Importer {
      */
     protected static function get_filename_from_disposition($disposition_header) {
         // Get the filename.
-        $filename = null;
+        $filename = NULL;
 
         foreach ($disposition_header as $value) {
             $value = trim($value);
@@ -1403,7 +1421,7 @@ class HDI_Import extends WP_Importer {
                 continue;
             }
 
-            list( $type, $attr_parts ) = explode(';', $value, 2);
+            list($type, $attr_parts) = explode(';', $value, 2);
 
             $attr_parts = explode(';', $attr_parts);
             $attributes = array();
@@ -1413,7 +1431,7 @@ class HDI_Import extends WP_Importer {
                     continue;
                 }
 
-                list( $key, $value ) = explode('=', $part, 2);
+                list($key, $value) = explode('=', $part, 2);
 
                 $attributes[trim($key)] = trim($value);
             }
@@ -1442,10 +1460,10 @@ class HDI_Import extends WP_Importer {
      * @return string|null File extension if available, or null if not found.
      */
     protected static function get_file_extension_by_mime_type($mime_type) {
-        static $map = null;
+        static $map = NULL;
 
         if (is_array($map)) {
-            return isset($map[$mime_type]) ? $map[$mime_type] : null;
+            return isset($map[$mime_type]) ? $map[$mime_type] : NULL;
         }
 
         $mime_types = wp_get_mime_types();
@@ -1456,7 +1474,7 @@ class HDI_Import extends WP_Importer {
             $map[$type] = strtok($extensions, '|');
         }
 
-        return isset($map[$mime_type]) ? $map[$mime_type] : null;
+        return isset($map[$mime_type]) ? $map[$mime_type] : NULL;
     }
 
 }

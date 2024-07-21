@@ -24,7 +24,9 @@ class HDI_Widget_Importer {
         // If no data or could not decode
         if (empty($data) || !is_object($data)) {
             wp_die(
-                    _e('Widget data is not available', 'hashthemes-demo-importer'), '', array('back_link' => true)
+                esc_html_e('Widget data is not available', 'hashthemes-demo-importer'),
+                '',
+                array('back_link' => true)
             );
         }
 
