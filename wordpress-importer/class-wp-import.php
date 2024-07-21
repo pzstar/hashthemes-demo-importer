@@ -299,14 +299,14 @@ class HDI_Import extends WP_Importer {
         echo '</label>';
 
         echo ' ' . wp_dropdown_users(
-            array(
-                'name' => "user_map[$n]",
-                'id' => 'imported_authors_' . $n,
-                'multi' => true,
-                'show_option_all' => __('- Select -', 'hashthemes-demo-importer'),
-                'show' => 'display_name_with_login',
-                'echo' => 0,
-            )
+                array(
+                    'name' => "user_map[$n]",
+                    'id' => 'imported_authors_' . $n,
+                    'multi' => true,
+                    'show_option_all' => __('- Select -', 'hashthemes-demo-importer'),
+                    'show' => 'display_name_with_login',
+                    'echo' => 0,
+                )
         );
 
         echo '<input type="hidden" name="imported_authors[' . $n . ']" value="' . esc_attr($author['author_login']) . '" />';
@@ -1021,27 +1021,23 @@ class HDI_Import extends WP_Importer {
 
         // Fetch the remote URL and write it to the placeholder file.
         $remote_response = wp_safe_remote_get(
-            $url,
-            array(
-                'timeout' => 3000,
-                'stream' => true,
-                'filename' => $tmp_file_name,
-                'headers' => array(
-                    'Accept-Encoding' => 'identity',
-                ),
-            )
+                $url, array(
+            'timeout' => 3000,
+            'stream' => true,
+            'filename' => $tmp_file_name,
+            'headers' => array(
+                'Accept-Encoding' => 'identity',
+            ),
+                )
         );
 
         if (is_wp_error($remote_response)) {
             @unlink($tmp_file_name);
             return new WP_Error(
-                'import_file_error',
-                sprintf(
-                    /* translators: 1: The WordPress error message. 2: The WordPress error code. */
-                    __('Request failed due to an error: %1$s (%2$s)', 'hashthemes-demo-importer'),
-                    esc_html($remote_response->get_error_message()),
-                    esc_html($remote_response->get_error_code())
-                )
+                    'import_file_error', sprintf(
+                            /* translators: 1: The WordPress error message. 2: The WordPress error code. */
+                            __('Request failed due to an error: %1$s (%2$s)', 'hashthemes-demo-importer'), esc_html($remote_response->get_error_message()), esc_html($remote_response->get_error_code())
+                    )
             );
         }
 
@@ -1051,13 +1047,10 @@ class HDI_Import extends WP_Importer {
         if (200 !== $remote_response_code) {
             @unlink($tmp_file_name);
             return new WP_Error(
-                'import_file_error',
-                sprintf(
-                    /* translators: 1: The HTTP error message. 2: The HTTP error code. */
-                    __('Remote server returned the following unexpected result: %1$s (%2$s)', 'hashthemes-demo-importer'),
-                    get_status_header_desc($remote_response_code),
-                    esc_html($remote_response_code)
-                )
+                    'import_file_error', sprintf(
+                            /* translators: 1: The HTTP error message. 2: The HTTP error code. */
+                            __('Remote server returned the following unexpected result: %1$s (%2$s)', 'hashthemes-demo-importer'), get_status_header_desc($remote_response_code), esc_html($remote_response_code)
+                    )
             );
         }
 

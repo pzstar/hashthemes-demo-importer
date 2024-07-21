@@ -237,23 +237,7 @@ class HDI_WXR_Parser_Regex {
         $post_content = str_replace('<hr>', '<hr />', $post_content);
 
         $postdata = compact(
-            'post_id',
-            'post_author',
-            'post_date',
-            'post_date_gmt',
-            'post_content',
-            'post_excerpt',
-            'post_title',
-            'status',
-            'post_name',
-            'comment_status',
-            'ping_status',
-            'guid',
-            'post_parent',
-            'menu_order',
-            'post_type',
-            'post_password',
-            'is_sticky'
+                'post_id', 'post_author', 'post_date', 'post_date_gmt', 'post_content', 'post_excerpt', 'post_title', 'status', 'post_name', 'comment_status', 'ping_status', 'guid', 'post_parent', 'menu_order', 'post_type', 'post_password', 'is_sticky'
         );
 
         $attachment_url = $this->get_tag($post, 'wp:attachment_url');

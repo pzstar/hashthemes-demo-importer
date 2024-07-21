@@ -24,7 +24,7 @@
             // combine filters
             var filterValue = concatValues(filters);
             // set filter for Isotope
-            $grid.isotope({ filter: filterValue });
+            $grid.isotope({filter: filterValue});
         });
 
         // change is-checked class on buttons
@@ -53,13 +53,13 @@
         var modalId = $(this).attr('href');
         $(modalId).fadeIn();
 
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $("html, body").animate({scrollTop: 0}, "slow");
     });
 
     $('.hdi-modal-back, .hdi-modal-cancel').on('click', function (e) {
         $('body').removeClass('hdi-modal-opened');
         $('.hdi-modal').hide();
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $("html, body").animate({scrollTop: 0}, "slow");
     });
 
     $('body').on('click', '.hdi-import-demo', function () {
@@ -80,7 +80,7 @@
         if ($import_true == false)
             return;
 
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $("html, body").animate({scrollTop: 0}, "slow");
 
         $('#hdi-modal-' + demo).hide();
         $('#hdi-import-progress').show();
