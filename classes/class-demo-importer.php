@@ -50,26 +50,26 @@ if (!class_exists('HDI_Demo_Importer')) {
             include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 
             $call_api = plugins_api(
-                    'plugin_information', array(
-                'slug' => $plugin,
-                'fields' => array(
-                    'downloaded' => false,
-                    'rating' => false,
-                    'description' => false,
-                    'short_description' => false,
-                    'donate_link' => false,
-                    'tags' => false,
-                    'sections' => true,
-                    'homepage' => true,
-                    'added' => false,
-                    'last_updated' => false,
-                    'compatibility' => false,
-                    'tested' => false,
-                    'requires' => false,
-                    'downloadlink' => false,
-                    'icons' => true
-                )
+                'plugin_information', array(
+                    'slug' => $plugin,
+                    'fields' => array(
+                        'downloaded' => false,
+                        'rating' => false,
+                        'description' => false,
+                        'short_description' => false,
+                        'donate_link' => false,
+                        'tags' => false,
+                        'sections' => true,
+                        'homepage' => true,
+                        'added' => false,
+                        'last_updated' => false,
+                        'compatibility' => false,
+                        'tested' => false,
+                        'requires' => false,
+                        'downloadlink' => false,
+                        'icons' => true
                     )
+                )
             );
 
             return $call_api;
@@ -142,10 +142,10 @@ if (!class_exists('HDI_Demo_Importer')) {
 
             if (!current_user_can('install_plugins')) {
                 wp_send_json(
-                        array(
-                            'success' => false,
-                            'message' => esc_html__('Sorry, you are not allowed to install plugins on this site.', 'hashthemes-demo-importer')
-                        )
+                    array(
+                        'success' => false,
+                        'message' => esc_html__('Sorry, you are not allowed to install plugins on this site.', 'hashthemes-demo-importer')
+                    )
                 );
                 die();
             }
@@ -157,10 +157,10 @@ if (!class_exists('HDI_Demo_Importer')) {
             // Check our nonce, if they don't match then bounce!
             if (!wp_verify_nonce($nonce, 'plugin_installer_nonce')) {
                 wp_send_json(
-                        array(
-                            'success' => false,
-                            'message' => esc_html__('Error - unable to verify nonce, please try again.', 'hashthemes-demo-importer')
-                        )
+                    array(
+                        'success' => false,
+                        'message' => esc_html__('Error - unable to verify nonce, please try again.', 'hashthemes-demo-importer')
+                    )
                 );
                 die();
             }
@@ -191,10 +191,10 @@ if (!class_exists('HDI_Demo_Importer')) {
         public function plugin_offline_installer_callback() {
             if (!current_user_can('install_plugins')) {
                 wp_send_json(
-                        array(
-                            'success' => false,
-                            'message' => esc_html__('Sorry, you are not allowed to install plugins on this site.', 'hashthemes-demo-importer')
-                        )
+                    array(
+                        'success' => false,
+                        'message' => esc_html__('Sorry, you are not allowed to install plugins on this site.', 'hashthemes-demo-importer')
+                    )
                 );
                 die();
             }
@@ -207,10 +207,10 @@ if (!class_exists('HDI_Demo_Importer')) {
             // Check our nonce, if they don't match then bounce!
             if (!wp_verify_nonce($nonce, 'plugin_installer_nonce')) {
                 wp_send_json(
-                        array(
-                            'success' => false,
-                            'message' => esc_html__('Error - unable to verify nonce, please try again.', 'hashthemes-demo-importer')
-                        )
+                    array(
+                        'success' => false,
+                        'message' => esc_html__('Error - unable to verify nonce, please try again.', 'hashthemes-demo-importer')
+                    )
                 );
                 die();
             }
@@ -234,10 +234,10 @@ if (!class_exists('HDI_Demo_Importer')) {
                 }
             } else {
                 wp_send_json(
-                        array(
-                            'success' => false,
-                            'message' => __('Missing File Location.', 'hashthemes-demo-importer')
-                        )
+                    array(
+                        'success' => false,
+                        'message' => __('Missing File Location.', 'hashthemes-demo-importer')
+                    )
                 );
             }
 
@@ -255,10 +255,10 @@ if (!class_exists('HDI_Demo_Importer')) {
             // Check our nonce, if they don't match then bounce!
             if (!wp_verify_nonce($nonce, 'plugin_activate_nonce')) {
                 wp_send_json(
-                        array(
-                            'success' => false,
-                            'message' => esc_html__('Error - unable to verify nonce, please try again.', 'hashthemes-demo-importer')
-                        )
+                    array(
+                        'success' => false,
+                        'message' => esc_html__('Error - unable to verify nonce, please try again.', 'hashthemes-demo-importer')
+                    )
                 );
                 die();
             }
@@ -268,10 +268,10 @@ if (!class_exists('HDI_Demo_Importer')) {
                 wp_send_json_success();
             } else {
                 wp_send_json(
-                        array(
-                            'success' => false,
-                            'message' => __('Error!! Plugin not activated.', 'hashthemes-demo-importer')
-                        )
+                    array(
+                        'success' => false,
+                        'message' => __('Error!! Plugin not activated.', 'hashthemes-demo-importer')
+                    )
                 );
             }
 

@@ -668,17 +668,17 @@ if (!class_exists('HDI_Importer')) {
 
                             foreach ($imdat['field'] as $field) {
                                 HashFormFields::create_row(
-                                        array(
-                                            'name' => $field['name'],
-                                            'description' => $field['description'],
-                                            'type' => $field['type'],
-                                            'default_value' => $field['default_value'],
-                                            'options' => $field['options'],
-                                            'field_order' => $field['field_order'],
-                                            'form_id' => absint($form_id),
-                                            'required' => $field['required'],
-                                            'field_options' => $field['field_options']
-                                        )
+                                    array(
+                                        'name' => $field['name'],
+                                        'description' => $field['description'],
+                                        'type' => $field['type'],
+                                        'default_value' => $field['default_value'],
+                                        'options' => $field['options'],
+                                        'field_order' => $field['field_order'],
+                                        'form_id' => absint($form_id),
+                                        'required' => $field['required'],
+                                        'field_options' => $field['field_options']
+                                    )
                                 );
                             }
                         } else {
@@ -761,11 +761,11 @@ if (!class_exists('HDI_Importer')) {
                 $demo_pack = $this->demo_upload_dir() . 'demo-pack.zip';
 
                 $file = wp_remote_retrieve_body(
-                        wp_remote_get(
-                                $external_url, array(
-                    'timeout' => 60,
-                                )
+                    wp_remote_get(
+                        $external_url, array(
+                            'timeout' => 60,
                         )
+                    )
                 );
 
                 $wp_filesystem->put_contents($demo_pack, $file);
@@ -1041,11 +1041,11 @@ if (!class_exists('HDI_Importer')) {
                 $plugin = $this->demo_upload_dir() . 'plugin.zip';
 
                 $file = wp_remote_retrieve_body(
-                        wp_remote_get(
-                                $external_url, array(
-                    'timeout' => 60,
-                                )
+                    wp_remote_get(
+                        $external_url, array(
+                            'timeout' => 60,
                         )
+                    )
                 );
 
                 $wp_filesystem->mkdir($this->demo_upload_dir());
@@ -1070,26 +1070,26 @@ if (!class_exists('HDI_Importer')) {
             include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 
             $call_api = plugins_api(
-                    'plugin_information', array(
-                'slug' => $slug,
-                'fields' => array(
-                    'downloaded' => false,
-                    'rating' => false,
-                    'description' => false,
-                    'short_description' => false,
-                    'donate_link' => false,
-                    'tags' => false,
-                    'sections' => false,
-                    'homepage' => false,
-                    'added' => false,
-                    'last_updated' => false,
-                    'compatibility' => false,
-                    'tested' => false,
-                    'requires' => false,
-                    'downloadlink' => true,
-                    'icons' => false
-                )
+                'plugin_information', array(
+                    'slug' => $slug,
+                    'fields' => array(
+                        'downloaded' => false,
+                        'rating' => false,
+                        'description' => false,
+                        'short_description' => false,
+                        'donate_link' => false,
+                        'tags' => false,
+                        'sections' => false,
+                        'homepage' => false,
+                        'added' => false,
+                        'last_updated' => false,
+                        'compatibility' => false,
+                        'tested' => false,
+                        'requires' => false,
+                        'downloadlink' => true,
+                        'icons' => false
                     )
+                )
             );
 
             return $call_api;
