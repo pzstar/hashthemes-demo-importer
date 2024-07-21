@@ -239,7 +239,7 @@
         // once stuff
         var onceListeners = this._onceEvents && this._onceEvents[eventName];
 
-        for (var i = 0;i < listeners.length;i++) {
+        for (var i = 0; i < listeners.length; i++) {
             var listener = listeners[i]
             var isOnce = onceListeners && onceListeners[listener];
             if (isOnce) {
@@ -335,7 +335,7 @@
             outerWidth: 0,
             outerHeight: 0
         };
-        for (var i = 0;i < measurementsLength;i++) {
+        for (var i = 0; i < measurementsLength; i++) {
             var measurement = measurements[i];
             size[measurement] = 0;
         }
@@ -428,7 +428,7 @@
         var isBorderBox = size.isBorderBox = style.boxSizing == 'border-box';
 
         // get all measurements
-        for (var i = 0;i < measurementsLength;i++) {
+        for (var i = 0; i < measurementsLength; i++) {
             var measurement = measurements[i];
             var value = style[measurement];
             var num = parseFloat(value);
@@ -512,7 +512,7 @@
         // check vendor prefixes
         var prefixes = ['webkit', 'moz', 'ms', 'o'];
 
-        for (var i = 0;i < prefixes.length;i++) {
+        for (var i = 0; i < prefixes.length; i++) {
             var prefix = prefixes[i];
             var method = prefix + 'MatchesSelector';
             if (ElemProto[method]) {
@@ -671,7 +671,7 @@
             // find children
             var childElems = elem.querySelectorAll(selector);
             // concat childElems to filterFound array
-            for (var i = 0;i < childElems.length;i++) {
+            for (var i = 0; i < childElems.length; i++) {
                 ffElems.push(childElems[i]);
             }
         });
@@ -1514,7 +1514,7 @@
 
         // create new Outlayer Items for collection
         var items = [];
-        for (var i = 0;i < itemElems.length;i++) {
+        for (var i = 0; i < itemElems.length; i++) {
             var elem = itemElems[i];
             var item = new Item(elem, this);
             items.push(item);
@@ -2096,7 +2096,7 @@
      */
     proto.getItem = function (elem) {
         // loop through items to get the one that matches
-        for (var i = 0;i < this.items.length;i++) {
+        for (var i = 0; i < this.items.length; i++) {
             var item = this.items[i];
             if (item.element == elem) {
                 // return item
@@ -2553,7 +2553,7 @@
 
         // reset column Y
         this.colYs = [];
-        for (var i = 0;i < this.cols;i++) {
+        for (var i = 0; i < this.cols; i++) {
             this.colYs.push(0);
         }
 
@@ -2616,7 +2616,7 @@
         // apply setHeight to necessary columns
         var setHeight = colPosition.y + item.size.outerHeight;
         var setMax = colSpan + colPosition.col;
-        for (var i = colPosition.col;i < setMax;i++) {
+        for (var i = colPosition.col; i < setMax; i++) {
             this.colYs[i] = setHeight;
         }
 
@@ -2648,7 +2648,7 @@
         // how many different places could this brick fit horizontally
         var groupCount = this.cols + 1 - colSpan;
         // for each group potential horizontal position
-        for (var i = 0;i < groupCount;i++) {
+        for (var i = 0; i < groupCount; i++) {
             colGroup[i] = this._getColGroupY(i, colSpan);
         }
         return colGroup;
@@ -2698,7 +2698,7 @@
         var isOriginTop = this._getOption('originTop');
         var stampMaxY = (isOriginTop ? offset.top : offset.bottom) +
             stampSize.outerHeight;
-        for (var i = firstCol;i <= lastCol;i++) {
+        for (var i = firstCol; i <= lastCol; i++) {
             this.colYs[i] = Math.max(stampMaxY, this.colYs[i]);
         }
     };
@@ -3060,7 +3060,7 @@
     proto._itemize = function () {
         var items = Outlayer.prototype._itemize.apply(this, arguments);
         // assign ID for original-order
-        for (var i = 0;i < items.length;i++) {
+        for (var i = 0; i < items.length; i++) {
             var item = items[i];
             item.id = this.itemGUID++;
         }
@@ -3183,7 +3183,7 @@
         var test = this._getFilterTest(filter);
 
         // test each item
-        for (var i = 0;i < items.length;i++) {
+        for (var i = 0; i < items.length; i++) {
             var item = items[i];
             if (item.isIgnored) {
                 continue;
@@ -3268,7 +3268,7 @@
         // do not update if no items
         var len = items && items.length;
 
-        for (var i = 0;len && i < len;i++) {
+        for (var i = 0; len && i < len; i++) {
             var item = items[i];
             item.updateSortData();
         }
@@ -3359,7 +3359,7 @@
 
     // check if sortBys is same as start of sortHistory
     proto._getIsSameSortBy = function (sortBys) {
-        for (var i = 0;i < sortBys.length;i++) {
+        for (var i = 0; i < sortBys.length; i++) {
             if (sortBys[i] != this.sortHistory[i]) {
                 return false;
             }
@@ -3371,7 +3371,7 @@
     function getItemSorter(sortBys, sortAsc) {
         return function sorter(itemA, itemB) {
             // cycle through all sortKeys
-            for (var i = 0;i < sortBys.length;i++) {
+            for (var i = 0; i < sortBys.length; i++) {
                 var sortBy = sortBys[i];
                 var a = itemA.sortData[sortBy];
                 var b = itemB.sortData[sortBy];
@@ -3478,19 +3478,19 @@
         // append item elements
         var i, item;
         var len = items.length;
-        for (i = 0;i < len;i++) {
+        for (i = 0; i < len; i++) {
             item = items[i];
             this.element.appendChild(item.element);
         }
         // filter new stuff
         var filteredInsertItems = this._filter(items).matches;
         // set flag
-        for (i = 0;i < len;i++) {
+        for (i = 0; i < len; i++) {
             items[i].isLayoutInstant = true;
         }
         this.arrange();
         // reset flag
-        for (i = 0;i < len;i++) {
+        for (i = 0; i < len; i++) {
             delete items[i].isLayoutInstant;
         }
         this.reveal(filteredInsertItems);
@@ -3505,7 +3505,7 @@
         // bail if no items to remove
         var len = removeItems && removeItems.length;
         // remove elems from filteredItems
-        for (var i = 0;len && i < len;i++) {
+        for (var i = 0; len && i < len; i++) {
             var item = removeItems[i];
             // remove item from collection
             utils.removeFrom(this.filteredItems, item);
@@ -3514,7 +3514,7 @@
 
     proto.shuffle = function () {
         // update random sortData
-        for (var i = 0;i < this.items.length;i++) {
+        for (var i = 0; i < this.items.length; i++) {
             var item = this.items[i];
             item.sortData.random = Math.random();
         }
