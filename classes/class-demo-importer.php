@@ -49,26 +49,28 @@ if (!class_exists('HDI_Demo_Importer')) {
         public static function call_plugin_api($plugin) {
             include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 
-            $call_api = plugins_api('plugin_information', array(
-                'slug' => $plugin,
-                'fields' => array(
-                    'downloaded' => false,
-                    'rating' => false,
-                    'description' => false,
-                    'short_description' => false,
-                    'donate_link' => false,
-                    'tags' => false,
-                    'sections' => true,
-                    'homepage' => true,
-                    'added' => false,
-                    'last_updated' => false,
-                    'compatibility' => false,
-                    'tested' => false,
-                    'requires' => false,
-                    'downloadlink' => false,
-                    'icons' => true
+            $call_api = plugins_api(
+                'plugin_information',
+                array(
+                    'slug' => $plugin,
+                    'fields' => array(
+                        'downloaded' => false,
+                        'rating' => false,
+                        'description' => false,
+                        'short_description' => false,
+                        'donate_link' => false,
+                        'tags' => false,
+                        'sections' => true,
+                        'homepage' => true,
+                        'added' => false,
+                        'last_updated' => false,
+                        'compatibility' => false,
+                        'tested' => false,
+                        'requires' => false,
+                        'downloadlink' => false,
+                        'icons' => true
+                    )
                 )
-            )
             );
 
             return $call_api;

@@ -1020,14 +1020,16 @@ class HDI_Import extends WP_Importer {
         }
 
         // Fetch the remote URL and write it to the placeholder file.
-        $remote_response = wp_safe_remote_get($url, array(
-            'timeout' => 3000,
-            'stream' => true,
-            'filename' => $tmp_file_name,
-            'headers' => array(
-                'Accept-Encoding' => 'identity',
-            ),
-        )
+        $remote_response = wp_safe_remote_get(
+            $url,
+            array(
+                'timeout' => 3000,
+                'stream' => true,
+                'filename' => $tmp_file_name,
+                'headers' => array(
+                    'Accept-Encoding' => 'identity',
+                ),
+            )
         );
 
         if (is_wp_error($remote_response)) {

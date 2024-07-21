@@ -62,11 +62,14 @@ class HDI_Customizer_Importer {
             include_once (dirname(__FILE__) . '/class-customizer-option.php');
 
             foreach ($data['options'] as $option_key => $option_value) {
-                $option = new HDI_Customzer_Option($wp_customize, $option_key, array(
-                    'default' => '',
-                    'type' => 'option',
-                    'capability' => 'edit_theme_options',
-                )
+                $option = new HDI_Customzer_Option(
+                    $wp_customize,
+                    $option_key,
+                    array(
+                        'default' => '',
+                        'type' => 'option',
+                        'capability' => 'edit_theme_options',
+                    )
                 );
 
                 $option->import($option_value);
