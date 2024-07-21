@@ -2,8 +2,8 @@
 Contributors: hashthemes
 Tags: demo importer, hashthemes, import, one click import
 Requires at least: 5.0
-Tested up to: 6.5
-Stable tag: 1.2.7
+Tested up to: 6.6
+Stable tag: 1.2.8
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,9 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
+= 1.2.8, Jul 21, 2024
+* Compatibility test with WordPress 6.6
+
 = 1.2.7, Jul 12, 2024
 * Elementor gutenberg optmized enabled by default
 
