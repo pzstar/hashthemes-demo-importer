@@ -737,7 +737,7 @@ if (!class_exists('HDI_Importer')) {
         public function download_files($external_url) {
             // Make sure we have the dependency.
             if (!function_exists('WP_Filesystem')) {
-                require_once (ABSPATH . 'wp-admin/includes/file.php');
+                require_once(ABSPATH . 'wp-admin/includes/file.php');
             }
 
             /*
@@ -1027,7 +1027,7 @@ if (!class_exists('HDI_Importer')) {
             if ($plugin_status == 'install') {
                 // Make sure we have the dependency.
                 if (!function_exists('WP_Filesystem')) {
-                    require_once (ABSPATH . 'wp-admin/includes/file.php');
+                    require_once(ABSPATH . 'wp-admin/includes/file.php');
                 }
 
                 /*
