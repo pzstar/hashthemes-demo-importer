@@ -268,6 +268,46 @@ $total = array(
             )
         )
     ),
+    'hotel' => array(
+        'name' => 'Hotel - Elementor Version',
+        'external_url' => 'https://hashthemes.com/import-files/total/hotel.zip',
+        'image' => 'https://hashthemes.com/import-files/total/screen/hotel.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/total/hotel',
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'menu_array' => array(
+            'primary' => 'Main Menu'
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            ),
+            'wp-payment-form' => array(
+                'name' => 'Paymattic',
+                'source' => 'wordpress',
+                'file_path' => 'wp-payment-form/wp-payment-form.php',
+            )
+        )
+    ),
 );
 
 $totally = array(
