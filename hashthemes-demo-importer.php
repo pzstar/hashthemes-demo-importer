@@ -80,6 +80,7 @@ if (!class_exists('HDI_Importer')) {
             add_action('wp_ajax_hdi_import_widget', array($this, 'import_widget_process'));
             add_action('wp_ajax_hdi_import_hashform', array($this, 'import_hashform_process'));
             add_action('wp_ajax_hdi_import_revslider', array($this, 'import_revslider_process'));
+            add_action('wp_ajax_hdi_import_additional_files', array($this, 'import_additional_files_process'));
         }
 
         /*
@@ -693,13 +694,8 @@ if (!class_exists('HDI_Importer')) {
 
             $sliderFile = $this->demo_upload_dir($demo_slug) . '/revslider.zip';
 
-            if (file_exists($sliderFile)) {
-                $this->ajax_response['next_step'] = 'hdi_import_revslider';
-                $this->ajax_response['next_step_message'] = esc_html__('Importing Revolution slider', 'hashthemes-demo-importer');
-            } else {
-                $this->ajax_response['next_step'] = '';
-                $this->ajax_response['next_step_message'] = '';
-            }
+            $this->ajax_response['next_step'] = 'hdi_import_revslider';
+            $this->ajax_response['next_step_message'] = esc_html__('Importing Revolution slider', 'hashthemes-demo-importer');
 
             $this->ajax_response['demo'] = $demo_slug;
             $this->send_ajax_response();
@@ -729,6 +725,27 @@ if (!class_exists('HDI_Importer')) {
             }
 
             $this->ajax_response['demo'] = $demo_slug;
+            $this->ajax_response['next_step'] = 'hdi_import_additional_files';
+            $this->ajax_response['next_step_message'] = esc_html__('Importing Additional Files', 'hashthemes-demo-importer');
+            $this->send_ajax_response();
+        }
+
+        function import_additional_files_process() {
+            if (!current_user_can('manage_options')) {
+                return;
+            }
+            check_ajax_referer('demo-importer-ajax', 'security');
+            $demo_slug = isset($_POST['demo']) ? sanitize_text_field($_POST['demo']) : '';
+
+            try {
+                do_action('hdi_import_additional_files', $demo_slug);
+                $this->ajax_response['complete_message'] = esc_html__('Additional Files imported', 'hashthemes-demo-importer');
+            } catch (\Exception $e) {
+                $this->ajax_response['complete_message'] = esc_html__('Additional Files not imported', 'hashthemes-demo-importer');
+            }
+
+            $this->ajax_response['demo'] = $demo_slug;
+            
             $this->ajax_response['next_step'] = '';
             $this->ajax_response['next_step_message'] = '';
             $this->send_ajax_response();

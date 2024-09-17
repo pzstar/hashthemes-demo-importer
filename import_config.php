@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('ABSPATH'))
+    exit;
 /*
  * Config file with each demo data
  */
