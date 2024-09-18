@@ -3,7 +3,7 @@
  * Plugin Name: HashThemes Demo Importer
  * Plugin URI: https://github.com/pzstar/hashthemes-demo-importer
  * Description: Easily imports demo with just one click.
- * Version: 1.2.9
+ * Version: 1.3.0
  * Author: hashthemes
  * Author URI:  https://hashthemes.com
  * Text Domain: hashthemes-demo-importer
@@ -16,7 +16,7 @@ if (!defined('ABSPATH'))
     exit;
 
 
-define('HDI_VERSION', '1.2.9');
+define('HDI_VERSION', '1.3.0');
 
 define('HDI_FILE', __FILE__);
 define('HDI_PLUGIN_BASENAME', plugin_basename(HDI_FILE));
@@ -742,10 +742,10 @@ if (!class_exists('HDI_Importer')) {
                 'slug' => $demo_slug,
                 'file_path' => $this->demo_upload_dir($demo_slug)
             ));
-            $this->ajax_response['complete_message'] = esc_html__('Complete', 'hashthemes-demo-importer');
+
+            $this->ajax_response['complete_message'] = esc_html__('Completed', 'hashthemes-demo-importer');
 
             $this->ajax_response['demo'] = $demo_slug;
-
             $this->ajax_response['next_step'] = '';
             $this->ajax_response['next_step_message'] = '';
             $this->send_ajax_response();
