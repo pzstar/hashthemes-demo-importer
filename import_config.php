@@ -25,6 +25,11 @@ $square = array(
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
@@ -60,6 +65,11 @@ $square = array(
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
@@ -88,6 +98,11 @@ $squarepress = array(
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
@@ -115,6 +130,11 @@ $total = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
@@ -145,6 +165,11 @@ $total = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'simple-floating-menu' => array(
                 'name' => 'Simple Floating Menu',
@@ -181,6 +206,11 @@ $total = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'simple-floating-menu' => array(
                 'name' => 'Simple Floating Menu',
@@ -223,6 +253,11 @@ $total = array(
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'simple-floating-menu' => array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
@@ -258,6 +293,11 @@ $total = array(
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'simple-floating-menu' => array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
@@ -292,6 +332,11 @@ $total = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'simple-floating-menu' => array(
                 'name' => 'Simple Floating Menu',
@@ -331,6 +376,11 @@ $totally = array(
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
@@ -358,6 +408,11 @@ $hashone = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
@@ -392,6 +447,11 @@ $viral = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
@@ -435,6 +495,11 @@ $viral = array(
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'smart-blocks' => array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
@@ -477,6 +542,11 @@ $viral = array(
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
@@ -513,6 +583,11 @@ $viral = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
@@ -556,6 +631,11 @@ $viral = array(
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'smart-blocks' => array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
@@ -592,6 +672,11 @@ $viral = array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'smart-blocks' => array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
@@ -635,6 +720,11 @@ $viral = array(
                 'source' => 'wordpress',
                 'file_path' => 'elementor/elementor.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-elements' => array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
@@ -677,6 +767,11 @@ $viral = array(
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'smart-blocks' => array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
@@ -718,6 +813,11 @@ $viral = array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'elementor/elementor.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'hash-elements' => array(
                 'name' => 'Hash Elements',
@@ -765,6 +865,11 @@ $viral = array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'elementor/elementor.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'hash-elements' => array(
                 'name' => 'Hash Elements',
@@ -815,6 +920,11 @@ $viral_news = array(
                 'source' => 'wordpress',
                 'file_path' => 'elementor/elementor.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-elements' => array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
@@ -860,6 +970,11 @@ $viral_news = array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'elementor/elementor.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'hash-elements' => array(
                 'name' => 'Hash Elements',
@@ -909,6 +1024,11 @@ $viral_news = array(
                 'source' => 'wordpress',
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'smart-blocks' => array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
@@ -949,6 +1069,11 @@ $viral_news = array(
                 'name' => 'Hash Elements',
                 'source' => 'wordpress',
                 'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'smart-blocks' => array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
@@ -998,6 +1123,11 @@ $viral_news = array(
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
@@ -1034,6 +1164,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
@@ -1075,6 +1210,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
@@ -1119,6 +1259,11 @@ $viral_news = array(
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
@@ -1159,6 +1304,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
@@ -1203,6 +1353,11 @@ $viral_news = array(
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
@@ -1243,6 +1398,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
@@ -1287,6 +1447,11 @@ $viral_news = array(
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
@@ -1328,6 +1493,11 @@ $viral_news = array(
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
@@ -1365,6 +1535,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
@@ -1409,6 +1584,11 @@ $viral_news = array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
@@ -1459,6 +1639,11 @@ $viral_mag = array(
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
@@ -1506,6 +1691,11 @@ $viral_mag = array(
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
@@ -1546,6 +1736,11 @@ $viral_mag = array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'elementor/elementor.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'smart-blocks' => array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
@@ -1598,6 +1793,11 @@ $viral_mag = array(
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
@@ -1644,6 +1844,11 @@ $viral_mag = array(
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
@@ -1684,6 +1889,11 @@ $viral_mag = array(
                 'name' => 'Elementor',
                 'source' => 'wordpress',
                 'file_path' => 'elementor/elementor.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'smart-blocks' => array(
                 'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',

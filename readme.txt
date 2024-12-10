@@ -2,8 +2,8 @@
 Contributors: hashthemes
 Tags: demo importer, hashthemes, import, one click import
 Requires at least: 5.0
-Tested up to: 6.6
-Stable tag: 1.3.0
+Tested up to: 6.7
+Stable tag: 1.3.1
 Requires PHP: 5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,6 +107,9 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
+= 1.3.1, Dec 10, 2024
+* New Demos added
+
 = 1.3.0, Sep 18, 2024
 * After Demo Import hook - Added
 
