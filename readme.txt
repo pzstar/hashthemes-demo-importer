@@ -107,75 +107,75 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
-= 1.3.1, Dec 10, 2024
+= 1.3.1 - Dec 10, 2024
 * New Demos added
 
-= 1.3.0, Sep 18, 2024
+= 1.3.0 - Sep 18, 2024
 * After Demo Import hook - Added
 
-= 1.2.9, Sep 04, 2024
+= 1.2.9 - Sep 04, 2024
 * Hotel demo added on Total theme
 
-= 1.2.8, Jul 21, 2024
+= 1.2.8 - Jul 21, 2024
 * Compatibility test with WordPress 6.6
 
-= 1.2.7, Jul 12, 2024
+= 1.2.7 - Jul 12, 2024
 * Elementor gutenberg optmized enabled by default
 
-= 1.2.6, Jul 6, 2024
+= 1.2.6 - Jul 6, 2024
 * Minor bug fixes
 
-= 1.2.5, Jul 3, 2024
+= 1.2.5 - Jul 3, 2024
 * New demo added for Viral News & Total Theme Theme
 
-= 1.2.4, Jun 19, 2024
+= 1.2.4 - Jun 19, 2024
 * New demo added for Viral News Theme
 
-= 1.2.3, Jun 13, 2024
+= 1.2.3 - Jun 13, 2024
 * New demo added for Viral Theme
 
-= 1.2.2, Jun 04, 2024
+= 1.2.2 - Jun 04, 2024
 * Outdated code removed
 
-= 1.2.1, Dec 22, 2023
+= 1.2.1 - Dec 22, 2023
 * Hash Form Plugin demo added
 
-= 1.2.0, Sep 01, 2023
+= 1.2.0 - Sep 01, 2023
 * Compatibility test with WordPress version 6.3
 
-= 1.1.9, May 08, 2022
+= 1.1.9 - May 08, 2022
 * RTL Ready - Added
 
-= 1.1.8, Dec 05, 2022
+= 1.1.8 - Dec 05, 2022
 * Suggested HashElements plugin missing for Viral Mag Theme - added
 
-= 1.1.7, Nov 24, 2022
+= 1.1.7 - Nov 24, 2022
 * New demos added for Viral Mag
 
-= 1.1.6, July 25, 2022
+= 1.1.6 - July 25, 2022
 * Added recommended plugins
 
-= 1.1.5, Jan 28, 2022
+= 1.1.5 - Jan 28, 2022
 * Compatibility with the latest WordPress v5.9
 
-= 1.1.4, Oct 22, 2021
+= 1.1.4 - Oct 22, 2021
 * Typo mistake for Total demo fixes
 * Other minor code refinements
 
-= 1.1.3, Sep 29, 2021
+= 1.1.3 - Sep 29, 2021
 * Total Demo Refined
 * Law, Education demo added for Total Theme
 
-= 1.1.1, Jun 22, 2021
+= 1.1.1 - Jun 22, 2021
 * Viral Mag Demo added
 
-= 1.1.0, May 15, 2021
+= 1.1.0 - May 15, 2021
 * Square Elementor Demo added
 
-= 1.0.9, Mar 08, 2021
+= 1.0.9 - Mar 08, 2021
 * Total Demo Import added
 
-= 1.0.8, Oct 12, 2020
+= 1.0.8 - Oct 12, 2020
 * Viral News Menu id mistake in config file fixed
 
 = 1.0.7
@@ -200,8 +200,3 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
 = 1.0
 * Release
-
-== Upgrade Notice ==
-
-= 1.0 =
-Release
