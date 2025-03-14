@@ -459,6 +459,10 @@ if (!class_exists('HDI_Importer')) {
 
             $plugin_active_count = $this->plugin_active_count;
 
+            if (function_exists('hashform_network_create_table')) {
+                hashform_network_create_table(true);
+            }
+
             if ($plugin_active_count > 0) {
                 $this->ajax_response['complete_message'] = esc_html__('All the required plugins activated', 'hashthemes-demo-importer');
             } else {
