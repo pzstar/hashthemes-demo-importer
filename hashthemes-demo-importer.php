@@ -81,6 +81,8 @@ if (!class_exists('HDI_Importer')) {
             add_action('wp_ajax_hdi_import_hashform', array($this, 'import_hashform_process'));
             add_action('wp_ajax_hdi_import_revslider', array($this, 'import_revslider_process'));
             add_action('wp_ajax_hdi_custom_import_hook', array($this, 'add_custom_import_hook'));
+
+            add_filter('plugin_action_links_' . plugin_basename(HDI_FILE), array($this, 'add_plugin_action_link'), 10, 1);
         }
 
         /*
@@ -1156,6 +1158,14 @@ if (!class_exists('HDI_Importer')) {
             $json = wp_json_encode($this->ajax_response);
             echo $json;
             die();
+        }
+
+        public function add_plugin_action_link($links) {
+            $custom['settings'] = sprintf(
+                '<a href="%s" aria-label="%s">%s</a>', esc_url(add_query_arg('page', 'hdi-demo-importer', admin_url('themes.php'))), esc_attr__('HashThemes Demo Importer', 'hash-form'), esc_html__('Import', 'hash-form')
+            );
+
+            return array_merge($custom, (array) $links);
         }
 
         /*
