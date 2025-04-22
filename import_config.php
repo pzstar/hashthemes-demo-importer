@@ -2045,7 +2045,7 @@ $viral_express = array(
         'image' => 'https://hashthemes.com/import-files/viral-express/screen/buzz.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-express/buzz',
         'menu_array' => array(
-            'primary' => 'Primary Menu',
+            'primary' => 'Menu 1',
         ),
         'options_array' => array('sfm_settings'),
         'hash_forms' => array('form'),
@@ -2086,7 +2086,7 @@ $viral_express = array(
         'image' => 'https://hashthemes.com/import-files/viral-express/screen/headline.jpg',
         'preview_url' => 'https://demo.hashthemes.com/viral-express/headline',
         'menu_array' => array(
-            'primary' => 'Primary Menu',
+            'primary' => 'primary',
         ),
         'options_array' => array('sfm_settings'),
         'hash_forms' => array('form'),
