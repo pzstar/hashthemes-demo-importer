@@ -1919,8 +1919,213 @@ $viral_express = array(
     'express' => array(
         'name' => 'Express',
         'external_url' => 'https://hashthemes.com/import-files/viral-express/express.zip',
-        'image' => 'https://hashthemes.com/import-files/viral/screen/demo1.jpg',
-        'preview_url' => 'https://demo.hashthemes.com/viral/demo1',
+        'image' => 'https://hashthemes.com/import-files/viral-express/screen/express.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-express/',
+        'menu_array' => array(
+            'primary' => 'Primary Menu',
+        ),
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'home_slug' => 'home',
+        'blog_slug' => 'blogs',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        )
+    ),
+    'bulletin' => array(
+        'name' => 'Bulletin',
+        'external_url' => 'https://hashthemes.com/import-files/viral-express/bulletin.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-express/screen/bulletin.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-express/bulletin',
+        'menu_array' => array(
+            'primary' => 'Primary Menu',
+        ),
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'home_slug' => 'home',
+        'blog_slug' => 'blogs',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        )
+    ),
+    'broadcast' => array(
+        'name' => 'Broadcast',
+        'external_url' => 'https://hashthemes.com/import-files/viral-express/broadcast.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-express/screen/broadcast.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-express/broadcast',
+        'menu_array' => array(
+            'primary' => 'Primary Menu',
+        ),
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'home_slug' => 'home',
+        'blog_slug' => 'blogs',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        )
+    ),
+    'buzz' => array(
+        'name' => 'Buzz',
+        'external_url' => 'https://hashthemes.com/import-files/viral-express/buzz.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-express/screen/buzz.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-express/buzz',
+        'menu_array' => array(
+            'primary' => 'Primary Menu',
+        ),
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'home_slug' => 'home',
+        'blog_slug' => 'blogs',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        )
+    ),
+    'headline' => array(
+        'name' => 'Headline',
+        'external_url' => 'https://hashthemes.com/import-files/viral-express/headline.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-express/screen/headline.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-express/headline',
+        'menu_array' => array(
+            'primary' => 'Primary Menu',
+        ),
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'home_slug' => 'home',
+        'blog_slug' => 'blogs',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        )
+    ),
+    'trend' => array(
+        'name' => 'Trend',
+        'external_url' => 'https://hashthemes.com/import-files/viral-express/trend.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-express/screen/trend.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-express/trend',
         'menu_array' => array(
             'primary' => 'Primary Menu',
         ),
