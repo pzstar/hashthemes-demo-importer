@@ -68,6 +68,11 @@ if (!class_exists('HDI_Importer')) {
             // Allow SVG uploads
             add_filter('upload_mimes', array($this, 'file_types_to_uploads'));
 
+            // Enable SVG for the WordPress Importer
+            //add_filter('wp_import_allowed_mime_types', array($this, 'file_types_to_uploads'));
+
+            //add_filter('wp_check_filetype_and_ext', array($this, 'fix_svg_file_check'), 10, 4);
+
             // Actions for the ajax call
             add_action('wp_ajax_hdi_install_demo', array($this, 'install_demo_process'));
             add_action('wp_ajax_hdi_install_plugin', array($this, 'install_plugin_process'));
@@ -84,6 +89,17 @@ if (!class_exists('HDI_Importer')) {
 
             add_filter('plugin_action_links_' . plugin_basename(HDI_FILE), array($this, 'add_plugin_action_link'), 10, 1);
         }
+
+        // 2. Bypass the filetype check error for SVGs
+        public function fix_svg_file_check($data, $file, $filename, $mimes) {
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            if ($ext === 'svg') {
+                $data['ext']  = 'svg';
+                $data['type'] = 'image/svg+xml';
+            }
+            return $data;
+        }
+
 
         /*
          * Loads the translation files
@@ -146,9 +162,7 @@ if (!class_exists('HDI_Importer')) {
          */
 
         function file_types_to_uploads($file_types) {
-            $new_filetypes = array();
-            $new_filetypes['svg'] = 'image/svg+xml';
-            $file_types = array_merge($file_types, $new_filetypes);
+            $file_types['svg'] = 'image/svg+xml';
             return $file_types;
         }
 

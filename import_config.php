@@ -355,6 +355,46 @@ $total = array(
             )
         )
     ),
+    'spa' => array(
+        'name' => 'Spa - Elementor Version',
+        'external_url' => 'https://hashthemes.com/import-files/total/spa.zip',
+        'image' => 'https://hashthemes.com/import-files/total/screen/spa.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/total/spa',
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'menu_array' => array(
+            'primary' => 'Main Menu'
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            )
+        )
+    ),
 );
 
 $totally = array(

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * WordPress eXtended RSS file parser implementations
  *
@@ -11,8 +10,7 @@
  * WXR Parser that makes use of the XML Parser PHP extension.
  */
 class HDI_WXR_Parser_XML {
-
-    var $wp_tags = array(
+    public $wp_tags = array(
         'wp:post_id',
         'wp:post_date',
         'wp:post_date_gmt',
@@ -45,7 +43,7 @@ class HDI_WXR_Parser_XML {
         'wp:author_first_name',
         'wp:author_last_name',
     );
-    var $wp_sub_tags = array(
+    public $wp_sub_tags = array(
         'wp:comment_id',
         'wp:comment_author',
         'wp:comment_author_email',
@@ -60,16 +58,40 @@ class HDI_WXR_Parser_XML {
         'wp:comment_user_id',
     );
 
-    function parse($file) {
-        $this->wxr_version = $this->in_post = $this->cdata = $this->data = $this->sub_data = $this->in_tag = $this->in_sub_tag = false;
-        $this->authors = $this->posts = $this->term = $this->category = $this->tag = array();
+    public $wxr_version;
+    public $in_post;
+    public $cdata;
+    public $data;
+    public $sub_data;
+    public $in_tag;
+    public $in_sub_tag;
+    public $authors;
+    public $posts;
+    public $term;
+    public $category;
+    public $tag;
+    public $base_url;
+    public $base_blog_url;
+
+    public function parse($file) {
+        $this->wxr_version = false;
+        $this->in_post = false;
+        $this->cdata = false;
+        $this->data = false;
+        $this->sub_data = false;
+        $this->in_tag = false;
+        $this->in_sub_tag = false;
+        $this->authors = array();
+        $this->posts = array();
+        $this->term = array();
+        $this->category = array();
+        $this->tag = array();
 
         $xml = xml_parser_create('UTF-8');
         xml_parser_set_option($xml, XML_OPTION_SKIP_WHITE, 1);
         xml_parser_set_option($xml, XML_OPTION_CASE_FOLDING, 0);
-        xml_set_object($xml, $this);
-        xml_set_character_data_handler($xml, 'cdata');
-        xml_set_element_handler($xml, 'tag_open', 'tag_close');
+        xml_set_character_data_handler($xml, array($this, 'cdata'));
+        xml_set_element_handler($xml, array($this, 'tag_open'), array($this, 'tag_close'));
 
         if (!xml_parse($xml, file_get_contents($file), true)) {
             $current_line = xml_get_current_line_number($xml);
@@ -80,8 +102,9 @@ class HDI_WXR_Parser_XML {
         }
         xml_parser_free($xml);
 
-        if (!preg_match('/^\d+\.\d+$/', $this->wxr_version))
-            return new WP_Error('WXR_parse_error', __('This does not appear to be a WXR file, missing/invalid WXR version number', 'hashthemes-demo-importer'));
+        if (!preg_match('/^\d+\.\d+$/', $this->wxr_version)) {
+            return new WP_Error('WXR_parse_error', __('This does not appear to be a WXR file, missing/invalid WXR version number', 'wordpress-importer'));
+        }
 
         return array(
             'authors' => $this->authors,
@@ -91,17 +114,17 @@ class HDI_WXR_Parser_XML {
             'terms' => $this->term,
             'base_url' => $this->base_url,
             'base_blog_url' => $this->base_blog_url,
-            'version' => $this->wxr_version
+            'version' => $this->wxr_version,
         );
     }
 
-    function tag_open($parse, $tag, $attr) {
-        if (in_array($tag, $this->wp_tags)) {
+    public function tag_open($parse, $tag, $attr) {
+        if (in_array($tag, $this->wp_tags, true)) {
             $this->in_tag = substr($tag, 3);
             return;
         }
 
-        if (in_array($tag, $this->wp_sub_tags)) {
+        if (in_array($tag, $this->wp_sub_tags, true)) {
             $this->in_sub_tag = substr($tag, 3);
             return;
         }
@@ -109,15 +132,21 @@ class HDI_WXR_Parser_XML {
         switch ($tag) {
             case 'category':
                 if (isset($attr['domain'], $attr['nicename'])) {
+                    if (false === $this->sub_data) {
+                        $this->sub_data = array();
+                    }
+
                     $this->sub_data['domain'] = $attr['domain'];
                     $this->sub_data['slug'] = $attr['nicename'];
                 }
                 break;
             case 'item':
                 $this->in_post = true;
+                break;
             case 'title':
-                if ($this->in_post)
+                if ($this->in_post) {
                     $this->in_tag = 'post_title';
+                }
                 break;
             case 'guid':
                 $this->in_tag = 'guid';
@@ -144,9 +173,10 @@ class HDI_WXR_Parser_XML {
         }
     }
 
-    function cdata($parser, $cdata) {
-        if (!trim($cdata))
+    public function cdata($parser, $cdata) {
+        if (!trim($cdata)) {
             return;
+        }
 
         if (false !== $this->in_tag || false !== $this->in_sub_tag) {
             $this->cdata .= $cdata;
@@ -155,18 +185,19 @@ class HDI_WXR_Parser_XML {
         }
     }
 
-    function tag_close($parser, $tag) {
+    public function tag_close($parser, $tag) {
         switch ($tag) {
             case 'wp:comment':
                 unset($this->sub_data['key'], $this->sub_data['value']); // remove meta sub_data
-                if (!empty($this->sub_data))
+                if (!empty($this->sub_data)) {
                     $this->data['comments'][] = $this->sub_data;
+                }
                 $this->sub_data = false;
                 break;
             case 'wp:commentmeta':
                 $this->sub_data['commentmeta'][] = array(
                     'key' => $this->sub_data['key'],
-                    'value' => $this->sub_data['value']
+                    'value' => $this->sub_data['value'],
                 );
                 break;
             case 'category':
@@ -177,8 +208,9 @@ class HDI_WXR_Parser_XML {
                 $this->sub_data = false;
                 break;
             case 'wp:postmeta':
-                if (!empty($this->sub_data))
+                if (!empty($this->sub_data)) {
                     $this->data['postmeta'][] = $this->sub_data;
+                }
                 $this->sub_data = false;
                 break;
             case 'item':
@@ -199,8 +231,9 @@ class HDI_WXR_Parser_XML {
                 $this->sub_data = false;
                 break;
             case 'wp:author':
-                if (!empty($this->data['author_login']))
+                if (!empty($this->data['author_login'])) {
                     $this->authors[$this->data['author_login']] = $this->data;
+                }
                 $this->data = false;
                 break;
             case 'wp:base_site_url':
@@ -218,9 +251,17 @@ class HDI_WXR_Parser_XML {
 
             default:
                 if ($this->in_sub_tag) {
+                    if (false === $this->sub_data) {
+                        $this->sub_data = array();
+                    }
+
                     $this->sub_data[$this->in_sub_tag] = !empty($this->cdata) ? $this->cdata : '';
                     $this->in_sub_tag = false;
-                } else if ($this->in_tag) {
+                } elseif ($this->in_tag) {
+                    if (false === $this->data) {
+                        $this->data = array();
+                    }
+
                     $this->data[$this->in_tag] = !empty($this->cdata) ? $this->cdata : '';
                     $this->in_tag = false;
                 }
@@ -228,5 +269,4 @@ class HDI_WXR_Parser_XML {
 
         $this->cdata = false;
     }
-
 }

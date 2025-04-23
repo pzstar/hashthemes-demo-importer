@@ -10,37 +10,41 @@
  * WordPress importer class.
  */
 class HDI_Import extends WP_Importer {
+    public $max_wxr_version = 1.2; // max. supported WXR version
 
-    var $max_wxr_version = 1.2; // max. supported WXR version
-    var $id; // WXR attachment ID
+    public $id; // WXR attachment ID
+
     // information to import from WXR file
-    var $version;
-    var $authors = array();
-    var $posts = array();
-    var $terms = array();
-    var $categories = array();
-    var $tags = array();
-    var $base_url = '';
+    public $version;
+    public $authors = array();
+    public $posts = array();
+    public $terms = array();
+    public $categories = array();
+    public $tags = array();
+    public $base_url = '';
+
     // mappings from old information to new
-    var $processed_authors = array();
-    var $author_mapping = array();
-    var $processed_terms = array();
-    var $processed_posts = array();
-    var $post_orphans = array();
-    var $processed_menu_items = array();
-    var $menu_item_orphans = array();
-    var $missing_menu_items = array();
-    var $fetch_attachments = false;
-    var $url_remap = array();
-    var $featured_images = array();
-    var $custom_menu_metas = array('_menu_item_megamenu', '_menu_item_megamenu_col', '_menu_item_megamenu_heading', '_menu_item_category_post', '_menu_item_megamenu_template', '_menu_item_megamenu_widgetarea', '_menu_item_megamenu_icon', '_menu_item_megamenu_hide_label', '_menu_item_megamenu_icon_position', '_menu_item_megamenu_icon_size');
+    public $processed_authors = array();
+    public $author_mapping = array();
+    public $processed_terms = array();
+    public $processed_posts = array();
+    public $post_orphans = array();
+    public $processed_menu_items = array();
+    public $menu_item_orphans = array();
+    public $missing_menu_items = array();
+
+    public $fetch_attachments = false;
+    public $url_remap = array();
+    public $featured_images = array();
+
+    public $custom_menu_metas = array('_menu_item_megamenu', '_menu_item_megamenu_col', '_menu_item_megamenu_heading', '_menu_item_category_post', '_menu_item_megamenu_template', '_menu_item_megamenu_widgetarea', '_menu_item_megamenu_icon', '_menu_item_megamenu_hide_label', '_menu_item_megamenu_icon_position', '_menu_item_megamenu_icon_size');
 
     /**
      * Registered callback function for the WordPress Importer
      *
      * Manages the three separate stages of the WXR import process
      */
-    function dispatch() {
+    public function dispatch() {
         $this->header();
 
         $step = empty($_GET['step']) ? 0 : (int) $_GET['step'];
@@ -50,8 +54,9 @@ class HDI_Import extends WP_Importer {
                 break;
             case 1:
                 check_admin_referer('import-upload');
-                if ($this->handle_upload())
+                if ($this->handle_upload()) {
                     $this->import_options();
+                }
                 break;
             case 2:
                 check_admin_referer('import-wordpress');
@@ -71,7 +76,7 @@ class HDI_Import extends WP_Importer {
      *
      * @param string $file Path to the WXR file for importing
      */
-    function import($file) {
+    public function import($file) {
         add_filter('import_post_meta_key', array($this, 'is_valid_meta_key'));
         add_filter('http_request_timeout', array(&$this, 'bump_request_timeout'));
 
@@ -99,7 +104,7 @@ class HDI_Import extends WP_Importer {
      *
      * @param string $file Path to the WXR file for importing
      */
-    function import_start($file) {
+    public function import_start($file) {
         if (!is_file($file)) {
             echo '<p><strong>' . __('Sorry, there has been an error.', 'hashthemes-demo-importer') . '</strong><br />';
             echo __('The file does not exist, please try again.', 'hashthemes-demo-importer') . '</p>';
@@ -133,7 +138,7 @@ class HDI_Import extends WP_Importer {
     /**
      * Performs post-import cleanup of files and the cache
      */
-    function import_end() {
+    public function import_end() {
         wp_import_cleanup($this->id);
 
         wp_cache_flush();
@@ -157,14 +162,14 @@ class HDI_Import extends WP_Importer {
      *
      * @return bool False if error uploading or invalid file, true otherwise
      */
-    function handle_upload() {
+    public function handle_upload() {
         $file = wp_import_handle_upload();
 
         if (isset($file['error'])) {
             echo '<p><strong>' . __('Sorry, there has been an error.', 'hashthemes-demo-importer') . '</strong><br />';
             echo esc_html($file['error']) . '</p>';
             return false;
-        } else if (!file_exists($file['file'])) {
+        } elseif (!file_exists($file['file'])) {
             echo '<p><strong>' . __('Sorry, there has been an error.', 'hashthemes-demo-importer') . '</strong><br />';
             printf(__('The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem.', 'hashthemes-demo-importer'), esc_html($file['file']));
             echo '</p>';
@@ -199,7 +204,7 @@ class HDI_Import extends WP_Importer {
      *
      * @param array $import_data Data returned by a WXR parser
      */
-    function get_authors_from_import($import_data) {
+    public function get_authors_from_import($import_data) {
         if (!empty($import_data['authors'])) {
             $this->authors = $import_data['authors'];
             // no author information, grab it from the posts
@@ -212,11 +217,12 @@ class HDI_Import extends WP_Importer {
                     continue;
                 }
 
-                if (!isset($this->authors[$login]))
+                if (!isset($this->authors[$login])) {
                     $this->authors[$login] = array(
                         'author_login' => $login,
-                        'author_display_name' => $post['post_author']
+                        'author_display_name' => $post['post_author'],
                     );
+                }
             }
         }
     }
@@ -225,8 +231,9 @@ class HDI_Import extends WP_Importer {
      * Display pre-import options, author importing/mapping and option to
      * fetch attachments
      */
-    function import_options() {
+    public function import_options() {
         $j = 0;
+        // phpcs:disable Generic.WhiteSpace.ScopeIndent.Incorrect
         ?>
         <form action="<?php echo admin_url('admin.php?import=wordpress&amp;step=2'); ?>" method="post">
             <?php wp_nonce_field('import-wordpress'); ?>
@@ -256,6 +263,7 @@ class HDI_Import extends WP_Importer {
             <p class="submit"><input type="submit" class="button" value="<?php esc_attr_e('Submit', 'hashthemes-demo-importer'); ?>" /></p>
         </form>
         <?php
+        // phpcs:enable Generic.WhiteSpace.ScopeIndent.Incorrect
     }
 
     /**
@@ -265,20 +273,22 @@ class HDI_Import extends WP_Importer {
      * @param int $n Index for each author in the form
      * @param array $author Author information, e.g. login, display name, email
      */
-    function author_select($n, $author) {
+    public function author_select($n, $author) {
         _e('Import author:', 'hashthemes-demo-importer');
         echo ' <strong>' . esc_html($author['author_display_name']);
-        if ($this->version != '1.0')
+        if ('1.0' != $this->version) {
             echo ' (' . esc_html($author['author_login']) . ')';
+        }
         echo '</strong><br />';
 
-        if ($this->version != '1.0')
+        if ('1.0' != $this->version) {
             echo '<div style="margin-left:18px">';
+        }
 
         $create_users = $this->allow_create_users();
         if ($create_users) {
             echo '<label for="user_new_' . $n . '">';
-            if ($this->version != '1.0') {
+            if ('1.0' != $this->version) {
                 _e('or create new user with login name:', 'hashthemes-demo-importer');
                 $value = '';
             } else {
@@ -291,7 +301,7 @@ class HDI_Import extends WP_Importer {
         }
 
         echo '<label for="imported_authors_' . $n . '">';
-        if (!$create_users && $this->version == '1.0') {
+        if (!$create_users && '1.0' == $this->version) {
             _e('assign posts to an existing user:', 'hashthemes-demo-importer');
         } else {
             _e('or assign posts to an existing user:', 'hashthemes-demo-importer');
@@ -311,8 +321,9 @@ class HDI_Import extends WP_Importer {
 
         echo '<input type="hidden" name="imported_authors[' . $n . ']" value="' . esc_attr($author['author_login']) . '" />';
 
-        if ($this->version != '1.0')
+        if ('1.0' != $this->version) {
             echo '</div>';
+        }
     }
 
     /**
@@ -320,9 +331,10 @@ class HDI_Import extends WP_Importer {
      * in import options form. Can map to an existing user, create a new user
      * or falls back to the current user in case of error with either of the previous
      */
-    function get_author_mapping() {
-        if (!isset($_POST['imported_authors']))
+    public function get_author_mapping() {
+        if (!isset($_POST['imported_authors'])) {
             return;
+        }
 
         $create_users = $this->allow_create_users();
 
@@ -334,14 +346,15 @@ class HDI_Import extends WP_Importer {
             if (!empty($_POST['user_map'][$i])) {
                 $user = get_userdata(intval($_POST['user_map'][$i]));
                 if (isset($user->ID)) {
-                    if ($old_id)
+                    if ($old_id) {
                         $this->processed_authors[$old_id] = $user->ID;
+                    }
                     $this->author_mapping[$santized_old_login] = $user->ID;
                 }
-            } else if ($create_users) {
+            } elseif ($create_users) {
                 if (!empty($_POST['user_new'][$i])) {
                     $user_id = wp_create_user($_POST['user_new'][$i], wp_generate_password());
-                } else if ($this->version != '1.0') {
+                } elseif ('1.0' != $this->version) {
                     $user_data = array(
                         'user_login' => $old_login,
                         'user_pass' => wp_generate_password(),
@@ -354,21 +367,24 @@ class HDI_Import extends WP_Importer {
                 }
 
                 if (!is_wp_error($user_id)) {
-                    if ($old_id)
+                    if ($old_id) {
                         $this->processed_authors[$old_id] = $user_id;
+                    }
                     $this->author_mapping[$santized_old_login] = $user_id;
                 } else {
                     printf(__('Failed to create new user for %s. Their posts will be attributed to the current user.', 'hashthemes-demo-importer'), esc_html($this->authors[$old_login]['author_display_name']));
-                    if (defined('IMPORT_DEBUG') && IMPORT_DEBUG)
+                    if (defined('IMPORT_DEBUG') && IMPORT_DEBUG) {
                         echo ' ' . $user_id->get_error_message();
+                    }
                     echo '<br />';
                 }
             }
 
             // failsafe: if the user_id was invalid, default to the current user
             if (!isset($this->author_mapping[$santized_old_login])) {
-                if ($old_id)
+                if ($old_id) {
                     $this->processed_authors[$old_id] = (int) get_current_user_id();
+                }
                 $this->author_mapping[$santized_old_login] = (int) get_current_user_id();
             }
         }
@@ -379,20 +395,23 @@ class HDI_Import extends WP_Importer {
      *
      * Doesn't create a new category if its slug already exists
      */
-    function process_categories() {
+    public function process_categories() {
         $this->categories = apply_filters('wp_import_categories', $this->categories);
 
-        if (empty($this->categories))
+        if (empty($this->categories)) {
             return;
+        }
 
         foreach ($this->categories as $cat) {
             // if the category already exists leave it alone
             $term_id = term_exists($cat['category_nicename'], 'category');
             if ($term_id) {
-                if (is_array($term_id))
+                if (is_array($term_id)) {
                     $term_id = $term_id['term_id'];
-                if (isset($cat['term_id']))
+                }
+                if (isset($cat['term_id'])) {
                     $this->processed_terms[intval($cat['term_id'])] = (int) $term_id;
+                }
                 continue;
             }
 
@@ -406,14 +425,16 @@ class HDI_Import extends WP_Importer {
                 'category_description' => wp_slash($description),
             );
 
-            $id = wp_insert_category($data);
+            $id = wp_insert_category($data, true);
             if (!is_wp_error($id) && $id > 0) {
-                if (isset($cat['term_id']))
+                if (isset($cat['term_id'])) {
                     $this->processed_terms[intval($cat['term_id'])] = $id;
+                }
             } else {
                 printf(__('Failed to import category %s', 'hashthemes-demo-importer'), esc_html($cat['category_nicename']));
-                if (defined('IMPORT_DEBUG') && IMPORT_DEBUG)
+                if (defined('IMPORT_DEBUG') && IMPORT_DEBUG) {
                     echo ': ' . $id->get_error_message();
+                }
                 echo '<br />';
                 continue;
             }
@@ -429,20 +450,23 @@ class HDI_Import extends WP_Importer {
      *
      * Doesn't create a tag if its slug already exists
      */
-    function process_tags() {
+    public function process_tags() {
         $this->tags = apply_filters('wp_import_tags', $this->tags);
 
-        if (empty($this->tags))
+        if (empty($this->tags)) {
             return;
+        }
 
         foreach ($this->tags as $tag) {
             // if the tag already exists leave it alone
             $term_id = term_exists($tag['tag_slug'], 'post_tag');
             if ($term_id) {
-                if (is_array($term_id))
+                if (is_array($term_id)) {
                     $term_id = $term_id['term_id'];
-                if (isset($tag['term_id']))
+                }
+                if (isset($tag['term_id'])) {
                     $this->processed_terms[intval($tag['term_id'])] = (int) $term_id;
+                }
                 continue;
             }
 
@@ -454,12 +478,14 @@ class HDI_Import extends WP_Importer {
 
             $id = wp_insert_term(wp_slash($tag['tag_name']), 'post_tag', $args);
             if (!is_wp_error($id)) {
-                if (isset($tag['term_id']))
+                if (isset($tag['term_id'])) {
                     $this->processed_terms[intval($tag['term_id'])] = $id['term_id'];
+                }
             } else {
                 printf(__('Failed to import post tag %s', 'hashthemes-demo-importer'), esc_html($tag['tag_name']));
-                if (defined('IMPORT_DEBUG') && IMPORT_DEBUG)
+                if (defined('IMPORT_DEBUG') && IMPORT_DEBUG) {
                     echo ': ' . $id->get_error_message();
+                }
                 echo '<br />';
                 continue;
             }
@@ -475,20 +501,23 @@ class HDI_Import extends WP_Importer {
      *
      * Doesn't create a term its slug already exists
      */
-    function process_terms() {
+    public function process_terms() {
         $this->terms = apply_filters('wp_import_terms', $this->terms);
 
-        if (empty($this->terms))
+        if (empty($this->terms)) {
             return;
+        }
 
         foreach ($this->terms as $term) {
             // if the term already exists in the correct taxonomy leave it alone
             $term_id = term_exists($term['slug'], $term['term_taxonomy']);
             if ($term_id) {
-                if (is_array($term_id))
+                if (is_array($term_id)) {
                     $term_id = $term_id['term_id'];
-                if (isset($term['term_id']))
+                }
+                if (isset($term['term_id'])) {
                     $this->processed_terms[intval($term['term_id'])] = (int) $term_id;
+                }
                 continue;
             }
 
@@ -505,17 +534,19 @@ class HDI_Import extends WP_Importer {
             $args = array(
                 'slug' => $term['slug'],
                 'description' => wp_slash($description),
-                'parent' => (int) $parent
+                'parent' => (int) $parent,
             );
 
             $id = wp_insert_term(wp_slash($term['term_name']), $term['term_taxonomy'], $args);
             if (!is_wp_error($id)) {
-                if (isset($term['term_id']))
+                if (isset($term['term_id'])) {
                     $this->processed_terms[intval($term['term_id'])] = $id['term_id'];
+                }
             } else {
-                printf(__('Failed to import %s %s', 'hashthemes-demo-importer'), esc_html($term['term_taxonomy']), esc_html($term['term_name']));
-                if (defined('IMPORT_DEBUG') && IMPORT_DEBUG)
+                printf(__('Failed to import %1$s %2$s', 'hashthemes-demo-importer'), esc_html($term['term_taxonomy']), esc_html($term['term_name']));
+                if (defined('IMPORT_DEBUG') && IMPORT_DEBUG) {
                     echo ': ' . $id->get_error_message();
+                }
                 echo '<br />';
                 continue;
             }
@@ -535,10 +566,6 @@ class HDI_Import extends WP_Importer {
      * @param int   $term_id ID of the newly created term.
      */
     protected function process_termmeta($term, $term_id) {
-        if (!function_exists('add_term_meta')) {
-            return;
-        }
-
         if (!isset($term['termmeta'])) {
             $term['termmeta'] = array();
         }
@@ -574,7 +601,7 @@ class HDI_Import extends WP_Importer {
             }
 
             // Export gets meta straight from the DB so could have a serialized string
-            $value = maybe_unserialize($meta['value']);
+            $value = $this->maybe_unserialize($meta['value']);
 
             add_term_meta($term_id, wp_slash($key), wp_slash_strings_only($value));
 
@@ -599,24 +626,30 @@ class HDI_Import extends WP_Importer {
      * is already noted as imported or a post with the same title and date already exists.
      * Note that new/updated terms, comments and meta are imported for the last of the above.
      */
-    function process_posts() {
+    public function process_posts() {
         $this->posts = apply_filters('wp_import_posts', $this->posts);
 
         foreach ($this->posts as $post) {
             $post = apply_filters('wp_import_post_data_raw', $post);
 
             if (!post_type_exists($post['post_type'])) {
-                printf(__('Failed to import &#8220;%s&#8221;: Invalid post type %s', 'hashthemes-demo-importer'), esc_html($post['post_title']), esc_html($post['post_type']));
+                printf(
+                    __('Failed to import &#8220;%1$s&#8221;: Invalid post type %2$s', 'hashthemes-demo-importer'),
+                    esc_html($post['post_title']),
+                    esc_html($post['post_type'])
+                );
                 echo '<br />';
                 do_action('wp_import_post_exists', $post);
                 continue;
             }
 
-            if (isset($this->processed_posts[$post['post_id']]) && !empty($post['post_id']))
+            if (isset($this->processed_posts[$post['post_id']]) && !empty($post['post_id'])) {
                 continue;
+            }
 
-            if ($post['status'] == 'auto-draft')
+            if ('auto-draft' == $post['status']) {
                 continue;
+            }
 
             if ('nav_menu_item' == $post['post_type']) {
                 $this->process_menu_item($post);
@@ -625,7 +658,7 @@ class HDI_Import extends WP_Importer {
 
             $post_type_object = get_post_type_object($post['post_type']);
 
-            $post_exists = post_exists($post['post_title'], '', $post['post_date']);
+            $post_exists = post_exists($post['post_title'], '', $post['post_date'], $post['post_type']);
 
             /**
              * Filter ID of the existing post corresponding to post currently importing.
@@ -642,9 +675,10 @@ class HDI_Import extends WP_Importer {
             $post_exists = apply_filters('wp_import_existing_post', $post_exists, $post);
 
             if ($post_exists && get_post_type($post_exists) == $post['post_type']) {
-                printf(__('%s &#8220;%s&#8221; already exists.', 'hashthemes-demo-importer'), $post_type_object->labels->singular_name, esc_html($post['post_title']));
+                printf(__('%1$s &#8220;%2$s&#8221; already exists.', 'hashthemes-demo-importer'), $post_type_object->labels->singular_name, esc_html($post['post_title']));
                 echo '<br />';
-                $comment_post_ID = $post_id = $post_exists;
+                $comment_post_id = $post_exists;
+                $post_id = $post_exists;
                 $this->processed_posts[intval($post['post_id'])] = intval($post_exists);
             } else {
                 $post_parent = (int) $post['post_parent'];
@@ -661,10 +695,11 @@ class HDI_Import extends WP_Importer {
 
                 // map the post author
                 $author = sanitize_user($post['post_author'], true);
-                if (isset($this->author_mapping[$author]))
+                if (isset($this->author_mapping[$author])) {
                     $author = $this->author_mapping[$author];
-                else
+                } else {
                     $author = (int) get_current_user_id();
+                }
 
                 $postdata = array(
                     'import_id' => $post['post_id'],
@@ -682,10 +717,10 @@ class HDI_Import extends WP_Importer {
                     'post_parent' => $post_parent,
                     'menu_order' => $post['menu_order'],
                     'post_type' => $post['post_type'],
-                    'post_password' => $post['post_password']
+                    'post_password' => $post['post_password'],
                 );
 
-                $original_post_ID = $post['post_id'];
+                $original_post_id = $post['post_id'];
                 $postdata = apply_filters('wp_import_post_data_processed', $postdata, $post);
 
                 $postdata = wp_slash($postdata);
@@ -698,37 +733,47 @@ class HDI_Import extends WP_Importer {
                     $postdata['upload_date'] = $post['post_date'];
                     if (isset($post['postmeta'])) {
                         foreach ($post['postmeta'] as $meta) {
-                            if ($meta['key'] == '_wp_attached_file') {
-                                if (preg_match('%^[0-9]{4}/[0-9]{2}%', $meta['value'], $matches))
+                            if ('_wp_attached_file' == $meta['key']) {
+                                if (preg_match('%^[0-9]{4}/[0-9]{2}%', $meta['value'], $matches)) {
                                     $postdata['upload_date'] = $matches[0];
+                                }
                                 break;
                             }
                         }
                     }
 
-                    $comment_post_ID = $post_id = $this->process_attachment($postdata, $remote_url);
+                    $comment_post_id = $this->process_attachment($postdata, $remote_url);
+                    $post_id = $comment_post_id;
                 } else {
-                    $comment_post_ID = $post_id = wp_insert_post($postdata, true);
-                    do_action('wp_import_insert_post', $post_id, $original_post_ID, $postdata, $post);
+                    $comment_post_id = wp_insert_post($postdata, true);
+                    $post_id = $comment_post_id;
+                    do_action('wp_import_insert_post', $post_id, $original_post_id, $postdata, $post);
                 }
 
                 if (is_wp_error($post_id)) {
-                    printf(__('Failed to import %s &#8220;%s&#8221;', 'hashthemes-demo-importer'), $post_type_object->labels->singular_name, esc_html($post['post_title']));
-                    if (defined('IMPORT_DEBUG') && IMPORT_DEBUG)
+                    printf(
+                        __('Failed to import %1$s &#8220;%2$s&#8221;', 'hashthemes-demo-importer'),
+                        $post_type_object->labels->singular_name,
+                        esc_html($post['post_title'])
+                    );
+                    if (defined('IMPORT_DEBUG') && IMPORT_DEBUG) {
                         echo ': ' . $post_id->get_error_message();
+                    }
                     echo '<br />';
                     continue;
                 }
 
-                if ($post['is_sticky'] == 1)
+                if (1 == $post['is_sticky']) {
                     stick_post($post_id);
+                }
             }
 
             // map pre-import ID to local ID
             $this->processed_posts[intval($post['post_id'])] = (int) $post_id;
 
-            if (!isset($post['terms']))
+            if (!isset($post['terms'])) {
                 $post['terms'] = array();
+            }
 
             $post['terms'] = apply_filters('wp_import_post_terms', $post['terms'], $post_id, $post);
 
@@ -746,9 +791,10 @@ class HDI_Import extends WP_Importer {
                             $term_id = $t['term_id'];
                             do_action('wp_import_insert_term', $t, $term, $post_id, $post);
                         } else {
-                            printf(__('Failed to import %s %s', 'hashthemes-demo-importer'), esc_html($taxonomy), esc_html($term['name']));
-                            if (defined('IMPORT_DEBUG') && IMPORT_DEBUG)
+                            printf(__('Failed to import %1$s %2$s', 'hashthemes-demo-importer'), esc_html($taxonomy), esc_html($term['name']));
+                            if (defined('IMPORT_DEBUG') && IMPORT_DEBUG) {
                                 echo ': ' . $t->get_error_message();
+                            }
                             echo '<br />';
                             do_action('wp_import_insert_term_failed', $t, $term, $post_id, $post);
                             continue;
@@ -764,8 +810,9 @@ class HDI_Import extends WP_Importer {
                 unset($post['terms'], $terms_to_set);
             }
 
-            if (!isset($post['comments']))
+            if (!isset($post['comments'])) {
                 $post['comments'] = array();
+            }
 
             $post['comments'] = apply_filters('wp_import_post_comments', $post['comments'], $post_id, $post);
 
@@ -775,7 +822,7 @@ class HDI_Import extends WP_Importer {
                 $inserted_comments = array();
                 foreach ($post['comments'] as $comment) {
                     $comment_id = $comment['comment_id'];
-                    $newcomments[$comment_id]['comment_post_ID'] = $comment_post_ID;
+                    $newcomments[$comment_id]['comment_post_ID'] = $comment_post_id;
                     $newcomments[$comment_id]['comment_author'] = $comment['comment_author'];
                     $newcomments[$comment_id]['comment_author_email'] = $comment['comment_author_email'];
                     $newcomments[$comment_id]['comment_author_IP'] = $comment['comment_author_IP'];
@@ -787,8 +834,9 @@ class HDI_Import extends WP_Importer {
                     $newcomments[$comment_id]['comment_type'] = $comment['comment_type'];
                     $newcomments[$comment_id]['comment_parent'] = $comment['comment_parent'];
                     $newcomments[$comment_id]['commentmeta'] = isset($comment['commentmeta']) ? $comment['commentmeta'] : array();
-                    if (isset($this->processed_authors[$comment['comment_user_id']]))
+                    if (isset($this->processed_authors[$comment['comment_user_id']])) {
                         $newcomments[$comment_id]['user_id'] = $this->processed_authors[$comment['comment_user_id']];
+                    }
                 }
                 ksort($newcomments);
 
@@ -805,22 +853,23 @@ class HDI_Import extends WP_Importer {
 
                         $inserted_comments[$key] = wp_insert_comment($comment_data);
 
-                        do_action('wp_import_insert_comment', $inserted_comments[$key], $comment, $comment_post_ID, $post);
+                        do_action('wp_import_insert_comment', $inserted_comments[$key], $comment, $comment_post_id, $post);
 
                         foreach ($comment['commentmeta'] as $meta) {
-                            $value = maybe_unserialize($meta['value']);
+                            $value = $this->maybe_unserialize($meta['value']);
 
                             add_comment_meta($inserted_comments[$key], wp_slash($meta['key']), wp_slash_strings_only($value));
                         }
 
-                        $num_comments++;
+                        ++$num_comments;
                     }
                 }
                 unset($newcomments, $inserted_comments, $post['comments']);
             }
 
-            if (!isset($post['postmeta']))
+            if (!isset($post['postmeta'])) {
                 $post['postmeta'] = array();
+            }
 
             $post['postmeta'] = apply_filters('wp_import_post_meta', $post['postmeta'], $post_id, $post);
 
@@ -831,16 +880,17 @@ class HDI_Import extends WP_Importer {
                     $value = false;
 
                     if ('_edit_last' == $key) {
-                        if (isset($this->processed_authors[intval($meta['value'])]))
+                        if (isset($this->processed_authors[intval($meta['value'])])) {
                             $value = $this->processed_authors[intval($meta['value'])];
-                        else
+                        } else {
                             $key = false;
+                        }
                     }
 
                     if ($key) {
                         // export gets meta straight from the DB so could have a serialized string
                         if (!$value) {
-                            $value = maybe_unserialize($meta['value']);
+                            $value = $this->maybe_unserialize($meta['value']);
                         }
 
                         add_post_meta($post_id, wp_slash($key), wp_slash_strings_only($value));
@@ -848,8 +898,9 @@ class HDI_Import extends WP_Importer {
                         do_action('import_post_meta', $post_id, $key, $value);
 
                         // if the post has a featured image, take note of this in case of remap
-                        if ('_thumbnail_id' == $key)
+                        if ('_thumbnail_id' == $key) {
                             $this->featured_images[$post_id] = (int) $value;
+                        }
                     }
                 }
             }
@@ -868,10 +919,11 @@ class HDI_Import extends WP_Importer {
      *
      * @param array $item Menu item details from WXR file
      */
-    function process_menu_item($item) {
+    public function process_menu_item($item) {
         // skip draft, orphaned menu items
-        if ('draft' == $item['status'])
+        if ('draft' == $item['status']) {
             return;
+        }
 
         $menu_slug = false;
         if (isset($item['terms'])) {
@@ -901,15 +953,14 @@ class HDI_Import extends WP_Importer {
         }
 
         foreach ($item['postmeta'] as $meta) {
-            global ${$meta['key']};
             ${$meta['key']} = $meta['value'];
         }
 
         if ('taxonomy' == $_menu_item_type && isset($this->processed_terms[intval($_menu_item_object_id)])) {
             $_menu_item_object_id = $this->processed_terms[intval($_menu_item_object_id)];
-        } else if ('post_type' == $_menu_item_type && isset($this->processed_posts[intval($_menu_item_object_id)])) {
+        } elseif ('post_type' == $_menu_item_type && isset($this->processed_posts[intval($_menu_item_object_id)])) {
             $_menu_item_object_id = $this->processed_posts[intval($_menu_item_object_id)];
-        } else if ('custom' != $_menu_item_type) {
+        } elseif ('custom' != $_menu_item_type) {
             // associated object is missing or not imported yet, we'll retry later
             $this->missing_menu_items[] = $item;
             return;
@@ -917,15 +968,16 @@ class HDI_Import extends WP_Importer {
 
         if (isset($this->processed_menu_items[intval($_menu_item_menu_item_parent)])) {
             $_menu_item_menu_item_parent = $this->processed_menu_items[intval($_menu_item_menu_item_parent)];
-        } else if ($_menu_item_menu_item_parent) {
+        } elseif ($_menu_item_menu_item_parent) {
             $this->menu_item_orphans[intval($item['post_id'])] = (int) $_menu_item_menu_item_parent;
             $_menu_item_menu_item_parent = 0;
         }
 
         // wp_update_nav_menu_item expects CSS classes as a space separated string
-        $_menu_item_classes = maybe_unserialize($_menu_item_classes);
-        if (is_array($_menu_item_classes))
+        $_menu_item_classes = $this->maybe_unserialize($_menu_item_classes);
+        if (is_array($_menu_item_classes)) {
             $_menu_item_classes = implode(' ', $_menu_item_classes);
+        }
 
         $args = array(
             'menu-item-object-id' => $_menu_item_object_id,
@@ -940,7 +992,7 @@ class HDI_Import extends WP_Importer {
             'menu-item-target' => $_menu_item_target,
             'menu-item-classes' => $_menu_item_classes,
             'menu-item-xfn' => $_menu_item_xfn,
-            'menu-item-status' => $item['status']
+            'menu-item-status' => $item['status'],
         );
 
         $id = wp_update_nav_menu_item($menu_id, 0, $args);
@@ -962,22 +1014,30 @@ class HDI_Import extends WP_Importer {
      * @param string $url URL to fetch attachment from
      * @return int|WP_Error Post ID on success, WP_Error otherwise
      */
-    function process_attachment($post, $url) {
-        if (!$this->fetch_attachments)
-            return new WP_Error('attachment_processing_error', __('Fetching attachments is not enabled', 'hashthemes-demo-importer'));
+    public function process_attachment($post, $url) {
+        if (!$this->fetch_attachments) {
+            return new WP_Error(
+                'attachment_processing_error',
+                __('Fetching attachments is not enabled', 'hashthemes-demo-importer')
+            );
+        }
 
         // if the URL is absolute, but does not contain address, then upload it assuming base_site_url
-        if (preg_match('|^/[\w\W]+$|', $url))
+        if (preg_match('|^/[\w\W]+$|', $url)) {
             $url = rtrim($this->base_url, '/') . $url;
+        }
 
         $upload = $this->fetch_remote_file($url, $post);
-        if (is_wp_error($upload))
+        if (is_wp_error($upload)) {
             return $upload;
+        }
 
-        if ($info = wp_check_filetype($upload['file']))
+        $info = wp_check_filetype($upload['file']);
+        if ($info) {
             $post['post_mime_type'] = $info['type'];
-        else
+        } else {
             return new WP_Error('attachment_processing_error', __('Invalid file type', 'hashthemes-demo-importer'));
+        }
 
         $post['guid'] = $upload['url'];
 
@@ -1006,9 +1066,13 @@ class HDI_Import extends WP_Importer {
      * @param array $post Attachment details
      * @return array|WP_Error Local file location details on success, WP_Error otherwise
      */
-    function fetch_remote_file_old($url, $post) {
+    public function fetch_remote_file($url, $post) {
         // Extract the file name from the URL.
-        $file_name = basename(parse_url($url, PHP_URL_PATH));
+        $path = parse_url($url, PHP_URL_PATH);
+        $file_name = '';
+        if (is_string($path)) {
+            $file_name = basename($path);
+        }
 
         if (!$file_name) {
             $file_name = md5($url);
@@ -1021,8 +1085,9 @@ class HDI_Import extends WP_Importer {
 
         // Fetch the remote URL and write it to the placeholder file.
         $remote_response = wp_safe_remote_get(
-            $url, array(
-                'timeout' => 3000,
+            $url,
+            array(
+                'timeout' => 300,
                 'stream' => true,
                 'filename' => $tmp_file_name,
                 'headers' => array(
@@ -1034,9 +1099,12 @@ class HDI_Import extends WP_Importer {
         if (is_wp_error($remote_response)) {
             @unlink($tmp_file_name);
             return new WP_Error(
-                'import_file_error', sprintf(
+                'import_file_error',
+                sprintf(
                     /* translators: 1: The WordPress error message. 2: The WordPress error code. */
-                    __('Request failed due to an error: %1$s (%2$s)', 'hashthemes-demo-importer'), esc_html($remote_response->get_error_message()), esc_html($remote_response->get_error_code())
+                    __('Request failed due to an error: %1$s (%2$s)', 'hashthemes-demo-importer'),
+                    esc_html($remote_response->get_error_message()),
+                    esc_html($remote_response->get_error_code())
                 )
             );
         }
@@ -1047,9 +1115,12 @@ class HDI_Import extends WP_Importer {
         if (200 !== $remote_response_code) {
             @unlink($tmp_file_name);
             return new WP_Error(
-                'import_file_error', sprintf(
+                'import_file_error',
+                sprintf(
                     /* translators: 1: The HTTP error message. 2: The HTTP error code. */
-                    __('Remote server returned the following unexpected result: %1$s (%2$s)', 'hashthemes-demo-importer'), get_status_header_desc($remote_response_code), esc_html($remote_response_code)
+                    __('Remote server returned the following unexpected result: %1$s (%2$s)', 'hashthemes-demo-importer'),
+                    get_status_header_desc($remote_response_code),
+                    esc_html($remote_response_code)
                 )
             );
         }
@@ -1143,60 +1214,9 @@ class HDI_Import extends WP_Importer {
         $this->url_remap[$url] = $upload['url'];
         $this->url_remap[$post['guid']] = $upload['url']; // r13735, really needed?
         // keep track of the destination if the remote url is redirected somewhere else
-        if (isset($headers['x-final-location']) && $headers['x-final-location'] != $url)
+        if (isset($headers['x-final-location']) && $headers['x-final-location'] != $url) {
             $this->url_remap[$headers['x-final-location']] = $upload['url'];
-
-        return $upload;
-    }
-
-    function fetch_remote_file($url, $post) {
-        // extract the file name and extension from the url
-        $file_name = basename($url);
-
-        // get placeholder file in the upload dir with a unique, sanitized filename
-        $upload = wp_upload_bits($file_name, 0, '', $post['upload_date']);
-        if ($upload['error'])
-            return new WP_Error('upload_dir_error', $upload['error']);
-
-        // fetch the remote url and write it to the placeholder file
-        $headers = wp_get_http($url, $upload['file']);
-
-        // request failed
-        if (!$headers) {
-            @unlink($upload['file']);
-            return new WP_Error('import_file_error', __('Remote server did not respond', 'hashthemes-demo-importer'));
         }
-
-        // make sure the fetch was successful
-        if ($headers['response'] != '200') {
-            @unlink($upload['file']);
-            return new WP_Error('import_file_error', sprintf(__('Remote server returned error response %1$d %2$s', 'hashthemes-demo-importer'), esc_html($headers['response']), get_status_header_desc($headers['response'])));
-        }
-
-        $filesize = filesize($upload['file']);
-
-        if (isset($headers['content-length']) && $filesize != $headers['content-length']) {
-            @unlink($upload['file']);
-            return new WP_Error('import_file_error', __('Remote file is incorrect size', 'hashthemes-demo-importer'));
-        }
-
-        if (0 == $filesize) {
-            @unlink($upload['file']);
-            return new WP_Error('import_file_error', __('Zero size file downloaded', 'hashthemes-demo-importer'));
-        }
-
-        $max_size = (int) $this->max_attachment_size();
-        if (!empty($max_size) && $filesize > $max_size) {
-            @unlink($upload['file']);
-            return new WP_Error('import_file_error', sprintf(__('Remote file is too large, limit is %s', 'hashthemes-demo-importer'), size_format($max_size)));
-        }
-
-        // keep track of the old and new urls so we can substitute them later
-        $this->url_remap[$url] = $upload['url'];
-        $this->url_remap[$post['guid']] = $upload['url']; // r13735, really needed?
-        // keep track of the destination if the remote url is redirected somewhere else
-        if (isset($headers['x-final-location']) && $headers['x-final-location'] != $url)
-            $this->url_remap[$headers['x-final-location']] = $upload['url'];
 
         return $upload;
     }
@@ -1208,16 +1228,19 @@ class HDI_Import extends WP_Importer {
      * so try again. Similarly for child menu items and menu items which were missing
      * the object (e.g. post) they represent in the menu
      */
-    function backfill_parents() {
+    public function backfill_parents() {
         global $wpdb;
 
         // find parents for post orphans
         foreach ($this->post_orphans as $child_id => $parent_id) {
-            $local_child_id = $local_parent_id = false;
-            if (isset($this->processed_posts[$child_id]))
+            $local_child_id = false;
+            $local_parent_id = false;
+            if (isset($this->processed_posts[$child_id])) {
                 $local_child_id = $this->processed_posts[$child_id];
-            if (isset($this->processed_posts[$parent_id]))
+            }
+            if (isset($this->processed_posts[$parent_id])) {
                 $local_parent_id = $this->processed_posts[$parent_id];
+            }
 
             if ($local_child_id && $local_parent_id) {
                 $wpdb->update($wpdb->posts, array('post_parent' => $local_parent_id), array('ID' => $local_child_id), '%d', '%d');
@@ -1227,26 +1250,31 @@ class HDI_Import extends WP_Importer {
 
         // all other posts/terms are imported, retry menu items with missing associated object
         $missing_menu_items = $this->missing_menu_items;
-        foreach ($missing_menu_items as $item)
+        foreach ($missing_menu_items as $item) {
             $this->process_menu_item($item);
+        }
 
         // find parents for menu item orphans
         foreach ($this->menu_item_orphans as $child_id => $parent_id) {
-            $local_child_id = $local_parent_id = 0;
-            if (isset($this->processed_menu_items[$child_id]))
+            $local_child_id = 0;
+            $local_parent_id = 0;
+            if (isset($this->processed_menu_items[$child_id])) {
                 $local_child_id = $this->processed_menu_items[$child_id];
-            if (isset($this->processed_menu_items[$parent_id]))
+            }
+            if (isset($this->processed_menu_items[$parent_id])) {
                 $local_parent_id = $this->processed_menu_items[$parent_id];
+            }
 
-            if ($local_child_id && $local_parent_id)
+            if ($local_child_id && $local_parent_id) {
                 update_post_meta($local_child_id, '_menu_item_menu_item_parent', (int) $local_parent_id);
+            }
         }
     }
 
     /**
      * Use stored mapping information to update old attachment URLs
      */
-    function backfill_attachment_urls() {
+    public function backfill_attachment_urls() {
         global $wpdb;
         // make sure we do the longest urls first, in case one is a substring of another
         uksort($this->url_remap, array(&$this, 'cmpr_strlen'));
@@ -1262,14 +1290,15 @@ class HDI_Import extends WP_Importer {
     /**
      * Update _thumbnail_id meta to new, imported attachment IDs
      */
-    function remap_featured_images() {
+    public function remap_featured_images() {
         // cycle through posts that have a featured image
         foreach ($this->featured_images as $post_id => $value) {
             if (isset($this->processed_posts[$value])) {
                 $new_id = $this->processed_posts[$value];
                 // only update if there's a difference
-                if ($new_id != $value)
+                if ($new_id != $value) {
                     update_post_meta($post_id, '_thumbnail_id', $new_id);
+                }
             }
         }
     }
@@ -1280,13 +1309,13 @@ class HDI_Import extends WP_Importer {
      * @param string $file Path to WXR file for parsing
      * @return array Information gathered from the WXR file
      */
-    function parse($file) {
+    public function parse($file) {
         $parser = new HDI_WXR_Parser();
         return $parser->parse($file);
     }
 
     // Display import page title
-    function header() {
+    public function header() {
         echo '<div class="wrap">';
         echo '<h2>' . __('Import WordPress', 'hashthemes-demo-importer') . '</h2>';
 
@@ -1301,14 +1330,14 @@ class HDI_Import extends WP_Importer {
     }
 
     // Close div.wrap
-    function footer() {
+    public function footer() {
         echo '</div>';
     }
 
     /**
      * Display introductory text and file upload form
      */
-    function greet() {
+    public function greet() {
         echo '<div class="narrow">';
         echo '<p>' . __('Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site.', 'hashthemes-demo-importer') . '</p>';
         echo '<p>' . __('Choose a WXR (.xml) file to upload, then click Upload file and import.', 'hashthemes-demo-importer') . '</p>';
@@ -1322,11 +1351,12 @@ class HDI_Import extends WP_Importer {
      * @param string $key The meta key to check
      * @return string|bool The key if we do want to import, false if not
      */
-    function is_valid_meta_key($key) {
+    public function is_valid_meta_key($key) {
         // skip attachment metadata since we'll regenerate it from scratch
         // skip _edit_lock as not relevant for import
-        if (in_array($key, array('_wp_attached_file', '_wp_attachment_metadata', '_edit_lock')))
+        if (in_array($key, array('_wp_attached_file', '_wp_attachment_metadata', '_edit_lock'), true)) {
             return false;
+        }
         return $key;
     }
 
@@ -1336,7 +1366,7 @@ class HDI_Import extends WP_Importer {
      *
      * @return bool True if creating users is allowed
      */
-    function allow_create_users() {
+    public function allow_create_users() {
         return apply_filters('import_allow_create_users', true);
     }
 
@@ -1347,7 +1377,7 @@ class HDI_Import extends WP_Importer {
      *
      * @return bool True if downloading attachments is allowed
      */
-    function allow_fetch_attachments() {
+    public function allow_fetch_attachments() {
         return apply_filters('import_allow_fetch_attachments', true);
     }
 
@@ -1357,7 +1387,7 @@ class HDI_Import extends WP_Importer {
      *
      * @return int Maximum attachment file size to import
      */
-    function max_attachment_size() {
+    public function max_attachment_size() {
         return apply_filters('import_attachment_size_limit', 0);
     }
 
@@ -1365,12 +1395,12 @@ class HDI_Import extends WP_Importer {
      * Added to http_request_timeout filter to force timeout at 60 seconds during import
      * @return int 60
      */
-    function bump_request_timeout($val) {
+    public function bump_request_timeout($val) {
         return 60;
     }
 
     // return the difference in length between two strings
-    function cmpr_strlen($a, $b) {
+    public function cmpr_strlen($a, $b) {
         return strlen($b) - strlen($a);
     }
 
@@ -1407,7 +1437,7 @@ class HDI_Import extends WP_Importer {
      */
     protected static function get_filename_from_disposition($disposition_header) {
         // Get the filename.
-        $filename = NULL;
+        $filename = null;
 
         foreach ($disposition_header as $value) {
             $value = trim($value);
@@ -1455,10 +1485,10 @@ class HDI_Import extends WP_Importer {
      * @return string|null File extension if available, or null if not found.
      */
     protected static function get_file_extension_by_mime_type($mime_type) {
-        static $map = NULL;
+        static $map = null;
 
         if (is_array($map)) {
-            return isset($map[$mime_type]) ? $map[$mime_type] : NULL;
+            return isset($map[$mime_type]) ? $map[$mime_type] : null;
         }
 
         $mime_types = wp_get_mime_types();
@@ -1469,7 +1499,26 @@ class HDI_Import extends WP_Importer {
             $map[$type] = strtok($extensions, '|');
         }
 
-        return isset($map[$mime_type]) ? $map[$mime_type] : NULL;
+        return isset($map[$mime_type]) ? $map[$mime_type] : null;
     }
 
+    /**
+     * Unserializes data only if it was serialized.
+     *
+     * @since 0.8.4
+     *
+     * @param string $data Data that might be unserialized.
+     * @return mixed Unserialized data can be any type.
+     */
+    protected function maybe_unserialize($data) {
+        // Don't attempt to unserialize data that wasn't serialized going in.
+        if (is_serialized($data)) {
+            // Transform the serialized objects to a stdClass object.
+            $data = preg_replace('/O:\d+:"[^"]+":/', 'O:8:"stdClass":', $data);
+
+            return maybe_unserialize($data);
+        }
+
+        return $data;
+    }
 }
