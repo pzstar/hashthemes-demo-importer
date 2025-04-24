@@ -1035,8 +1035,8 @@ if (!class_exists('HDI_Importer')) {
             }
         }
 
-        public function plugin_installer_callback($path, $slug) {
-            $plugin_status = $this->plugin_status($path);
+        public function plugin_installer_callback($file_path, $slug) {
+            $plugin_status = $this->plugin_status($file_path);
 
             if ($plugin_status == 'install') {
                 // Include required libs for installation
