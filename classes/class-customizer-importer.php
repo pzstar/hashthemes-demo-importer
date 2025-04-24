@@ -33,15 +33,15 @@ class HDI_Customizer_Importer {
 
         // Data checks.
         if ('array' != gettype($data)) {
-            $error = __('Error importing settings! Please check that you uploaded a customizer export file.', 'hashthemes-demo-importer');
+            $error = esc_html__('Error importing settings! Please check that you uploaded a customizer export file.', 'hashthemes-demo-importer');
             return;
         }
         if (!isset($data['template']) || !isset($data['mods'])) {
-            $error = __('Error importing settings! Please check that you uploaded a customizer export file.', 'hashthemes-demo-importer');
+            $error = esc_html__('Error importing settings! Please check that you uploaded a customizer export file.', 'hashthemes-demo-importer');
             return;
         }
         if ($data['template'] != $template) {
-            $error = __('Error importing settings! The settings you uploaded are not for the current theme.', 'hashthemes-demo-importer');
+            $error = esc_html__('Error importing settings! The settings you uploaded are not for the current theme.', 'hashthemes-demo-importer');
             return;
         }
 

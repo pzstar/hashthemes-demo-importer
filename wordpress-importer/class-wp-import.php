@@ -106,8 +106,8 @@ class HDI_Import extends WP_Importer {
      */
     public function import_start($file) {
         if (!is_file($file)) {
-            echo '<p><strong>' . __('Sorry, there has been an error.', 'hashthemes-demo-importer') . '</strong><br />';
-            echo __('The file does not exist, please try again.', 'hashthemes-demo-importer') . '</p>';
+            echo '<p><strong>' . esc_html__('Sorry, there has been an error.', 'hashthemes-demo-importer') . '</strong><br />';
+            echo esc_html__('The file does not exist, please try again.', 'hashthemes-demo-importer') . '</p>';
             $this->footer();
             die();
         }
@@ -115,7 +115,7 @@ class HDI_Import extends WP_Importer {
         $import_data = $this->parse($file);
 
         if (is_wp_error($import_data)) {
-            echo '<p><strong>' . __('Sorry, there has been an error.', 'hashthemes-demo-importer') . '</strong><br />';
+            echo '<p><strong>' . esc_html__('Sorry, there has been an error.', 'hashthemes-demo-importer') . '</strong><br />';
             echo esc_html($import_data->get_error_message()) . '</p>';
             $this->footer();
             die();
@@ -150,8 +150,8 @@ class HDI_Import extends WP_Importer {
         wp_defer_term_counting(false);
         wp_defer_comment_counting(false);
 
-        echo '<p>' . __('All done.', 'hashthemes-demo-importer') . ' <a href="' . admin_url() . '">' . __('Have fun!', 'hashthemes-demo-importer') . '</a>' . '</p>';
-        echo '<p>' . __('Remember to update the passwords and roles of imported users.', 'hashthemes-demo-importer') . '</p>';
+        echo '<p>' . esc_html__('All done.', 'hashthemes-demo-importer') . ' <a href="' . admin_url() . '">' . esc_html__('Have fun!', 'hashthemes-demo-importer') . '</a>' . '</p>';
+        echo '<p>' . esc_html__('Remember to update the passwords and roles of imported users.', 'hashthemes-demo-importer') . '</p>';
 
         do_action('import_end');
     }
@@ -166,11 +166,11 @@ class HDI_Import extends WP_Importer {
         $file = wp_import_handle_upload();
 
         if (isset($file['error'])) {
-            echo '<p><strong>' . __('Sorry, there has been an error.', 'hashthemes-demo-importer') . '</strong><br />';
+            echo '<p><strong>' . esc_html__('Sorry, there has been an error.', 'hashthemes-demo-importer') . '</strong><br />';
             echo esc_html($file['error']) . '</p>';
             return false;
         } elseif (!file_exists($file['file'])) {
-            echo '<p><strong>' . __('Sorry, there has been an error.', 'hashthemes-demo-importer') . '</strong><br />';
+            echo '<p><strong>' . esc_html__('Sorry, there has been an error.', 'hashthemes-demo-importer') . '</strong><br />';
             printf(__('The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem.', 'hashthemes-demo-importer'), esc_html($file['file']));
             echo '</p>';
             return false;
@@ -179,7 +179,7 @@ class HDI_Import extends WP_Importer {
         $this->id = (int) $file['id'];
         $import_data = $this->parse($file['file']);
         if (is_wp_error($import_data)) {
-            echo '<p><strong>' . __('Sorry, there has been an error.', 'hashthemes-demo-importer') . '</strong><br />';
+            echo '<p><strong>' . esc_html__('Sorry, there has been an error.', 'hashthemes-demo-importer') . '</strong><br />';
             echo esc_html($import_data->get_error_message()) . '</p>';
             return false;
         }
@@ -313,7 +313,7 @@ class HDI_Import extends WP_Importer {
                 'name' => "user_map[$n]",
                 'id' => 'imported_authors_' . $n,
                 'multi' => true,
-                'show_option_all' => __('- Select -', 'hashthemes-demo-importer'),
+                'show_option_all' => esc_html__('- Select -', 'hashthemes-demo-importer'),
                 'show' => 'display_name_with_login',
                 'echo' => 0,
             )
@@ -634,7 +634,7 @@ class HDI_Import extends WP_Importer {
 
             if (!post_type_exists($post['post_type'])) {
                 printf(
-                    __('Failed to import &#8220;%1$s&#8221;: Invalid post type %2$s', 'hashthemes-demo-importer'),
+                    esc_html__('Failed to import &#8220;%1$s&#8221;: Invalid post type %2$s', 'hashthemes-demo-importer'),
                     esc_html($post['post_title']),
                     esc_html($post['post_type'])
                 );
@@ -752,7 +752,7 @@ class HDI_Import extends WP_Importer {
 
                 if (is_wp_error($post_id)) {
                     printf(
-                        __('Failed to import %1$s &#8220;%2$s&#8221;', 'hashthemes-demo-importer'),
+                        esc_html__('Failed to import %1$s &#8220;%2$s&#8221;', 'hashthemes-demo-importer'),
                         $post_type_object->labels->singular_name,
                         esc_html($post['post_title'])
                     );
@@ -1018,7 +1018,7 @@ class HDI_Import extends WP_Importer {
         if (!$this->fetch_attachments) {
             return new WP_Error(
                 'attachment_processing_error',
-                __('Fetching attachments is not enabled', 'hashthemes-demo-importer')
+                esc_html__('Fetching attachments is not enabled', 'hashthemes-demo-importer')
             );
         }
 
@@ -1036,7 +1036,7 @@ class HDI_Import extends WP_Importer {
         if ($info) {
             $post['post_mime_type'] = $info['type'];
         } else {
-            return new WP_Error('attachment_processing_error', __('Invalid file type', 'hashthemes-demo-importer'));
+            return new WP_Error('attachment_processing_error', esc_html__('Invalid file type', 'hashthemes-demo-importer'));
         }
 
         $post['guid'] = $upload['url'];
@@ -1080,7 +1080,7 @@ class HDI_Import extends WP_Importer {
 
         $tmp_file_name = wp_tempnam($file_name);
         if (!$tmp_file_name) {
-            return new WP_Error('import_no_file', __('Could not create temporary file.', 'hashthemes-demo-importer'));
+            return new WP_Error('import_no_file', esc_html__('Could not create temporary file.', 'hashthemes-demo-importer'));
         }
 
         // Fetch the remote URL and write it to the placeholder file.
@@ -1102,7 +1102,7 @@ class HDI_Import extends WP_Importer {
                 'import_file_error',
                 sprintf(
                     /* translators: 1: The WordPress error message. 2: The WordPress error code. */
-                    __('Request failed due to an error: %1$s (%2$s)', 'hashthemes-demo-importer'),
+                    esc_html__('Request failed due to an error: %1$s (%2$s)', 'hashthemes-demo-importer'),
                     esc_html($remote_response->get_error_message()),
                     esc_html($remote_response->get_error_code())
                 )
@@ -1118,7 +1118,7 @@ class HDI_Import extends WP_Importer {
                 'import_file_error',
                 sprintf(
                     /* translators: 1: The HTTP error message. 2: The HTTP error code. */
-                    __('Remote server returned the following unexpected result: %1$s (%2$s)', 'hashthemes-demo-importer'),
+                    esc_html__('Remote server returned the following unexpected result: %1$s (%2$s)', 'hashthemes-demo-importer'),
                     get_status_header_desc($remote_response_code),
                     esc_html($remote_response_code)
                 )
@@ -1130,19 +1130,19 @@ class HDI_Import extends WP_Importer {
         // Request failed.
         if (!$headers) {
             @unlink($tmp_file_name);
-            return new WP_Error('import_file_error', __('Remote server did not respond', 'hashthemes-demo-importer'));
+            return new WP_Error('import_file_error', esc_html__('Remote server did not respond', 'hashthemes-demo-importer'));
         }
 
         $filesize = (int) filesize($tmp_file_name);
 
         if (0 === $filesize) {
             @unlink($tmp_file_name);
-            return new WP_Error('import_file_error', __('Zero size file downloaded', 'hashthemes-demo-importer'));
+            return new WP_Error('import_file_error', esc_html__('Zero size file downloaded', 'hashthemes-demo-importer'));
         }
 
         if (!isset($headers['content-encoding']) && isset($headers['content-length']) && $filesize !== (int) $headers['content-length']) {
             @unlink($tmp_file_name);
-            return new WP_Error('import_file_error', __('Downloaded file has incorrect size', 'hashthemes-demo-importer'));
+            return new WP_Error('import_file_error', esc_html__('Downloaded file has incorrect size', 'hashthemes-demo-importer'));
         }
 
         $max_size = (int) $this->max_attachment_size();
@@ -1180,7 +1180,7 @@ class HDI_Import extends WP_Importer {
         }
 
         if ((!$type || !$ext) && !current_user_can('unfiltered_upload')) {
-            return new WP_Error('import_file_error', __('Sorry, this file type is not permitted for security reasons.', 'hashthemes-demo-importer'));
+            return new WP_Error('import_file_error', esc_html__('Sorry, this file type is not permitted for security reasons.', 'hashthemes-demo-importer'));
         }
 
         $uploads = wp_upload_dir($post['upload_date']);
@@ -1195,7 +1195,7 @@ class HDI_Import extends WP_Importer {
 
         if (!$move_new_file) {
             @unlink($tmp_file_name);
-            return new WP_Error('import_file_error', __('The uploaded file could not be moved', 'hashthemes-demo-importer'));
+            return new WP_Error('import_file_error', esc_html__('The uploaded file could not be moved', 'hashthemes-demo-importer'));
         }
 
         // Set correct file permissions.
@@ -1317,7 +1317,7 @@ class HDI_Import extends WP_Importer {
     // Display import page title
     public function header() {
         echo '<div class="wrap">';
-        echo '<h2>' . __('Import WordPress', 'hashthemes-demo-importer') . '</h2>';
+        echo '<h2>' . esc_html__('Import WordPress', 'hashthemes-demo-importer') . '</h2>';
 
         $updates = get_plugin_updates();
         $basename = plugin_basename(__FILE__);
@@ -1339,8 +1339,8 @@ class HDI_Import extends WP_Importer {
      */
     public function greet() {
         echo '<div class="narrow">';
-        echo '<p>' . __('Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site.', 'hashthemes-demo-importer') . '</p>';
-        echo '<p>' . __('Choose a WXR (.xml) file to upload, then click Upload file and import.', 'hashthemes-demo-importer') . '</p>';
+        echo '<p>' . esc_html__('Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site.', 'hashthemes-demo-importer') . '</p>';
+        echo '<p>' . esc_html__('Choose a WXR (.xml) file to upload, then click Upload file and import.', 'hashthemes-demo-importer') . '</p>';
         wp_import_upload_form('admin.php?import=wordpress&amp;step=1');
         echo '</div>';
     }

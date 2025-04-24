@@ -236,7 +236,7 @@ if (!class_exists('HDI_Demo_Importer')) {
                 wp_send_json(
                     array(
                         'success' => false,
-                        'message' => __('Missing File Location.', 'hashthemes-demo-importer')
+                        'message' => esc_html__('Missing File Location.', 'hashthemes-demo-importer')
                     )
                 );
             }
@@ -270,7 +270,7 @@ if (!class_exists('HDI_Demo_Importer')) {
                 wp_send_json(
                     array(
                         'success' => false,
-                        'message' => __('Error!! Plugin not activated.', 'hashthemes-demo-importer')
+                        'message' => esc_html__('Error!! Plugin not activated.', 'hashthemes-demo-importer')
                     )
                 );
             }

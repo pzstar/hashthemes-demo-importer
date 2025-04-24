@@ -113,28 +113,83 @@ $squarepress = array(
 );
 
 $total = array(
-    'agency' => array(
-        'name' => 'Agency - Customizer Version',
-        'external_url' => 'https://hashthemes.com/import-files/total/agency.zip',
-        'image' => 'https://hashthemes.com/import-files/total/screen/agency.jpg',
-        'preview_url' => 'https://demo.hashthemes.com/total/agency',
+    'hotel' => array(
+        'name' => 'Hotel - Elementor Version',
+        'external_url' => 'https://hashthemes.com/import-files/total/hotel.zip',
+        'image' => 'https://hashthemes.com/import-files/total/screen/hotel.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/total/hotel',
         'options_array' => array('sfm_settings'),
         'hash_forms' => array('form'),
         'menu_array' => array(
-            'primary' => 'Primary Menu'
+            'primary' => 'Main Menu'
         ),
-        'home_slug' => 'home-page',
+        'home_slug' => 'home',
         'blog_slug' => 'blog',
         'plugins' => array(
-            'simple-floating-menu' => array(
-                'name' => 'Simple Floating Menu',
+            'elementor' => array(
+                'name' => 'Elementor',
                 'source' => 'wordpress',
-                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
             ),
             'easy-elementor-addons' => array(
                 'name' => 'Easy Elementor Addons',
                 'source' => 'wordpress',
                 'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            ),
+            'wp-payment-form' => array(
+                'name' => 'Paymattic',
+                'source' => 'wordpress',
+                'file_path' => 'wp-payment-form/wp-payment-form.php',
+            )
+        )
+    ),
+    'spa' => array(
+        'name' => 'Spa - Elementor Version',
+        'external_url' => 'https://hashthemes.com/import-files/total/spa.zip',
+        'image' => 'https://hashthemes.com/import-files/total/screen/spa.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/total/spa',
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'menu_array' => array(
+            'primary' => 'Main Menu'
+        ),
+        'home_slug' => 'home',
+        'blog_slug' => 'blog',
+        'plugins' => array(
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
+            'hash-elements' => array(
+                'name' => 'Hash Elements',
+                'source' => 'wordpress',
+                'file_path' => 'hash-elements/hash-elements.php'
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
@@ -143,17 +198,17 @@ $total = array(
             )
         )
     ),
-    'el-agency' => array(
-        'name' => 'Agency - Elementor Version',
-        'external_url' => 'https://hashthemes.com/import-files/total/el-agency.zip',
-        'image' => 'https://hashthemes.com/import-files/total/screen/agency.jpg',
-        'preview_url' => 'https://demo.hashthemes.com/total/el-agency',
+    'constructions' => array(
+        'name' => 'Construction - Elementor Version',
+        'external_url' => 'https://hashthemes.com/import-files/total/constructions.zip',
+        'image' => 'https://hashthemes.com/import-files/total/screen/construction.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/total/construction',
         'options_array' => array('sfm_settings'),
         'hash_forms' => array('form'),
         'menu_array' => array(
-            'primary' => 'Primary Menu'
+            'primary' => 'Main Menu'
         ),
-        'home_slug' => 'home-page',
+        'home_slug' => 'home',
         'blog_slug' => 'blog',
         'plugins' => array(
             'elementor' => array(
@@ -310,62 +365,47 @@ $total = array(
             )
         )
     ),
-    'hotel' => array(
-        'name' => 'Hotel - Elementor Version',
-        'external_url' => 'https://hashthemes.com/import-files/total/hotel.zip',
-        'image' => 'https://hashthemes.com/import-files/total/screen/hotel.jpg',
-        'preview_url' => 'https://demo.hashthemes.com/total/hotel',
+    'agency' => array(
+        'name' => 'Agency - Customizer Version',
+        'external_url' => 'https://hashthemes.com/import-files/total/agency.zip',
+        'image' => 'https://hashthemes.com/import-files/total/screen/agency.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/total/agency',
         'options_array' => array('sfm_settings'),
         'hash_forms' => array('form'),
         'menu_array' => array(
-            'primary' => 'Main Menu'
+            'primary' => 'Primary Menu'
         ),
-        'home_slug' => 'home',
+        'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
-            'elementor' => array(
-                'name' => 'Elementor',
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
-                'file_path' => 'elementor/elementor.php',
-            ),
-            'hash-elements' => array(
-                'name' => 'Hash Elements',
-                'source' => 'wordpress',
-                'file_path' => 'hash-elements/hash-elements.php'
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'easy-elementor-addons' => array(
                 'name' => 'Easy Elementor Addons',
                 'source' => 'wordpress',
                 'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
-            'simple-floating-menu' => array(
-                'name' => 'Simple Floating Menu',
-                'source' => 'wordpress',
-                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
-            ),
             'hash-form' => array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
-            ),
-            'wp-payment-form' => array(
-                'name' => 'Paymattic',
-                'source' => 'wordpress',
-                'file_path' => 'wp-payment-form/wp-payment-form.php',
             )
         )
     ),
-    'spa' => array(
-        'name' => 'Spa - Elementor Version',
-        'external_url' => 'https://hashthemes.com/import-files/total/spa.zip',
-        'image' => 'https://hashthemes.com/import-files/total/screen/spa.jpg',
-        'preview_url' => 'https://demo.hashthemes.com/total/spa',
+    'el-agency' => array(
+        'name' => 'Agency - Elementor Version',
+        'external_url' => 'https://hashthemes.com/import-files/total/el-agency.zip',
+        'image' => 'https://hashthemes.com/import-files/total/screen/agency.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/total/el-agency',
         'options_array' => array('sfm_settings'),
         'hash_forms' => array('form'),
         'menu_array' => array(
-            'primary' => 'Main Menu'
+            'primary' => 'Primary Menu'
         ),
-        'home_slug' => 'home',
+        'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
             'elementor' => array(

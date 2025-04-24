@@ -94,7 +94,7 @@ if (!class_exists('HDI_Importer')) {
         public function fix_svg_file_check($data, $file, $filename, $mimes) {
             $ext = pathinfo($filename, PATHINFO_EXTENSION);
             if ($ext === 'svg') {
-                $data['ext']  = 'svg';
+                $data['ext'] = 'svg';
                 $data['type'] = 'image/svg+xml';
             }
             return $data;
@@ -246,7 +246,7 @@ if (!class_exists('HDI_Importer')) {
                         <?php
                         // Loop through Demos
                         foreach ($this->configFile as $demo_slug => $demo_pack) {
-                            $tags = $pagebuilders = $class = '';
+                            $tags = $pagebuilders = '';
                             if (isset($demo_pack['tags'])) {
                                 $tags = implode(' ', array_keys($demo_pack['tags']));
                             }
@@ -880,6 +880,11 @@ if (!class_exists('HDI_Importer')) {
 
             //Clear "uploads" folder
             $this->clear_uploads($this->uploads_dir['basedir']);
+
+            if (did_action('elementor/loaded')) {
+                $created_default_kit = Elementor\Plugin::$instance->kits_manager->create_default();
+                update_option('elementor_active_kit', $created_default_kit);
+            }
         }
 
         /*
@@ -1005,7 +1010,6 @@ if (!class_exists('HDI_Importer')) {
             $plugins = $demo['plugins'];
 
             foreach ($plugins as $plugin_slug => $plugin) {
-                $name = isset($plugin['name']) ? $plugin['name'] : '';
                 $source = isset($plugin['source']) ? $plugin['source'] : '';
                 $file_path = isset($plugin['file_path']) ? $plugin['file_path'] : '';
                 $location = isset($plugin['location']) ? $plugin['location'] : '';
@@ -1024,7 +1028,6 @@ if (!class_exists('HDI_Importer')) {
             $plugins = $demo['plugins'];
 
             foreach ($plugins as $plugin_slug => $plugin) {
-                $name = isset($plugin['name']) ? $plugin['name'] : '';
                 $file_path = isset($plugin['file_path']) ? $plugin['file_path'] : '';
                 $plugin_status = $this->plugin_status($file_path);
 
@@ -1134,7 +1137,7 @@ if (!class_exists('HDI_Importer')) {
 
         public function activate_plugin($file_path) {
             if ($file_path) {
-                $activate = activate_plugin($file_path, '', false, true);
+                activate_plugin($file_path, '', false, true);
             }
         }
 
