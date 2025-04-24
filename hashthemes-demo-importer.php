@@ -1179,7 +1179,7 @@ if (!class_exists('HDI_Importer')) {
 
         public function add_plugin_action_link($links) {
             $custom['settings'] = sprintf(
-                '<a href="%s" aria-label="%s">%s</a>', esc_url(add_query_arg('page', 'hdi-demo-importer', admin_url('themes.php'))), esc_attr__('HashThemes Demo Importer', 'hash-form'), esc_html__('Import', 'hash-form')
+                '<a href="%s" aria-label="%s">%s</a>', esc_url(add_query_arg('page', 'hdi-demo-importer', admin_url('themes.php'))), esc_attr__('HashThemes Demo Importer', 'hash-form'), esc_html__('Import Demo', 'hashthemes-demo-importer')
             );
 
             return array_merge($custom, (array) $links);
