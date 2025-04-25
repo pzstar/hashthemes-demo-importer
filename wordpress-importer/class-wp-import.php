@@ -171,7 +171,7 @@ class HDI_Import extends WP_Importer {
             return false;
         } elseif (!file_exists($file['file'])) {
             echo '<p><strong>' . esc_html__('Sorry, there has been an error.', 'hashthemes-demo-importer') . '</strong><br />';
-            printf(__('The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem.', 'hashthemes-demo-importer'), esc_html($file['file']));
+            printf(esc_html__('The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem.', 'hashthemes-demo-importer'), esc_html($file['file']));
             echo '</p>';
             return false;
         }
@@ -187,7 +187,7 @@ class HDI_Import extends WP_Importer {
         $this->version = $import_data['version'];
         if ($this->version > $this->max_wxr_version) {
             echo '<div class="error"><p><strong>';
-            printf(__('This WXR file (version %s) may not be supported by this version of the importer. Please consider updating.', 'hashthemes-demo-importer'), esc_html($import_data['version']));
+            printf(esc_html__('This WXR file (version %s) may not be supported by this version of the importer. Please consider updating.', 'hashthemes-demo-importer'), esc_html($import_data['version']));
             echo '</strong></p></div>';
         }
 
@@ -212,7 +212,7 @@ class HDI_Import extends WP_Importer {
             foreach ($import_data['posts'] as $post) {
                 $login = sanitize_user($post['post_author'], true);
                 if (empty($login)) {
-                    printf(__('Failed to import author %s. Their posts will be attributed to the current user.', 'hashthemes-demo-importer'), esc_html($post['post_author']));
+                    printf(esc_html__('Failed to import author %s. Their posts will be attributed to the current user.', 'hashthemes-demo-importer'), esc_html($post['post_author']));
                     echo '<br />';
                     continue;
                 }
@@ -243,7 +243,7 @@ class HDI_Import extends WP_Importer {
                 <h3><?php _e('Assign Authors', 'hashthemes-demo-importer'); ?></h3>
                 <p><?php _e('To make it simpler for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site, such as your primary administrator account.', 'hashthemes-demo-importer'); ?></p>
                 <?php if ($this->allow_create_users()): ?>
-                    <p><?php printf(__('If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary.', 'hashthemes-demo-importer'), esc_html(get_option('default_role'))); ?></p>
+                    <p><?php printf(esc_html__('If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary.', 'hashthemes-demo-importer'), esc_html(get_option('default_role'))); ?></p>
                 <?php endif; ?>
                 <ol id="authors">
                     <?php foreach ($this->authors as $author): ?>
@@ -372,7 +372,7 @@ class HDI_Import extends WP_Importer {
                     }
                     $this->author_mapping[$santized_old_login] = $user_id;
                 } else {
-                    printf(__('Failed to create new user for %s. Their posts will be attributed to the current user.', 'hashthemes-demo-importer'), esc_html($this->authors[$old_login]['author_display_name']));
+                    printf(esc_html__('Failed to create new user for %s. Their posts will be attributed to the current user.', 'hashthemes-demo-importer'), esc_html($this->authors[$old_login]['author_display_name']));
                     if (defined('IMPORT_DEBUG') && IMPORT_DEBUG) {
                         echo ' ' . $user_id->get_error_message();
                     }
@@ -431,7 +431,7 @@ class HDI_Import extends WP_Importer {
                     $this->processed_terms[intval($cat['term_id'])] = $id;
                 }
             } else {
-                printf(__('Failed to import category %s', 'hashthemes-demo-importer'), esc_html($cat['category_nicename']));
+                printf(esc_html__('Failed to import category %s', 'hashthemes-demo-importer'), esc_html($cat['category_nicename']));
                 if (defined('IMPORT_DEBUG') && IMPORT_DEBUG) {
                     echo ': ' . $id->get_error_message();
                 }
@@ -482,7 +482,7 @@ class HDI_Import extends WP_Importer {
                     $this->processed_terms[intval($tag['term_id'])] = $id['term_id'];
                 }
             } else {
-                printf(__('Failed to import post tag %s', 'hashthemes-demo-importer'), esc_html($tag['tag_name']));
+                printf(esc_html__('Failed to import post tag %s', 'hashthemes-demo-importer'), esc_html($tag['tag_name']));
                 if (defined('IMPORT_DEBUG') && IMPORT_DEBUG) {
                     echo ': ' . $id->get_error_message();
                 }
@@ -543,7 +543,7 @@ class HDI_Import extends WP_Importer {
                     $this->processed_terms[intval($term['term_id'])] = $id['term_id'];
                 }
             } else {
-                printf(__('Failed to import %1$s %2$s', 'hashthemes-demo-importer'), esc_html($term['term_taxonomy']), esc_html($term['term_name']));
+                printf(esc_html__('Failed to import %1$s %2$s', 'hashthemes-demo-importer'), esc_html($term['term_taxonomy']), esc_html($term['term_name']));
                 if (defined('IMPORT_DEBUG') && IMPORT_DEBUG) {
                     echo ': ' . $id->get_error_message();
                 }
@@ -675,7 +675,7 @@ class HDI_Import extends WP_Importer {
             $post_exists = apply_filters('wp_import_existing_post', $post_exists, $post);
 
             if ($post_exists && get_post_type($post_exists) == $post['post_type']) {
-                printf(__('%1$s &#8220;%2$s&#8221; already exists.', 'hashthemes-demo-importer'), $post_type_object->labels->singular_name, esc_html($post['post_title']));
+                printf(esc_html__('%1$s &#8220;%2$s&#8221; already exists.', 'hashthemes-demo-importer'), $post_type_object->labels->singular_name, esc_html($post['post_title']));
                 echo '<br />';
                 $comment_post_id = $post_exists;
                 $post_id = $post_exists;
@@ -791,7 +791,7 @@ class HDI_Import extends WP_Importer {
                             $term_id = $t['term_id'];
                             do_action('wp_import_insert_term', $t, $term, $post_id, $post);
                         } else {
-                            printf(__('Failed to import %1$s %2$s', 'hashthemes-demo-importer'), esc_html($taxonomy), esc_html($term['name']));
+                            printf(esc_html__('Failed to import %1$s %2$s', 'hashthemes-demo-importer'), esc_html($taxonomy), esc_html($term['name']));
                             if (defined('IMPORT_DEBUG') && IMPORT_DEBUG) {
                                 echo ': ' . $t->get_error_message();
                             }
@@ -945,7 +945,7 @@ class HDI_Import extends WP_Importer {
 
         $menu_id = term_exists($menu_slug, 'nav_menu');
         if (!$menu_id) {
-            printf(__('Menu item skipped due to invalid menu slug: %s', 'hashthemes-demo-importer'), esc_html($menu_slug));
+            printf(esc_html__('Menu item skipped due to invalid menu slug: %s', 'hashthemes-demo-importer'), esc_html($menu_slug));
             echo '<br />';
             return;
         } else {
@@ -953,6 +953,7 @@ class HDI_Import extends WP_Importer {
         }
 
         foreach ($item['postmeta'] as $meta) {
+            global ${$meta['key']};
             ${$meta['key']} = $meta['value'];
         }
 
@@ -1148,7 +1149,7 @@ class HDI_Import extends WP_Importer {
         $max_size = (int) $this->max_attachment_size();
         if (!empty($max_size) && $filesize > $max_size) {
             @unlink($tmp_file_name);
-            return new WP_Error('import_file_error', sprintf(__('Remote file is too large, limit is %s', 'hashthemes-demo-importer'), size_format($max_size)));
+            return new WP_Error('import_file_error', sprintf(esc_html__('Remote file is too large, limit is %s', 'hashthemes-demo-importer'), size_format($max_size)));
         }
 
         // Override file name with Content-Disposition header value.
@@ -1324,7 +1325,7 @@ class HDI_Import extends WP_Importer {
         if (isset($updates[$basename])) {
             $update = $updates[$basename];
             echo '<div class="error"><p><strong>';
-            printf(__('A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files.', 'hashthemes-demo-importer'), $update->update->new_version);
+            printf(esc_html__('A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files.', 'hashthemes-demo-importer'), $update->update->new_version);
             echo '</strong></p></div>';
         }
     }
