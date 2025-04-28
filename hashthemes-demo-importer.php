@@ -1196,7 +1196,7 @@ if (!class_exists('HDI_Importer')) {
                 'reset_database' => esc_html__('Reseting database', 'hashthemes-demo-importer'),
                 'no_reset_database' => esc_html__('Database was not reset', 'hashthemes-demo-importer'),
                 'import_error' => sprintf(esc_html__('There was an error in importing demo. Please reload the page and try again. If it still did not work then please click %s for more detail.', 'hashthemes-demo-importer'), '<a href="https://hashthemes.com/demo-import-process-failed-why-does-demo-import-fail/" target="_blank">' . esc_html('here', 'hashthemes-demo-importer') . '</a>'),
-                'import_success' => '<h2>' . esc_html__('All done. Have fun!', 'hashthemes-demo-importer') . '</h2><p>' . esc_html__('Your website has been successfully setup.', 'hashthemes-demo-importer') . '</p><a class="button" target="_blank" href="' . esc_url(home_url('/')) . '">View your Website</a><a class="button" href="' . esc_url(admin_url('/admin.php?page=hdi-demo-importer')) . '">' . esc_html__('Go Back', 'hashthemes-demo-importer') . '</a>'
+                'import_success' => '<h2>' . esc_html__('All done. Have fun!', 'hashthemes-demo-importer') . '</h2><p>' . esc_html__('Your website has been successfully setup.', 'hashthemes-demo-importer') . '</p><a class="button" target="_blank" href="' . esc_url(home_url('/')) . '">' . esc_html__('View your Website', 'hashthemes-demo-importer') . '</a><a class="button" href="' . esc_url(admin_url('/admin.php?page=hdi-demo-importer')) . '">' . esc_html__('Go Back', 'hashthemes-demo-importer') . '</a>'
             );
 
             wp_enqueue_script('isotope-pkgd', HDI_ASSETS_URL . 'isotope.pkgd.js', array('jquery'), HDI_VERSION, true);
