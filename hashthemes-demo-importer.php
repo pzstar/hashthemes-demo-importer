@@ -3,7 +3,7 @@
  * Plugin Name: HashThemes Demo Importer
  * Plugin URI: https://github.com/pzstar/hashthemes-demo-importer
  * Description: Easily imports demo with just one click.
- * Version: 1.3.2
+ * Version: 1.3.6
  * Author: hashthemes
  * Author URI:  https://hashthemes.com
  * Text Domain: hashthemes-demo-importer
@@ -16,7 +16,7 @@ if (!defined('ABSPATH'))
     exit;
 
 
-define('HDI_VERSION', '1.3.2');
+define('HDI_VERSION', '1.3.6');
 
 define('HDI_FILE', __FILE__);
 define('HDI_PLUGIN_BASENAME', plugin_basename(HDI_FILE));
@@ -68,6 +68,11 @@ if (!class_exists('HDI_Importer')) {
             // Allow SVG uploads
             add_filter('upload_mimes', array($this, 'file_types_to_uploads'));
 
+            // Enable SVG for the WordPress Importer
+            //add_filter('wp_import_allowed_mime_types', array($this, 'file_types_to_uploads'));
+
+            //add_filter('wp_check_filetype_and_ext', array($this, 'fix_svg_file_check'), 10, 4);
+
             // Actions for the ajax call
             add_action('wp_ajax_hdi_install_demo', array($this, 'install_demo_process'));
             add_action('wp_ajax_hdi_install_plugin', array($this, 'install_plugin_process'));
@@ -84,6 +89,17 @@ if (!class_exists('HDI_Importer')) {
 
             add_filter('plugin_action_links_' . plugin_basename(HDI_FILE), array($this, 'add_plugin_action_link'), 10, 1);
         }
+
+        // 2. Bypass the filetype check error for SVGs
+        public function fix_svg_file_check($data, $file, $filename, $mimes) {
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            if ($ext === 'svg') {
+                $data['ext'] = 'svg';
+                $data['type'] = 'image/svg+xml';
+            }
+            return $data;
+        }
+
 
         /*
          * Loads the translation files
@@ -146,9 +162,7 @@ if (!class_exists('HDI_Importer')) {
          */
 
         function file_types_to_uploads($file_types) {
-            $new_filetypes = array();
-            $new_filetypes['svg'] = 'image/svg+xml';
-            $file_types = array_merge($file_types, $new_filetypes);
+            $file_types['svg'] = 'image/svg+xml';
             return $file_types;
         }
 
@@ -232,7 +246,7 @@ if (!class_exists('HDI_Importer')) {
                         <?php
                         // Loop through Demos
                         foreach ($this->configFile as $demo_slug => $demo_pack) {
-                            $tags = $pagebuilders = $class = '';
+                            $tags = $pagebuilders = '';
                             if (isset($demo_pack['tags'])) {
                                 $tags = implode(' ', array_keys($demo_pack['tags']));
                             }
@@ -461,8 +475,21 @@ if (!class_exists('HDI_Importer')) {
 
             $plugin_active_count = $this->plugin_active_count;
 
-            if (function_exists('hashform_network_create_table')) {
-                hashform_network_create_table(is_multisite() && is_network_admin());
+            if (class_exists('HashFormCreateTable')) {
+                global $wpdb;
+                if (is_multisite()) {
+                    // Get all blogs in the network and activate plugin on each one
+                    $blog_ids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+                    foreach ($blog_ids as $blog_id) {
+                        switch_to_blog($blog_id);
+                        $db = new HashFormCreateTable();
+                        $db->upgrade();
+                        restore_current_blog();
+                    }
+                } else {
+                    $db = new HashFormCreateTable();
+                    $db->upgrade();
+                }
             }
 
             if ($plugin_active_count > 0) {
@@ -866,6 +893,11 @@ if (!class_exists('HDI_Importer')) {
 
             //Clear "uploads" folder
             $this->clear_uploads($this->uploads_dir['basedir']);
+
+            if (did_action('elementor/loaded')) {
+                $created_default_kit = Elementor\Plugin::$instance->kits_manager->create_default();
+                update_option('elementor_active_kit', $created_default_kit);
+            }
         }
 
         /*
@@ -991,7 +1023,6 @@ if (!class_exists('HDI_Importer')) {
             $plugins = $demo['plugins'];
 
             foreach ($plugins as $plugin_slug => $plugin) {
-                $name = isset($plugin['name']) ? $plugin['name'] : '';
                 $source = isset($plugin['source']) ? $plugin['source'] : '';
                 $file_path = isset($plugin['file_path']) ? $plugin['file_path'] : '';
                 $location = isset($plugin['location']) ? $plugin['location'] : '';
@@ -1010,7 +1041,6 @@ if (!class_exists('HDI_Importer')) {
             $plugins = $demo['plugins'];
 
             foreach ($plugins as $plugin_slug => $plugin) {
-                $name = isset($plugin['name']) ? $plugin['name'] : '';
                 $file_path = isset($plugin['file_path']) ? $plugin['file_path'] : '';
                 $plugin_status = $this->plugin_status($file_path);
 
@@ -1021,8 +1051,8 @@ if (!class_exists('HDI_Importer')) {
             }
         }
 
-        public function plugin_installer_callback($path, $slug) {
-            $plugin_status = $this->plugin_status($path);
+        public function plugin_installer_callback($file_path, $slug) {
+            $plugin_status = $this->plugin_status($file_path);
 
             if ($plugin_status == 'install') {
                 // Include required libs for installation
@@ -1120,7 +1150,7 @@ if (!class_exists('HDI_Importer')) {
 
         public function activate_plugin($file_path) {
             if ($file_path) {
-                $activate = activate_plugin($file_path, '', is_multisite() && is_network_admin(), true);
+                activate_plugin($file_path, '', false, true);
             }
         }
 
@@ -1162,7 +1192,7 @@ if (!class_exists('HDI_Importer')) {
 
         public function add_plugin_action_link($links) {
             $custom['settings'] = sprintf(
-                '<a href="%s" aria-label="%s">%s</a>', esc_url(add_query_arg('page', 'hdi-demo-importer', admin_url('themes.php'))), esc_attr__('HashThemes Demo Importer', 'hash-form'), esc_html__('Import', 'hash-form')
+                '<a href="%s" aria-label="%s">%s</a>', esc_url(add_query_arg('page', 'hdi-demo-importer', admin_url('themes.php'))), esc_attr__('HashThemes Demo Importer', 'hash-form'), esc_html__('Import Demo', 'hashthemes-demo-importer')
             );
 
             return array_merge($custom, (array) $links);
@@ -1179,7 +1209,7 @@ if (!class_exists('HDI_Importer')) {
                 'reset_database' => esc_html__('Reseting database', 'hashthemes-demo-importer'),
                 'no_reset_database' => esc_html__('Database was not reset', 'hashthemes-demo-importer'),
                 'import_error' => sprintf(esc_html__('There was an error in importing demo. Please reload the page and try again. If it still did not work then please click %s for more detail.', 'hashthemes-demo-importer'), '<a href="https://hashthemes.com/demo-import-process-failed-why-does-demo-import-fail/" target="_blank">' . esc_html('here', 'hashthemes-demo-importer') . '</a>'),
-                'import_success' => '<h2>' . esc_html__('All done. Have fun!', 'hashthemes-demo-importer') . '</h2><p>' . esc_html__('Your website has been successfully setup.', 'hashthemes-demo-importer') . '</p><a class="button" target="_blank" href="' . esc_url(home_url('/')) . '">View your Website</a><a class="button" href="' . esc_url(admin_url('/admin.php?page=hdi-demo-importer')) . '">' . esc_html__('Go Back', 'hashthemes-demo-importer') . '</a>'
+                'import_success' => '<h2>' . esc_html__('All done. Have fun!', 'hashthemes-demo-importer') . '</h2><p>' . esc_html__('Your website has been successfully setup.', 'hashthemes-demo-importer') . '</p><a class="button" target="_blank" href="' . esc_url(home_url('/')) . '">' . esc_html__('View your Website', 'hashthemes-demo-importer') . '</a><a class="button" href="' . esc_url(admin_url('/admin.php?page=hdi-demo-importer')) . '">' . esc_html__('Go Back', 'hashthemes-demo-importer') . '</a>'
             );
 
             wp_enqueue_script('isotope-pkgd', HDI_ASSETS_URL . 'isotope.pkgd.js', array('jquery'), HDI_VERSION, true);
