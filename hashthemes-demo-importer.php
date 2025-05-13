@@ -475,8 +475,21 @@ if (!class_exists('HDI_Importer')) {
 
             $plugin_active_count = $this->plugin_active_count;
 
-            if (function_exists('hashform_network_create_table')) {
-                hashform_network_create_table(false);
+            if (class_exists('HashFormCreateTable')) {
+                global $wpdb;
+                if (is_multisite()) {
+                    // Get all blogs in the network and activate plugin on each one
+                    $blog_ids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+                    foreach ($blog_ids as $blog_id) {
+                        switch_to_blog($blog_id);
+                        $db = new HashFormCreateTable();
+                        $db->upgrade();
+                        restore_current_blog();
+                    }
+                } else {
+                    $db = new HashFormCreateTable();
+                    $db->upgrade();
+                }
             }
 
             if ($plugin_active_count > 0) {
