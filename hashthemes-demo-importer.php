@@ -3,7 +3,7 @@
  * Plugin Name: HashThemes Demo Importer
  * Plugin URI: https://github.com/pzstar/hashthemes-demo-importer
  * Description: Easily imports demo with just one click.
- * Version: 1.3.6
+ * Version: 1.3.7
  * Author: hashthemes
  * Author URI:  https://hashthemes.com
  * Text Domain: hashthemes-demo-importer
@@ -16,7 +16,7 @@ if (!defined('ABSPATH'))
     exit;
 
 
-define('HDI_VERSION', '1.3.6');
+define('HDI_VERSION', '1.3.7');
 
 define('HDI_FILE', __FILE__);
 define('HDI_PLUGIN_BASENAME', plugin_basename(HDI_FILE));
@@ -446,6 +446,10 @@ if (!class_exists('HDI_Importer')) {
             // Install Required Plugins
             $this->install_plugins($demo_slug);
 
+            if (function_exists('hashform_network_create_table')) {
+                hashform_network_create_table(is_multisite() && is_network_admin());
+            }
+
             $plugin_install_count = $this->plugin_install_count;
 
             if ($plugin_install_count > 0) {
@@ -474,10 +478,6 @@ if (!class_exists('HDI_Importer')) {
             $this->activate_plugins($demo_slug);
 
             $plugin_active_count = $this->plugin_active_count;
-
-            if (function_exists('hashform_network_create_table')) {
-                hashform_network_create_table(is_multisite() && is_network_admin());
-            }
 
             if ($plugin_active_count > 0) {
                 $this->ajax_response['complete_message'] = esc_html__('All the required plugins activated', 'hashthemes-demo-importer');
