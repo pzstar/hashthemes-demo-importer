@@ -17,7 +17,7 @@ $square = array(
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
-        'home_slug' => 'home-page',
+        'home_slug' => 'home',
         'blog_slug' => 'blog',
         'plugins' => array(
             'simple-floating-menu' => array(
@@ -47,7 +47,7 @@ $square = array(
         'menu_array' => array(
             'primary' => 'Primary Menu'
         ),
-        'home_slug' => 'home-page',
+        'home_slug' => 'home',
         'blog_slug' => 'blog',
         'plugins' => array(
             'simple-floating-menu' => array(

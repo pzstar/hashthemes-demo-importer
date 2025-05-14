@@ -445,11 +445,7 @@ if (!class_exists('HDI_Importer')) {
 
             // Install Required Plugins
             $this->install_plugins($demo_slug);
-
-            if (function_exists('hashform_network_create_table')) {
-                hashform_network_create_table(is_multisite() && is_network_admin());
-            }
-
+            
             $plugin_install_count = $this->plugin_install_count;
 
             if ($plugin_install_count > 0) {
@@ -968,12 +964,6 @@ if (!class_exists('HDI_Importer')) {
                         if ($page) {
                             update_option('show_on_front', 'page');
                             update_option('page_on_front', $page->ID);
-                        } else {
-                            $page = get_page_by_title('Home');
-                            if ($page) {
-                                update_option('show_on_front', 'page');
-                                update_option('page_on_front', $page->ID);
-                            }
                         }
                     }
 
@@ -1060,9 +1050,9 @@ if (!class_exists('HDI_Importer')) {
             }
         }
 
-        public function plugin_offline_installer_callback($path, $external_url) {
+        public function plugin_offline_installer_callback($file_path, $external_url) {
 
-            $plugin_status = $this->plugin_status($path);
+            $plugin_status = $this->plugin_status($file_path);
 
             if ($plugin_status == 'install') {
                 // Make sure we have the dependency.
@@ -1094,7 +1084,7 @@ if (!class_exists('HDI_Importer')) {
 
                 unzip_file($plugin, WP_PLUGIN_DIR);
 
-                $plugin_file = WP_PLUGIN_DIR . '/' . esc_html($path);
+                $plugin_file = WP_PLUGIN_DIR . '/' . esc_html($file_path);
 
                 $wp_filesystem->delete($plugin);
 
@@ -1138,6 +1128,10 @@ if (!class_exists('HDI_Importer')) {
         public function activate_plugin($file_path) {
             if ($file_path) {
                 activate_plugin($file_path, '', is_multisite() && is_network_admin(), true);
+
+                if ($file_path == 'hash-form/hash-form.php' && function_exists('hashform_network_create_table')) {
+                    hashform_network_create_table(is_multisite() && is_network_admin());
+                }
             }
         }
 
