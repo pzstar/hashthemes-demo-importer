@@ -1901,7 +1901,7 @@ $viral_mag = array(
         'menu_array' => array(
             'viral-mag-primary-menu' => 'Primary Menu'
         ),
-        'home_slug' => 'home',
+        'home_slug' => 'sample-page',
         'blog_slug' => 'blog',
         'plugins' => array(
             'hash-elements' => array(
