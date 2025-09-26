@@ -378,6 +378,11 @@ $total = array(
         'home_slug' => 'home-page',
         'blog_slug' => 'blog',
         'plugins' => array(
+            'elementor' => array(
+                'name' => 'Elementor',
+                'source' => 'wordpress',
+                'file_path' => 'elementor/elementor.php',
+            ),
             'simple-floating-menu' => array(
                 'name' => 'Simple Floating Menu',
                 'source' => 'wordpress',
