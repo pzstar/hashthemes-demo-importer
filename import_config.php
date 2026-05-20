@@ -34,6 +34,11 @@ $square = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         )
     ),
@@ -74,6 +79,11 @@ $square = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         )
     )
@@ -107,6 +117,11 @@ $squarepress = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         )
     )
@@ -151,10 +166,10 @@ $total = array(
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
             ),
-            'wp-payment-form' => array(
-                'name' => 'Paymattic',
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
                 'source' => 'wordpress',
-                'file_path' => 'wp-payment-form/wp-payment-form.php',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         )
     ),
@@ -195,6 +210,11 @@ $total = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         )
     ),
@@ -235,6 +255,11 @@ $total = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         )
     ),
@@ -281,6 +306,11 @@ $total = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         )
     ),
@@ -322,6 +352,11 @@ $total = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         )
     ),
@@ -362,6 +397,11 @@ $total = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         )
     ),
@@ -397,6 +437,11 @@ $total = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         )
     ),
@@ -437,6 +482,11 @@ $total = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         )
     ),
@@ -470,6 +520,11 @@ $totally = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         )
     )
@@ -503,6 +558,11 @@ $hashone = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         )
     )
@@ -542,6 +602,11 @@ $viral = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -594,6 +659,11 @@ $viral = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -636,6 +706,11 @@ $viral = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -678,6 +753,11 @@ $viral = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -730,6 +810,11 @@ $viral = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -772,6 +857,11 @@ $viral = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -824,6 +914,11 @@ $viral = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -866,6 +961,11 @@ $viral = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -918,6 +1018,11 @@ $viral = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -970,6 +1075,11 @@ $viral = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -1024,6 +1134,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -1075,6 +1190,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -1123,6 +1243,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
     ),
@@ -1169,6 +1294,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -1217,6 +1347,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
     ),
@@ -1259,6 +1394,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
     ),
@@ -1305,6 +1445,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -1353,6 +1498,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
     ),
@@ -1399,6 +1549,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -1447,6 +1602,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
     ),
@@ -1493,6 +1653,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -1541,6 +1706,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
     ),
@@ -1587,6 +1757,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -1630,6 +1805,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'pagebuilder' => array(
@@ -1679,6 +1859,11 @@ $viral_news = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -1733,6 +1918,11 @@ $viral_mag = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -1785,6 +1975,11 @@ $viral_mag = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -1836,6 +2031,11 @@ $viral_mag = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -1887,6 +2087,11 @@ $viral_mag = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -1938,6 +2143,11 @@ $viral_mag = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -1989,6 +2199,11 @@ $viral_mag = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -2033,6 +2248,11 @@ $viral_express = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -2074,6 +2294,11 @@ $viral_express = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -2115,6 +2340,11 @@ $viral_express = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -2156,6 +2386,11 @@ $viral_express = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -2197,6 +2432,11 @@ $viral_express = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -2238,6 +2478,11 @@ $viral_express = array(
                 'name' => 'Hash Form - Drag & Drop Form Builder',
                 'source' => 'wordpress',
                 'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
             )
         ),
         'tags' => array(
@@ -2247,6 +2492,285 @@ $viral_express = array(
             'customizer' => 'Customizer'
         )
     ),
+);
+
+$viral_times = array(
+    'flash' => array(
+        'name' => 'Flash',
+        'external_url' => 'https://hashthemes.com/import-files/viral-times/flash.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-times/screen/flash.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-times/',
+        'menu_array' => array(
+            'primary' => 'Primary Menu',
+        ),
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'home_slug' => 'home',
+        'blog_slug' => 'blogs',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        )
+    ),
+    'bulletin' => array(
+        'name' => 'Bulletin',
+        'external_url' => 'https://hashthemes.com/import-files/viral-times/bulletin.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-times/screen/bulletin.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-times/bulletin',
+        'menu_array' => array(
+            'primary' => 'Primary Menu',
+        ),
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'home_slug' => 'home',
+        'blog_slug' => 'blogs',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        ),
+    ),
+    'broadcast' => array(
+        'name' => 'Broadcast',
+        'external_url' => 'https://hashthemes.com/import-files/viral-times/broadcast.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-times/screen/broadcast.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-times/broadcast',
+        'menu_array' => array(
+            'primary' => 'Primary Menu',
+        ),
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'home_slug' => 'home',
+        'blog_slug' => 'blogs',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        ),
+    ),
+    'buzz' => array(
+        'name' => 'Buzz',
+        'external_url' => 'https://hashthemes.com/import-files/viral-times/buzz.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-times/screen/buzz.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-times/buzz',
+        'menu_array' => array(
+            'primary' => 'Primary Menu',
+        ),
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'home_slug' => 'home',
+        'blog_slug' => 'blogs',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        ),
+    ),
+    'headline' => array(
+        'name' => 'Headline',
+        'external_url' => 'https://hashthemes.com/import-files/viral-times/headline.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-times/screen/headline.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-times/headline',
+        'menu_array' => array(
+            'primary' => 'Primary Menu',
+        ),
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'home_slug' => 'home',
+        'blog_slug' => 'blogs',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        ),
+    ),
+    'trend' => array(
+        'name' => 'Trend',
+        'external_url' => 'https://hashthemes.com/import-files/viral-times/trend.zip',
+        'image' => 'https://hashthemes.com/import-files/viral-times/screen/trend.jpg',
+        'preview_url' => 'https://demo.hashthemes.com/viral-times/trend',
+        'menu_array' => array(
+            'primary' => 'Primary Menu',
+        ),
+        'options_array' => array('sfm_settings'),
+        'hash_forms' => array('form'),
+        'home_slug' => 'home',
+        'blog_slug' => 'blogs',
+        'plugins' => array(
+            'simple-floating-menu' => array(
+                'name' => 'Simple Floating Menu',
+                'source' => 'wordpress',
+                'file_path' => 'simple-floating-menu/simple-floating-menu.php',
+            ),
+            'smart-blocks' => array(
+                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'source' => 'wordpress',
+                'file_path' => 'smart-blocks/smart-blocks.php',
+            ),
+            'easy-elementor-addons' => array(
+                'name' => 'Easy Elementor Addons',
+                'source' => 'wordpress',
+                'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
+            ),
+            'hash-form' => array(
+                'name' => 'Hash Form - Drag & Drop Form Builder',
+                'source' => 'wordpress',
+                'file_path' => 'hash-form/hash-form.php',
+            ),
+            'onyx-dark-mode-switcher' => array(
+                'name' => 'Onyx Dark Mode Switcher',
+                'source' => 'wordpress',
+                'file_path' => 'onyx-dark-mode-switcher/onyx-dark-mode-switcher.php',
+            )
+        ),
+        'tags' => array(
+            'free' => 'Free'
+        ),
+        'pagebuilder' => array(
+            'customizer' => 'Customizer'
+        ),
+    )
 );
 
 $active_theme = str_replace('-', '_', get_option('stylesheet'));
