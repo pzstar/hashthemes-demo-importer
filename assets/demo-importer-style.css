@@ -71,7 +71,7 @@
     background-color: #fafafa;
     font-size: 15px;
     font-weight: 600;
-    line-height: 48px;
+    line-height: 60px;
     margin: 0;
     overflow: hidden;
     padding: 0 15px;
@@ -137,7 +137,7 @@
     background: rgba(244, 244, 244, 0.8);
     bottom: 0;
     display: none;
-    height: 48px;
+    height: 60px;
     opacity: 1;
     padding: 10px;
     position: absolute;
