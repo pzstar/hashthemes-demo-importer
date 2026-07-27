@@ -82,7 +82,14 @@
 
         $("html, body").animate({scrollTop: 0}, "slow");
 
+
+        var image = $('#' + demo).find('img').attr('src');
+        var title = $('#' + demo).find('h4').text();
+
         $('#hdi-modal-' + demo).hide();
+
+        $('.hdi-import-preview').find('img').attr('src', image);
+        $('.hdi-import-preview').find('h4').html(title);
         $('#hdi-import-progress').show();
 
         $('#hdi-import-progress .hdi-import-progress-message').html(hdi_ajax_data.prepare_importing).fadeIn();

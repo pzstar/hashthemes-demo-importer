@@ -2,8 +2,8 @@
 Contributors: hashthemes
 Tags: demo importer, hashthemes, import, one click import
 Requires at least: 6.3
-Tested up to: 6.9
-Stable tag: 1.4.2
+Tested up to: 7.0
+Stable tag: 1.4.3
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -103,6 +103,10 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
+= 1.4.3 - 27 Jul, 2026 =
+* Compatibility fixes with WordPress 7.0
+* Viral Times demos added
+
 = 1.4.2 - 20 May, 2025 =
 * New Demos added for Viral Times Theme
 
