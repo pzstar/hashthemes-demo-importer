@@ -51,6 +51,10 @@ if (!class_exists('HDI_Importer')) {
             require_once HDI_PATH . 'classes/class-customizer-importer.php';
             require_once HDI_PATH . 'classes/class-widget-importer.php';
 
+            if (defined('WP_CLI') && WP_CLI) {
+                require_once HDI_PATH . 'classes/class-cli.php';
+            }
+
             // Load translation files
             add_action('init', array($this, 'load_plugin_textdomain'));
 
@@ -84,6 +88,8 @@ if (!class_exists('HDI_Importer')) {
             add_action('wp_ajax_hdi_import_hashform', array($this, 'import_hashform_process'));
             add_action('wp_ajax_hdi_import_revslider', array($this, 'import_revslider_process'));
             add_action('wp_ajax_hdi_custom_import_hook', array($this, 'add_custom_import_hook'));
+            add_action('wp_ajax_hdi_import_log', array($this, 'import_log_process'));
+            add_action('wp_ajax_hdi_preflight', array($this, 'preflight_process'));
 
             add_filter('plugin_action_links_' . plugin_basename(HDI_FILE), array($this, 'add_plugin_action_link'), 10, 1);
         }
@@ -259,7 +265,10 @@ if (!class_exists('HDI_Importer')) {
                         asort($tags);
                         asort($pagebuilders);
 
-                        if (!empty($tags) || !empty($pagebuilders)) {
+                        // The bar is rendered even for a theme that defines no
+                        // tags, because the search box and the grid layout both
+                        // hang off it.
+                        if (count($config) > 1 || !empty($tags) || !empty($pagebuilders)) {
                             ?>
                             <div class="hdi-tab-filter hdi-clearfix">
                                 <?php
@@ -300,6 +309,11 @@ if (!class_exists('HDI_Importer')) {
                                     </div>
                                 <?php }
                                 ?>
+
+                                <div class="hdi-demo-search">
+                                    <label class="screen-reader-text" for="hdi-demo-search-input"><?php esc_html_e('Search demos', 'hashthemes-demo-importer'); ?></label>
+                                    <input type="search" id="hdi-demo-search-input" placeholder="<?php esc_attr_e('Search demos...', 'hashthemes-demo-importer'); ?>" />
+                                </div>
                             </div>
                             <?php
                         }
@@ -425,6 +439,51 @@ if (!class_exists('HDI_Importer')) {
                                             }
                                             ?>
                                         </div>
+
+                                        <div class="hdi-preflight" data-demo-slug="<?php echo esc_attr($demo_slug); ?>">
+                                            <h4><?php esc_html_e('Before you start', 'hashthemes-demo-importer'); ?></h4>
+                                            <p><?php esc_html_e('A quick look at whether this server can handle the import. Warnings do not stop you, but they are the usual reason an import fails halfway.', 'hashthemes-demo-importer'); ?></p>
+                                            <ul class="hdi-preflight-list">
+                                                <?php
+                                                foreach ($this->get_server_checks() as $check) {
+                                                    ?>
+                                                    <li class="hdi-check hdi-check-<?php echo esc_attr($check['status']); ?>">
+                                                        <span class="hdi-check-label"><?php echo esc_html($check['label']); ?></span>
+                                                        <span class="hdi-check-value"><?php echo esc_html($check['value']); ?></span>
+                                                        <?php if ('ok' !== $check['status'] && $check['message']) { ?>
+                                                            <span class="hdi-check-message"><?php echo esc_html($check['message']); ?></span>
+                                                        <?php } ?>
+                                                    </li>
+                                                    <?php
+                                                }
+                                                ?>
+                                                <li class="hdi-check hdi-check-pending hdi-check-remote">
+                                                    <span class="hdi-check-label"><?php esc_html_e('Demo package', 'hashthemes-demo-importer'); ?></span>
+                                                    <span class="hdi-check-value"><?php esc_html_e('Checking...', 'hashthemes-demo-importer'); ?></span>
+                                                    <span class="hdi-check-message"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="hdi-import-parts">
+                                            <h4><?php esc_html_e('What to Import', 'hashthemes-demo-importer'); ?></h4>
+                                            <p><?php esc_html_e('Everything is imported by default. Uncheck anything you would rather keep as it is.', 'hashthemes-demo-importer'); ?></p>
+                                            <ul class="hdi-import-parts-list">
+                                                <?php
+                                                foreach ($this->get_import_parts() as $part_key => $part_label) {
+                                                    ?>
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox" class="hdi-import-part" value="<?php echo esc_attr($part_key); ?>" checked="checked" />
+                                                            <?php echo esc_html($part_label); ?>
+                                                        </label>
+                                                    </li>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </ul>
+                                        </div>
+
                                         <div class="hdi-exclude-image-checkbox">
                                             <h4><?php esc_html_e('Exclude Images', 'hashthemes-demo-importer') ?></h4>
                                             <p><?php esc_html_e('Check this option if importing demo fails multiple times. Excluding image will make the demo import process super quick.', 'hashthemes-demo-importer') ?></p>
@@ -475,6 +534,31 @@ if (!class_exists('HDI_Importer')) {
                                     </div>
                                 </div>
                                 <div class="hdi-import-progress-message"></div>
+
+                                <div class="hdi-import-progress-bar">
+                                    <div class="hdi-import-progress-bar-fill" style="width: 0%;"></div>
+                                </div>
+                                <div class="hdi-import-progress-step"></div>
+
+                                <ul class="hdi-import-steps">
+                                    <?php
+                                    foreach ($this->get_import_steps() as $step) {
+                                        ?>
+                                        <li class="hdi-import-step hdi-step-pending" data-step="<?php echo esc_attr($step['action']); ?>">
+                                            <span class="hdi-import-step-label"><?php echo esc_html($step['label']); ?></span>
+                                        </li>
+                                        <?php
+                                    }
+                                    ?>
+                                </ul>
+
+                                <div class="hdi-import-actions">
+                                    <button type="button" class="button button-primary hdi-import-retry"><?php esc_html_e('Try Again', 'hashthemes-demo-importer'); ?></button>
+                                    <a class="button hdi-import-back" href="<?php echo esc_url(add_query_arg('page', 'hdi-demo-importer', admin_url('themes.php'))); ?>"><?php esc_html_e('Go Back', 'hashthemes-demo-importer'); ?></a>
+                                    <button type="button" class="button-link hdi-import-details-toggle"><?php esc_html_e('Show error details', 'hashthemes-demo-importer'); ?></button>
+                                </div>
+
+                                <pre class="hdi-import-details" style="display: none;"></pre>
                             </div>
 
                             <div class="hdi-import-preview">
@@ -490,6 +574,426 @@ if (!class_exists('HDI_Importer')) {
                 </div>
             </div>
             <?php
+        }
+
+        /*
+         *  The parts of a demo a user can choose to import. Plugins and the
+         *  download are not listed: nothing else works without them.
+         */
+
+        public function get_import_parts() {
+            return array(
+                'content' => esc_html__('Posts, pages, media & menus', 'hashthemes-demo-importer'),
+                'customizer' => esc_html__('Customizer settings', 'hashthemes-demo-importer'),
+                'options' => esc_html__('Theme options', 'hashthemes-demo-importer'),
+                'widgets' => esc_html__('Widgets', 'hashthemes-demo-importer'),
+                'forms' => esc_html__('Forms', 'hashthemes-demo-importer'),
+            );
+        }
+
+        /*
+         *  Reads the chosen parts off the request. A request that says nothing
+         *  about parts imports everything, so older callers keep working.
+         */
+
+        public function get_selected_parts() {
+            $valid = array_keys($this->get_import_parts());
+
+            if (!isset($_POST['parts'])) {
+                return $valid;
+            }
+
+            $parts = sanitize_text_field(wp_unslash($_POST['parts']));
+            $parts = array_filter(array_map('trim', explode(',', $parts)));
+
+            return array_values(array_intersect($parts, $valid));
+        }
+
+        public function is_part_selected($part, $parts) {
+            return is_array($parts) && in_array($part, $parts, true);
+        }
+
+        /*
+         *  The import chain in order, with a short name for each step. This is
+         *  the one place the order is defined: the progress checklist, the
+         *  progress bar and the wp-cli command all read it from here.
+         */
+
+        public function get_import_steps() {
+            return array(
+                array('action' => 'hdi_install_demo', 'label' => esc_html__('Preparing', 'hashthemes-demo-importer')),
+                array('action' => 'hdi_install_plugin', 'label' => esc_html__('Installing plugins', 'hashthemes-demo-importer')),
+                array('action' => 'hdi_activate_plugin', 'label' => esc_html__('Activating plugins', 'hashthemes-demo-importer')),
+                array('action' => 'hdi_download_files', 'label' => esc_html__('Downloading demo files', 'hashthemes-demo-importer')),
+                array('action' => 'hdi_import_xml', 'label' => esc_html__('Posts, pages & media', 'hashthemes-demo-importer')),
+                array('action' => 'hdi_import_customizer', 'label' => esc_html__('Customizer settings', 'hashthemes-demo-importer')),
+                array('action' => 'hdi_import_menu', 'label' => esc_html__('Menus', 'hashthemes-demo-importer')),
+                array('action' => 'hdi_import_theme_option', 'label' => esc_html__('Theme options', 'hashthemes-demo-importer')),
+                array('action' => 'hdi_import_widget', 'label' => esc_html__('Widgets', 'hashthemes-demo-importer')),
+                array('action' => 'hdi_import_hashform', 'label' => esc_html__('Forms', 'hashthemes-demo-importer')),
+                array('action' => 'hdi_import_revslider', 'label' => esc_html__('Revolution Slider', 'hashthemes-demo-importer')),
+                array('action' => 'hdi_custom_import_hook', 'label' => esc_html__('Finishing up', 'hashthemes-demo-importer')),
+            );
+        }
+
+        /* ===== Import log =====
+         *
+         *  The importers write warnings to the output buffer, which used to be
+         *  thrown away. Keeping it means a failed import can say why.
+         */
+
+        public function reset_log() {
+            delete_transient('hdi_import_log');
+        }
+
+        public function log($message) {
+            $message = trim(wp_strip_all_tags((string) $message));
+
+            if (!$message) {
+                return;
+            }
+
+            $log = get_transient('hdi_import_log');
+
+            if (!is_array($log)) {
+                $log = array();
+            }
+
+            $log[] = current_time('H:i:s') . ' - ' . $message;
+
+            // Bound it: a noisy import should not fill up the options table.
+            if (count($log) > 200) {
+                $log = array_slice($log, -200);
+            }
+
+            set_transient('hdi_import_log', $log, DAY_IN_SECONDS);
+        }
+
+        public function get_log_text() {
+            $log = get_transient('hdi_import_log');
+
+            return is_array($log) ? implode("\n", $log) : '';
+        }
+
+        /*
+         *  Runs a callback with the output buffer captured into the log, so a
+         *  notice printed by an importer is kept instead of discarded.
+         */
+
+        public function capture($callback) {
+            ob_start();
+            $returned = call_user_func($callback);
+            $output = ob_get_clean();
+
+            if (trim($output)) {
+                $this->log($output);
+            }
+
+            return $returned;
+        }
+
+        public function result($message, $error = false, $skipped = false) {
+            $this->log(($error ? 'ERROR: ' : '') . $message);
+
+            return array('error' => (bool) $error, 'message' => $message, 'skipped' => (bool) $skipped);
+        }
+
+        /* ===== Import runners =====
+         *
+         *  One method per step, each returning array('error', 'message'). The
+         *  ajax steps and the wp-cli command both drive these, so the two can
+         *  never drift apart.
+         */
+
+        public function run_reset() {
+            $this->database_reset();
+
+            return $this->result(esc_html__('Database reset complete', 'hashthemes-demo-importer'));
+        }
+
+        public function run_install_plugins($slug) {
+            $this->capture(function () use ($slug) {
+                $this->install_plugins($slug);
+            });
+
+            if ($this->plugin_install_count > 0) {
+                return $this->result(esc_html__('All the required plugins installed', 'hashthemes-demo-importer'));
+            }
+
+            return $this->result(esc_html__('No plugin required to install', 'hashthemes-demo-importer'));
+        }
+
+        public function run_activate_plugins($slug) {
+            $this->capture(function () use ($slug) {
+                $this->activate_plugins($slug);
+            });
+
+            if ($this->plugin_active_count > 0) {
+                return $this->result(esc_html__('All the required plugins activated', 'hashthemes-demo-importer'));
+            }
+
+            return $this->result(esc_html__('No plugin required to activate', 'hashthemes-demo-importer'));
+        }
+
+        public function run_download($slug) {
+            $demo = $this->get_demo($slug);
+            $external_url = isset($demo['external_url']) ? $demo['external_url'] : '';
+
+            if ($this->download_files($external_url)) {
+                return $this->result(esc_html__('All demo files downloaded', 'hashthemes-demo-importer'));
+            }
+
+            return $this->result(esc_html__('Demo import process failed. Demo files can not be downloaded', 'hashthemes-demo-importer'), true);
+        }
+
+        public function run_content($slug, $excludeImages, $parts) {
+            if (!$this->is_part_selected('content', $parts)) {
+                return $this->result(esc_html__('Content import skipped', 'hashthemes-demo-importer'), false, true);
+            }
+
+            if ('1' !== get_option('elementor_unfiltered_files_upload')) {
+                update_option('elementor_unfiltered_files_upload', '1');
+            }
+
+            $xml_filepath = $this->demo_upload_dir($slug) . '/content.xml';
+
+            if (!file_exists($xml_filepath)) {
+                return $this->result(esc_html__('Demo import process failed. No content file found', 'hashthemes-demo-importer'), true);
+            }
+
+            $this->importDemoContent($xml_filepath, $excludeImages, $slug);
+
+            return $this->result(esc_html__('All content imported', 'hashthemes-demo-importer'));
+        }
+
+        public function run_customizer($slug, $excludeImages, $parts) {
+            if (!$this->is_part_selected('customizer', $parts)) {
+                return $this->result(esc_html__('Customizer settings skipped', 'hashthemes-demo-importer'), false, true);
+            }
+
+            $customizer_filepath = $this->demo_upload_dir($slug) . '/customizer.dat';
+
+            if (!file_exists($customizer_filepath)) {
+                return $this->result(esc_html__('No customizer settings found', 'hashthemes-demo-importer'));
+            }
+
+            $this->capture(function () use ($customizer_filepath, $excludeImages) {
+                HDI_Customizer_Importer::import($customizer_filepath, $excludeImages);
+            });
+
+            return $this->result(esc_html__('Customizer settings imported', 'hashthemes-demo-importer'));
+        }
+
+        public function run_menus($slug, $parts) {
+            if (!$this->is_part_selected('content', $parts)) {
+                return $this->result(esc_html__('Menus skipped', 'hashthemes-demo-importer'), false, true);
+            }
+
+            $demo = $this->get_demo($slug);
+            $menu_array = isset($demo['menu_array']) ? $demo['menu_array'] : '';
+
+            if (!$menu_array) {
+                return $this->result(esc_html__('No menus saved', 'hashthemes-demo-importer'));
+            }
+
+            $this->setMenu($menu_array);
+
+            return $this->result(esc_html__('Menus saved', 'hashthemes-demo-importer'));
+        }
+
+        public function run_theme_options($slug, $parts) {
+            if (!$this->is_part_selected('options', $parts)) {
+                return $this->result(esc_html__('Theme options skipped', 'hashthemes-demo-importer'), false, true);
+            }
+
+            $demo = $this->get_demo($slug);
+            $options_array = isset($demo['options_array']) ? $demo['options_array'] : '';
+
+            if (!is_array($options_array)) {
+                return $this->result(esc_html__('No theme options found', 'hashthemes-demo-importer'));
+            }
+
+            foreach ($options_array as $theme_option) {
+                $option_filepath = $this->demo_upload_dir($slug) . '/' . $theme_option . '.json';
+
+                if (!file_exists($option_filepath)) {
+                    continue;
+                }
+
+                $data = file_get_contents($option_filepath);
+
+                if (!$data) {
+                    continue;
+                }
+
+                $decoded = json_decode($data, true);
+
+                // Never overwrite a live option with null from a truncated or
+                // malformed json file.
+                if (!is_null($decoded)) {
+                    update_option($theme_option, $decoded);
+                }
+            }
+
+            return $this->result(esc_html__('Theme options settings imported', 'hashthemes-demo-importer'));
+        }
+
+        public function run_widgets($slug, $parts) {
+            if (!$this->is_part_selected('widgets', $parts)) {
+                return $this->result(esc_html__('Widgets skipped', 'hashthemes-demo-importer'), false, true);
+            }
+
+            $widget_filepath = $this->demo_upload_dir($slug) . '/widget.wie';
+
+            if (!file_exists($widget_filepath)) {
+                return $this->result(esc_html__('No widgets found', 'hashthemes-demo-importer'));
+            }
+
+            $this->capture(function () use ($widget_filepath) {
+                HDI_Widget_Importer::import($widget_filepath);
+            });
+
+            return $this->result(esc_html__('Widgets imported', 'hashthemes-demo-importer'));
+        }
+
+        public function run_hash_forms($slug, $parts) {
+            if (!$this->is_part_selected('forms', $parts)) {
+                return $this->result(esc_html__('Forms skipped', 'hashthemes-demo-importer'), false, true);
+            }
+
+            $demo = $this->get_demo($slug);
+            $hash_forms = isset($demo['hash_forms']) ? $demo['hash_forms'] : '';
+
+            if (!is_array($hash_forms) || !$hash_forms) {
+                return $this->result(esc_html__('No Form files found', 'hashthemes-demo-importer'));
+            }
+
+            if (!class_exists('HashFormBuilder')) {
+                return $this->result(esc_html__('Hash Form plugin not installed', 'hashthemes-demo-importer'));
+            }
+
+            if (class_exists('HashFormCreateTable')) {
+                new HashFormCreateTable();
+            }
+
+            foreach ($hash_forms as $hash_form) {
+                $filepath = $this->demo_upload_dir($slug) . '/' . $hash_form . '.json';
+
+                if (!file_exists($filepath)) {
+                    continue;
+                }
+
+                $imdat = json_decode(file_get_contents($filepath), true);
+
+                // A malformed export used to fatal on the missing keys.
+                if (!is_array($imdat) || !isset($imdat['options']) || !is_array($imdat['options'])) {
+                    continue;
+                }
+
+                $options = $imdat['options'];
+
+                $form = array(
+                    'name' => isset($options['title']) ? esc_html($options['title']) : '',
+                    'description' => isset($options['description']) ? esc_html($options['description']) : '',
+                    'options' => $options,
+                    'status' => isset($imdat['status']) ? $imdat['status'] : '',
+                    'settings' => isset($imdat['settings']) ? $imdat['settings'] : '',
+                    'styles' => isset($imdat['styles']) ? $imdat['styles'] : '',
+                    'created_at' => current_time('mysql'),
+                );
+
+                $form_id = HashFormBuilder::create($form);
+
+                if (!isset($imdat['field']) || !is_array($imdat['field']) || !class_exists('HashFormFields')) {
+                    continue;
+                }
+
+                foreach ($imdat['field'] as $field) {
+                    if (!is_array($field)) {
+                        continue;
+                    }
+
+                    HashFormFields::create_row(
+                        array(
+                            'name' => isset($field['name']) ? $field['name'] : '',
+                            'description' => isset($field['description']) ? $field['description'] : '',
+                            'type' => isset($field['type']) ? $field['type'] : '',
+                            'default_value' => isset($field['default_value']) ? $field['default_value'] : '',
+                            'options' => isset($field['options']) ? $field['options'] : '',
+                            'field_order' => isset($field['field_order']) ? $field['field_order'] : 0,
+                            'form_id' => absint($form_id),
+                            'required' => isset($field['required']) ? $field['required'] : 0,
+                            'field_options' => isset($field['field_options']) ? $field['field_options'] : ''
+                        )
+                    );
+                }
+            }
+
+            return $this->result(esc_html__('Forms imported', 'hashthemes-demo-importer'));
+        }
+
+        public function has_revslider_file($slug) {
+            return file_exists($this->demo_upload_dir($slug) . '/revslider.zip');
+        }
+
+        public function run_revslider($slug, $parts) {
+            if (!$this->is_part_selected('content', $parts)) {
+                return $this->result(esc_html__('Revolution slider skipped', 'hashthemes-demo-importer'), false, true);
+            }
+
+            $sliderFile = $this->demo_upload_dir($slug) . '/revslider.zip';
+
+            if (!class_exists('RevSlider')) {
+                return $this->result(esc_html__('Revolution slider plugin not installed', 'hashthemes-demo-importer'));
+            }
+
+            $this->capture(function () use ($sliderFile) {
+                $slider = new RevSlider();
+                $slider->importSliderFromPost(true, true, $sliderFile);
+            });
+
+            return $this->result(esc_html__('Revolution slider installed', 'hashthemes-demo-importer'));
+        }
+
+        /*
+         *  Last step: hand over to anything hooked in, then tidy up after
+         *  ourselves.
+         */
+
+        public function run_finalize($slug) {
+            do_action('hdi_after_demo_import', array(
+                'slug' => $slug,
+                'file_path' => $this->demo_upload_dir($slug)
+            ));
+
+            $this->cleanup_after_import($slug);
+
+            update_option('hdi_last_imported_demo', array(
+                'slug' => $slug,
+                'time' => current_time('mysql'),
+            ));
+
+            return $this->result(esc_html__('Completed', 'hashthemes-demo-importer'));
+        }
+
+        /*
+         *  Post import housekeeping. Permalinks in particular: imported pages
+         *  404 until the rewrite rules are rebuilt.
+         */
+
+        public function cleanup_after_import($slug) {
+            flush_rewrite_rules();
+
+            if (did_action('elementor/loaded') && isset(Elementor\Plugin::$instance->files_manager)) {
+                Elementor\Plugin::$instance->files_manager->clear_cache();
+            }
+
+            // Themes that need the demo files afterwards can keep them.
+            if (apply_filters('hdi_delete_demo_files', true, $slug)) {
+                $this->clear_uploads($this->demo_upload_dir());
+            }
+
+            wp_cache_flush();
         }
 
         /*
@@ -519,330 +1023,123 @@ if (!class_exists('HDI_Importer')) {
         }
 
         /*
+         *  Finishes an ajax step: reports what happened and where to go next.
+         */
+
+        public function send_step($result, $demo_slug, $next_step = '', $next_step_message = '') {
+            if (!empty($result['error'])) {
+                $this->send_ajax_error($result['message']);
+            }
+
+            $this->ajax_response['complete_message'] = $result['message'];
+            $this->ajax_response['skipped'] = !empty($result['skipped']);
+            $this->ajax_response['demo'] = $demo_slug;
+            $this->ajax_response['excludeImages'] = $this->get_exclude_images();
+            $this->ajax_response['next_step'] = $next_step;
+            $this->ajax_response['next_step_message'] = $next_step_message;
+            $this->send_ajax_response();
+        }
+
+        /*
          *  Do the install on ajax call
          */
 
         function install_demo_process() {
-            // Get the demo content from the right file
             $demo_slug = $this->verify_ajax_request();
-            $excludeImages = $this->get_exclude_images();
+
+            // A fresh run, so previous diagnostics are not mixed in.
+            $this->reset_log();
+            $this->log(sprintf('Import started: %s', $demo_slug));
+
+            $result = $this->result('');
 
             if (isset($_POST['reset']) && $_POST['reset'] == 'true') {
-                $this->database_reset();
-                $this->ajax_response['complete_message'] = esc_html__('Database reset complete', 'hashthemes-demo-importer');
+                $result = $this->run_reset();
             }
 
-            $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['excludeImages'] = $excludeImages;
-            $this->ajax_response['next_step'] = 'hdi_install_plugin';
-            $this->ajax_response['next_step_message'] = esc_html__('Installing required plugins', 'hashthemes-demo-importer');
-            $this->send_ajax_response();
+            $this->send_step($result, $demo_slug, 'hdi_install_plugin', esc_html__('Installing required plugins', 'hashthemes-demo-importer'));
         }
 
         function install_plugin_process() {
             $demo_slug = $this->verify_ajax_request();
-            $excludeImages = $this->get_exclude_images();
+            $result = $this->run_install_plugins($demo_slug);
 
-            // Install Required Plugins
-            $this->install_plugins($demo_slug);
-
-            $plugin_install_count = $this->plugin_install_count;
-
-            if ($plugin_install_count > 0) {
-                $this->ajax_response['complete_message'] = esc_html__('All the required plugins installed', 'hashthemes-demo-importer');
-            } else {
-                $this->ajax_response['complete_message'] = esc_html__('No plugin required to install', 'hashthemes-demo-importer');
-            }
-
-            $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['next_step'] = 'hdi_activate_plugin';
-            $this->ajax_response['excludeImages'] = $excludeImages;
-            $this->ajax_response['next_step_message'] = esc_html__('Activating required plugins', 'hashthemes-demo-importer');
-            $this->send_ajax_response();
+            $this->send_step($result, $demo_slug, 'hdi_activate_plugin', esc_html__('Activating required plugins', 'hashthemes-demo-importer'));
         }
 
         function activate_plugin_process() {
             $demo_slug = $this->verify_ajax_request();
-            $excludeImages = $this->get_exclude_images();
+            $result = $this->run_activate_plugins($demo_slug);
 
-            // Activate Required Plugins
-            $this->activate_plugins($demo_slug);
-
-            $plugin_active_count = $this->plugin_active_count;
-
-            if ($plugin_active_count > 0) {
-                $this->ajax_response['complete_message'] = esc_html__('All the required plugins activated', 'hashthemes-demo-importer');
-            } else {
-                $this->ajax_response['complete_message'] = esc_html__('No plugin required to activate', 'hashthemes-demo-importer');
-            }
-
-            $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['excludeImages'] = $excludeImages;
-            $this->ajax_response['next_step'] = 'hdi_download_files';
-            $this->ajax_response['next_step_message'] = esc_html__('Downloading demo files', 'hashthemes-demo-importer');
-            $this->send_ajax_response();
+            $this->send_step($result, $demo_slug, 'hdi_download_files', esc_html__('Downloading demo files', 'hashthemes-demo-importer'));
         }
 
         function download_files_process() {
             $demo_slug = $this->verify_ajax_request();
-            $excludeImages = $this->get_exclude_images();
+            $result = $this->run_download($demo_slug);
 
-            $demo = $this->get_demo($demo_slug);
-            $external_url = isset($demo['external_url']) ? $demo['external_url'] : '';
-
-            $downloads = $this->download_files($external_url);
-            if ($downloads) {
-                $this->ajax_response['complete_message'] = esc_html__('All demo files downloaded', 'hashthemes-demo-importer');
-                $this->ajax_response['next_step'] = 'hdi_import_xml';
-                $this->ajax_response['next_step_message'] = esc_html__('Importing posts, pages and medias. It may take a bit longer time', 'hashthemes-demo-importer');
-            } else {
-                $this->ajax_response['error'] = true;
-                $this->ajax_response['error_message'] = esc_html__('Demo import process failed. Demo files can not be downloaded', 'hashthemes-demo-importer');
-            }
-
-            $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['excludeImages'] = $excludeImages;
-            $this->send_ajax_response();
+            $this->send_step($result, $demo_slug, 'hdi_import_xml', esc_html__('Importing posts, pages and medias. It may take a bit longer time', 'hashthemes-demo-importer'));
         }
 
         function import_xml_process() {
             $demo_slug = $this->verify_ajax_request();
-            $excludeImages = $this->get_exclude_images();
+            $result = $this->run_content($demo_slug, $this->get_exclude_images(), $this->get_selected_parts());
 
-            if ('1' !== get_option('elementor_unfiltered_files_upload')) {
-                update_option('elementor_unfiltered_files_upload', '1');
-            }
-
-            // Import XML content
-            $xml_filepath = $this->demo_upload_dir($demo_slug) . '/content.xml';
-
-            if (file_exists($xml_filepath)) {
-                $this->importDemoContent($xml_filepath, $excludeImages);
-                $this->ajax_response['complete_message'] = esc_html__('All content imported', 'hashthemes-demo-importer');
-                $this->ajax_response['next_step'] = 'hdi_import_customizer';
-                $this->ajax_response['next_step_message'] = esc_html__('Importing customizer settings', 'hashthemes-demo-importer');
-            } else {
-                $this->ajax_response['error'] = true;
-                $this->ajax_response['error_message'] = esc_html__('Demo import process failed. No content file found', 'hashthemes-demo-importer');
-            }
-
-            $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['excludeImages'] = $excludeImages;
-            $this->send_ajax_response();
+            $this->send_step($result, $demo_slug, 'hdi_import_customizer', esc_html__('Importing customizer settings', 'hashthemes-demo-importer'));
         }
 
         function import_customizer_process() {
             $demo_slug = $this->verify_ajax_request();
-            $excludeImages = $this->get_exclude_images();
+            $result = $this->run_customizer($demo_slug, $this->get_exclude_images(), $this->get_selected_parts());
 
-            $customizer_filepath = $this->demo_upload_dir($demo_slug) . '/customizer.dat';
-
-            if (file_exists($customizer_filepath)) {
-                ob_start();
-                HDI_Customizer_Importer::import($customizer_filepath, $excludeImages);
-                ob_end_clean();
-                $this->ajax_response['complete_message'] = esc_html__('Customizer settings imported', 'hashthemes-demo-importer');
-            } else {
-                $this->ajax_response['complete_message'] = esc_html__('No customizer settings found', 'hashthemes-demo-importer');
-            }
-
-            $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['next_step'] = 'hdi_import_menu';
-            $this->ajax_response['next_step_message'] = esc_html__('Setting menus', 'hashthemes-demo-importer');
-            $this->send_ajax_response();
+            $this->send_step($result, $demo_slug, 'hdi_import_menu', esc_html__('Setting menus', 'hashthemes-demo-importer'));
         }
 
         function import_menu_process() {
             $demo_slug = $this->verify_ajax_request();
+            $result = $this->run_menus($demo_slug, $this->get_selected_parts());
 
-            $demo = $this->get_demo($demo_slug);
-            $menu_array = isset($demo['menu_array']) ? $demo['menu_array'] : '';
-            // Set menu
-            if ($menu_array) {
-                $this->setMenu($menu_array);
-                $this->ajax_response['complete_message'] = esc_html__('Menus saved', 'hashthemes-demo-importer');
-            } else {
-                $this->ajax_response['complete_message'] = esc_html__('No menus saved', 'hashthemes-demo-importer');
-            }
-
-            $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['next_step'] = 'hdi_import_theme_option';
-            $this->ajax_response['next_step_message'] = esc_html__('Importing theme option settings', 'hashthemes-demo-importer');
-            $this->send_ajax_response();
+            $this->send_step($result, $demo_slug, 'hdi_import_theme_option', esc_html__('Importing theme option settings', 'hashthemes-demo-importer'));
         }
 
         function import_theme_option_process() {
             $demo_slug = $this->verify_ajax_request();
+            $result = $this->run_theme_options($demo_slug, $this->get_selected_parts());
 
-            $demo = $this->get_demo($demo_slug);
-            $options_array = isset($demo['options_array']) ? $demo['options_array'] : '';
-
-            if (is_array($options_array)) {
-                foreach ($options_array as $theme_option) {
-                    $option_filepath = $this->demo_upload_dir($demo_slug) . '/' . $theme_option . '.json';
-
-                    if (file_exists($option_filepath)) {
-                        $data = file_get_contents($option_filepath);
-
-                        if ($data) {
-                            $decoded = json_decode($data, true);
-
-                            // Never overwrite a live option with null from a
-                            // truncated or malformed json file.
-                            if (!is_null($decoded)) {
-                                update_option($theme_option, $decoded);
-                            }
-                        }
-                    }
-                }
-                $this->ajax_response['complete_message'] = esc_html__('Theme options settings imported', 'hashthemes-demo-importer');
-            } else {
-                $this->ajax_response['complete_message'] = esc_html__('No theme options found', 'hashthemes-demo-importer');
-            }
-
-            $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['next_step'] = 'hdi_import_widget';
-            $this->ajax_response['next_step_message'] = esc_html__('Importing widgets', 'hashthemes-demo-importer');
-            $this->send_ajax_response();
+            $this->send_step($result, $demo_slug, 'hdi_import_widget', esc_html__('Importing widgets', 'hashthemes-demo-importer'));
         }
 
         function import_widget_process() {
             $demo_slug = $this->verify_ajax_request();
+            $result = $this->run_widgets($demo_slug, $this->get_selected_parts());
 
-            $widget_filepath = $this->demo_upload_dir($demo_slug) . '/widget.wie';
-
-            if (file_exists($widget_filepath)) {
-                ob_start();
-                HDI_Widget_Importer::import($widget_filepath);
-                ob_end_clean();
-                $this->ajax_response['complete_message'] = esc_html__('Widgets imported', 'hashthemes-demo-importer');
-            } else {
-                $this->ajax_response['complete_message'] = esc_html__('No widgets found', 'hashthemes-demo-importer');
-            }
-
-            $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['next_step'] = 'hdi_import_hashform';
-            $this->ajax_response['next_step_message'] = esc_html__('Importing Forms', 'hashthemes-demo-importer');
-            $this->send_ajax_response();
+            $this->send_step($result, $demo_slug, 'hdi_import_hashform', esc_html__('Importing Forms', 'hashthemes-demo-importer'));
         }
 
         function import_hashform_process() {
             $demo_slug = $this->verify_ajax_request();
+            $result = $this->run_hash_forms($demo_slug, $this->get_selected_parts());
 
-            $demo = $this->get_demo($demo_slug);
-            $hash_forms = isset($demo['hash_forms']) ? $demo['hash_forms'] : '';
-
-            if (is_array($hash_forms) && $hash_forms) {
-                if (!class_exists('HashFormBuilder')) {
-                    $this->ajax_response['complete_message'] = esc_html__('Hash Form plugin not installed', 'hashthemes-demo-importer');
-                } else {
-                    if (class_exists('HashFormCreateTable')) {
-                        new HashFormCreateTable();
-                    }
-
-                    foreach ($hash_forms as $hash_form) {
-                        $filepath = $this->demo_upload_dir($demo_slug) . '/' . $hash_form . '.json';
-
-                        if (!file_exists($filepath)) {
-                            continue;
-                        }
-
-                        $imdat = json_decode(file_get_contents($filepath), true);
-
-                        // A malformed export used to fatal on the missing keys.
-                        if (!is_array($imdat) || !isset($imdat['options']) || !is_array($imdat['options'])) {
-                            continue;
-                        }
-
-                        $options = $imdat['options'];
-
-                        $form = array(
-                            'name' => isset($options['title']) ? esc_html($options['title']) : '',
-                            'description' => isset($options['description']) ? esc_html($options['description']) : '',
-                            'options' => $options,
-                            'status' => isset($imdat['status']) ? $imdat['status'] : '',
-                            'settings' => isset($imdat['settings']) ? $imdat['settings'] : '',
-                            'styles' => isset($imdat['styles']) ? $imdat['styles'] : '',
-                            'created_at' => current_time('mysql'),
-                        );
-
-                        $form_id = HashFormBuilder::create($form);
-
-                        if (!isset($imdat['field']) || !is_array($imdat['field']) || !class_exists('HashFormFields')) {
-                            continue;
-                        }
-
-                        foreach ($imdat['field'] as $field) {
-                            if (!is_array($field)) {
-                                continue;
-                            }
-
-                            HashFormFields::create_row(
-                                array(
-                                    'name' => isset($field['name']) ? $field['name'] : '',
-                                    'description' => isset($field['description']) ? $field['description'] : '',
-                                    'type' => isset($field['type']) ? $field['type'] : '',
-                                    'default_value' => isset($field['default_value']) ? $field['default_value'] : '',
-                                    'options' => isset($field['options']) ? $field['options'] : '',
-                                    'field_order' => isset($field['field_order']) ? $field['field_order'] : 0,
-                                    'form_id' => absint($form_id),
-                                    'required' => isset($field['required']) ? $field['required'] : 0,
-                                    'field_options' => isset($field['field_options']) ? $field['field_options'] : ''
-                                )
-                            );
-                        }
-                    }
-
-                    $this->ajax_response['complete_message'] = esc_html__('Forms imported', 'hashthemes-demo-importer');
-                }
-            } else {
-                $this->ajax_response['complete_message'] = esc_html__('No Form files found', 'hashthemes-demo-importer');
+            // The slider step only exists when the demo shipped one.
+            if ($this->has_revslider_file($demo_slug)) {
+                $this->send_step($result, $demo_slug, 'hdi_import_revslider', esc_html__('Importing Revolution slider', 'hashthemes-demo-importer'));
             }
 
-            $sliderFile = $this->demo_upload_dir($demo_slug) . '/revslider.zip';
-
-            if (file_exists($sliderFile)) {
-                $this->ajax_response['next_step'] = 'hdi_import_revslider';
-                $this->ajax_response['next_step_message'] = esc_html__('Importing Revolution slider', 'hashthemes-demo-importer');
-            } else {
-                $this->ajax_response['next_step'] = 'hdi_custom_import_hook';
-                $this->ajax_response['next_step_message'] = esc_html__('Completing Final Settings', 'hashthemes-demo-importer');
-            }
-
-            $this->ajax_response['demo'] = $demo_slug;
-            $this->send_ajax_response();
+            $this->send_step($result, $demo_slug, 'hdi_custom_import_hook', esc_html__('Completing Final Settings', 'hashthemes-demo-importer'));
         }
 
         function import_revslider_process() {
             $demo_slug = $this->verify_ajax_request();
+            $result = $this->run_revslider($demo_slug, $this->get_selected_parts());
 
-            // Get the zip file path
-            $sliderFile = $this->demo_upload_dir($demo_slug) . '/revslider.zip';
-
-            if (class_exists('RevSlider')) {
-                $slider = new RevSlider();
-                $slider->importSliderFromPost(true, true, $sliderFile);
-                $this->ajax_response['complete_message'] = esc_html__('Revolution slider installed', 'hashthemes-demo-importer');
-            } else {
-                $this->ajax_response['complete_message'] = esc_html__('Revolution slider plugin not installed', 'hashthemes-demo-importer');
-            }
-
-            $this->ajax_response['demo'] = $demo_slug;
-            $this->ajax_response['next_step'] = 'hdi_custom_import_hook';
-            $this->ajax_response['next_step_message'] = esc_html__('Completing Final Settings', 'hashthemes-demo-importer');
-            $this->send_ajax_response();
+            $this->send_step($result, $demo_slug, 'hdi_custom_import_hook', esc_html__('Completing Final Settings', 'hashthemes-demo-importer'));
         }
 
         function add_custom_import_hook() {
             $demo_slug = $this->verify_ajax_request();
+            $result = $this->run_finalize($demo_slug);
 
-            do_action('hdi_after_demo_import', array(
-                'slug' => $demo_slug,
-                'file_path' => $this->demo_upload_dir($demo_slug)
-            ));
-
-            $this->ajax_response['complete_message'] = esc_html__('Completed', 'hashthemes-demo-importer');
-
+            $this->ajax_response['complete_message'] = $result['message'];
             $this->ajax_response['demo'] = $demo_slug;
             $this->ajax_response['next_step'] = '';
             $this->ajax_response['next_step_message'] = '';
@@ -852,6 +1149,164 @@ if (!class_exists('HDI_Importer')) {
             // response would read as "no next step" and look like success.
             $this->ajax_response['completed'] = true;
             $this->send_ajax_response();
+        }
+
+        /*
+         *  Hands the collected log back so a failed import can show what went
+         *  wrong. Reachable even when the failure left no usable response.
+         */
+
+        function import_log_process() {
+            if (!current_user_can('manage_options')) {
+                $this->send_ajax_error(esc_html__('You are not allowed to import demos on this site.', 'hashthemes-demo-importer'));
+            }
+
+            check_ajax_referer('demo-importer-ajax', 'security');
+
+            $this->ajax_response['log'] = $this->get_log_text();
+            $this->send_ajax_response();
+        }
+
+        /*
+         *  Checks the server can realistically run an import, and that the demo
+         *  package is actually reachable, before anything is overwritten.
+         */
+
+        function preflight_process() {
+            $demo_slug = $this->verify_ajax_request();
+            $demo = $this->get_demo($demo_slug);
+            $external_url = isset($demo['external_url']) ? $demo['external_url'] : '';
+
+            $this->ajax_response['checks'] = $this->get_remote_checks($external_url);
+            $this->send_ajax_response();
+        }
+
+        /*
+         *  Server side checks. These are cheap and need no network, so the
+         *  modal can render them with the page.
+         */
+
+        public function get_server_checks() {
+            $checks = array();
+
+            $memory = $this->bytes_from_ini(ini_get('memory_limit'));
+            $checks[] = array(
+                'label' => esc_html__('PHP memory limit', 'hashthemes-demo-importer'),
+                'value' => ini_get('memory_limit'),
+                // -1 means no limit at all, which is fine.
+                'status' => ($memory < 0 || $memory >= 268435456) ? 'ok' : 'warning',
+                'message' => esc_html__('256M or more is recommended. A large demo can run out of memory below that.', 'hashthemes-demo-importer'),
+            );
+
+            $execution = (int) ini_get('max_execution_time');
+            $checks[] = array(
+                'label' => esc_html__('Max execution time', 'hashthemes-demo-importer'),
+                'value' => $execution ? $execution . 's' : esc_html__('Unlimited', 'hashthemes-demo-importer'),
+                'status' => (0 === $execution || $execution >= 300) ? 'ok' : 'warning',
+                'message' => esc_html__('300 seconds or more is recommended. Importing media is the slow part.', 'hashthemes-demo-importer'),
+            );
+
+            $checks[] = array(
+                'label' => esc_html__('PHP version', 'hashthemes-demo-importer'),
+                'value' => PHP_VERSION,
+                'status' => version_compare(PHP_VERSION, '7.4', '>=') ? 'ok' : 'warning',
+                'message' => esc_html__('PHP 7.4 or newer is recommended.', 'hashthemes-demo-importer'),
+            );
+
+            // On a site that has never had an upload the folder does not exist
+            // yet, so fall back to asking whether we could create it.
+            $uploads_dir = $this->uploads_dir['basedir'];
+            $uploads_writable = file_exists($uploads_dir) ? wp_is_writable($uploads_dir) : wp_is_writable(dirname($uploads_dir));
+            $checks[] = array(
+                'label' => esc_html__('Uploads folder', 'hashthemes-demo-importer'),
+                'value' => $uploads_writable ? esc_html__('Writable', 'hashthemes-demo-importer') : esc_html__('Not writable', 'hashthemes-demo-importer'),
+                'status' => $uploads_writable ? 'ok' : 'error',
+                'message' => esc_html__('The demo package is unpacked here, so the import cannot run without write access.', 'hashthemes-demo-importer'),
+            );
+
+            $checks[] = array(
+                'label' => esc_html__('Zip support', 'hashthemes-demo-importer'),
+                'value' => class_exists('ZipArchive') ? esc_html__('ZipArchive', 'hashthemes-demo-importer') : esc_html__('Fallback', 'hashthemes-demo-importer'),
+                'status' => 'ok',
+                'message' => '',
+            );
+
+            return apply_filters('hdi_server_checks', $checks);
+        }
+
+        /*
+         *  Confirms the demo zip is really there. Split out from the server
+         *  checks because it costs a request.
+         */
+
+        public function get_remote_checks($external_url) {
+            $check = array(
+                'label' => esc_html__('Demo package', 'hashthemes-demo-importer'),
+                'value' => esc_html__('Not reachable', 'hashthemes-demo-importer'),
+                'status' => 'error',
+                'message' => esc_html__('The demo files could not be reached. Check your connection and try again later.', 'hashthemes-demo-importer'),
+            );
+
+            if (!$external_url) {
+                $check['message'] = esc_html__('This demo has no package url set in the config file.', 'hashthemes-demo-importer');
+                return array($check);
+            }
+
+            $response = wp_remote_head($external_url, array('timeout' => 15, 'redirection' => 5));
+            $code = is_wp_error($response) ? 0 : (int) wp_remote_retrieve_response_code($response);
+
+            // Some servers refuse HEAD. Ask for the first byte instead.
+            if (200 !== $code) {
+                $response = wp_remote_get($external_url, array(
+                    'timeout' => 15,
+                    'redirection' => 5,
+                    'headers' => array('Range' => 'bytes=0-1'),
+                ));
+                $code = is_wp_error($response) ? 0 : (int) wp_remote_retrieve_response_code($response);
+            }
+
+            if (200 === $code || 206 === $code) {
+                $size = (int) wp_remote_retrieve_header($response, 'content-length');
+                $check['status'] = 'ok';
+                $check['value'] = ($size > 1 && 200 === $code) ? size_format($size) : esc_html__('Reachable', 'hashthemes-demo-importer');
+                $check['message'] = '';
+            } else if (is_wp_error($response)) {
+                $check['message'] = $response->get_error_message();
+            }
+
+            return array($check);
+        }
+
+        /*
+         *  ini_get returns things like "256M". Returns bytes, or -1 for no
+         *  limit.
+         */
+
+        public function bytes_from_ini($value) {
+            $value = trim((string) $value);
+
+            if ('' === $value) {
+                return 0;
+            }
+
+            $bytes = (int) $value;
+
+            if ($bytes < 0) {
+                return -1;
+            }
+
+            switch (strtolower(substr($value, -1))) {
+                case 'g':
+                    $bytes *= 1024;
+                // no break
+                case 'm':
+                    $bytes *= 1024;
+                // no break
+                case 'k':
+                    $bytes *= 1024;
+            }
+
+            return $bytes;
         }
 
         public function download_files($external_url) {
@@ -1047,7 +1502,7 @@ if (!class_exists('HDI_Importer')) {
          * Import demo XML content
          */
 
-        function importDemoContent($xml_filepath, $excludeImages) {
+        function importDemoContent($xml_filepath, $excludeImages, $demo_slug = '') {
 
             if (!defined('WP_LOAD_IMPORTERS'))
                 define('WP_LOAD_IMPORTERS', true);
@@ -1061,7 +1516,12 @@ if (!class_exists('HDI_Importer')) {
 
             // Import demo content from XML
             if (class_exists('HDI_Import')) {
-                $demo_slug = isset($_POST['demo']) ? sanitize_text_field(wp_unslash($_POST['demo'])) : '';
+                // The slug is passed in by the caller; the request fallback is
+                // only there for anything still calling this the old way.
+                if (!$demo_slug) {
+                    $demo_slug = isset($_POST['demo']) ? sanitize_text_field(wp_unslash($_POST['demo'])) : '';
+                }
+
                 $excludeImages = $excludeImages == 'true' ? false : true;
                 $demo = $this->get_demo($demo_slug);
                 $home_slug = isset($demo['home_slug']) ? $demo['home_slug'] : '';
@@ -1071,11 +1531,12 @@ if (!class_exists('HDI_Importer')) {
                 if (file_exists($xml_filepath)) {
                     $wp_import = new HDI_Import();
                     $wp_import->fetch_attachments = $excludeImages;
-                    // Capture the output.
-                    ob_start();
-                    $wp_import->import($xml_filepath);
-                    // Clean the output.
-                    ob_end_clean();
+
+                    // Whatever the importer prints goes to the log, so a failed
+                    // import can be explained afterwards.
+                    $this->capture(function () use ($wp_import, $xml_filepath) {
+                        $wp_import->import($xml_filepath);
+                    });
                     // Import DONE
                     // set homepage as front page
                     if ($home_slug) {
@@ -1348,6 +1809,14 @@ if (!class_exists('HDI_Importer')) {
                 'no_reset_database' => esc_html__('Database was not reset', 'hashthemes-demo-importer'),
                 'confirm_import' => esc_html__('Are you sure to proceed?', 'hashthemes-demo-importer'),
                 'confirm_reset_import' => esc_html__('Are you sure to proceed? Resetting the database will delete all your contents.', 'hashthemes-demo-importer'),
+                'no_parts_selected' => esc_html__('Choose at least one thing to import.', 'hashthemes-demo-importer'),
+                'import_steps' => $this->get_import_steps(),
+                /* translators: 1: current step number, 2: total number of steps. */
+                'step_counter' => esc_html__('Step %1$s of %2$s', 'hashthemes-demo-importer'),
+                'show_details' => esc_html__('Show error details', 'hashthemes-demo-importer'),
+                'hide_details' => esc_html__('Hide error details', 'hashthemes-demo-importer'),
+                'no_details' => esc_html__('No further details were recorded.', 'hashthemes-demo-importer'),
+                'preflight_blocked' => esc_html__('This demo cannot be imported right now. See the checks above.', 'hashthemes-demo-importer'),
                 'import_error' => sprintf(esc_html__('There was an error in importing demo. Please reload the page and try again. If it still did not work then please click %s for more detail.', 'hashthemes-demo-importer'), '<a href="https://hashthemes.com/demo-import-process-failed-why-does-demo-import-fail/" target="_blank">' . esc_html__('here', 'hashthemes-demo-importer') . '</a>'),
                 'import_success' => '<h2>' . esc_html__('All done. Have fun!', 'hashthemes-demo-importer') . '</h2><p>' . esc_html__('Your website has been successfully setup.', 'hashthemes-demo-importer') . '</p><a class="button" target="_blank" href="' . esc_url(home_url('/')) . '">' . esc_html__('View your Website', 'hashthemes-demo-importer') . '</a><a class="button" href="' . esc_url(admin_url('themes.php?page=hdi-demo-importer')) . '">' . esc_html__('Go Back', 'hashthemes-demo-importer') . '</a>'
             );
