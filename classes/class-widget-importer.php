@@ -1,5 +1,10 @@
 <?php
 
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Widget_Importer Class.
  *
@@ -10,10 +15,8 @@ class HDI_Widget_Importer {
      * Import widget JSON data.
      *
      * @global array $wp_registered_sidebars
-     * @param  string $import_file Path to the import file.
-     * @param  string $demo_id     The ID of demo being imported.
-     * @param  array  $demo_data   The data of demo being imported.
-     * @return WP_Error|array WP_Error on failure, $results on success.
+     * @param  string $widgetFile Path to the import file.
+     * @return array $results, or an empty array when there is nothing to import.
      */
     public static function import($widgetFile) {
         global $wp_registered_sidebars;
@@ -21,16 +24,15 @@ class HDI_Widget_Importer {
         $data = json_decode(file_get_contents($widgetFile));
 
         // Have valid data?
-        // If no data or could not decode
+        // If no data or could not decode. This runs inside an ajax step, so
+        // bail out quietly rather than killing the whole import.
         if (empty($data) || !is_object($data)) {
-            wp_die(
-                esc_html_e('Widget data is not available', 'hashthemes-demo-importer'), '', array('back_link' => true)
-            );
+            return array();
         }
 
         global $wp_registered_widget_controls;
 
-        $widget_controls = $wp_registered_widget_controls;
+        $widget_controls = is_array($wp_registered_widget_controls) ? $wp_registered_widget_controls : array();
 
         $available_widgets = array();
 
@@ -203,6 +205,8 @@ class HDI_Widget_Importer {
                 $results[$sidebar_id]['widgets'][$widget_instance_id]['message'] = $widget_message;
             }
         }
+
+        return $results;
     }
 
 }

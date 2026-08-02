@@ -57,9 +57,13 @@
 }
 
 .hdi-tab {
+    background: none;
+    border: 0;
     border-radius: 2px;
+    color: inherit;
     cursor: pointer;
     display: inline-block;
+    font: inherit;
     padding: 5px 15px;
 }
 
@@ -214,6 +218,9 @@
 }
 
 .hdi-modal-header .hdi-modal-back {
+    background: none;
+    padding: 0;
+    border: 0;
     border-left: 1px solid #EEE;
     cursor: pointer;
     height: 48px;
@@ -439,6 +446,34 @@ body.hdi-modal-opened .hdi-demo-box-wrap {
 
 .import-error .hdi-loader-rotater {
     animation: none;
+    display: none;
+}
+
+/* Failed import: turn the ring red and cross out the tick. */
+.import-error .hdi-loader-content {
+    border-color: #DC3232;
+}
+
+.import-error .hdi-loader-line-point {
+    height: 30px;
+    width: 30px;
+}
+
+.import-error .hdi-loader-line-point:before,
+.import-error .hdi-loader-line-point:after {
+    background: #DC3232;
+    bottom: 0;
+    height: 30px;
+    left: 12px;
+    right: auto;
+}
+
+.import-error .hdi-loader-line-point:before {
+    transform: rotate(45deg);
+}
+
+.import-error .hdi-loader-line-point:after {
+    transform: rotate(-45deg);
 }
 
 @keyframes hdi-check-left {

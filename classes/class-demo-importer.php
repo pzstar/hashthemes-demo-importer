@@ -40,9 +40,6 @@ if (!class_exists('HDI_Demo_Importer')) {
 
             /** Plugin Activation Ajax * */
             add_action('wp_ajax_plugin_activation', array($this, 'plugin_activation_callback'));
-
-            /** Plugin Deactivation Ajax * */
-            add_action('wp_ajax_plugin_deactivation', array($this, 'plugin_deactivation_callback'));
         }
 
         /** Plugin API * */
@@ -89,11 +86,15 @@ if (!class_exists('HDI_Demo_Importer')) {
 
         /** Generate Url for the Plugin Button * */
         public static function generate_plugin_url($plugin) {
-            $status = self::plugin_active_status($plugin);
+            $file_path = isset($plugin['file_path']) ? $plugin['file_path'] : '';
+            $source = isset($plugin['source']) ? $plugin['source'] : '';
+            $status = self::plugin_active_status($file_path);
             $url = 'javascript:void()';
-            if ($status == 'install' && $source == 'remote') {
+
+            if ($status == 'install' && $source == 'remote' && isset($plugin['location'])) {
                 $url = $plugin['location'];
             }
+
             return $url;
         }
 
@@ -219,6 +220,16 @@ if (!class_exists('HDI_Demo_Importer')) {
                 $upload_path = $this->get_local_dir_path($file_location, $plugin);
                 $plugin_file = WP_PLUGIN_DIR . '/' . esc_html($plugin) . '/' . esc_html($plugin_file);
 
+                if (!$upload_path || !class_exists('ZipArchive')) {
+                    wp_send_json(
+                        array(
+                            'success' => false,
+                            'message' => esc_html__('The plugin package could not be downloaded.', 'hashthemes-demo-importer')
+                        )
+                    );
+                    die();
+                }
+
                 $zip = new ZipArchive();
                 if ($zip->open($upload_path) === TRUE) {
                     $zip->extractTo(WP_PLUGIN_DIR);
@@ -246,6 +257,16 @@ if (!class_exists('HDI_Demo_Importer')) {
 
         /** Plugin Offline Activation Ajax * */
         public function plugin_activation_callback() {
+
+            if (!current_user_can('activate_plugins')) {
+                wp_send_json(
+                    array(
+                        'success' => false,
+                        'message' => esc_html__('Sorry, you are not allowed to activate plugins on this site.', 'hashthemes-demo-importer')
+                    )
+                );
+                die();
+            }
 
             $plugin = isset($_POST['plugin']) ? sanitize_text_field(wp_unslash($_POST['plugin'])) : '';
             $plugin_file = isset($_POST['plugin_file']) ? sanitize_text_field(wp_unslash($_POST['plugin_file'])) : '';

@@ -31,17 +31,15 @@ class HDI_Customizer_Importer {
         $data = maybe_unserialize(file_get_contents($customizerFile));
         $excludeImages = $excludeImages == 'true' ? true : false;
 
-        // Data checks.
+        // Data checks. Anything that is not a customizer export for the active
+        // theme is skipped, the rest of the import carries on.
         if ('array' != gettype($data)) {
-            $error = esc_html__('Error importing settings! Please check that you uploaded a customizer export file.', 'hashthemes-demo-importer');
             return;
         }
         if (!isset($data['template']) || !isset($data['mods'])) {
-            $error = esc_html__('Error importing settings! Please check that you uploaded a customizer export file.', 'hashthemes-demo-importer');
             return;
         }
         if ($data['template'] != $template) {
-            $error = esc_html__('Error importing settings! The settings you uploaded are not for the current theme.', 'hashthemes-demo-importer');
             return;
         }
 
@@ -100,6 +98,11 @@ class HDI_Customizer_Importer {
             if (self::isJSON($value)) {
                 $data_array = json_decode($value);
                 foreach ($data_array as $data_key => $data_object) {
+                    // A plain list of scalars is not a repeater row.
+                    if (!is_object($data_object) && !is_array($data_object)) {
+                        continue;
+                    }
+
                     foreach ($data_object as $sub_data_key => $sub_data_value) {
                         if (self::is_image_url($sub_data_value)) {
                             $sub_data = self::media_handle_sideload($sub_data_value);
@@ -150,6 +153,12 @@ class HDI_Customizer_Importer {
         if (!empty($file)) {
             // Set variables for storage, fix file filename for query strings.
             preg_match('/[^\?]+\.(jpe?g|jpe|gif|png)\b/i', $file, $matches);
+
+            // Without a match there is no filename to sideload with.
+            if (empty($matches)) {
+                return $data;
+            }
+
             $file_array = array();
             $file_array['name'] = basename($matches[0]);
 
@@ -175,8 +184,8 @@ class HDI_Customizer_Importer {
             $data->attachment_id = $id;
             $data->url = wp_get_attachment_url($id);
             $data->thumbnail_url = wp_get_attachment_thumb_url($id);
-            $data->height = $meta['height'];
-            $data->width = $meta['width'];
+            $data->height = isset($meta['height']) ? $meta['height'] : 0;
+            $data->width = isset($meta['width']) ? $meta['width'] : 0;
         }
 
         return $data;
