@@ -18,17 +18,13 @@
     --hdi-success: #2e9e5b;
     --hdi-warning: #d98500;
     --hdi-danger: #d3383c;
-    --hdi-radius: 12px;
-    --hdi-radius-sm: 8px;
+    --hdi-radius: 6px;
+    --hdi-radius-sm: 2px;
     --hdi-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 1px 3px rgba(16, 24, 40, .06);
     --hdi-shadow-lg: 0 12px 28px -8px rgba(16, 24, 40, .18), 0 4px 10px -4px rgba(16, 24, 40, .1);
     --hdi-card-title-h: 58px;
-
-    margin-left: -20px;
-    background: var(--hdi-page);
     color: var(--hdi-text);
-    min-height: calc(100vh - 32px);
-    padding-bottom: 40px;
+    margin-left: -20px;
 }
 
 .hdi-clearfix:after,
@@ -281,7 +277,7 @@
 }
 
 .hdi-demo-buttons .button {
-    border-radius: 999px;
+    border-radius: 8px;
     box-shadow: none;
     margin: 0;
     padding: 4px 18px;
@@ -463,17 +459,8 @@ body.hdi-modal-opened .hdi-demo-box-wrap {
 }
 
 .hdi-reset-website-checkbox {
-    align-items: flex-start;
     color: #8a2c2f;
-    display: flex;
     font-weight: 500;
-    gap: 8px;
-}
-
-.hdi-exclude-image-checkbox label {
-    align-items: center;
-    display: flex;
-    gap: 8px;
 }
 
 /* Pre-flight checks */
@@ -622,7 +609,8 @@ body.hdi-modal-opened .hdi-demo-box-wrap {
 
 .hdi-import-progress-wrap,
 .hdi-import-preview {
-    width: 400px;
+    width: 50%;
+    max-width: 500px;
 }
 
 #hdi-import-progress .hdi-import-progress-message {

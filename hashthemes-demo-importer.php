@@ -349,7 +349,7 @@ if (!class_exists('HDI_Importer')) {
                                             <h4><?php echo esc_html($demo_pack['name']); ?></h4>
 
                                             <div class="hdi-demo-buttons">
-                                                <a href="<?php echo isset($demo_pack['preview_url']) ? esc_url($demo_pack['preview_url']) : '#'; ?>" target="_blank" class="button">
+                                                <a href="<?php echo isset($demo_pack['preview_url']) ? esc_url($demo_pack['preview_url']) : '#'; ?>" target="_blank" class="button button-primary">
                                                     <?php echo esc_html__('Preview', 'hashthemes-demo-importer'); ?>
                                                 </a>
 
