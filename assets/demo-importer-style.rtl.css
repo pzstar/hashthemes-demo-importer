@@ -1,9 +1,5 @@
 /**
  * HashThemes Demo Importer - admin styles.
- *
- * Layout note: the demo grid is driven by Isotope, which positions the cards
- * absolutely. The percentage widths on .hdi-demo-box are what it measures, so
- * they stay as explicit widths rather than becoming a css grid.
  */
 
 .hdi-demo-importer-wrap {
@@ -18,17 +14,13 @@
     --hdi-success: #2e9e5b;
     --hdi-warning: #d98500;
     --hdi-danger: #d3383c;
-    --hdi-radius: 12px;
-    --hdi-radius-sm: 8px;
+    --hdi-radius: 6px;
+    --hdi-radius-sm: 2px;
     --hdi-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 1px 3px rgba(16, 24, 40, .06);
     --hdi-shadow-lg: 0 12px 28px -8px rgba(16, 24, 40, .18), 0 4px 10px -4px rgba(16, 24, 40, .1);
     --hdi-card-title-h: 58px;
-
-    margin-right: -20px;
-    background: var(--hdi-page);
     color: var(--hdi-text);
-    min-height: calc(100vh - 32px);
-    padding-bottom: 40px;
+    margin-right: -20px;
 }
 
 .hdi-clearfix:after,
@@ -129,7 +121,7 @@
 .hdi-tab {
     background: none;
     border: 0;
-    border-radius: 999px;
+    border-radius: 2px;
     color: var(--hdi-muted);
     cursor: pointer;
     display: inline-block;
@@ -193,7 +185,7 @@
 .hdi-demo-box {
     margin: 0 0 24px;
     padding: 0 12px;
-    width: 20%;
+    width: 25%;
 }
 
 .hdi-demo-elements {
@@ -281,10 +273,9 @@
 }
 
 .hdi-demo-buttons .button {
-    border-radius: 8px;
+    border-radius: 2px;
     box-shadow: none;
     margin: 0;
-    padding: 4px 18px;
 }
 
 /* ---------- Modal ---------- */
@@ -613,7 +604,8 @@ body.hdi-modal-opened .hdi-demo-box-wrap {
 
 .hdi-import-progress-wrap,
 .hdi-import-preview {
-    width: 400px;
+    width: 50%;
+    max-width: 500px;
 }
 
 #hdi-import-progress .hdi-import-progress-message {
@@ -995,12 +987,6 @@ body.hdi-modal-opened .hdi-demo-box-wrap {
 }
 
 /* ---------- Responsive ---------- */
-
-@media only screen and (max-width: 2000px) {
-    .hdi-demo-box {
-        width: 25%;
-    }
-}
 
 @media only screen and (max-width: 1640px) {
     .hdi-demo-box {

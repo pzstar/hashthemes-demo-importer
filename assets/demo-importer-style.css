@@ -1,9 +1,5 @@
 /**
  * HashThemes Demo Importer - admin styles.
- *
- * Layout note: the demo grid is driven by Isotope, which positions the cards
- * absolutely. The percentage widths on .hdi-demo-box are what it measures, so
- * they stay as explicit widths rather than becoming a css grid.
  */
 
 .hdi-demo-importer-wrap {
@@ -295,7 +291,6 @@ body.hdi-modal-opened .hdi-demo-box-wrap {
     border-radius: var(--hdi-radius);
     box-shadow: var(--hdi-shadow);
     margin-top: 24px;
-    overflow: hidden;
 }
 
 .hdi-modal-header {
@@ -357,8 +352,7 @@ body.hdi-modal-opened .hdi-demo-box-wrap {
 }
 
 .hdi-modal-wrap {
-    flex-grow: 1;
-    min-width: 0;
+    width: calc(100% - 420px);
 }
 
 .hdi-modal-preview {
