@@ -33,6 +33,8 @@ class HDI_CLI_Command {
      * ## EXAMPLES
      *
      *     wp hdi list
+     *
+     * @subcommand list
      */
     public function list_( $args, $assoc_args ) {
         $config = hdi_importer()->get_config();
