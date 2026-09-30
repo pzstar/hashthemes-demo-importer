@@ -50,6 +50,7 @@ if (!class_exists('HDI_Importer')) {
             require_once HDI_PATH . 'classes/class-demo-importer.php';
             require_once HDI_PATH . 'classes/class-customizer-importer.php';
             require_once HDI_PATH . 'classes/class-widget-importer.php';
+            require_once HDI_PATH . 'classes/class-total-home-sections.php';
 
             if (defined('WP_CLI') && WP_CLI) {
                 require_once HDI_PATH . 'classes/class-cli.php';
