@@ -2,7 +2,7 @@
 Contributors: hashthemes
 Tags: demo importer, hashthemes, import, one click import
 Requires at least: 6.3
-Tested up to: 7.0
+Tested up to: 7.1
 Stable tag: 2.0
 Requires PHP: 7.2
 License: GPLv2 or later
