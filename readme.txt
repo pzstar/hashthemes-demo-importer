@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: demo importer, hashthemes, import, one click import
 Requires at least: 6.3
 Tested up to: 7.1
-Stable tag: 2.0
+Stable tag: 2.1.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -103,7 +103,7 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
-= 2.1 =
+= 2.1.1 - 2 Oct, 2026 =
 * Total theme: the Slider, Featured, Service, Team and Testimonial home sections can take their content from their own items instead of pages (Content From: Custom Content), with 3 slides, 3 featured blocks, 6 services, 4 team members and 3 testimonials. The items carry over to Total Plus, which lets you add more
 
 = 2.0 - 4 Aug, 2026 =
