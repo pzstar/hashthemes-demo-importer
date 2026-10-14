@@ -160,6 +160,10 @@ class HDI_CLI_Command {
         });
 
         $steps[] = array(__('Importing widgets', 'hashthemes-demo-importer'), function () use ($importer, $slug, $parts) {
+            // The browser runs each step in its own request. Here they share one, so widget areas
+            // a theme registers from its settings (just imported) are registered again, or their
+            // widgets would end up inactive.
+            do_action('widgets_init');
             return $importer->run_widgets($slug, $parts);
         });
 

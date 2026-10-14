@@ -25,7 +25,7 @@ class HDI_Customizer_Importer {
      * @param object $wp_customize An instance of WP_Customize_Manager.
      * @return void
      */
-    public static function import($customizerFile, $excludeImages) {
+    public static function import($customizerFile, $excludeImages, $term_map = array(), $demo_url = '') {
         global $wp_customize;
         $template = get_template();
         $data = maybe_unserialize(file_get_contents($customizerFile));
@@ -43,10 +43,17 @@ class HDI_Customizer_Importer {
             return;
         }
 
+        // Settings that name a category or menu by ID get the IDs the content import gave them.
+        $data['mods'] = HDI_Import_Remapper::remap_mods($data['mods'], $term_map);
+
         // Import Images.
         if (!$excludeImages) {
             $data['mods'] = self::import_images($data['mods']);
         }
+
+        // Links to the demo site's pages lead to this site. After the images, which still need
+        // the demo site's upload links to be downloaded.
+        $data['mods'] = HDI_Import_Remapper::remap_urls($data['mods'], $demo_url);
 
         // Import custom options.
         if (isset($data['options'])) {

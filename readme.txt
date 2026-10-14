@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: demo importer, hashthemes, import, one click import
 Requires at least: 6.3
 Tested up to: 7.1
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -103,6 +103,11 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
+= 2.1.2 - 14 Oct, 2026 =
+* Fix: front page sections, Elementor widgets and sidebar widgets showed the wrong categories after importing a demo with Reset, or into a site that already had categories or tags. Categories, portfolio categories and menus chosen in the demo are now matched to the ones it imports
+* Fix: buttons and links in imported settings and widgets pointed back to the demo site; they now lead to the same pages on your site
+* Fix: importing from WP-CLI left the widgets of theme-added widget areas inactive
+
 = 2.1.1 - 2 Oct, 2026 =
 * Total theme: the Slider, Featured, Service, Team and Testimonial home sections can take their content from their own items instead of pages (Content From: Custom Content), with 3 slides, 3 featured blocks, 6 services, 4 team members and 3 testimonials. The items carry over to Total Plus, which lets you add more
 

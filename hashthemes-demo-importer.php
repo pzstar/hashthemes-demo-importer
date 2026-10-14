@@ -3,7 +3,7 @@
  * Plugin Name: HashThemes Demo Importer
  * Plugin URI: https://github.com/pzstar/hashthemes-demo-importer
  * Description: Easily imports demo with just one click.
- * Version: 2.1.1
+ * Version: 2.1.2
  * Author: hashthemes
  * Author URI:  https://hashthemes.com
  * Text Domain: hashthemes-demo-importer
@@ -16,7 +16,7 @@ if (!defined('ABSPATH'))
     exit;
 
 
-define('HDI_VERSION', '2.1.1');
+define('HDI_VERSION', '2.1.2');
 
 define('HDI_FILE', __FILE__);
 define('HDI_PLUGIN_BASENAME', plugin_basename(HDI_FILE));
@@ -50,6 +50,7 @@ if (!class_exists('HDI_Importer')) {
             require_once HDI_PATH . 'classes/class-demo-importer.php';
             require_once HDI_PATH . 'classes/class-customizer-importer.php';
             require_once HDI_PATH . 'classes/class-widget-importer.php';
+            require_once HDI_PATH . 'classes/class-import-remapper.php';
             require_once HDI_PATH . 'classes/class-total-home-sections.php';
 
             if (defined('WP_CLI') && WP_CLI) {
@@ -778,8 +779,10 @@ if (!class_exists('HDI_Importer')) {
                 return $this->result(esc_html__('No customizer settings found', 'hashthemes-demo-importer'));
             }
 
-            $this->capture(function () use ($customizer_filepath, $excludeImages) {
-                HDI_Customizer_Importer::import($customizer_filepath, $excludeImages);
+            $term_map = HDI_Import_Remapper::get($slug);
+            $demo_url = HDI_Import_Remapper::get_url($slug);
+            $this->capture(function () use ($customizer_filepath, $excludeImages, $term_map, $demo_url) {
+                HDI_Customizer_Importer::import($customizer_filepath, $excludeImages, $term_map, $demo_url);
             });
 
             return $this->result(esc_html__('Customizer settings imported', 'hashthemes-demo-importer'));
@@ -850,9 +853,22 @@ if (!class_exists('HDI_Importer')) {
                 return $this->result(esc_html__('No widgets found', 'hashthemes-demo-importer'));
             }
 
+            // Widgets that name a category or menu by ID get the IDs the content import gave them,
+            // and links to the demo site's pages lead to this site.
+            $term_map = HDI_Import_Remapper::get($slug);
+            $demo_url = HDI_Import_Remapper::get_url($slug);
+            $remap_widget = function ($widget) use ($term_map, $demo_url) {
+                return HDI_Import_Remapper::remap_urls(HDI_Import_Remapper::remap_deep($widget, $term_map), $demo_url);
+            };
+            if ($term_map || $demo_url) {
+                add_filter('wie_widget_settings_array', $remap_widget);
+            }
+
             $this->capture(function () use ($widget_filepath) {
                 HDI_Widget_Importer::import($widget_filepath);
             });
+
+            remove_filter('wie_widget_settings_array', $remap_widget);
 
             return $this->result(esc_html__('Widgets imported', 'hashthemes-demo-importer'));
         }
@@ -1530,6 +1546,8 @@ if (!class_exists('HDI_Importer')) {
                 $element_kit_slug = isset($demo['element_kit_slug']) ? $demo['element_kit_slug'] : '';
 
                 if (file_exists($xml_filepath)) {
+                    HDI_Import_Remapper::clear();
+
                     $wp_import = new HDI_Import();
                     $wp_import->fetch_attachments = $excludeImages;
 
@@ -1538,6 +1556,10 @@ if (!class_exists('HDI_Importer')) {
                     $this->capture(function () use ($wp_import, $xml_filepath) {
                         $wp_import->import($xml_filepath);
                     });
+
+                    // The customizer and widget steps use this to point settings at the new term IDs.
+                    HDI_Import_Remapper::save($demo_slug, $wp_import->processed_terms, $xml_filepath);
+                    HDI_Import_Remapper::remap_elementor_data($wp_import->processed_posts, $wp_import->processed_terms);
                     // Import DONE
                     // set homepage as front page
                     if ($home_slug) {
