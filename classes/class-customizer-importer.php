@@ -145,10 +145,18 @@ class HDI_Customizer_Importer {
      * Taken from the core media_sideload_image function and
      * modified to return an array of data instead of html.
      *
+     * An image the content import (or an earlier setting) already downloaded is reused, so each demo
+     * image is downloaded once.
+     *
      * @param  string $file The image file path.
      * @return array An array of image data.
      */
     private static function media_handle_sideload($file) {
+        $existing = HDI_Import_Remapper::find_image($file);
+        if ($existing) {
+            return self::image_data($existing, $file);
+        }
+
         $data = new stdClass();
 
         if (!function_exists('media_handle_sideload')) {
@@ -186,13 +194,35 @@ class HDI_Customizer_Importer {
                 return $id;
             }
 
-            // Build the object to return.
-            $meta = wp_get_attachment_metadata($id);
-            $data->attachment_id = $id;
-            $data->url = wp_get_attachment_url($id);
-            $data->thumbnail_url = wp_get_attachment_thumb_url($id);
-            $data->height = isset($meta['height']) ? $meta['height'] : 0;
-            $data->width = isset($meta['width']) ? $meta['width'] : 0;
+            HDI_Import_Remapper::remember_image($id, $file);
+            $data = self::image_data($id, $file);
+        }
+
+        return $data;
+    }
+
+    /**
+     * The image data a setting stores. A setting that used one size of the demo image (photo-300x200.jpg)
+     * gets the same size of the local one when it exists.
+     */
+    private static function image_data($id, $file) {
+        $data = new stdClass();
+        $meta = wp_get_attachment_metadata($id);
+        $data->attachment_id = $id;
+        $data->url = wp_get_attachment_url($id);
+        $data->thumbnail_url = wp_get_attachment_thumb_url($id);
+        $data->height = isset($meta['height']) ? $meta['height'] : 0;
+        $data->width = isset($meta['width']) ? $meta['width'] : 0;
+
+        if (preg_match('/-(\d+)x(\d+)\.[a-z0-9]+(?:[?#].*)?$/i', $file, $size) && !empty($meta['sizes'])) {
+            foreach ($meta['sizes'] as $image_size) {
+                if ((int) $image_size['width'] === (int) $size[1] && (int) $image_size['height'] === (int) $size[2]) {
+                    $data->url = trailingslashit(dirname($data->url)) . $image_size['file'];
+                    $data->width = (int) $image_size['width'];
+                    $data->height = (int) $image_size['height'];
+                    break;
+                }
+            }
         }
 
         return $data;

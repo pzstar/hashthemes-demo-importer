@@ -23,6 +23,9 @@ class HDI_Import_Remapper {
 
     const OPTION = 'hdi_import_remap';
 
+    /** Post meta on downloaded images: the demo image they came from (see image_key()). */
+    const SOURCE_META = '_hdi_source_image';
+
     /**
      * Saves what the content import of this demo changed: old => new term IDs and the demo site's address.
      */
@@ -38,6 +41,45 @@ class HDI_Import_Remapper {
 
     public static function clear() {
         delete_option(self::OPTION);
+    }
+
+    /**
+     * The identity of a demo image: its URL without scheme, query, size suffix or "-scaled", so every size
+     * and spelling of one image (http/https, \/-escaped, -300x200) gives the same key.
+     */
+    public static function image_key($url) {
+        $url = preg_replace('/[?#].*$/', '', trim(str_replace('\\/', '/', (string) $url)));
+        $url = preg_replace('#^(?:https?:)?//(?:www\.)?#i', '', $url);
+        $url = preg_replace('/-(?:\d+x\d+|scaled)(\.[a-z0-9]+)$/i', '$1', $url);
+        return strtolower($url);
+    }
+
+    /** Records which demo image an attachment was downloaded from. */
+    public static function remember_image($attachment_id, $url) {
+        $key = self::image_key($url);
+        if ($attachment_id && '' !== $key) {
+            update_post_meta($attachment_id, self::SOURCE_META, $key);
+        }
+    }
+
+    /** The attachment already downloaded from this demo image (any size of it), or 0. */
+    public static function find_image($url) {
+        $key = self::image_key($url);
+        if ('' === $key) {
+            return 0;
+        }
+        $ids = get_posts(array(
+            'post_type' => 'attachment',
+            'post_status' => 'inherit',
+            'numberposts' => 1,
+            'fields' => 'ids',
+            'meta_key' => self::SOURCE_META,
+            'meta_value' => $key,
+            'orderby' => 'ID',
+            'order' => 'ASC',
+            'suppress_filters' => true,
+        ));
+        return $ids ? (int) $ids[0] : 0;
     }
 
     /**

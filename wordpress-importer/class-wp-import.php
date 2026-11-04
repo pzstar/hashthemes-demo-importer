@@ -1046,6 +1046,11 @@ class HDI_Import extends WP_Importer {
         $post_id = wp_insert_attachment($post, $upload['file']);
         wp_update_attachment_metadata($post_id, wp_generate_attachment_metadata($post_id, $upload['file']));
 
+        // The customizer import reuses this image instead of downloading it again.
+        if ($post_id && !is_wp_error($post_id) && class_exists('HDI_Import_Remapper')) {
+            HDI_Import_Remapper::remember_image($post_id, $url);
+        }
+
         // remap resized image URLs, works by stripping the extension and remapping the URL stub.
         if (preg_match('!^image/!', $info['type'])) {
             $parts = pathinfo($url);
