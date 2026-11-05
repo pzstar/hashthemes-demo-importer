@@ -589,7 +589,7 @@ $viral = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -651,7 +651,7 @@ $viral = array(
                 'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -693,7 +693,7 @@ $viral = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -740,7 +740,7 @@ $viral = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -802,7 +802,7 @@ $viral = array(
                 'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -849,7 +849,7 @@ $viral = array(
                 'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -906,7 +906,7 @@ $viral = array(
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -953,7 +953,7 @@ $viral = array(
                 'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1010,7 +1010,7 @@ $viral = array(
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1067,7 +1067,7 @@ $viral = array(
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1126,7 +1126,7 @@ $viral_news = array(
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1182,7 +1182,7 @@ $viral_news = array(
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1235,7 +1235,7 @@ $viral_news = array(
                 'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1286,7 +1286,7 @@ $viral_news = array(
                 'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1334,7 +1334,7 @@ $viral_news = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1381,7 +1381,7 @@ $viral_news = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1432,7 +1432,7 @@ $viral_news = array(
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1485,7 +1485,7 @@ $viral_news = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1536,7 +1536,7 @@ $viral_news = array(
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1589,7 +1589,7 @@ $viral_news = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1640,7 +1640,7 @@ $viral_news = array(
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1693,7 +1693,7 @@ $viral_news = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1744,7 +1744,7 @@ $viral_news = array(
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1792,7 +1792,7 @@ $viral_news = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1846,7 +1846,7 @@ $viral_news = array(
                 'file_path' => 'hash-elements/hash-elements.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1905,7 +1905,7 @@ $viral_mag = array(
                 'file_path' => 'elementor/elementor.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -1962,7 +1962,7 @@ $viral_mag = array(
                 'file_path' => 'elementor/elementor.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2023,7 +2023,7 @@ $viral_mag = array(
                 'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2074,7 +2074,7 @@ $viral_mag = array(
                 'file_path' => 'elementor/elementor.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2130,7 +2130,7 @@ $viral_mag = array(
                 'file_path' => 'elementor/elementor.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2191,7 +2191,7 @@ $viral_mag = array(
                 'file_path' => 'easy-elementor-addons/easy-elementor-addons.php'
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2235,7 +2235,7 @@ $viral_express = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2281,7 +2281,7 @@ $viral_express = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2327,7 +2327,7 @@ $viral_express = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2373,7 +2373,7 @@ $viral_express = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2419,7 +2419,7 @@ $viral_express = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2465,7 +2465,7 @@ $viral_express = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2514,7 +2514,7 @@ $viral_times = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2560,7 +2560,7 @@ $viral_times = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2606,7 +2606,7 @@ $viral_times = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2652,7 +2652,7 @@ $viral_times = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2698,7 +2698,7 @@ $viral_times = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
@@ -2744,7 +2744,7 @@ $viral_times = array(
                 'file_path' => 'simple-floating-menu/simple-floating-menu.php',
             ),
             'smart-blocks' => array(
-                'name' => 'Smart Blocks - Wordpress Gutenberg Blocks',
+                'name' => 'Smart Blocks - WordPress Gutenberg Blocks',
                 'source' => 'wordpress',
                 'file_path' => 'smart-blocks/smart-blocks.php',
             ),
