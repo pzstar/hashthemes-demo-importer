@@ -3,7 +3,7 @@
  * Plugin Name: HashThemes Demo Importer
  * Plugin URI: https://github.com/pzstar/hashthemes-demo-importer
  * Description: Easily imports demo with just one click.
- * Version: 2.1.2
+ * Version: 2.1.3
  * Author: hashthemes
  * Author URI:  https://hashthemes.com
  * Text Domain: hashthemes-demo-importer
@@ -16,7 +16,7 @@ if (!defined('ABSPATH'))
     exit;
 
 
-define('HDI_VERSION', '2.1.2');
+define('HDI_VERSION', '2.1.3');
 
 define('HDI_FILE', __FILE__);
 define('HDI_PLUGIN_BASENAME', plugin_basename(HDI_FILE));
@@ -893,7 +893,12 @@ if (!class_exists('HDI_Importer')) {
                 new HashFormCreateTable();
             }
 
-            foreach ($hash_forms as $hash_form) {
+            // The demo's form ID comes from the file (Hash Demo Exporter 1.3+); older packs list files in form ID order (1, 2, 3...) or key them by ID.
+            $is_list = array_keys($hash_forms) === range(0, count($hash_forms) - 1);
+            $post_map = HDI_Import_Remapper::post_map($slug);
+            $form_map = array();
+
+            foreach ($hash_forms as $index => $hash_form) {
                 $filepath = $this->demo_upload_dir($slug) . '/' . $hash_form . '.json';
 
                 if (!file_exists($filepath)) {
@@ -902,24 +907,42 @@ if (!class_exists('HDI_Importer')) {
 
                 $imdat = json_decode(file_get_contents($filepath), true);
 
-                // A malformed export used to fatal on the missing keys.
                 if (!is_array($imdat) || !isset($imdat['options']) || !is_array($imdat['options'])) {
                     continue;
                 }
 
                 $options = $imdat['options'];
+                $styles = isset($imdat['styles']) && is_array($imdat['styles']) ? $imdat['styles'] : array();
+
+                // The style template is a post: use the one the content import brought in, or rebuild it from the file.
+                $template = isset($styles['form_style_template']) ? absint($styles['form_style_template']) : 0;
+                if ($template && isset($post_map[$template])) {
+                    $styles['form_style_template'] = $post_map[$template];
+                } elseif (!empty($imdat['style']) && class_exists('HashFormStyles') && class_exists('HashFormHelper')) {
+                    $style_id = wp_insert_post(array('post_type' => 'hashform-styles', 'post_title' => $this->form_name($hash_form, $options), 'post_status' => 'publish'));
+                    if ($style_id && !is_wp_error($style_id)) {
+                        $style = HashFormHelper::recursive_parse_args($imdat['style'], HashFormStyles::default_styles());
+                        update_post_meta($style_id, 'hashform_styles', HashFormHelper::sanitize_array($style, HashFormStyles::get_styles_sanitize_array()));
+                        $styles['form_style_template'] = $style_id;
+                    }
+                }
 
                 $form = array(
-                    'name' => isset($options['title']) ? esc_html($options['title']) : '',
+                    'name' => $this->form_name($hash_form, $options),
                     'description' => isset($options['description']) ? esc_html($options['description']) : '',
                     'options' => $options,
                     'status' => isset($imdat['status']) ? $imdat['status'] : '',
                     'settings' => isset($imdat['settings']) ? $imdat['settings'] : '',
-                    'styles' => isset($imdat['styles']) ? $imdat['styles'] : '',
+                    'styles' => $styles,
                     'created_at' => current_time('mysql'),
                 );
 
                 $form_id = HashFormBuilder::create($form);
+
+                if ($form_id) {
+                    $old_id = !empty($imdat['id']) ? absint($imdat['id']) : ($is_list ? $index + 1 : absint($index));
+                    $form_map[$old_id] = (int) $form_id;
+                }
 
                 if (!isset($imdat['field']) || !is_array($imdat['field']) || !class_exists('HashFormFields')) {
                     continue;
@@ -946,7 +969,20 @@ if (!class_exists('HDI_Importer')) {
                 }
             }
 
+            HDI_Import_Remapper::remap_forms($slug, $form_map);
+
             return $this->result(esc_html__('Forms imported', 'hashthemes-demo-importer'));
+        }
+
+        // A form exported without a title is named after its file ("valuation-request" => "Valuation Request"), or its button for a plain "form".
+        private function form_name($file, $options) {
+            if (!empty($options['title'])) {
+                return esc_html($options['title']);
+            }
+            if ('form' === $file && !empty($options['submit_value'])) {
+                return esc_html($options['submit_value']);
+            }
+            return esc_html(ucwords(str_replace(array('-', '_'), ' ', $file)));
         }
 
         public function has_revslider_file($slug) {
@@ -1558,7 +1594,7 @@ if (!class_exists('HDI_Importer')) {
                     });
 
                     // The customizer and widget steps use this to point settings at the new term IDs.
-                    HDI_Import_Remapper::save($demo_slug, $wp_import->processed_terms, $xml_filepath);
+                    HDI_Import_Remapper::save($demo_slug, $wp_import->processed_terms, $xml_filepath, $wp_import->processed_posts);
                     HDI_Import_Remapper::remap_elementor_data($wp_import->processed_posts, $wp_import->processed_terms);
                     // Import DONE
                     // set homepage as front page

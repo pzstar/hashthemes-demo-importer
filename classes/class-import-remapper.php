@@ -29,14 +29,91 @@ class HDI_Import_Remapper {
     /**
      * Saves what the content import of this demo changed: old => new term IDs and the demo site's address.
      */
-    public static function save($demo_slug, $processed_terms, $xml_filepath) {
+    public static function save($demo_slug, $processed_terms, $xml_filepath, $processed_posts = array()) {
+        update_option(self::OPTION, array('demo' => $demo_slug, 'map' => self::id_map($processed_terms), 'posts' => self::id_map($processed_posts), 'url' => self::demo_url($xml_filepath)), false);
+    }
+
+    private static function id_map($processed) {
         $map = array();
-        foreach ((array) $processed_terms as $old => $new) {
+        foreach ((array) $processed as $old => $new) {
             if ((int) $old && (int) $new) {
                 $map[(int) $old] = (int) $new;
             }
         }
-        update_option(self::OPTION, array('demo' => $demo_slug, 'map' => $map, 'url' => self::demo_url($xml_filepath)), false);
+        return $map;
+    }
+
+    /** Old => new post IDs from this demo's content import. */
+    public static function post_map($demo_slug) {
+        $saved = self::saved($demo_slug);
+        return empty($saved['posts']) ? array() : $saved['posts'];
+    }
+
+    /**
+     * Points form shortcodes, Hash Form blocks and Elementor widgets in the imported posts, theme mods and widgets at the new form IDs.
+     */
+    public static function remap_forms($demo_slug, $form_map) {
+        foreach ($form_map as $old => $new) {
+            if ((int) $old === (int) $new) {
+                unset($form_map[$old]);
+            }
+        }
+        if (!$form_map) {
+            return;
+        }
+
+        global $wpdb;
+        foreach (array_unique(array_values(self::post_map($demo_slug))) as $post_id) {
+            $content = get_post_field('post_content', $post_id, 'raw');
+            $new = self::remap_form_ids($content, $form_map);
+            if ($new !== $content) {
+                $wpdb->update($wpdb->posts, array('post_content' => $new), array('ID' => $post_id));
+                clean_post_cache($post_id);
+            }
+
+            $raw = get_post_meta($post_id, '_elementor_data', true);
+            $data = is_array($raw) ? $raw : json_decode((string) $raw, true);
+            if (is_array($data)) {
+                $new = self::remap_form_ids($data, $form_map);
+                if ($new !== $data) {
+                    update_post_meta($post_id, '_elementor_data', wp_slash(wp_json_encode($new)));
+                    // Elementor caches shortcode output per page, so the old form would keep showing.
+                    delete_post_meta($post_id, '_elementor_element_cache');
+                }
+            }
+        }
+
+        foreach ((array) get_theme_mods() as $key => $value) {
+            $new = self::remap_form_ids($value, $form_map);
+            if ($new !== $value) {
+                set_theme_mod($key, $new);
+            }
+        }
+
+        foreach (array('widget_text', 'widget_block', 'widget_custom_html') as $option) {
+            $value = get_option($option);
+            $new = self::remap_form_ids($value, $form_map);
+            if ($new !== $value) {
+                update_option($option, $new);
+            }
+        }
+    }
+
+    private static function remap_form_ids($data, $map) {
+        if (is_array($data)) {
+            foreach ($data as $key => $value) {
+                $data[$key] = ('hf_form_id' === $key) ? self::remap_ids($value, $map) : self::remap_form_ids($value, $map);
+            }
+            return $data;
+        }
+        if (!is_string($data) || (false === stripos($data, 'hashform') && false === strpos($data, 'formId'))) {
+            return $data;
+        }
+        $swap = function ($m) use ($map) {
+            return $m[1] . (isset($map[(int) $m[2]]) ? $map[(int) $m[2]] : $m[2]);
+        };
+        $data = preg_replace_callback('/(\[hashform\b[^\]]*?\bid\s*=\s*(?:\\\\*["\'])?)(\d+)/i', $swap, $data);
+        return preg_replace_callback('/(\\\\*"formId\\\\*"\s*:\s*\\\\*"?)(\d+)/', $swap, $data);
     }
 
     public static function clear() {
@@ -202,9 +279,7 @@ class HDI_Import_Remapper {
     }
 
     /**
-     * Elementor pages name categories by ID in their widgets' settings ("category_ids",
-     * "posts_category_ids", "post_cats", and the "category" of WordPress widgets placed in them).
-     * Runs right after the content import, on the posts it created.
+     * Elementor pages name categories by ID in their widgets' settings ("category_ids", "posts_category_ids", "post_cats", and the "category" of WordPress widgets placed in them).
      */
     public static function remap_elementor_data($processed_posts, $processed_terms) {
         $map = array();
@@ -230,6 +305,7 @@ class HDI_Import_Remapper {
             $new = self::remap_deep($data, $map);
             if ($new !== $data) {
                 update_post_meta($post_id, '_elementor_data', wp_slash(wp_json_encode($new)));
+                delete_post_meta($post_id, '_elementor_element_cache');
                 $updated++;
             }
         }
@@ -237,15 +313,17 @@ class HDI_Import_Remapper {
     }
 
     /**
-     * "category", "category1", "cat", "cats", "categories", "nav_menu", "theme_ticker_category",
-     * "category_ids", "posts_category_ids", "blog_cat_exclude", "portfolio_cat_menu"...
-     * but not switches like "display_cat".
+     * "category", "category1", "cat", "cats", "categories", "nav_menu", "theme_ticker_category", "category_ids", "posts_category_ids", "blog_cat_exclude", "portfolio_cat_menu"... but not switches like "display_cat".
      */
     public static function is_term_key($key) {
         if (!is_string($key)) {
             return false;
         }
         $key = strtolower($key);
+        // Onyx Dark Mode Switcher keeps the menu its toggle sits in by ID.
+        if ('switch_menu' === $key) {
+            return true;
+        }
         if (false !== strpos($key, 'display') || false !== strpos($key, 'show_')) {
             return false;
         }

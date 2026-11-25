@@ -3,7 +3,7 @@ Contributors: hashthemes
 Tags: demo importer, hashthemes, import, one click import
 Requires at least: 6.3
 Tested up to: 7.1
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -103,6 +103,9 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
 
  
 == Changelog ==
+= 2.1.3 - 25 Nov, 2026 =
+* Fix: pages showed the wrong forms after importing a demo with more than one form, or into a site that already had forms. Forms also get a name and keep their style, and Elementor no longer shows the old form from its cache
+
 = 2.1.2 - 14 Oct, 2026 =
 * Fix: front page sections, Elementor widgets and sidebar widgets showed the wrong categories after importing a demo with Reset, or into a site that already had categories or tags. Categories, portfolio categories and menus chosen in the demo are now matched to the ones it imports
 * Fix: buttons and links in imported settings and widgets pointed back to the demo site; they now lead to the same pages on your site
