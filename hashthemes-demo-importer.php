@@ -89,6 +89,7 @@ if (!class_exists('HDI_Importer')) {
             add_action('wp_ajax_hdi_import_widget', array($this, 'import_widget_process'));
             add_action('wp_ajax_hdi_import_hashform', array($this, 'import_hashform_process'));
             add_action('wp_ajax_hdi_import_revslider', array($this, 'import_revslider_process'));
+            add_action('hdi_import_image_sizes', array($this, 'image_sizes_cron'));
             add_action('wp_ajax_hdi_custom_import_hook', array($this, 'add_custom_import_hook'));
             add_action('wp_ajax_hdi_import_log', array($this, 'import_log_process'));
             add_action('wp_ajax_hdi_preflight', array($this, 'preflight_process'));
@@ -763,6 +764,7 @@ if (!class_exists('HDI_Importer')) {
                 return $this->result(esc_html__('Demo import process failed. No content file found', 'hashthemes-demo-importer'), true);
             }
 
+            $this->defer_image_sizes();
             $this->importDemoContent($xml_filepath, $excludeImages, $slug);
 
             return $this->result(esc_html__('All content imported', 'hashthemes-demo-importer'));
@@ -781,6 +783,7 @@ if (!class_exists('HDI_Importer')) {
 
             $term_map = HDI_Import_Remapper::get($slug);
             $demo_url = HDI_Import_Remapper::get_url($slug);
+            $this->defer_image_sizes();
             $this->capture(function () use ($customizer_filepath, $excludeImages, $term_map, $demo_url) {
                 HDI_Customizer_Importer::import($customizer_filepath, $excludeImages, $term_map, $demo_url);
             });
@@ -1008,6 +1011,152 @@ if (!class_exists('HDI_Importer')) {
             return $this->result(esc_html__('Revolution slider installed', 'hashthemes-demo-importer'));
         }
 
+        /* ===== Image sizes ===== */
+
+        /* Making every registered image size took most of an import, and grows with each plugin that adds sizes.
+         * Imported images are saved as originals only; WP-Cron makes their sizes in the background afterwards. */
+
+        public function defer_image_sizes() {
+            if (has_filter('intermediate_image_sizes_advanced', array($this, 'no_image_sizes'))) {
+                return;
+            }
+            add_filter('intermediate_image_sizes_advanced', array($this, 'no_image_sizes'), 999);
+            add_filter('wp_generate_attachment_metadata', array($this, 'queue_image_sizes'), 10, 2);
+        }
+
+        public function no_image_sizes() {
+            return array();
+        }
+
+        public function queue_image_sizes($metadata, $attachment_id) {
+            if (wp_attachment_is_image($attachment_id)) {
+                $queue = get_option('hdi_import_image_sizes', array());
+                $queue[] = (int) $attachment_id;
+                update_option('hdi_import_image_sizes', array_values(array_unique($queue)), false);
+
+                // Fallback start if the import stops before its last step.
+                if (!wp_next_scheduled('hdi_import_image_sizes')) {
+                    wp_schedule_single_event(time() + 10 * MINUTE_IN_SECONDS, 'hdi_import_image_sizes');
+                }
+            }
+            return $metadata;
+        }
+
+        /* Makes the sizes of queued images until the time budget runs out; returns how many are left. */
+
+        public function run_image_sizes($budget = 20) {
+            remove_filter('intermediate_image_sizes_advanced', array($this, 'no_image_sizes'), 999);
+            remove_filter('wp_generate_attachment_metadata', array($this, 'queue_image_sizes'), 10);
+
+            if (!function_exists('wp_generate_attachment_metadata')) {
+                require_once ABSPATH . 'wp-admin/includes/image.php';
+            }
+
+            $start = microtime(true);
+            $queue = get_option('hdi_import_image_sizes', array());
+
+            while ($queue && (microtime(true) - $start) < $budget) {
+                $id = (int) array_shift($queue);
+                $file = get_attached_file($id);
+                if ($file && file_exists($file)) {
+                    wp_update_attachment_metadata($id, wp_generate_attachment_metadata($id, $file));
+                }
+                // Saved after each image, so a timed-out request never repeats work.
+                update_option('hdi_import_image_sizes', $queue, false);
+            }
+
+            if (!$queue) {
+                delete_option('hdi_import_image_sizes');
+            }
+
+            return count($queue);
+        }
+
+        public function image_sizes_cron() {
+            if ($this->run_image_sizes()) {
+                wp_schedule_single_event(time(), 'hdi_import_image_sizes');
+            }
+        }
+
+        /* Starts the background job, and points links to sizes not made yet (photo-400x280.jpg) at the original. */
+
+        public function start_image_sizes() {
+            $queue = get_option('hdi_import_image_sizes', array());
+            if (!$queue) {
+                return;
+            }
+
+            $this->link_original_images($queue);
+
+            wp_clear_scheduled_hook('hdi_import_image_sizes');
+            wp_schedule_single_event(time(), 'hdi_import_image_sizes');
+        }
+
+        private function link_original_images($ids) {
+            global $wpdb;
+
+            $basedir = trailingslashit(wp_get_upload_dir()['basedir']);
+            $patterns = array();
+            foreach ($ids as $id) {
+                $file = get_attached_file($id);
+                if (!$file || 0 !== strpos($file, $basedir)) {
+                    continue;
+                }
+                $info = pathinfo(substr($file, strlen($basedir)));
+                $dir = ('.' === $info['dirname']) ? '' : implode('(\\\\?/)', array_map(function ($part) { return preg_quote($part, '#'); }, explode('/', $info['dirname']))) . '(\\\\?/)';
+                $patterns[] = $dir . preg_quote($info['filename'], '#') . '-\d+x\d+(?=\.' . preg_quote($info['extension'], '#') . ')';
+            }
+            if (!$patterns) {
+                return;
+            }
+
+            // A link to photo-400x280.jpg loses the size part, keeping its slashes (plain or escaped in JSON).
+            $fix = function ($text) use ($patterns) {
+                if (!is_string($text) || !preg_match('#-\d+x\d+\.#', $text)) {
+                    return $text;
+                }
+                foreach (array_chunk($patterns, 50) as $chunk) {
+                    $text = preg_replace_callback('#(?:' . implode('|', $chunk) . ')#', function ($m) {
+                        return preg_replace('#-\d+x\d+$#', '', $m[0]);
+                    }, $text);
+                }
+                return $text;
+            };
+            $fix_deep = function ($data) use (&$fix_deep, $fix) {
+                if (is_array($data)) {
+                    return array_map($fix_deep, $data);
+                }
+                return $fix($data);
+            };
+
+            $posts = $wpdb->get_results("SELECT ID, post_content FROM {$wpdb->posts} WHERE post_type <> 'revision' AND post_content REGEXP '-[0-9]+x[0-9]+\\\\.'");
+            foreach ($posts as $post) {
+                $content = $fix($post->post_content);
+                if ($content !== $post->post_content) {
+                    $wpdb->update($wpdb->posts, array('post_content' => $content), array('ID' => $post->ID));
+                    clean_post_cache($post->ID);
+                }
+            }
+
+            $metas = $wpdb->get_results("SELECT post_id, meta_value FROM {$wpdb->postmeta} WHERE meta_key = '_elementor_data' AND meta_value REGEXP '-[0-9]+x[0-9]+\\\\.'");
+            foreach ($metas as $meta) {
+                $value = $fix($meta->meta_value);
+                if ($value !== $meta->meta_value) {
+                    update_post_meta($meta->post_id, '_elementor_data', wp_slash($value));
+                    delete_post_meta($meta->post_id, '_elementor_element_cache');
+                }
+            }
+
+            $options = $wpdb->get_col("SELECT option_name FROM {$wpdb->options} WHERE option_name = 'theme_mods_" . esc_sql(get_option('stylesheet')) . "' OR option_name LIKE 'widget\\_%'");
+            foreach ($options as $name) {
+                $value = get_option($name);
+                $fixed = $fix_deep($value);
+                if ($fixed !== $value) {
+                    update_option($name, $fixed);
+                }
+            }
+        }
+
         /*
          *  Last step: hand over to anything hooked in, then tidy up after
          *  ourselves.
@@ -1035,7 +1184,16 @@ if (!class_exists('HDI_Importer')) {
          */
 
         public function cleanup_after_import($slug) {
-            flush_rewrite_rules();
+            // Writes .htaccess when flushing; not loaded on WP-CLI.
+            if (!function_exists('save_mod_rewrite_rules')) {
+                require_once ABSPATH . 'wp-admin/includes/misc.php';
+            }
+
+            if ('' === get_option('permalink_structure')) {
+                $this->enable_post_name_permalinks();
+            } else {
+                flush_rewrite_rules();
+            }
 
             if (did_action('elementor/loaded') && isset(Elementor\Plugin::$instance->files_manager)) {
                 Elementor\Plugin::$instance->files_manager->clear_cache();
@@ -1046,7 +1204,32 @@ if (!class_exists('HDI_Importer')) {
                 $this->clear_uploads($this->demo_upload_dir());
             }
 
+            $this->start_image_sizes();
+
             wp_cache_flush();
+        }
+
+        /* Demo menus link to pages by pretty URL (custom links), which 404 with plain permalinks. Switch to
+         * Post name, then load an imported page; if the server can't serve it, go back to plain (as core's installer does). */
+
+        private function enable_post_name_permalinks() {
+            global $wp_rewrite;
+
+            $wp_rewrite->set_permalink_structure('/%postname%/');
+            flush_rewrite_rules();
+
+            $pages = get_posts(array('post_type' => 'page', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids'));
+            if (!$pages) {
+                return;
+            }
+
+            // A 404 means the server isn't rewriting; a failed loopback (blocked on some hosts) leaves it to got_url_rewrite().
+            $response = wp_remote_get(get_permalink($pages[0]), array('timeout' => 10, 'redirection' => 0, 'sslverify' => false));
+            $works = is_wp_error($response) ? got_url_rewrite() : 404 !== (int) wp_remote_retrieve_response_code($response);
+            if (!$works) {
+                $wp_rewrite->set_permalink_structure('');
+                flush_rewrite_rules();
+            }
         }
 
         /*

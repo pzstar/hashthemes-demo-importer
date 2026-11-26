@@ -128,6 +128,8 @@ class HDI_Import_Remapper {
         $url = preg_replace('/[?#].*$/', '', trim(str_replace('\\/', '/', (string) $url)));
         $url = preg_replace('#^(?:https?:)?//(?:www\.)?#i', '', $url);
         $url = preg_replace('/-(?:\d+x\d+|scaled)(\.[a-z0-9]+)$/i', '$1', $url);
+        // A multisite file is reachable through any site's path (/total-plus/ and /total-plus/wedding/); keep host + uploads path.
+        $url = preg_replace('#^([^/]+)/(?:[^?]*?/)?(wp-content/uploads/sites/\d+/)#', '$1/$2', $url);
         return strtolower($url);
     }
 

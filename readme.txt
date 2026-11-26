@@ -104,6 +104,9 @@ add_filter( 'hdi_import_files', 'hdi_import_files_array' );
  
 == Changelog ==
 = 2.1.3 - 25 Nov, 2026 =
+* Fix: page links in the imported menus did not work on sites with plain permalinks. The import now switches plain permalinks to Post name, after checking that the server supports pretty links, and leaves any other structure alone
+* Faster import: images are saved as originals only, and their sizes are made in the background after the import, so the import no longer slows down with every plugin that adds image sizes
+* Fix: images used in both the demo content and the customizer settings were downloaded twice on demos hosted on a multisite network
 * Fix: pages showed the wrong forms after importing a demo with more than one form, or into a site that already had forms. Forms also get a name and keep their style, and Elementor no longer shows the old form from its cache
 
 = 2.1.2 - 14 Oct, 2026 =

@@ -487,7 +487,7 @@
 
                 setTimeout(function () {
                     do_ajax(result);
-                }, 2000);
+                }, 500);
             },
             error: function (xhr, status) {
                 // status is 'timeout', 'abort', 'error' or 'parsererror'. All of
